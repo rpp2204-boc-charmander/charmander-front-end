@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <h1 className="text-9xl font-bold underline">
-      If you see this you rock
+      test test test
     </h1>
   )
 }
