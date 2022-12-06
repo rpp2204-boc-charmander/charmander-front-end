@@ -32,7 +32,6 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
-          port: 3000
           script: 
             docker login
             docker stop frontend_app
