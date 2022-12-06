@@ -32,8 +32,8 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
-          script: 
+          script: |
             docker login
             docker stop frontend_app
             docker rm frontend_app
-            docker run -p 3000:3000 --name frontend_app rickyp00/charmander-front-end:latest
+            docker run --detach -p 3000:3000 --name frontend_app rickyp00/charmander-front-end:latest
