@@ -33,7 +33,8 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           port: 3000
-          script: docker login
+          script: 
+            docker login
             docker stop frontend_app
             docker rm frontend_app
             docker run -d --name frontend_app -p 3000:3000 rickyp00/charmander-front-end:latest
