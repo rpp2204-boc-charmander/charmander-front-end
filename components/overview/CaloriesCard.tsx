@@ -6,7 +6,7 @@ interface CaloriesCardProps {
 export default function Card(props: CaloriesCardProps) {
   return (
     <div className="bg-white flex text-black flex-col h-[20rem] w-[30rem]
-      justify-center items-center ml-[10rem] mr-[10rem] rounded-3xl shadow-2xl"
+      justify-center items-center rounded-3xl shadow-xl hover:shadow-2xl cursor-pointer"
     >
       <div className="text-[6rem] font-bold">
         {props.calorie}
