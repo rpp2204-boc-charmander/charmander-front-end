@@ -36,4 +36,5 @@ jobs:
             docker login
             docker stop frontend_app
             docker rm frontend_app
+            docker rmi -f $(docker images -aq)
             docker run --detach --rm -p 3000:3000 --name frontend_app rickyp00/charmander-front-end:latest
