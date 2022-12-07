@@ -1,9 +1,10 @@
+import React, { useState } from "react";
+import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 
 const Nutrition = () => {
+
   return (
-    <h1 className="text-9xl font-bold underline">
-      Welcome to the nutrition page!
-    </h1>
+    <CaloriesWidget />
   )
 }
 
