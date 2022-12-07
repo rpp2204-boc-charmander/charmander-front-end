@@ -1,0 +1,134 @@
+{
+  "data": [{
+    "id": 1,
+    "muscle_group": "Chest",
+    "exercise": "Bench Press",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 2,
+    "muscle_group": "Back",
+    "exercise": "Pull Ups",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 3,
+    "muscle_group": "Legs",
+    "exercise": "Squats",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 4,
+    "muscle_group": "Biceps",
+    "exercise": "Curls",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 5,
+    "muscle_group": "Triceps",
+    "exercise": "Dips",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 6,
+    "muscle_group": "Back",
+    "exercise": "Rows",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 7,
+    "muscle_group": "Biceps",
+    "exercise": "Hammer Curls",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 8,
+    "muscle_group": "Chest",
+    "exercise": "Dumbell Bench Press",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 9,
+    "muscle_group": "Triceps",
+    "exercise": "Skull Crushers",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 10,
+    "muscle_group": "Legs",
+    "exercise": "Hamstring Curls",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 11,
+    "muscle_group": "Legs",
+    "exercise": "Leg Press",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  },
+  {
+    "id": 12,
+    "muscle_group": "Legs",
+    "exercise": "Calf Raises",
+    "sets": [
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+    ],
+    "total_calories_burned": 75
+  }]
+}
