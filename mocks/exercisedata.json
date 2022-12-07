@@ -2,7 +2,7 @@
   "data": [{
     "id": 1,
     "muscle_group": "Chest",
-    "exercise": "Bench Press",
+    "name": "Bench Press",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -13,7 +13,7 @@
   {
     "id": 2,
     "muscle_group": "Back",
-    "exercise": "Pull Ups",
+    "name": "Pull Ups",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -24,7 +24,7 @@
   {
     "id": 3,
     "muscle_group": "Legs",
-    "exercise": "Squats",
+    "name": "Squats",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -35,7 +35,7 @@
   {
     "id": 4,
     "muscle_group": "Biceps",
-    "exercise": "Curls",
+    "name": "Curls",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -46,7 +46,7 @@
   {
     "id": 5,
     "muscle_group": "Triceps",
-    "exercise": "Dips",
+    "name": "Dips",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -57,7 +57,7 @@
   {
     "id": 6,
     "muscle_group": "Back",
-    "exercise": "Rows",
+    "name": "Rows",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -68,7 +68,7 @@
   {
     "id": 7,
     "muscle_group": "Biceps",
-    "exercise": "Hammer Curls",
+    "name": "Hammer Curls",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -79,7 +79,7 @@
   {
     "id": 8,
     "muscle_group": "Chest",
-    "exercise": "Dumbell Bench Press",
+    "name": "Dumbell Bench Press",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -90,7 +90,7 @@
   {
     "id": 9,
     "muscle_group": "Triceps",
-    "exercise": "Skull Crushers",
+    "name": "Skull Crushers",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -101,7 +101,7 @@
   {
     "id": 10,
     "muscle_group": "Legs",
-    "exercise": "Hamstring Curls",
+    "name": "Hamstring Curls",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -112,7 +112,7 @@
   {
     "id": 11,
     "muscle_group": "Legs",
-    "exercise": "Leg Press",
+    "name": "Leg Press",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
@@ -123,7 +123,7 @@
   {
     "id": 12,
     "muscle_group": "Legs",
-    "exercise": "Calf Raises",
+    "name": "Calf Raises",
     "sets": [
       { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
