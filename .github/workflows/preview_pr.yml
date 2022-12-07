@@ -34,7 +34,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             docker login
-            docker pull preview_app rickyp00/charmander-front-end:${{ github.head_ref }}
+            docker pull rickyp00/charmander-front-end:${{ github.head_ref }}
             docker stop preview_app
             docker rm preview_app
             docker run --detach --rm -p 4000:3000 --name preview_app rickyp00/charmander-front-end:${{ github.head_ref }}
