@@ -1,7 +1,7 @@
-name: Build Docker Image & Push to AWS EC2
+name: Preview Pull Request on EC2
 
 on:
-  push:
+  pull_request:
     branches: ['main']
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: rickyp00/charmander-front-end:latest
+          tags: rickyp00/charmander-front-end:${{ github.head_ref }}
 
       - name: Push to EC2
         uses: appleboy/ssh-action@master
@@ -34,7 +34,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             docker login
-            docker pull rickyp00/charmander-front-end:latest
-            docker stop frontend_app
-            docker rm frontend_app
-            docker run --detach --rm -p 3000:3000 --name frontend_app rickyp00/charmander-front-end:latest
+            docker pull rickyp00/charmander-front-end:${{ github.head_ref }}
+            docker stop preview_app
+            docker rm preview_app
+            docker run --detach --rm -p 4000:3000 --name preview_app rickyp00/charmander-front-end:${{ github.head_ref }}
