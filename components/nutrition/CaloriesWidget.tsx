@@ -15,11 +15,11 @@ const CaloriesWidget = () => {
           <div className="flex flex-col items-center justify-center bg-white rounded-xl">
             <div className="p-8">
             <div className="text-sm font-medium text-black flex justify-center truncate">calories gained</div>
-            <div className="text-sm font-medium text-black flex justify-center">(estimated)</div>
+            <div className="italic text-sm font-medium text-black flex justify-center">(estimated)</div>
           </div>
           <p className="p-4 text-3xl text-black flex justify-center">{totalCalories}</p>
         <button
-        className="bg-white hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full border border-black w-32 h- flex justify-center items-center mb-4 shadow"
+        className="bg-white hover:bg-green-700 text-black text-3xl py-2 px-4 rounded-full border border-black w-32 h-7 flex justify-center items-center mb-4 shadow"
         onClick={prompter}
         >
           +
