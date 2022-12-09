@@ -50,7 +50,7 @@ const Modal = () => {
             return (
               <div>
                 <div>{food.food.label}</div>
-                <Image src={food.food.image} alt='' width={200} height={200} />
+                <Image src={food.food.image} alt='' width={50} height={500} />
                 <div>{food.food.nutrients.ENERC_KCAL} calories</div>
               </div>
             )
