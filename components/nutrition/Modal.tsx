@@ -1,5 +1,6 @@
 import FoodCard from "./FoodCard";
 import axios from 'axios';
+import Image from 'next/Image';
 
 import { useState, useEffect } from "react";
 
@@ -10,6 +11,7 @@ const Modal = () => {
 
   const [foodList, setFoodList] = useState([1])
   const [search, setSearch] = useState('');
+  const [preview, setPreview] = useState([])
 
   const handleSearch = (e) => {
     // console.log(e.target.value)
@@ -17,11 +19,18 @@ const Modal = () => {
   }
 
   useEffect(() => {
-    axios({
-      method: 'get',
-      url:'/search'
-    })
-    console.log(appId)
+    if (search !== '') {
+      axios({
+        method: 'get',
+        url:'/api/search',
+        params: {
+          ingr: search
+        }
+      }).then((data) => {
+        setPreview(data.data)
+      })
+
+    }
   }, [search])
 
 
@@ -34,8 +43,22 @@ const Modal = () => {
             handleSearch(e)
           }}></input>
         </form>
-        <div className="results"></div>
       </div>
+      {
+        preview.length > 0 ? (
+          preview.map(food => {
+            return (
+              <div>
+                <div>{food.food.label}</div>
+                <Image src={food.food.image} alt='' width={200} height={200} />
+                <div>{food.food.nutrients.ENERC_KCAL} calories</div>
+              </div>
+            )
+          })
+        ) : (
+          null
+        )
+      }
       <div className="list">
         {
           foodList.map(food => {
