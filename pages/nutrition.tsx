@@ -1,11 +1,12 @@
+import React, { useState } from "react";
+import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 import Modal from '../components/nutrition/Modal';
 
 const Nutrition = () => {
+
   return (
+    <CaloriesWidget />
     <div>
-      <h1 className="font-bold underline">
-        Welcome to the nutrition page!
-      </h1>
       <Modal />
     </div>
   )

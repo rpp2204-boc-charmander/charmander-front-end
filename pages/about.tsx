@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <h1 className="text-9xl font-bold underline">
-      Welcome to our About page!
+      if you see this you rock!!! -- test after refactor
     </h1>
   )
 }
