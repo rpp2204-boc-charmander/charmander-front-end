@@ -5,9 +5,13 @@ import Modal from '../components/nutrition/Modal';
 const Nutrition = () => {
   const [showModal, setShowModal] = useState(false);
 
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  }
+
   return (
     <div>
-      <CaloriesWidget />
+      <CaloriesWidget handleShowModal={handleShowModal}/>
       {
         showModal ? ( <Modal />) : ( null )
       }

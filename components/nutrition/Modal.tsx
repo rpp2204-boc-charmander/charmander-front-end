@@ -1,15 +1,29 @@
 import FoodCard from "./FoodCard";
-import { useState } from "react"
+import axios from 'axios';
+
+import { useState, useEffect } from "react";
+
+const appId = process.env.EDAMAM_APPLICATION_ID;
+const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
 const Modal = () => {
 
-  const [foodList, setFoodList] = useState([])
+  const [foodList, setFoodList] = useState([1])
   const [search, setSearch] = useState('');
 
   const handleSearch = (e) => {
     // console.log(e.target.value)
     setSearch(e.target.value);
   }
+
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url:'/search'
+    })
+    console.log(appId)
+  }, [search])
+
 
   return (
     <div className="">
@@ -24,7 +38,7 @@ const Modal = () => {
       </div>
       <div className="list">
         {
-          foodList.forEach(food => {
+          foodList.map(food => {
             return (
               <FoodCard />
             )

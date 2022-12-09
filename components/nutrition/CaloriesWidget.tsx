@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-const CaloriesWidget = () => {
+const CaloriesWidget = ({ handleShowModal }) => {
   const [totalCalories, setTotalCalories] = useState(1000);
   const [foodList, setFoodList] = useState(['Big Mac', 'Chicken Breast', 'Egg']);
 
@@ -20,7 +20,9 @@ const CaloriesWidget = () => {
           <p className="p-4 text-3xl text-black flex justify-center">{totalCalories}</p>
         <button
         className="bg-white hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full border border-black w-32 h- flex justify-center items-center mb-4 shadow"
-        onClick={prompter}
+        onClick={() => {
+          handleShowModal()
+        }}
         >
           +
         </button>
