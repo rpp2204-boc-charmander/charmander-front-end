@@ -43,7 +43,7 @@ export default function Exercise() {
   return (
     <>
       <header className={styles.header}>
-        <MdOutlineFitnessCenter size="6rem"/>
+        <MdOutlineFitnessCenter size={75}/>
         <h1 className="text-7xl font-bold ml-3"> Exercise </h1>
         {/* <CurrDate /> */}
       </header>
