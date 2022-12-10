@@ -15,7 +15,7 @@ export default function Sidenav() {
           Nutrition
         </li>
         <li>
-          Report
+          <Link href='/report'>Report</Link>
         </li>
         <li>
           Friends
