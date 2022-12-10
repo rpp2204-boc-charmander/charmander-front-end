@@ -3,14 +3,24 @@ import PieChart from './pieChart';
 import BarChart from './barChart';
 import LineChart from './lineChart';
 
-// interface data {
-//   key: string;
-//   timeSpan: string;
-//   metaOne: string;
-//   metaTwo: string;
-//   statsOne: number[];
-//   statsTwo: number[];
-// };
+/*
+  [{maxrep: 420, type: deadlift, Unix: (current days time stamp),
+    timespan: week, data: [{x: unix, y: max-weight},...]}]
+*/
+interface coord {
+  x: number;
+  y: number;
+};
+
+interface data {
+  maxRep: number;
+  type: string;
+  unix: number;
+  timespan: string;
+  data: coord[];
+};
+
+
 interface userData {
   id: number;
   year: number;
@@ -18,7 +28,7 @@ interface userData {
   userLost: number;
 };
 
-let data: userData[] = [
+let testData: userData[] = [
   {
     id: 1,
     year: 2016,
@@ -51,28 +61,23 @@ let data: userData[] = [
   }
 ];
 
-export default function Charts () {
-  const [chartData, setChartData] = useState({
-    labels: data.map((year) => year.year),
-    datasets: [
-      {
-        label: 'Users Gained',
-        data: data.map((gained) => gained.userGain),
-        backgroundColor: [
-          'rgba(75,192,192,1)',
-          '#ecf01',
-          '#50AF95',
-          '#f3ba2f',
-          '#2a71d0'
-        ],
-        borderColor: 'black',
-        borderWidth: 2
-      }
-    ]
-  });
+export default function Charts (props: any) {
+  let reports: data[] = props.reports;
   return (
     <div>
-      <LineChart chartData={chartData}/>
+      <ul className='w-full h-full overflow-auto'>
+        {/* {reports.map((report, index) => {
+          return (
+            <li key={index}>
+              <LineChart chartData={report}/>
+            </li>)})} */}
+      </ul>
     </div>
   );
 };
+
+/*
+  labels: three different options, one for the past week, this month, and this year
+
+  data: map the weight or calories and the unix time stamp
+*/
