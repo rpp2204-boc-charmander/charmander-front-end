@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-const CaloriesWidget = () => {
-  const [totalCalories, setTotalCalories] = useState(1000);
-  const [foodList, setFoodList] = useState(['Big Mac', 'Chicken Breast', 'Egg']);
+const CaloriesWidget = ({foodData}) => {
+  let calculatedCalories : number = 0;
+  foodData.map((food) => {
+    calculatedCalories += Number(food.CAL);
+  })
+  const [totalCalories, setTotalCalories] = useState(calculatedCalories);
 
   const prompter = () => {
-    alert('It works..... gov. nor.')
+    alert('Loading food search......')
   }
 
   return (
