@@ -1,19 +1,20 @@
 interface CaloriesCardProps {
   calorie: number,
   text: string
+  textColor?: string,
 }
 
-export default function Card(props: CaloriesCardProps) {
+export default function Card( {calorie, text, textColor = "text-black" } : CaloriesCardProps) {
   return (
-    <div className="bg-white flex text-black flex-col h-[11rem] w-[18rem]
+    <div className="bg-white flex flex-col text-black h-[11rem] w-[18rem]
       justify-center items-center rounded-3xl shadow-xl hover:shadow-2xl cursor-pointer"
     >
-      <div className="text-[3rem] font-bold">
-        {props.calorie}
+      <div className={`text-[3rem] ${textColor} font-bold`}>
+        {calorie}
       </div>
 
       <div className="text-[1.5rem]">
-        {props.text}
+        {text}
       </div>
     </div>
   )

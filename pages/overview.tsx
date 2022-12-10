@@ -3,13 +3,34 @@ import Head from "next/head";
 import Header from "../components/overview/Header";
 import Container from "../components/overview/Container";
 
+interface ExerciseObjProps {
+  text: string,
+  calorie: number
+}
+
+interface NutritionObjProps {
+  text: string,
+  calorie: number
+}
+
+interface OverviewProps {
+  day: Date,
+  caloriesConsumed: number,
+  caloriesBurned: number ,
+  exercises: Array<ExerciseObjProps>,
+  nutrition: Array<NutritionObjProps>
+}
+
 export default function Overview({
-  calorieConsumed,
-  calorieBurned,
-  exercises,
-  nutrition
-}) {
-  const [currentDate, setCurrentDate] = useState<any>();
+  day = new Date(),
+  caloriesConsumed = 0,
+  caloriesBurned = 0,
+  exercises = [],
+  nutrition = []}: OverviewProps) {
+  const netCalories = caloriesConsumed - caloriesBurned;
+
+  const [currentDate, setCurrentDate] = useState(day);
+  const [currrentExercises, setCurrentExercises] = useState(exercises);
 
   return (
     <div>
@@ -28,31 +49,23 @@ export default function Overview({
 
           <div className="flex flex-col items-center">
             <Container title="Daily Calories" type="calories" cards={[
-              {calorie: 1650, text: "Calories gained"},
-              {calorie: 2500, text: "Calories burned"},
-              {calorie: -850, text: "Net Calories"}
+              {calorie: caloriesConsumed, text: "Calories consumed"},
+              {calorie: caloriesBurned, text: "Calories burned"},
+              {calorie: netCalories, text: "Net Calories"}
             ]}/>
 
-            <Container title="Exercise" type="exercise" cards={[
-              {text: "Bench Press", calorie: 500},
-              {text: "Bench Press", calorie: 500},
-              {text: "Bench Press", calorie: 500},
-              {text: "Bench Press", calorie: 500},
-              {text: "Bench Press", calorie: 500},
-              {text: "Bench Press", calorie: 500},
-              {text: "Bench Press", calorie: 500}
-            ]} />
+            <Container
+              title="Exercise"
+              type="exercise"
+              cards={exercises}
+              currrentExercises={currrentExercises}
+              setCurrentExercises={setCurrentExercises}
+            />
 
-            <Container title="Nutrition" type="nutrition" cards={[
-              {text: "Big Mac", calorie: 300},
-              {text: "Big Mac", calorie: 300},
-              {text: "Big Mac", calorie: 300}
-            ]} />
+            <Container title="Nutrition" type="nutrition" cards={nutrition} />
           </div>
         </div>
       </div>
-
-
     </div>
   )
 }
