@@ -12,19 +12,19 @@ export default function Sidenav() {
           <Link href='/exercise'>Exercise</Link>
         </li>
         <li>
-          Nutrition
+          <Link href='/'>Nutrition</Link>
         </li>
         <li>
-          Report
+          <Link href='/'>Report</Link>
         </li>
         <li>
-          Friends
+          <Link href='/'>Friends</Link>
         </li>
         <li>
-          Settings
+          <Link href='/'>Settings</Link>
         </li>
         <li>
-          Logout
+          <Link href='/'>Logout</Link>
         </li>
       </ul>
     </div>

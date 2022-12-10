@@ -1,7 +1,7 @@
 .header {
   border-bottom: 2px solid black;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .date {
@@ -10,7 +10,7 @@
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 25% 75%;
   padding-left: 20px;
 }
 
