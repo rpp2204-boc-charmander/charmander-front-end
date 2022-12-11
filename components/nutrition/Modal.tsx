@@ -42,43 +42,47 @@ const Modal = () => {
 
 
   return (
-    <div className="border top-1/2 left-1/2 ml-px150 mt-px150">
-      <div>
-        <h4>Nutrition Search</h4>
-        <form>
-          <input id="search-form"placeholder="search by name" onChange={(e) => {
-            handleSearch(e)
-          }}></input>
-        </form>
-      </div>
+    <div>
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50"></div>
+      <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
+      flex flex-col items-center w-[70%] h-[80%] rounded-3xl pl-10 pr-10">
+        <div>
+          <h4>Nutrition Search</h4>
+          <form>
+            <input id="search-form"placeholder="search by name" onChange={(e) => {
+              handleSearch(e)
+            }}></input>
+          </form>
+        </div>
 
-      {
-        preview.length > 0 ? (
-          preview.map((food, index) => {
-            return (
-              <div key={index} className="border hover:bg-slate-400" onClick={(e) => {
-                handleSelect(food);
-              }}>
-                <div>{food.food.label}</div>
-                <Image src={food.food.image} alt='' width={50} height={50} />
-                <div>{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
-              </div>
-            )
-          })
-        ) : (
-          null
-        )
-      }
-      <div className="list">
         {
-          foodList.map((food, index) => {
-            return (
-              <FoodCard key={index} info={food}/>
-            )
-          })
+          preview.length > 0 ? (
+            preview.map((food, index) => {
+              return (
+                <div key={index} className="border hover:bg-slate-400" onClick={(e) => {
+                  handleSelect(food);
+                }}>
+                  <div>{food.food.label}</div>
+                  <Image src={food.food.image} alt='' width={50} height={50} />
+                  <div>{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
+                </div>
+              )
+            })
+          ) : (
+            null
+          )
         }
-      </div>
+        <div className="list">
+          {
+            foodList.map((food, index) => {
+              return (
+                <FoodCard key={index} info={food}/>
+              )
+            })
+          }
+        </div>
 
+      </div>
     </div>
   )
 }
