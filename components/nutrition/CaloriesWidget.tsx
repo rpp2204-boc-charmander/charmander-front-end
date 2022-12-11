@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-const CaloriesWidget = () => {
-  const [totalCalories, setTotalCalories] = useState(1000);
-  const [foodList, setFoodList] = useState(['Big Mac', 'Chicken Breast', 'Egg']);
+const CaloriesWidget = ({foodData}) => {
+  let calculatedCalories : number = 0;
+  foodData.map((food) => {
+    calculatedCalories += Number(food.CAL);
+  })
+  const [totalCalories, setTotalCalories] = useState(calculatedCalories);
 
   const prompter = () => {
-    alert('It works..... gov. nor.')
+    alert('Loading food search......')
   }
 
   return (
@@ -15,11 +18,11 @@ const CaloriesWidget = () => {
           <div className="flex flex-col items-center justify-center bg-white rounded-xl">
             <div className="p-8">
             <div className="text-sm font-medium text-black flex justify-center truncate">calories gained</div>
-            <div className="text-sm font-medium text-black flex justify-center">(estimated)</div>
+            <div className="italic text-sm font-medium text-black flex justify-center">(estimated)</div>
           </div>
           <p className="p-4 text-3xl text-black flex justify-center">{totalCalories}</p>
         <button
-        className="bg-white hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full border border-black w-32 h- flex justify-center items-center mb-4 shadow"
+        className="bg-white hover:bg-green-700 text-black text-3xl py-2 px-4 rounded-full border border-black w-32 h-7 flex justify-center items-center mb-4 shadow"
         onClick={prompter}
         >
           +
