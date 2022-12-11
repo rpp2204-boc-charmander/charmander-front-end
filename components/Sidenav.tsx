@@ -57,42 +57,42 @@ export default function Sidenav() {
 
       <ul className="w-32 flex flex-col grow max-h-[35rem] justify-between pt-10 pb-[12rem] font-bold">
         <li>
-        <Link className="flex flex-row items-center" href='/'>
+        <Link className="flex flex-row items-center hover:text-yellow-400" href='/'>
             <MdOutlineSort className="h-5 w-5 mr-2" />
             Overview
           </Link>
         </li>
 
         <li>
-          <Link className="flex flex-row items-center" href='/'>
+          <Link className="flex flex-row items-center hover:text-yellow-400" href='/'>
             <MdOutlineFitnessCenter className="h-5 w-5 mr-2" />
             Exercise
           </Link>
         </li>
 
         <li>
-          <Link className="flex flex-row items-center" href='/'>
+          <Link className="flex flex-row items-center hover:text-yellow-400" href='/'>
             <MdRestaurant className="h-5 w-5 mr-2" />
             Nutrition
           </Link>
         </li>
 
         <li>
-          <Link className="flex flex-row items-center" href='/'>
+          <Link className="flex flex-row items-center hover:text-yellow-400" href='/'>
             <MdOutlineAssignment className="h-5 w-5 mr-2" />
             Report
           </Link>
         </li>
 
         <li>
-          <Link className="flex flex-row items-center" href='/'>
+          <Link className="flex flex-row items-center hover:text-yellow-400" href='/'>
             <MdOutlinePeopleAlt className="h-5 w-5 mr-2" />
             Friends
           </Link>
         </li>
 
         <li>
-          <Link className="flex flex-row items-center" href='/'>
+          <Link className="flex flex-row items-cente hover:text-yellow-400" href='/'>
             <MdOutlineSettings className="h-5 w-5 mr-2" />
             Settings
           </Link>
@@ -100,7 +100,7 @@ export default function Sidenav() {
       </ul>
 
 
-      <div className="w-32 flex pb-10 font-bold">
+      <div className="w-32 flex pb-10 font-bold hover:text-yellow-400">
         <Link className="flex flex-row items-center" href='/'>
           <MdLogout className="h-5 w-5 mr-2" />
           Logout
