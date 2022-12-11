@@ -1,4 +1,4 @@
-import FoodCard from "./FoodCard";
+import FoodCardModal from "./FoodCardModal";
 import axios from 'axios';
 import Image from 'next/Image';
 
@@ -76,7 +76,7 @@ const Modal = () => {
           {
             foodList.map((food, index) => {
               return (
-                <FoodCard key={index} info={food}/>
+                <FoodCardModal key={index} info={food}/>
               )
             })
           }
