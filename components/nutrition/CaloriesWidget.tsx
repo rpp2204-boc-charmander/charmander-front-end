@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-const CaloriesWidget = ({ handleShowModal }) => {
-  const [totalCalories, setTotalCalories] = useState(1000);
-  const [foodList, setFoodList] = useState(['Big Mac', 'Chicken Breast', 'Egg']);
+const CaloriesWidget = ({ handleShowModal, foodData }) => {
+  let calculatedCalories : number = 0;
+  foodData.map((food) => {
+    calculatedCalories += Number(food.CAL);
+  })
+  const [totalCalories, setTotalCalories] = useState(calculatedCalories);
 
   const prompter = () => {
-    alert('It works..... gov. nor.')
+    alert('Loading food search......')
   }
 
   return (
@@ -15,7 +18,7 @@ const CaloriesWidget = ({ handleShowModal }) => {
           <div className="flex flex-col items-center justify-center bg-white rounded-xl">
             <div className="p-8">
             <div className="text-sm font-medium text-black flex justify-center truncate">calories gained</div>
-            <div className="text-sm font-medium text-black flex justify-center">(estimated)</div>
+            <div className="italic text-sm font-medium text-black flex justify-center">(estimated)</div>
           </div>
           <p className="p-4 text-3xl text-black flex justify-center">{totalCalories}</p>
         <button
