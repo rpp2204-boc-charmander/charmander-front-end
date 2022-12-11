@@ -3,28 +3,29 @@ import { MdAdd } from 'react-icons/md';
 import CaloriesCard from "./CaloriesCard";
 import ExerciseAndNutritionCard from "./ExerciseAndNutritionCard";
 import Modal from "./Modal";
+import { ExerciseObjProps } from "../../pages/overview";
 
 interface CaloriesCardProps {
-  calorie: number,
   text: string
+  calorie: number,
 }
 
-interface ExerciseAndNutritionCardProps {
+interface NutritionCardProps {
   text: string,
   calorie: number,
-  sets?: number,
-  reps?: number
+  portion?: number,
+  completed: boolean
 }
 
 interface ContainerProps {
-  title: string,
   type: "calories" | "exercise" | "nutrition",
-  cards: Array<CaloriesCardProps> | Array<ExerciseAndNutritionCardProps>,
-  currrentExercises?: any,
-  setCurrentExercises?: any
+  title: string,
+  cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionCardProps>,
+  setExercises?: any,
+  setNutrition?: any
 }
 
-export default function Container({title, type, cards, currrentExercises, setCurrentExercises}: ContainerProps) {
+export default function Container({ type, title, cards, setExercises, setNutrition }: ContainerProps) {
   /* const scrollRef = useRef<any>();
 
   const slideScroll = () => {
@@ -51,9 +52,9 @@ export default function Container({title, type, cards, currrentExercises, setCur
       <Modal
         open={isOpen}
         setIsOpen={setIsOpen}
-        onClose={() => setIsOpen(false)}
-        currrentExercises={currrentExercises}
-        setCurrentExercises={setCurrentExercises}
+        cards={cards}
+        setExercises={setExercises}
+        setNutrition={setNutrition}
       ></Modal>
 
       <div className="relative">
@@ -62,17 +63,43 @@ export default function Container({title, type, cards, currrentExercises, setCur
         >
           {cards.map((card, index) => {
             if (type === "calories") {
+              let textColor = "text-black"
               if (index === 2) {
                 if (card.calorie >= 0) {
-                  return <CaloriesCard textColor="text-green-500" key={index} calorie={card.calorie} text={card.text} />
+                  textColor = "text-green-500";
                 } else {
-                  return <CaloriesCard textColor="text-red-500" key={index} calorie={card.calorie} text={card.text} />
+                  textColor = "text-red-500";
                 }
               } else {
-                return <CaloriesCard key={index} calorie={card.calorie} text={card.text} />
+                textColor = "text-black";
               }
+              return <CaloriesCard
+                textColor={textColor}
+                key={index}
+                calorie={card.calorie}
+                text={card.text}
+              />
+            } else if (type === "exercise") {
+              return <ExerciseAndNutritionCard
+                key={index}
+                idx={index}
+                name={card.text}
+                calorie={card.calorie}
+                sets={card.sets}
+                reps={card.reps}
+                weight={card.weight}
+                completed={card.completed}
+                exercises={cards}
+                setExercises={setExercises}
+              />
             } else {
-              return <ExerciseAndNutritionCard key={index} name={card.text} calorie={card.calorie} sets={card.sets} reps={card.reps} />
+              return <ExerciseAndNutritionCard
+                key={index}
+                name={card.text}
+                calorie={card.calorie}
+                portion={card.portion}
+                completed={card.completed}
+              />
             }
           })}
         </div>

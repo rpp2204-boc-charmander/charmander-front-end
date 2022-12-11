@@ -6,29 +6,56 @@ import ModalCard from "./ModalCard";
 interface ModalProps {
   open: Boolean,
   setIsOpen: any,
-  onClose: MouseEventHandler,
-  currrentExercises?: any,
-  setCurrentExercises?: any
+  cards?: any,
+  setExercises?: any,
+  setNutrition?: any
 }
 
-export default function Modal( {open, onClose, setIsOpen, currrentExercises, setCurrentExercises}: ModalProps ) {
-  const [cardInfo, setCardInfo] = useState({
+export default function Modal({ open, setIsOpen, cards, setExercises }: ModalProps ) {
+  const [newExerciseInfo, setNewExerciseInfo] = useState({
     name: '',
-    weight: 0,
-    sets: 0,
-    reps: 0
+    calorie: '',
+    weight:'',
+    sets: '',
+    reps: '',
+    completed: false
   });
 
   if (!open) return null;
 
+  const handleSubmit = () => {
+    console.log(newExerciseInfo);
+  }
+
+  const handleClose = () => {
+    setNewExerciseInfo((prevState: any) => ({
+      name: '',
+      calorie: '',
+      weight:'',
+      sets: '',
+      reps: '',
+      completed: false
+    }))
+  }
+
   const handleAddExercise = () => {
     let exerciseObj = {
-      text: cardInfo.name,
-      calorie: 100
-    }
+      text: newExerciseInfo.name,
+      calorie: parseInt(newExerciseInfo.calorie),
+      weight: parseInt(newExerciseInfo.weight),
+      sets: newExerciseInfo.sets,
+      reps: newExerciseInfo.reps,
+      completed: newExerciseInfo.completed
+    };
 
-    setCurrentExercises(prevState => prevState.unshift(exerciseObj));
+    setExercises((prevState: any) => {
+      let currentState = [exerciseObj, ...prevState];
+      return currentState;
+    })
+
     setIsOpen(false);
+    handleSubmit();
+    handleClose();
   }
 
   return (
@@ -40,7 +67,10 @@ export default function Modal( {open, onClose, setIsOpen, currrentExercises, set
       >
         <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
           <div className="title text-[2rem] font-bold"> Exercise Search </div>
-          <MdClose className="text-[2rem] cursor-pointer" onClick={onClose} />
+          <MdClose
+            className="text-[2rem] cursor-pointer"
+            onClick={() => setIsOpen(false)}
+          />
         </div>
 
         <div className="search w-[100%] flex flex-row pb-6">
@@ -48,12 +78,16 @@ export default function Modal( {open, onClose, setIsOpen, currrentExercises, set
         </div>
 
         <div className="modalCardContainer w-[100%] bg-gray-500 flex flex-col p-5 overflow-hidden overflow-y-scroll scrollbar-hide border">
-          <ModalCard cardInfo={cardInfo} setCardInfo={setCardInfo} />
+          <ModalCard
+            newExerciseInfo={newExerciseInfo}
+            setNewExerciseInfo={setNewExerciseInfo}
+            handleSubmit={handleSubmit}
+          />
         </div>
 
         <div className="buttonContainer flex w-[50%] justify-between p-5">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleAddExercise}> Add Exercise </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={onClose}> Mark All Completed </button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => setIsOpen(false)}> Add and Mark As Completed </button>
         </div>
 
       </div>
