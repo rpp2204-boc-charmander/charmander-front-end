@@ -2,22 +2,6 @@ import Head from 'next/head'
 //import styles from '../styles/Home.module.css'
 import Overview from './overview'
 
-const day = new Date();
-const caloriesConsumed = 1650;
-const caloriesBurned = 2000;
-const exercises = [
-  {text: "Bench Press", calorie: 500, sets: 3, reps: 5, completed: false},
-  {text: "Chair Press", calorie: 500},
-  {text: "Desk Press", calorie: 500},
-  {text: "Table Press", calorie: 500},
-  {text: "Squats", calorie: 500}
-];
-const nutrition = [
-  {text: "Big Mac", calorie: 300},
-  {text: "Big Mac", calorie: 300},
-  {text: "Big Mac", calorie: 300}
-];
-
 export default function Home() {
   return (
     <div>
@@ -27,13 +11,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Overview
-        day={day}
-        caloriesConsumed={caloriesConsumed}
-        caloriesBurned={caloriesBurned}
-        exercises={exercises}
-        nutrition={nutrition}
-      />
+      <Overview />
     </div>
   )
 }

@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/overview/Header";
 import Container from "../components/overview/Container";
 
-interface ExerciseObjProps {
+export interface ExerciseObjProps {
   text: string,
-  calorie: number
+  calorie: number,
+  sets?: number,
+  reps?: number,
+  weight?: number,
+  completed: boolean
 }
 
 interface NutritionObjProps {
@@ -13,24 +17,56 @@ interface NutritionObjProps {
   calorie: number
 }
 
-interface OverviewProps {
-  day: Date,
-  caloriesConsumed: number,
-  caloriesBurned: number ,
-  exercises: Array<ExerciseObjProps>,
-  nutrition: Array<NutritionObjProps>
-}
+export default function Overview() {
+  const [day, setDay] = useState(new Date());
+  const [caloriesConsumed, setcaloriesConsumed] = useState(0);
+  const [caloriesBurned, setcaloriesBurned] = useState(0);
+  const [netCalories, setNetCalories] = useState(0);
+  const [exercises, setExercises] = useState(Array<ExerciseObjProps>);
+  const [nutrition, setNutrition] = useState(Array<NutritionObjProps>);
 
-export default function Overview({
-  day = new Date(),
-  caloriesConsumed = 0,
-  caloriesBurned = 0,
-  exercises = [],
-  nutrition = []}: OverviewProps) {
-  const netCalories = caloriesConsumed - caloriesBurned;
+  useEffect(() => {
+    const day = new Date();
+    const exercises = [
+      {text: "Bench Press", calorie: 500, sets: 3, reps: 5, weight: 15, completed: true},
+      {text: "Chair Press", calorie: 500, sets: 3, reps: 5, completed: false},
+      {text: "Desk Press", calorie: 500, sets: 3, reps: 5, completed: false},
+      {text: "Table Press", calorie: 1000, completed: false},
+      {text: "Squats", calorie: 500, completed: false}
+    ];
+    const nutrition = [
+      {text: "Big Mac", calorie: 300},
+      {text: "Big Mac", calorie: 300},
+      {text: "Big Mac", calorie: 300}
+    ];
+    setExercises(exercises);
+    setNutrition(nutrition);
+  }, [])
 
-  const [currentDate, setCurrentDate] = useState(day);
-  const [currrentExercises, setCurrentExercises] = useState(exercises);
+  // Calculate total calorie burned
+  useEffect(() => {
+    let sum = 0;
+    exercises.map(exercise => {
+      if (exercise.completed) {
+        sum += exercise.calorie;
+      }
+    })
+    setcaloriesBurned(prevState => sum);
+  }, [exercises])
+
+  // Calculate total calorie consumed
+  useEffect(() => {
+    let sum = 0;
+    nutrition.map(food => {
+      sum += food.calorie;
+    })
+    setcaloriesConsumed(prevState => sum);
+  }, [nutrition])
+
+  // Calculate net calories
+  useEffect(() => {
+    setNetCalories(prevState => caloriesConsumed - caloriesBurned)
+  }, [caloriesConsumed, caloriesBurned])
 
   return (
     <div>
@@ -48,21 +84,29 @@ export default function Overview({
           <Header />
 
           <div className="flex flex-col items-center">
-            <Container title="Daily Calories" type="calories" cards={[
-              {calorie: caloriesConsumed, text: "Calories consumed"},
-              {calorie: caloriesBurned, text: "Calories burned"},
-              {calorie: netCalories, text: "Net Calories"}
-            ]}/>
-
             <Container
-              title="Exercise"
-              type="exercise"
-              cards={exercises}
-              currrentExercises={currrentExercises}
-              setCurrentExercises={setCurrentExercises}
+              type="calories"
+              title="Daily Calories"
+              cards={[
+                {calorie: caloriesConsumed, text: "Calories Consumed"},
+                {calorie: caloriesBurned, text: "Calories Burned"},
+                {calorie: netCalories, text: "Net Calories"}
+              ]}
             />
 
-            <Container title="Nutrition" type="nutrition" cards={nutrition} />
+            <Container
+              type="exercise"
+              title="Exercise"
+              cards={exercises}
+              setExercises={setExercises}
+            />
+
+            <Container
+              type="nutrition"
+              title="Nutrition"
+              cards={nutrition}
+              setNutrition={setNutrition}
+            />
           </div>
         </div>
       </div>
