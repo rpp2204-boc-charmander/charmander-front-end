@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { calculateOverrideValues } from 'next/dist/server/font-utils'
+import Image from 'next/Image'
+import { useState } from 'react'
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
-export default function FoodCard ({ food } : any) {
-  const [calories, setCalories] = useState(food.CAL);
+const FoodCard = ({ food } : any) => {
+  const [calories, setCalories] = useState(food.CAL)
 
   return (
     <div className="p-4 bg-white rounded-xl shadow-lg mb-4">
@@ -41,3 +43,5 @@ export default function FoodCard ({ food } : any) {
     </div>
   )
 };
+
+export default FoodCard;
