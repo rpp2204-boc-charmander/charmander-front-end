@@ -1,10 +1,9 @@
 import { MdAccountCircle, MdOutlineSort, MdOutlineFitnessCenter, MdRestaurant, MdOutlineAssignment, MdOutlinePeopleAlt, MdOutlineSettings, MdLogout } from "react-icons/md";
-
 import Link from 'next/link';
 
 export default function Sidenav() {
   return (
-    <div className="flex flex-col grow bg-gray-500 h-[100vh] w-[200px] fixed top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-10">
+    <div className="flex flex-col grow bg-gray-500 h-[100vh] w-[200px] fixed top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-10 text-white">
       <div className="flex flex-col items-center">
         <div className="pb-1">
           <MdAccountCircle className="h-32 w-32" />

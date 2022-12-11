@@ -36,7 +36,7 @@ export default function Container({ type, title, cards, setExercises, setNutriti
 
   return (
     <div className="flex flex-col min-h-[20rem] items-center mb-[2rem] overflow-hidden max-w-[80vw]">
-      <div className="bg-gray-500 flex w-[100%] justify-between rounded-t-3xl h-[4rem] items-center text-[2rem]">
+      <div className="bg-gray-500 flex w-[100%] justify-between rounded-t-3xl h-[4rem] items-center text-[2rem] text-white">
         <div className="ml-5"> {title} </div>
         {(type === "calories") && (
           <div className="text-base italic mr-5"> Daily recommended calories: {Math.round(bmr)} </div>
