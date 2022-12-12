@@ -10,7 +10,7 @@ module.exports = {
         'xxs': 	'14rem'
       },
       height: {
-        'list': '88vh',
+        'list': '90vh',
         '5.5/6': '80%',
         '4.5/6': '70%'
       },
