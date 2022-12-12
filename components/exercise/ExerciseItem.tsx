@@ -5,7 +5,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 
 export default function ExerciseItem ({ exercise, toggleEditModal } : any) {
   return (
-    <div onClick={toggleEditModal} className="max-h-60 rounded-lg overflow-hidden shadow-lg bg-gray-200 mx-5 mt-4 p-4 flex justify-between cursor-pointer">
+    <div onClick={toggleEditModal} className="max-h-60 rounded-lg overflow-hidden shadow-lg bg-gray-200 mx-5 mt-8 p-4 flex justify-between cursor-pointer">
       <div>
         <h2 className="text-xl font-bold">{exercise.name}</h2>
         <p> Muscle Group: {exercise.muscle_group}</p>
