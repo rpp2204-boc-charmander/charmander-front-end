@@ -13,7 +13,8 @@ interface CaloriesCardProps {
 interface ContainerProps {
   type: "calories" | "exercise" | "nutrition",
   title: string,
-  cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionObjProps>,
+  //cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionObjProps>,
+  cards: any,
   setExercises?: any,
   setNutrition?: any,
   bmr: number | 0
@@ -33,16 +34,25 @@ export default function Container({ type, title, cards, setExercises, setNutriti
   }) */
 
   const [isOpen, setIsOpen] = useState(false);
+  let numberOfCompleted = 0;
+  cards.map((card: any) => {
+    if (card.completed === true) {
+      numberOfCompleted++;
+    }
+  })
 
   return (
     <div className="flex flex-col min-h-[20rem] items-center mb-[2rem] overflow-hidden max-w-[80vw]">
-      <div className="bg-gray-500 flex w-[100%] justify-between rounded-t-3xl h-[4rem] items-center text-[2rem] text-white">
+      <div className="bg-gray-500 flex w-[100%] rounded-t-3xl h-[4rem] items-center text-[2rem] text-white justify-between">
         <div className="ml-5"> {title} </div>
         {(type === "calories") && (
           <div className="text-base italic mr-5"> Daily recommended calories: {Math.round(bmr)} </div>
         )}
         {(type !== "calories") && (
-          <MdAdd className="mr-5 cursor-pointer" onClick={() => setIsOpen(true)}/>
+          <div className="flex flex-row grow items-center justify-between">
+            <div className="text-base italic ml-5"> {numberOfCompleted} of {cards.length} items completed </div>
+            <MdAdd className="mr-5 cursor-pointer" onClick={() => setIsOpen(true)}/>
+          </div>
         )}
       </div>
 
@@ -58,7 +68,7 @@ export default function Container({ type, title, cards, setExercises, setNutriti
         <div className="bg-gray-300 flex flex-row rounded-b-3xl h-[16rem] justify-between
           items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] w-[80vw] scrollbar-hide border"
         >
-          {cards.map((card, index) => {
+          {cards.map((card: any, index: any) => {
             if (type === "calories") {
               let textColor = "text-black"
               if (index === 2) {
