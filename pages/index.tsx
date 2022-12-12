@@ -1,5 +1,6 @@
+import { useState } from "react"
+import { GiWeightLifitngUp } from "react-icons/gi"
 import Head from 'next/head'
-//import styles from '../styles/Home.module.css'
 import Overview from './overview'
 
 export default function Home() {

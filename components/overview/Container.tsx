@@ -46,7 +46,7 @@ export default function Container({ type, title, cards, setExercises, setNutriti
       <div className="bg-gray-500 flex w-[100%] rounded-t-3xl h-[4rem] items-center text-[2rem] text-white justify-between">
         <div className="ml-5"> {title} </div>
         {(type === "calories") && (
-          <div className="text-base italic mr-5"> Daily recommended calories: {Math.round(bmr)} </div>
+          <div className="text-base italic mr-5"> Recommended daily consumption: {Math.round(bmr)} </div>
         )}
         {(type !== "calories") && (
           <div className="flex flex-row grow items-center justify-between">

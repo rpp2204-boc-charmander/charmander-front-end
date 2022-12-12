@@ -19,9 +19,14 @@ export interface NutritionObjProps {
   completed: boolean
 }
 
+export interface DateProps {
+  currentDate: Date;
+  setCurrentDate: Function
+}
+
 export default function Overview() {
   // States
-  const [day, setDay] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
   const [caloriesBurned, setcaloriesBurned] = useState(0);
   const [netCalories, setNetCalories] = useState(0);
@@ -37,7 +42,6 @@ export default function Overview() {
 
   // Load dummy data
   useEffect(() => {
-    const day = new Date();
     const exercises = [
       {text: "Bench Press", calorie: 500, sets: 3, reps: 5, weight: 15, completed: true},
       {text: "Chair Press", calorie: 500, sets: 3, reps: 5, completed: false},
@@ -52,7 +56,7 @@ export default function Overview() {
     ];
     setExercises(exercises);
     setNutrition(nutrition);
-  }, [])
+  }, [currentDate])
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
@@ -109,12 +113,15 @@ export default function Overview() {
       </Head>
 
       <div className="bg-white flex flex-col w-[100%]">
-        <Header />
+        <Header
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+        />
 
-        <div className="flex flex-col items-center pt-4">
+        <div className="flex flex-col items-center pt-4 pl-12 pr-12">
           <Container
             type="calories"
-            title="Daily Calories"
+            title="Calories"
             cards={[
               {calorie: caloriesConsumed, text: "Calories Consumed"},
               {calorie: caloriesBurned, text: "Calories Burned"},
