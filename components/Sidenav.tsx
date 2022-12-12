@@ -11,7 +11,7 @@ import { MdLogout } from "react-icons/md";
 
 export default function Sidenav() {
   return (
-      <div className="flex flex-col align-center bg-gray-400 h-screen w-[200px] fixed left-0 top-0 pt-20 text-center overflow-x-hidden">
+      <div className="flex flex-col align-center bg-gray-500 h-screen w-[200px] fixed left-0 top-0 pt-20 text-center overflow-x-hidden">
 
         <div className="flex flex-col h-[250px] justify-evenly">
           <div className="bg-slate-50 w-[150px] h-[150px] rounded-full border-gray-300 border-4 self-center"> </div>
@@ -23,31 +23,31 @@ export default function Sidenav() {
           <ul className="text-slate-50 font-[600] flex flex-col h-full">
             <li className="flex justify-evenly items-center mb-3">
               <MdOutlineBarChart size={45}/>
-              <Link href='/' className="text-xl text-left hover:text-black">Overview</Link>
+              <Link href='/' className="text-xl text-left hover:text-gray-400">Overview</Link>
             </li>
             <li className="flex justify-evenly items-center my-3">
               <MdOutlineFitnessCenter size={35}/>
-              <Link href='/exercise' className="text-xl text-left hover:text-black">Exercise</Link>
+              <Link href='/exercise' className="text-xl text-left hover:text-gray-400">Exercise</Link>
             </li>
             <li className="flex justify-evenly items-center my-3">
               <MdOutlineRestaurant size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-black">Nutrition</Link>
+              <Link href='/' className="text-xl text-left hover:text-gray-400">Nutrition</Link>
             </li>
             <li className="flex justify-evenly items-center my-3">
               <MdOutlineAssignment size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-black">Report</Link>
+              <Link href='/' className="text-xl text-left hover:text-gray-400">Report</Link>
             </li>
             <li className="flex justify-evenly items-center my-3">
               <MdOutlinePeopleAlt size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-black">Friends</Link>
+              <Link href='/' className="text-xl text-left hover:text-gray-400">Friends</Link>
             </li>
             <li className="flex justify-evenly items-center my-3">
               <MdSettings size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-black">Settings</Link>
+              <Link href='/' className="text-xl text-left hover:text-gray-400">Settings</Link>
             </li>
             <li className="flex justify-evenly items-center my-3 mt-48">
               <MdLogout size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-black">Logout</Link>
+              <Link href='/' className="text-xl text-left hover:text-gray-400">Logout</Link>
             </li>
           </ul>
         </div>
