@@ -63,12 +63,12 @@ export default function Overview() {
     const sex = 'female';
 
     let bmr = 0;
-    let s;
-    if (sex === 'male') {
+    let s = -161;
+    /* if (sex === 'male') {
       s = 5;
     } else {
       s = -161;
-    }
+    } */
 
     bmr = 10 * weight + 6.25 * height - 5 * age + s;
     setBmr(bmr);
@@ -128,6 +128,7 @@ export default function Overview() {
             title="Exercise"
             cards={exercises}
             setExercises={setExercises}
+            bmr={bmr}
           />
 
           <Container
@@ -135,6 +136,7 @@ export default function Overview() {
             title="Nutrition"
             cards={nutrition}
             setNutrition={setNutrition}
+            bmr={bmr}
           />
         </div>
       </div>
