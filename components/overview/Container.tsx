@@ -50,7 +50,7 @@ export default function Container({ type, title, cards, setExercises, setNutriti
 >>>>>>> 8782119 (Fixing CI/CD error)
         <div className="ml-5"> {title} </div>
         {(type === "calories") && (
-          <div className="text-base italic mr-5"> Daily recommended calories: {Math.round(bmr)} </div>
+          <div className="text-base italic mr-5"> Recommended daily consumption: {Math.round(bmr)} </div>
         )}
         {(type !== "calories") && (
           <div className="flex flex-row grow items-center justify-between">
