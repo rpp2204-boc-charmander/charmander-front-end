@@ -2,7 +2,6 @@ import ExerciseList from "../components/exercise/ExerciseList"
 import CalorieComponent from "../components/exercise/CalorieComponent";
 import SearchModal from "../components/exercise/SearchModal";
 import EditModal from "../components/exercise/EditModal";
-import CurrDate from "../components/exercise/CurrDate";
 
 import { useState } from 'react';
 import styles from '../styles/Exercise.module.css';
@@ -42,14 +41,13 @@ export default function Exercise() {
 
   return (
     <>
-      <header className={styles.header}>
-        <MdOutlineFitnessCenter size={75}/>
-        <h1 className="text-7xl font-bold ml-3"> Exercise </h1>
-        {/* <CurrDate /> */}
+      <header className="flex px-10 py-5 shadow-md">
+        <MdOutlineFitnessCenter size={70}/>
+        <h1 className="text-7xl font-bold ml-10"> Exercise </h1>
       </header>
       { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
       { editModalState && <EditModal toggleEditModal={toggleEditModal}/>}
-      <div className={styles.content}>
+      <div className="grid grid-cols-[25%_75%]">
         <CalorieComponent total={total_calories_burned} toggleAddModal={toggleAddModal}/>
         <ExerciseList exercises={exercises} toggleEditModal={toggleEditModal}/>
       </div>
