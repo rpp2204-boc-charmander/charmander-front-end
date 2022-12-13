@@ -17,13 +17,12 @@ interface ExerciseAndNutritionCardProps {
 export default function Card({ idx, type, name, calorie, sets, reps, weight, portion, completed, setExercises, setNutrition }: ExerciseAndNutritionCardProps) {
   let bgColor;
   if (completed) {
-    bgColor = "bg-yellow-400";
+    bgColor = "bg-yellow-300";
   } else {
     bgColor = "bg-white";
   }
 
   const handleClick = (e: any) => {
-    console.log(type);
     if (type === "exercise") {
       setExercises((prevState: any) => {
         let items = [...prevState];

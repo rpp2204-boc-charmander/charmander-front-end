@@ -42,11 +42,11 @@ export default function Container({ type, title, cards, setExercises, setNutriti
   })
 
   return (
-    <div className="flex flex-col min-h-[20rem] items-center mb-[2rem] overflow-hidden max-w-[80vw]">
-      <div className="bg-gray-500 flex w-[100%] rounded-t-3xl h-[4rem] items-center text-[2rem] text-white justify-between">
+    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
+      <div className="bg-gray-500 flex flex-row h-[4rem] items-center text-[2rem] text-white justify-between w-full">
         <div className="ml-5"> {title} </div>
         {(type === "calories") && (
-          <div className="text-base italic mr-5"> Daily recommended calories: {Math.round(bmr)} </div>
+          <div className="text-base italic mr-5"> Recommended daily consumption: {Math.round(bmr)} </div>
         )}
         {(type !== "calories") && (
           <div className="flex flex-row grow items-center justify-between">
@@ -65,8 +65,8 @@ export default function Container({ type, title, cards, setExercises, setNutriti
       ></Modal>
 
       <div className="relative">
-        <div className="bg-gray-300 flex flex-row rounded-b-3xl h-[16rem] justify-between
-          items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] w-[80vw] scrollbar-hide border"
+        <div className="bg-gray-300 flex flex-row h-[16rem] justify-between
+          items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] scrollbar-hide border w-[75rem]"
         >
           {cards.map((card: any, index: any) => {
             if (type === "calories") {
