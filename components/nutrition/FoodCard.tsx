@@ -18,7 +18,7 @@ const FoodCard = ({ food } : any) => {
         <div style={{display: "flex", flexDirection: "column", alignItems: "end", justifyContent: "space-between"}}>
           <div className="flex flex-row">
           <AiOutlineEdit onClick={(e) => {
-            const servingSize : number = prompt("Confirm serving size");
+            const servingSize : any = prompt("Confirm serving size");
             setCalories(servingSize * food.CAL);
           }}/>
           <BsTrash onClick={(e) => {
