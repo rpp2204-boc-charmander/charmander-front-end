@@ -54,25 +54,27 @@ const Modal = () => {
             }}></input>
           </form>
         </div>
+        <div className="z-10 bg-slate-600">
+          {
+            preview.length > 0 ? (
+              preview.map((food, index) => {
+                return (
+                  <div key={index} className=" hover:bg-slate-400 flex flex-row w-96 space-x-8" onClick={(e) => {
+                    handleSelect(food);
+                  }}>
+                    <Image src={food.food.image} alt='' width={50} height={50} />
+                    <div>{food.food.label}</div>
+                    <div>{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
+                  </div>
+                )
+              })
+            ) : (
+              null
+            )
+          }
 
-        {
-          preview.length > 0 ? (
-            preview.map((food, index) => {
-              return (
-                <div key={index} className="border hover:bg-slate-400" onClick={(e) => {
-                  handleSelect(food);
-                }}>
-                  <div>{food.food.label}</div>
-                  <Image src={food.food.image} alt='' width={50} height={50} />
-                  <div>{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
-                </div>
-              )
-            })
-          ) : (
-            null
-          )
-        }
-        <div className="list">
+        </div>
+        <div className="list bg-slate-600">
           {
             foodList.map((food, index) => {
               return (
