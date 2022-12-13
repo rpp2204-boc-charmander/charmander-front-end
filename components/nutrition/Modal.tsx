@@ -83,7 +83,10 @@ const Modal = () => {
             })
           }
         </div>
-
+        <div className="space-x-10">
+          <button>Add</button>
+          <button>Add as completed</button>
+        </div>
       </div>
     </div>
   )
