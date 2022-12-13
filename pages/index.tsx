@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { GiWeightLifitngUp } from "react-icons/gi"
 import Head from 'next/head'
 import Overview from './overview'
 
