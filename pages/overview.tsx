@@ -119,7 +119,7 @@ export default function Overview() {
         <Header
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
-          title={'Overview'}
+          title='Overview'
           Icon={MdOutlineSort}
         />
 
