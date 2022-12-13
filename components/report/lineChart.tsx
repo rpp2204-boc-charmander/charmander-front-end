@@ -1,18 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'chart.js/auto';
 import {Line} from 'react-chartjs-2';
 
-export default function LineChart ({chartData}: any) {
+interface coords {
+  x: number;
+  y: number;
+};
+
+interface report {
+  maxRep: number;
+  type: string;
+  data: coords[];
+};
+
+export default function LineChart (props: any) {
+  let chartData: coords[] = props.chartData.data;
+  const[DATA, setChartData] = useState({
+    labels: chartData.map((coord) => coord.x),
+    datasets: [
+      {
+        label: 'Test Chart',
+        data: chartData.map((coord) => coord.y),
+        backgroundColor: [
+          'rgba(75,192,192,1)',
+          '#ecf01',
+          '#50AF95',
+          '#f3ba2f',
+          '#2a71d0'
+        ],
+        borderColor: 'black',
+        borderWidth: 2
+      }
+    ]
+  })
   return (
     <div className='chart-container'>
-      <h2 style={{textAlign: 'center'}}>Line Chart</h2>
       <Line
-        data={chartData}
+        data={DATA}
         options={{
           plugins: {
             title: {
               display: true,
-              text: 'Users Gained between 2016-2020'
+              text: 'Test of Line Chart'
             },
             legend: {
               display: false

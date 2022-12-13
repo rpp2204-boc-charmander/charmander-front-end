@@ -9,14 +9,25 @@ interface userData {
   userLost: number;
 };
 
+interface coord {
+  x: number;
+  y: number;
+};
+
+interface report {
+  maxRep: number;
+  type: string;
+  data: coord[];
+};
+
 export default function ScatterChart (props:any) {
-  let chartData: userData[] = props.chartData;
+  let chartData: coord[] = props.chartData.data;
   const [DATA, setChartData] = useState({
-    labels: chartData.map((year) => year.year),
+    labels: chartData.map((co_ord) => co_ord.x),
     datasets: [
       {
         label: 'Users Gained',
-        data: chartData.map((gained) => gained.userGain),
+        data: chartData,
         backgroundColor: [
           'rgba(75,192,192,1)',
           '#ecf01',
@@ -29,5 +40,21 @@ export default function ScatterChart (props:any) {
       }
     ]
   });
-  //TODO
+  console.log(props.chartData);
+  return (
+    <div>
+      <Scatter data={DATA}
+        options={{
+          plugins: {
+            title: {
+              display: true,
+              text: 'Test of scatter chart'
+            },
+            legend: {
+              display: false
+            }
+          }
+        }}/>
+    </div>
+  )
 };
