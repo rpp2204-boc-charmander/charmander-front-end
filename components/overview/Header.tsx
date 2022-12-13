@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { MdOutlineSort, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { DateProps } from "../../pages/overview";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 export default function Header({ currentDate, setCurrentDate }: DateProps) {
   const [formattedDate, setFormattedDate] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setFormattedDate((prevState: string) => {
-      return dateFormatter();
-    })
+    setFormattedDate(dateFormatter());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate])
 
@@ -23,30 +24,35 @@ export default function Header({ currentDate, setCurrentDate }: DateProps) {
       6: "Saturday"
     }
     const months: {[key: number]: string} = {
-      1: "January",
-      2: "February",
-      3: "March",
-      4: "April",
-      5: "May",
-      6: "June",
-      7: "July",
-      8: "August",
-      9: "September",
-      10: "October",
-      11: "November",
-      12: "December",
-
+      0: "January",
+      1: "February",
+      2: "March",
+      3: "April",
+      4: "May",
+      5: "June",
+      6: "July",
+      7: "August",
+      8: "September",
+      9: "October",
+      10: "November",
+      11: "December",
     }
-    //return`${weekdays[currentDate?.getDay()]} ${currentDate?.getMonth()}/${currentDate?.getDate()}/${currentDate?.getFullYear()}`;
     return`${weekdays[currentDate?.getDay()]}, ${months[currentDate?.getMonth()]} ${currentDate?.getDate()}, ${currentDate?.getFullYear()}`;
   }
 
   const dateChanger = function(numberOfDays: number) {
     const msToChange = 86_400_000 * numberOfDays;
     const newDate = new Date(currentDate.getTime() + msToChange);
-    setCurrentDate((prevState: any) => {
-      return newDate;
-    });
+    setCurrentDate(newDate);
+  }
+
+  const onChange = (date: any) => {
+    setCurrentDate(date);
+    setIsOpen((prevState) => (!prevState));
+  }
+
+  const handleCalendarClick = function() {
+    setIsOpen((prevState) => (!prevState));
   }
 
   return (
@@ -61,8 +67,16 @@ export default function Header({ currentDate, setCurrentDate }: DateProps) {
           <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
 
-        <div className="sm:w-52 lg:w-80 flex justify-center">
-          {formattedDate}
+        <div className="flex flex-col justify-center">
+          <div className="sm:w-52 lg:w-96 flex justify-center" onClick={handleCalendarClick}>
+            {formattedDate}
+          </div>
+
+          {isOpen && (
+            <div className="pt-48 flex justify-center">
+              <Calendar onChange={onChange} />
+            </div>
+          )}
         </div>
 
         <div>

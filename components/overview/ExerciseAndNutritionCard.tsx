@@ -23,7 +23,6 @@ export default function Card({ idx, type, name, calorie, sets, reps, weight, por
   }
 
   const handleClick = (e: any) => {
-    console.log(type);
     if (type === "exercise") {
       setExercises((prevState: any) => {
         let items = [...prevState];
