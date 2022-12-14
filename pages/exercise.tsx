@@ -34,7 +34,7 @@ export default function Exercise() {
   }
 
   const toggleEditModal = () => {
-    setAddModalState( prevState => !prevState)
+    setEditModalState( prevState => !prevState)
   }
 
   const deleteExercise = (id: number) => {
