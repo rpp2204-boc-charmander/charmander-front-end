@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/overview/Header";
@@ -57,6 +58,11 @@ export default function Overview() {
     setExercises(exercises);
     setNutrition(nutrition);
   }, [currentDate])
+
+  /* useEffect(() => {
+    axios('http://localhost:4000/overview/daily?currentDate=2022-12-13')
+    .then(result => console.log(result));
+  }) */
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
