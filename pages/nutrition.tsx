@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 import FoodList from "../components/nutrition/FoodList";
+import EditItemModal from "../components/nutrition/EditItemModal";
+import RemoveItemModal from "../components/nutrition/RemoveItemModal";
 import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
@@ -8,48 +10,19 @@ import { getDisplayName } from "next/dist/shared/lib/utils";
 
 const Nutrition = () => {
   const [pendingItem, setPendingItem] = useState('');
+  const [isEditShowing, setIsEditShowing] = useState(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState(false);
   const [allFoods, setAllFoods] = useState(foodData);
 
-const RemoveItemModal = ({pendingItem}) => {
-  const modalStyling = {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#FFF",
-    padding: "50px",
-    zIndex: "1000"
+  const updateCalories = (foods) => {
+    let calculatedCalories : number = 0;
+    foods.map((food) => {
+      calculatedCalories += Number(food.CAL);
+    })
+    return calculatedCalories;
   }
 
-  return (
-    <>
-      <div style={modalStyling} className="shadow-2xl">
-        {/* <GrClose className="absolute top-2 right-2"/> */}
-        <p>{`Are you sure you want to remove ${pendingItem.ITEM}?`}</p>
-        <div className="p-10 flex flex-row justify-center">
-          <button className="mr-2 bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
-          onClick={() => {
-            let newFoodsList = allFoods;
-            for(let item in newFoodsList){
-              if(newFoodsList[item].ITEM === pendingItem.ITEM){
-                delete newFoodsList[item];
-              }
-            }
-            setAllFoods(newFoodsList);
-            setIsRemoveShowing(false);
-          }}>
-            Confirm
-          </button>
-          <button className="ml-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
-          onClick={() => setIsRemoveShowing(false)}>
-            Cancel
-          </button>
-        </div>
-      </div>
-    </>
-  )
-}
+  const [calories, setCalories] = useState(updateCalories(allFoods));
 
   return (
     <>
@@ -62,16 +35,33 @@ const RemoveItemModal = ({pendingItem}) => {
           <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
             Prev
           </button>
-          <p className="flex items-center">Today</p>
+          <p className="flex items-center ml-5 mr-5">Today</p>
           <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
             Next
           </button>
         </div>
       </div>
       <div className="flex flex-row justify-between p-2 w-auto">
-        <CaloriesWidget foodData={allFoods}/>
-          {isRemoveShowing ? <RemoveItemModal pendingItem={pendingItem}/> : null}
-        <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing}/>
+        <CaloriesWidget calories={calories}/>
+          {isRemoveShowing ?
+          <RemoveItemModal
+          pendingItem={pendingItem}
+          setIsRemoveShowing={setIsRemoveShowing}
+          setCalories={setCalories}
+          setAllFoods={setAllFoods}
+          allFoods={allFoods}
+          calories={calories}/>
+          : null}
+          {isEditShowing ?
+          <EditItemModal
+          pendingItem={pendingItem}
+          setIsEditShowing={setIsEditShowing}
+          setCalories={setCalories}
+          setAllFoods={setAllFoods}
+          allFoods={allFoods}
+          calories={calories}/>
+        : null}
+        <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
       </div>
     </>
   )

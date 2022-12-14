@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-const CaloriesWidget = ({foodData}) => {
-  let calculatedCalories : number = 0;
-  foodData.map((food) => {
-    calculatedCalories += Number(food.CAL);
-  })
-  const [totalCalories, setTotalCalories] = useState(calculatedCalories);
+const CaloriesWidget = ({calories}) => {
 
   const prompter = () => {
     alert('Loading food search......')
@@ -20,7 +15,7 @@ const CaloriesWidget = ({foodData}) => {
             <div className="text-sm font-medium text-black flex justify-center truncate">calories gained</div>
             <div className="italic text-sm font-medium text-black flex justify-center">(estimated)</div>
           </div>
-          <p className="p-4 text-3xl text-black flex justify-center">{totalCalories}</p>
+          <p className="p-4 text-3xl text-black flex justify-center">{calories}</p>
         <button
         className="bg-white hover:bg-green-700 text-black text-3xl py-2 px-4 rounded-full border border-black w-32 h-7 flex justify-center items-center mb-4 shadow"
         onClick={prompter}
