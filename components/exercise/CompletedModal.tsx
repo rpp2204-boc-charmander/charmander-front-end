@@ -20,23 +20,23 @@ export default function CompletedModal({ toggleCompletedModal }: any) {
          <div className="w-[100%] h-[65%] bg-gray-400 flex flex-col scrollbar-hide rounded-lg justify-around items-center">
 
             <h3 className="font-bold"> Set 1:
-              <input className="w-[50%] ml-5" placeholder="Actual Reps" type="number"></input>
+              <input className="w-[130px] ml-5" placeholder="Actual Reps" type="number"></input>
             </h3>
 
             <h3 className="font-bold"> Set 2:
-              <input className="w-[50%] ml-5" placeholder="Actual Reps" type="number"></input>
+              <input className="w-[130px] ml-5" placeholder="Actual Reps" type="number"></input>
             </h3>
 
             <h3 className="font-bold"> Set 3:
-              <input className="w-[50%] ml-5" placeholder="Actual Reps" type="number"></input>
+              <input className="w-[130px] ml-5" placeholder="Actual Reps" type="number"></input>
             </h3>
 
             <h3 className="font-bold"> Set 4:
-              <input className="w-[50%] ml-5" placeholder="Actual Reps" type="number"></input>
+              <input className="w-[130px] ml-5" placeholder="Actual Reps" type="number"></input>
             </h3>
 
             <h3 className="font-bold"> Set 5:
-              <input className="w-[50%] ml-5" placeholder="Actual Reps" type="number"></input>
+              <input className="w-[130px] ml-5" placeholder="Actual Reps" type="number"></input>
             </h3>
 
           </div>
