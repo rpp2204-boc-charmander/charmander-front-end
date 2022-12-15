@@ -4,6 +4,8 @@ import { measureMemory } from 'vm';
 
 const FoodCardModal = ({ info }) => {
 
+  // info.unit = "Gram";
+  // info.grams = 1;
   let selectedIndex = 0;
   info.measures.forEach((measure, index) => {
     if (measure.label === "Gram") {
@@ -20,6 +22,7 @@ const FoodCardModal = ({ info }) => {
   const handleAmountChange = (e) => {
     // console.log(e.target.value)
     setAmount(Number(e.target.value));
+    info.amount = Number(e.target.value);
   }
 
   const handleUnitChange = (e) => {
@@ -33,6 +36,8 @@ const FoodCardModal = ({ info }) => {
       label: label,
       grams: grams
     })
+    info.unit = label;
+    info.grams = grams;
   }
 
   return (
@@ -58,7 +63,7 @@ const FoodCardModal = ({ info }) => {
         </form>
         <form>
           <label>Unit</label>
-          <select selected="Gram, 1 grams" onChange={(e) => {
+          <select defaultValue="Gram, 1 grams" onChange={(e) => {
             handleUnitChange(e)
           }}>
             {

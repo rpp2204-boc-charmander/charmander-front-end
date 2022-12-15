@@ -11,7 +11,12 @@ const Modal = () => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
-  const [preview, setPreview] = useState([])
+  const [preview, setPreview] = useState([]);
+  const [parameters, setParameters] = useState([]);
+
+  const handleParameterChange = () => {
+    
+  }
 
   const handleSearch = (e) => {
     // console.log(e.target.value)
@@ -23,6 +28,10 @@ const Modal = () => {
     setFoodList(foodList.concat([food]));
     setPreview([]);
     document.getElementById('search-form').value = ""
+  }
+
+  const handleSubmit = () => {
+    console.log(foodList)
   }
 
   useEffect(() => {
@@ -84,7 +93,9 @@ const Modal = () => {
           }
         </div>
         <div className="space-x-10">
-          <button>Add</button>
+          <button onClick={() => {
+            handleSubmit();
+          }}>Add</button>
           <button>Add as completed</button>
         </div>
       </div>
