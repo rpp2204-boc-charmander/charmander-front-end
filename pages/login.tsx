@@ -1,7 +1,8 @@
 /* gloabal google */
 import Head from 'next/head';
 import LoginCard from '../components/login/LoginCard';
-import { useState } from 'react';
+import { IoIosFitness} from 'react-icons/io';
+import { MdOutlineFastfood } from 'react-icons/md'
 
 const Login = () => {
 
@@ -15,7 +16,14 @@ const Login = () => {
       <main>
 
       <div className="fixed top-[45%] left-[20%] text-black flex flex-col items-center text-6xl ">
-          <h1>My Heath Coach</h1>
+        <h1>My Heath Coach</h1>
+        <div className="flex flex-row w-full mt-3">
+          <div className="grow"></div>
+          <MdOutlineFastfood className="test-2xl " />
+          <div className="grow"></div>
+          <IoIosFitness className="text-7xl" />
+          <div className="grow"></div>
+        </div>
       </div >
         <LoginCard />
       </main>
