@@ -60,8 +60,8 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
     );
   }
 
-  if(init) {
-    initGoogle();
+  if (init) {
+    initGoogle()
   }
 
 

@@ -19,7 +19,7 @@ const Login = () => {
         <h1>My Heath Coach</h1>
         <div className="flex flex-row w-full mt-3">
           <div className="grow"></div>
-          <MdOutlineFastfood className="test-2xl " />
+          <MdOutlineFastfood className="test-xl" />
           <div className="grow"></div>
           <IoIosFitness className="text-7xl" />
           <div className="grow"></div>
