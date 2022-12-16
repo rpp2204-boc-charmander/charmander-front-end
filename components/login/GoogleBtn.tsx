@@ -1,6 +1,4 @@
-/* global google */
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 
 
@@ -42,10 +40,13 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
   // initializes connection to GI API and renders login button
   function initGoogle () {
 
-    const client = "256921641374-b9cl93p3rhfshgo14oo628tnj7bf3ng0.apps.googleusercontent.com"
+    //keeps linter from throwing error
+    // google object is only defined after
+    // the google identity script runs
+    const google = (window as any).google;
 
     google.accounts.id.initialize({
-      client_id: client,
+      client_id: process.env.CLIENT_ID,
       context: 'signin',
       ux_mode: 'popup',
       callback: handleResponse,
@@ -63,7 +64,6 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
   if (init) {
     initGoogle()
   }
-
 
   return (
     <div id='google_btn' />
