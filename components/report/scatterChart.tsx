@@ -1,13 +1,7 @@
 import React, {useState} from 'react';
 import 'chart.js/auto';
+import 'chartjs-adapter-date-fns'
 import {Scatter} from 'react-chartjs-2';
-
-interface userData {
-  id: number;
-  year: number;
-  userGain: number;
-  userLost: number;
-};
 
 interface coord {
   x: number;
@@ -23,7 +17,6 @@ interface report {
 export default function ScatterChart (props:any) {
   let chartData: coord[] = props.chartData.data;
   const [DATA, setChartData] = useState({
-    labels: chartData.map((co_ord) => co_ord.x),
     datasets: [
       {
         label: 'Users Gained',
@@ -45,6 +38,16 @@ export default function ScatterChart (props:any) {
     <div>
       <Scatter data={DATA}
         options={{
+          scales: {
+            x: {
+              min: 1670922000000,
+              max: 1670922000000 + 86400000*6,
+              type: 'time',
+              time: {
+                unit: 'day'
+              }
+            }
+          },
           plugins: {
             title: {
               display: true,

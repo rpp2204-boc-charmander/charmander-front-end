@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import 'chart.js/auto';
+import 'chartjs-adapter-date-fns';
 import {Line} from 'react-chartjs-2';
 
 interface coords {
   x: number;
   y: number;
 };
-
 interface report {
   maxRep: number;
   type: string;
@@ -14,13 +14,11 @@ interface report {
 };
 
 export default function LineChart (props: any) {
-  let chartData: coords[] = props.chartData.data;
-  const[DATA, setChartData] = useState({
-    labels: chartData.map((coord) => coord.x),
+  const [chartSetup, setChartData]: any = useState({
     datasets: [
       {
         label: 'Test Chart',
-        data: chartData.map((coord) => coord.y),
+        data: props.chartData.data,
         backgroundColor: [
           'rgba(75,192,192,1)',
           '#ecf01',
@@ -32,22 +30,67 @@ export default function LineChart (props: any) {
         borderWidth: 2
       }
     ]
-  })
+  });
+  const [options, setOptions]: any = useState({
+    plugins: {
+      title: {
+        display: true,
+        text: 'Test of Line Chart'
+      },
+      legend: {
+        display: false
+      }
+    },
+    scales: {
+      x: {
+        min: 0,
+        max: 1,
+        type: 'time',
+        time: {
+          unit: 'day'
+        }
+      }
+    }
+  });
+
+  useEffect(() => {setChartData((prevState: any) => {
+    let setup = {...prevState};
+    setup.datasets[0].label = 'testing';
+    setup.datasets[0].data = props.chartData.data;
+    return setup;
+  })}, [props.chartData]);
+  useEffect(() => {setOptions((prevState: any) => {
+    let newChart = props.chartData;
+    let options = {...prevState};
+    options.plugins.title.text = newChart.type;
+    if (props.timespan === 'week') {
+      options.scales.x.min = props.time - 86400000*6;
+      options.scales.x.max = props.time;
+      options.scales.x.time.unit = 'day';
+    } else if (props.timespan === 'month') {
+      let date = new Date(props.time);
+      let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).toString();
+      let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).toString();
+      let [ufirst, ulast] = [Date.parse(firstDay), Date.parse(lastDay)];
+      options.scales.x.min = ufirst;
+      options.scales.x.max = ulast;
+      options.scales.x.time.unit = 'day';
+    } else {
+      let date = new Date(props.time);
+      let firstDay = new Date(date.getFullYear(), 0, 1).toString();
+      let lastDay = new Date(date.getFullYear() + 1, 0, 1).toString();
+      let [ufirst, ulast] = [Date.parse(firstDay), Date.parse(lastDay)];
+      options.scales.x.min = ufirst;
+      options.scales.x.max = ulast;
+      options.scales.x.time.unit = 'month';
+    }
+    return options;
+  })}, [props.chartData, props.timespan, props.time])
+
+
   return (
     <div className='chart-container'>
-      <Line
-        data={DATA}
-        options={{
-          plugins: {
-            title: {
-              display: true,
-              text: 'Test of Line Chart'
-            },
-            legend: {
-              display: false
-            }
-          }
-        }}/>
+      <Line data={chartSetup} options={options}/>
     </div>
   );
 };
