@@ -8,21 +8,36 @@ import { GiForkKnifeSpoon } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
 
-const Nutrition = () => {
-  const [pendingItem, setPendingItem] = useState('');
-  const [isEditShowing, setIsEditShowing] = useState(false);
-  const [isRemoveShowing, setIsRemoveShowing] = useState(false);
-  const [allFoods, setAllFoods] = useState(foodData);
+interface FoodDataType {
+  CAL: string,
+  FAT: string,
+  SFAT: string,
+  TFAT: string,
+  CHOL: string,
+  SALT: string,
+  CARB: string,
+  FBR: string,
+  SGR: string,
+  PRO: string,
+  ITEM: string,
+  CATEGORY: string
+}
 
-  const updateCalories = (foods) => {
+const Nutrition = () => {
+  const [pendingItem, setPendingItem] = useState<FoodDataType>({} as FoodDataType);
+  const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
+  const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
+  const [allFoods, setAllFoods] = useState<any>(foodData);
+
+  const updateCalories = (foods : []) => {
     let calculatedCalories : number = 0;
-    foods.map((food) => {
+    foods.map((food : FoodDataType) => {
       calculatedCalories += Number(food.CAL);
     })
     return calculatedCalories;
   }
 
-  const [calories, setCalories] = useState(updateCalories(allFoods));
+  const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
   return (
     <>

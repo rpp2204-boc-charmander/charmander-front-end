@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-const CaloriesWidget = ({calories}) => {
+
+interface CaloriesProp {
+calories: number
+}
+
+const CaloriesWidget = ({calories} : CaloriesProp) => {
 
   const prompter = () => {
     alert('Loading food search......')
