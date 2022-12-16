@@ -15,7 +15,7 @@ const Modal = () => {
   const [parameters, setParameters] = useState([]);
 
   const handleParameterChange = () => {
-    
+
   }
 
   const handleSearch = (e) => {
@@ -66,7 +66,7 @@ const Modal = () => {
         <div className="z-10 bg-slate-600">
           {
             preview.length > 0 ? (
-              preview.map((food, index) => {
+              preview.map((food: any, index) => {
                 return (
                   <div key={index} className=" hover:bg-slate-400 flex flex-row w-96 space-x-8" onClick={(e) => {
                     handleSelect(food);

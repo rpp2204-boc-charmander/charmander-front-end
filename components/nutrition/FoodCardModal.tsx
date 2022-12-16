@@ -67,7 +67,7 @@ const FoodCardModal = ({ info }) => {
             handleUnitChange(e)
           }}>
             {
-              info.measures.map((unit: object, index: number) => {
+              info.measures.map((unit: any, index: number) => {
                 if (index === selectedIndex) {
                   return (
                     <option key={index} selected>{unit.label}, {Math.round(unit.weight)} grams</option>
