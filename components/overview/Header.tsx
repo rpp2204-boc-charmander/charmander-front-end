@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { MdOutlineSort, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { DateProps } from "../../pages/overview";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-export default function Header({ currentDate, setCurrentDate }: DateProps) {
+export default function Header({ currentDate, setCurrentDate, title, Icon }: DateProps) {
   const [formattedDate, setFormattedDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -58,8 +58,8 @@ export default function Header({ currentDate, setCurrentDate }: DateProps) {
   return (
     <div className="bg-white flex flex-row grow justify-between items-center md:h-18 lg:h-24 text-black font-bold sticky top-0 bottom-0 z-50 shadow-lg w-full pl-12 pr-12">
       <div className="flex items-center w-full h-full">
-        <MdOutlineSort className="sm:text-3xl lg:text-6xl mr-5"/>
-        <h1 className="sm:text-3xl lg:text-5xl"> Overview </h1>
+        <Icon className="sm:text-3xl lg:text-6xl mr-5"/>
+        <h1 className="sm:text-3xl lg:text-5xl"> {title} </h1>
       </div>
 
       <div className="sm:text-base lg:text-xl flex flex-row h-full items-center">
