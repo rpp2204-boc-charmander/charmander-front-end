@@ -1,13 +1,8 @@
 import React, {useState} from 'react';
-import PieChart from './pieChart';
-import BarChart from './barChart';
 import LineChart from './lineChart';
 import ScatterChart from './scatterChart';
 
-/*
-  [{maxrep: 420, type: deadlift, Unix: (current days time stamp),
-    timespan: week, data: [{x: unix, y: max-weight},...]}]
-*/
+
 interface coord {
   x: number;
   y: number;
@@ -92,9 +87,3 @@ export default function Charts () {
     </div>
   );
 };
-
-/*
-  labels: three different options, one for the past week, this month, and this year
-
-  data: map the weight or calories and the unix time stamp
-*/
