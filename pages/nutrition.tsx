@@ -7,6 +7,7 @@ import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import Modal from '../components/nutrition/Modal';
 
+<<<<<<< HEAD
 const Nutrition = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -14,6 +15,39 @@ const Nutrition = () => {
     setShowModal(!showModal);
   }
 
+=======
+interface FoodDataType {
+  CAL: string,
+  FAT: string,
+  SFAT: string,
+  TFAT: string,
+  CHOL: string,
+  SALT: string,
+  CARB: string,
+  FBR: string,
+  SGR: string,
+  PRO: string,
+  ITEM: string,
+  CATEGORY: string
+}
+
+const Nutrition = () => {
+  const [pendingItem, setPendingItem] = useState<FoodDataType>({} as FoodDataType);
+  const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
+  const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
+  const [allFoods, setAllFoods] = useState<any>(foodData);
+
+  const updateCalories = (foods : []) => {
+    let calculatedCalories : number = 0;
+    foods.map((food : FoodDataType) => {
+      calculatedCalories += Number(food.CAL);
+    })
+    return calculatedCalories;
+  }
+
+  const [calories, setCalories] = useState<any>(updateCalories(allFoods));
+
+>>>>>>> f3bcf0b (Typescript refactor, removing no longer updates calories widget)
   return (
     <div>
       <>

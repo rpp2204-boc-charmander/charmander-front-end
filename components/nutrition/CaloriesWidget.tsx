@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 const CaloriesWidget = ({ handleShowModal, foodData }) => {
   let calculatedCalories : number = 0;
   foodData.map((food) => {
@@ -9,6 +10,14 @@ const CaloriesWidget = ({ handleShowModal, foodData }) => {
 =======
 const CaloriesWidget = ({calories}) => {
 >>>>>>> 2321af3 (Moved remove item modal and created edit item modal)
+=======
+
+interface CaloriesProp {
+calories: number
+}
+
+const CaloriesWidget = ({calories} : CaloriesProp) => {
+>>>>>>> f3bcf0b (Typescript refactor, removing no longer updates calories widget)
 
   const prompter = () => {
     alert('Loading food search......')
