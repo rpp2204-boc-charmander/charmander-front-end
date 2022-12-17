@@ -7,6 +7,7 @@ import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
+import Header from "../components/overview/Header";
 
 interface FoodDataType {
   CAL: string,
@@ -28,6 +29,7 @@ const Nutrition = () => {
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
   const [allFoods, setAllFoods] = useState<any>(foodData);
+  const [ currentDate, setCurrentDate ] = useState(new Date());
 
   const updateCalories = (foods : []) => {
     let calculatedCalories : number = 0;
@@ -41,7 +43,8 @@ const Nutrition = () => {
 
   return (
     <>
-      <div className="flex justify-between flex-row mb-10 w-auto">
+      <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Nutrition' Icon={GiForkKnifeSpoon}/>
+      {/* <div className="flex justify-between flex-row mb-10 w-auto">
         <div className="flex flex-row">
           <GiForkKnifeSpoon className="text-3xl mr-2"/>
           <div className="text-3xl">Nutrition</div>
@@ -56,7 +59,8 @@ const Nutrition = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-row justify-between p-2 w-auto">
+      <div className="flex flex-row justify-between p-2 w-auto"> */}
+      <div className="grid grid-cols-[25%_75%]">
         <CaloriesWidget calories={calories}/>
           {isRemoveShowing ?
           <RemoveItemModal
