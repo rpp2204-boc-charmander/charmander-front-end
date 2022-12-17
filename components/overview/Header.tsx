@@ -9,6 +9,7 @@ export default function Header({ currentDate, setCurrentDate }: DateProps) {
     setFormattedDate((prevState: string) => {
       return dateFormatter();
     })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate])
 
   const dateFormatter = function() {
@@ -49,18 +50,18 @@ export default function Header({ currentDate, setCurrentDate }: DateProps) {
   }
 
   return (
-    <div className="bg-white flex flex-row grow justify-between items-center h-24 text-black font-bold sticky top-0 bottom-0 z-50 shadow-lg w-full pl-12 pr-12">
+    <div className="bg-white flex flex-row grow justify-between items-center md:h-18 lg:h-24 text-black font-bold sticky top-0 bottom-0 z-50 shadow-lg w-full pl-12 pr-12">
       <div className="flex items-center w-full h-full">
-        <MdOutlineSort className="h-16 w-16 mr-5"/>
-        <h1 className="text-5xl"> Overview </h1>
+        <MdOutlineSort className="sm:text-3xl lg:text-6xl mr-5"/>
+        <h1 className="sm:text-3xl lg:text-5xl"> Overview </h1>
       </div>
 
-      <div className="text-xl flex flex-row h-full items-center">
+      <div className="sm:text-base lg:text-xl flex flex-row h-full items-center">
         <div>
           <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
 
-        <div className="w-80 flex justify-center">
+        <div className="sm:w-52 lg:w-80 flex justify-center">
           {formattedDate}
         </div>
 
