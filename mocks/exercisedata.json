@@ -15,11 +15,11 @@
     "muscle_group": "Back",
     "name": "Pull Ups",
     "sets": [
-      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 30},
-      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
-      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
+      { "id": 1, "reps": 10, "actual": 10, "calories_burned": 20},
+      { "id": 2, "reps": 10, "actual": 8, "calories_burned": 23},
+      { "id": 3, "reps": 10, "actual": 7, "calories_burned": 21}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 64
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 21
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 102
   },
   {
     "id": 5,
@@ -52,7 +52,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 95
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 86
   },
   {
     "id": 7,
@@ -74,7 +74,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 44
   },
   {
     "id": 8,
@@ -85,7 +85,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 23
   },
   {
     "id": 9,
@@ -96,7 +96,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 12
   },
   {
     "id": 10,
@@ -107,7 +107,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 33
   },
   {
     "id": 11,
@@ -118,7 +118,7 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 47
   },
   {
     "id": 12,
@@ -129,6 +129,6 @@
       { "id": 2, "reps": 10, "actual": 8, "calories_burned": 25},
       { "id": 3, "reps": 10, "actual": 7, "calories_burned": 20}
     ],
-    "total_calories_burned": 75
+    "total_calories_burned": 87
   }]
 }

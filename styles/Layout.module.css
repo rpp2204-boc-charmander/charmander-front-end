@@ -1,5 +1,6 @@
 .container {
-  padding: 0 2rem;
+  /* padding: 0 2rem; */
+  margin-left: 12rem;
 }
 
 .main {
@@ -75,6 +76,9 @@
 }
 
 .card {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
   margin: 1rem;
   padding: 1.5rem;
   text-align: left;
@@ -83,7 +87,7 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  max-width: 300px;
+  max-width: 700px;
 }
 
 .card:hover,
@@ -91,6 +95,7 @@
 .card:active {
   color: #0070f3;
   border-color: #0070f3;
+  cursor: pointer;
 }
 
 .card h2 {
