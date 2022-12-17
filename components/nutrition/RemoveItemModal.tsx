@@ -25,19 +25,25 @@ interface RemoveItemProps {
 }
 
 const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShowing, allFoods, calories} : RemoveItemProps) => {
-  const modalStyling = {
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    backgroundColor: "#FFF",
-    padding: "50px",
-    zIndex: "1000"
-  }
+  // const modalStyling = {
+  //   position: "fixed",
+  //   top: "50%",
+  //   left: "50%",
+  //   transform: "translate(-50%, -50%)",
+  //   backgroundColor: "#FFF",
+  //   padding: "50px",
+  //   zIndex: "1000"
+  // }
 
   return (
     <>
-      <div style={modalStyling} className="shadow-2xl">
+      <div style={{position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor: "#FFF",
+        padding: "50px",
+        zIndex: "1000"}} className="shadow-2xl">
         {/* <GrClose className="absolute top-2 right-2"/> */}
         <p>{`Are you sure you want to remove ${pendingItem.ITEM}?`}</p>
         <div className="p-10 flex flex-row justify-center">
