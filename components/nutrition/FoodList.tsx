@@ -16,9 +16,6 @@ interface foodDataType {
   CATEGORY: string
 }
 
-<<<<<<< HEAD
-const FoodList = ({foodData}) => {
-=======
 interface FoodListProps {
   foodData: foodDataType[],
   setPendingItem: Function,
@@ -27,12 +24,11 @@ interface FoodListProps {
 }
 
 const FoodList = ({foodData, setPendingItem, setIsRemoveShowing, setIsEditShowing}: FoodListProps) => {
->>>>>>> f3bcf0b (Typescript refactor, removing no longer updates calories widget)
   return (
-  <div>
+  <div className="w-3/4">
     {
     foodData.map((food) => {
-        return <FoodCard key={food.ITEM} food={food} />
+        return <FoodCard key={food.ITEM} food={food} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
       })
     }
   </div>

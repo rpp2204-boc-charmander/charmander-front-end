@@ -1,14 +1,6 @@
 import { MdAccountCircle, MdOutlineSort, MdOutlineFitnessCenter, MdRestaurant, MdOutlineAssignment, MdOutlinePeopleAlt, MdOutlineSettings, MdLogout } from "react-icons/md";
 import Link from 'next/link';
 
-import { MdOutlineBarChart } from "react-icons/md";
-import { MdOutlineFitnessCenter } from 'react-icons/md';
-import { MdOutlineRestaurant } from "react-icons/md";
-import { MdOutlineAssignment } from "react-icons/md";
-import { MdOutlinePeopleAlt } from "react-icons/md";
-import { MdSettings } from "react-icons/md";
-import { MdLogout } from "react-icons/md";
-
 export default function Sidenav() {
   return (
     <div className="flex flex-col grow bg-gray-500 h-[100vh] w-48 fixed top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
@@ -74,38 +66,6 @@ export default function Sidenav() {
           Logout
         </Link>
       </div>
-        <div className="h-full mt-10">
-          <ul className="text-slate-50 font-[600] flex flex-col h-full">
-            <li className="flex justify-evenly items-center mb-3">
-              <MdOutlineBarChart size={45}/>
-              <Link href='/' className="text-xl text-left hover:text-gray-400">Overview</Link>
-            </li>
-            <li className="flex justify-evenly items-center my-3">
-              <MdOutlineFitnessCenter size={35}/>
-              <Link href='/exercise' className="text-xl text-left hover:text-gray-400">Exercise</Link>
-            </li>
-            <li className="flex justify-evenly items-center my-3">
-              <MdOutlineRestaurant size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-gray-400">Nutrition</Link>
-            </li>
-            <li className="flex justify-evenly items-center my-3">
-              <MdOutlineAssignment size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-gray-400">Report</Link>
-            </li>
-            <li className="flex justify-evenly items-center my-3">
-              <MdOutlinePeopleAlt size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-gray-400">Friends</Link>
-            </li>
-            <li className="flex justify-evenly items-center my-3">
-              <MdSettings size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-gray-400">Settings</Link>
-            </li>
-            <li className="flex justify-evenly items-center my-3 mt-48">
-              <MdLogout size={35}/>
-              <Link href='/' className="text-xl text-left hover:text-gray-400">Logout</Link>
-            </li>
-          </ul>
-        </div>
     </div>
   )
 };

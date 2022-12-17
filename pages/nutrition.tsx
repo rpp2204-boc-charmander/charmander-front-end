@@ -5,7 +5,6 @@ import EditItemModal from "../components/nutrition/EditItemModal";
 import RemoveItemModal from "../components/nutrition/RemoveItemModal";
 import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
-import Modal from '../components/nutrition/Modal';
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
 import Header from "../components/overview/Header";
@@ -50,22 +49,50 @@ const Nutrition = () => {
   const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
   return (
-    <div>
-      <>
-    <div className="flex flex-row mb-10">
-    <GiForkKnifeSpoon className="text-3xl mr-5"/>
-    <div className="text-3xl">Nutrition</div>
-    <p style={{marginLeft: "400px"}}>{`< 10 Dec 2022 >`}</p>
-    </div>
-    <div className="flex flex-row">
-      <CaloriesWidget handleShowModal={handleShowModal} foodData={foodData}/>
-      <FoodList foodData={foodData}/>
-    </div>
-    </>
-      {
+    <>
+      <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Nutrition' Icon={GiForkKnifeSpoon}/>
+      {/* <div className="flex justify-between flex-row mb-10 w-auto">
+        <div className="flex flex-row">
+          <GiForkKnifeSpoon className="text-3xl mr-2"/>
+          <div className="text-3xl">Nutrition</div>
+        </div>
+        <div className="inline-flex">
+          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+            Prev
+          </button>
+          <p className="flex items-center ml-5 mr-5">Today</p>
+          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+            Next
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-row justify-between p-2 w-auto"> */}
+      <div className="grid grid-cols-[25%_75%]">
+        <CaloriesWidget handleShowModal={handleShowModal} calories={calories}/>
+          {isRemoveShowing ?
+          <RemoveItemModal
+          pendingItem={pendingItem}
+          setIsRemoveShowing={setIsRemoveShowing}
+          setCalories={setCalories}
+          setAllFoods={setAllFoods}
+          allFoods={allFoods}
+          calories={calories}/>
+          : null}
+          {isEditShowing ?
+          <EditItemModal
+          pendingItem={pendingItem}
+          setIsEditShowing={setIsEditShowing}
+          setCalories={setCalories}
+          setAllFoods={setAllFoods}
+          allFoods={allFoods}
+          calories={calories}/>
+        : null}
+        <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
+        {
         showModal ? ( <Modal />) : ( null )
       }
-    </div>
+      </div>
+    </>
   )
 }
 
