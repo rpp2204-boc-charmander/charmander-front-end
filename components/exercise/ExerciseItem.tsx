@@ -6,7 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { GiMuscleUp } from "react-icons/gi";
 
 
-export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal } : any) {
+export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, completeExercise } : any) {
   return (
     <div className="h-64 max-h-72 rounded-lg overflow-hidden shadow-lg bg-gray-200 mx-5 mt-8 p-4 flex justify-between relative">
         <AiOutlineDelete size={25} className="absolute top-2 left-2 cursor-pointer" onClick={deleteExercise}/>
@@ -21,7 +21,8 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
           <p className="flex bg-slate-50 shadow-md w-72 h-8 rounded-full justify-evenly items-center font-bold"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
         </div>
 
-        <button className="bg-green-500 hover:bg-green-400 shadow-lg rounded-full w-[50%] h-[20%] font-bold text-slate-50"> Complete Workout </button>
+        <button className="bg-green-500 hover:bg-green-400 shadow-lg rounded-full w-[50%] h-[20%] font-bold text-slate-50"
+                onClick={completeExercise}> Complete Workout </button>
 
       </div>
 
@@ -30,14 +31,14 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
           <div className="bg-gray-500 flex flex-col rounded-2xl h-[75%] justify-between overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
 
           {exercise.sets?.map( (exercise: any) => {
-            return <button className="bg-slate-50 hover:bg-green-500 hover:text-white w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
+            return <button className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
                            onClick={toggleCompletedModal}
                            > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
           })}
 
           </div>
 
-        <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold"> Add Set </button>
+        <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={toggleAddSetModal}> Add Set </button>
 
       </div>
     </div>

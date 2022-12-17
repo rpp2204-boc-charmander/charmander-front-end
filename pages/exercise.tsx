@@ -6,6 +6,7 @@ import CalorieComponent from "../components/exercise/CalorieComponent";
 import SearchModal from "../components/exercise/SearchModal";
 import EditModal from "../components/exercise/EditModal";
 import CompletedModal from '../components/exercise/CompletedModal';
+import AddSet from '../components/exercise/AddSet';
 import Header from "../components/overview/Header";
 import Modal from "../components/overview/Modal";
 
@@ -39,6 +40,7 @@ export default function Exercise() {
   const [ addModalState, setAddModalState ] = useState(false);
   const [ editModalState, setEditModalState ] = useState(false);
   const [ completedModalState, setCompletedModalState ] = useState(false);
+  const [ addSetModalState, setAddSetModalState ] = useState(false);
 
   //Calories
   const [ caloriesBurned, setCaloriesBurned ] = useState(0)
@@ -74,11 +76,19 @@ export default function Exercise() {
     setCompletedModalState( prevState => !prevState)
   }
 
+  const toggleAddSetModal = () => {
+    setAddSetModalState( prevState => !prevState)
+  }
+
   const deleteExercise = (id: number) => {
     //alerts for now, will work on functionality later
 
     alert('Are you sure you want to remove this exercise?')
   };
+
+  const completeExercise = () => {
+    alert('Complete Exercise?')
+  }
 
   return (
     <>
@@ -87,10 +97,16 @@ export default function Exercise() {
       { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
       { editModalState && <EditModal toggleEditModal={toggleEditModal} workoutID={workoutID}/>}
       { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal}/>}
+      { addSetModalState && <AddSet toggleAddSetModal={toggleAddSetModal}/>}
 
       <div className="grid grid-cols-[25%_75%]">
         <CalorieComponent caloriesBurned={caloriesBurned} toggleAddModal={toggleAddModal}/>
-        <ExerciseList exercises={exercises} toggleEditModal={toggleEditModal} deleteExercise={deleteExercise}  toggleCompletedModal={toggleCompletedModal}/>
+        <ExerciseList exercises={exercises}
+                      toggleEditModal={toggleEditModal}
+                      deleteExercise={deleteExercise}
+                      toggleCompletedModal={toggleCompletedModal}
+                      toggleAddSetModal={toggleAddSetModal}
+                      completeExercise={completeExercise}/>
       </div>
     </>
   )
