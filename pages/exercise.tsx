@@ -26,11 +26,21 @@ const getCaloriesBurned = (exercises: any): number => {
 
 
 export default function Exercise() {
+  //Date
   const [ currentDate, setCurrentDate ] = useState(new Date());
+
+  //IDs
+  const [ workoutID, setWorkoutID ] = useState(1);
+
+  //Exercises
   const [ exercises, setExercises ] = useState([]);
+
+  //Modals
   const [ addModalState, setAddModalState ] = useState(false);
   const [ editModalState, setEditModalState ] = useState(false);
   const [ completedModalState, setCompletedModalState ] = useState(false);
+
+  //Calories
   const [ caloriesBurned, setCaloriesBurned ] = useState(0)
 
   useEffect(() => {
@@ -43,14 +53,21 @@ export default function Exercise() {
       .then(({ data }) => {
         setExercises(data);
       })
+      .catch(error => {
+        console.log(error.stack)
+      })
   }
 
   const toggleAddModal = () => {
     setAddModalState( prevState => !prevState)
   }
 
-  const toggleEditModal = () => {
+  const toggleEditModal = (workout_id: number) => {
     setEditModalState( prevState => !prevState)
+
+    if (workout_id) {
+      setWorkoutID(workout_id)
+    }
   }
 
   const toggleCompletedModal = () => {
@@ -68,7 +85,7 @@ export default function Exercise() {
       <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Exercise' Icon={MdOutlineFitnessCenter}/>
 
       { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
-      { editModalState && <EditModal toggleEditModal={toggleEditModal}/>}
+      { editModalState && <EditModal toggleEditModal={toggleEditModal} workoutID={workoutID}/>}
       { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal}/>}
 
       <div className="grid grid-cols-[25%_75%]">

@@ -10,7 +10,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
   return (
     <div className="h-64 max-h-72 rounded-lg overflow-hidden shadow-lg bg-gray-200 mx-5 mt-8 p-4 flex justify-between relative">
         <AiOutlineDelete size={25} className="absolute top-2 left-2 cursor-pointer" onClick={deleteExercise}/>
-        <AiOutlineEdit size={25} className="absolute top-2 left-10 cursor-pointer" onClick={toggleEditModal}/>
+        <AiOutlineEdit size={25} className="absolute top-2 left-10 cursor-pointer" onClick={ () => { toggleEditModal(exercise.id) }}/>
 
       <div className="flex flex-col w-[80%] items-center justify-evenly">
 
@@ -37,9 +37,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
           </div>
 
-        <button className="bg-slate-50 hover:bg-slate-200 px-5 py-2 w-4/6 rounded-full shadow-lg self-center font-bold"> Add Set </button>
-
-
+        <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold"> Add Set </button>
 
       </div>
     </div>

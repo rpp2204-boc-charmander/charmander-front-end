@@ -9,7 +9,7 @@ export default function CompletedModal({ toggleCompletedModal }: any) {
       flex flex-col items-center w-[40%] h-[50%] rounded-3xl pl-10 pr-10">
 
          <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
-          <div className="title text-[2rem] font-bold"> Complete Exercise </div>
+          <div className="title text-[2rem] font-bold"> Complete Set? </div>
           <MdClose
             className="text-[2rem] cursor-pointer"
             onClick={toggleCompletedModal}
