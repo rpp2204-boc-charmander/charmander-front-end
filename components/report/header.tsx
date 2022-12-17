@@ -7,7 +7,7 @@ interface data {
 
 export default function Header (props:data) {
   return (
-    <div className='bg-indigo-500 flex flex-row justify-between items-center h-[6rem] mb-[3rem]'>
+    <div className='bg-gray-400 flex flex-row justify-between items-center h-[6rem] mb-[3rem]'>
       <div className='flex items-center'>
         <TbClipboardList className='inline h-36 w-1/6 mr-5'/>
         <h1 className='inline text-[4rem]'> Report </h1>
