@@ -1,8 +1,16 @@
+import { useState } from "react";
 import Head from "next/head";
 import Header from "../components/overview/Header";
 import Container from "../components/overview/Container";
 
-export default function Overview() {
+export default function Overview({
+  calorieConsumed,
+  calorieBurned,
+  exercises,
+  nutrition
+}) {
+  const [currentDate, setCurrentDate] = useState<any>();
+
   return (
     <div>
       <Head>
@@ -11,11 +19,11 @@ export default function Overview() {
       </Head>
 
       <div className="flex flex-row">
-        <div className="sidebar bg-indigo-400 min-w-[25rem]">
+        <div className="sidebar bg-gray-400 w-[10%]">
           SIDEBAR
         </div>
 
-        <div className="flex flex-col px-[5rem]">
+        <div className="bg-white flex flex-col w-[90%]">
           <Header />
 
           <div className="flex flex-col items-center">
