@@ -61,8 +61,8 @@ export default function Sidenav() {
 
 
       <div className="w-32 flex pb-10 font-bold hover:text-yellow-400">
-        <Link className="flex flex-row items-center" href='/logout'>
-          <MdLogout className="h-5 w-5 mr-2" />
+        <Link className="flex flex-row items-center" href='/login'>
+          <MdLogout className="h-5 w-5 mr-2"/>
           Logout
         </Link>
       </div>

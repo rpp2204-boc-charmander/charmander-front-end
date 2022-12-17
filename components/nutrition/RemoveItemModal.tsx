@@ -26,7 +26,7 @@ interface RemoveItemProps {
 
 const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShowing, allFoods, calories} : RemoveItemProps) => {
   const modalStyling = {
-    position: "fixed",
+    // position: "fixed",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
