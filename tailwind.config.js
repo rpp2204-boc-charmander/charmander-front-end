@@ -16,8 +16,11 @@ module.exports = {
       },
       maxHeight: {
         'calories': '250px'
+      },
+      boxShadow: {
+        'wellShadow': 'inset 0 10px 4px 0 rgb(0 0 0 / 0.25)',
       }
-    },
+    }
   },
-  plugins: [require('tailwind-scrollbar-hide')],
+  plugins: [require('tailwind-scrollbar-hide')]
 }
