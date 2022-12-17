@@ -41,6 +41,11 @@ export default function Overview() {
   const age = 0;
   const sex = 'female';
 
+  // Helper function
+  const convertDateToString = (date: any) => {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  }
+
   // Load dummy data
   useEffect(() => {
     const exercises = [
@@ -60,9 +65,12 @@ export default function Overview() {
   }, [currentDate])
 
   /* useEffect(() => {
-    axios('http://localhost:4000/overview/daily?currentDate=2022-12-13')
-    .then(result => console.log(result));
-  }) */
+    console.log(convertDateToString(currentDate));
+    axios(`http://localhost:4000/overview/exercise?date=${convertDateToString(currentDate)}`)
+    .then(result => {
+      setExercises(result.data);
+    })
+  }, [currentDate]) */
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
