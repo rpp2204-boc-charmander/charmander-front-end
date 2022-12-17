@@ -8,7 +8,6 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
   const repsRef: any = useRef();
 
   const onSubmit = () => {
-    console.log(workoutID)
 
     axios.post('api/exercise/create/set', {
         weight_lbs: Number(weightRef.current.value),
@@ -42,23 +41,21 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
 
          <div className="bg-gray-500 flex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-[inset_0_2px_5px_0_#404040]">
 
-          <div className="bg-slate-100 flex flex-col h-5/6 rounded-2x w-11/12 py-3 rounded-3xl shadow-lg justify-evenly items-center">
-            <div className="flex">
-              <h3 className="font-bold w-20 text-center"> Weight </h3>
-              <input className="rounded-lg shadow-md" type="number" ref={weightRef}></input>
-              <p className="ml-3"> lbs </p>
-            </div>
+          <div className="bg-slate-100 flex flex-col h-5/6 w-11/12 py-3 rounded-2xl shadow-lg justify-evenly items-center">
 
             <div className="flex w-[290px]">
               <h3 className="font-bold w-20 text-center"> Reps </h3>
               <input className="rounded-lg shadow-md" type="number" ref={repsRef}></input>
             </div>
+
+            <div className="flex">
+              <h3 className="font-bold w-20 text-center"> Weight </h3>
+              <input className="rounded-lg shadow-md" type="number" ref={weightRef}></input>
+              <span className="ml-3"> lbs </span>
+            </div>
+
           </div>
 
-          {/* <div className="bg-slate-100 flex rounded-2x w-10/12 py-3 rounded-3xl shadow-md justify-center">
-          <h3 className="font-bold mr-3"> Reps </h3>
-          <input className="rounded-lg shadow-md" type="number"></input>
-          </div> */}
 
          </div>
 

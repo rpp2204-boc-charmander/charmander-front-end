@@ -47,7 +47,7 @@ export default function Exercise() {
 
   useEffect(() => {
     getUserExercises();
-  })
+  }, [addSetModalState])
 
   const getUserExercises = () => {
     //get username and log_date from index im assuming
