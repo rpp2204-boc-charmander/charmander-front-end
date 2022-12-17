@@ -6,6 +6,9 @@ import RemoveItemModal from "../components/nutrition/RemoveItemModal";
 import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import Modal from '../components/nutrition/Modal';
+import { GrClose } from "react-icons/gr";
+import { getDisplayName } from "next/dist/shared/lib/utils";
+import Header from "../components/overview/Header";
 
 interface FoodDataType {
   CAL: string,
@@ -27,6 +30,7 @@ const Nutrition = () => {
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
   const [allFoods, setAllFoods] = useState<any>(foodData);
+  const [ currentDate, setCurrentDate ] = useState(new Date());
 
   const updateCalories = (foods : []) => {
     let calculatedCalories : number = 0;
