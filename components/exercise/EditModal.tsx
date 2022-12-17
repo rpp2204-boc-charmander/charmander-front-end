@@ -40,11 +40,11 @@ export default function EditModal({ toggleEditModal, workoutID }: any) {
       />
      </div>
 
-     <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-[inset_0_2px_5px_0_#404040]">
+     <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-[inset_0_2px_5px_0_#404040]">
 
       { workoutSets.map( (set: any, index: number) => {
         return (
-          <div className="flex flex-col items-center w-10/12 overflow-y-scroll no-scrollbar">
+          <div className="flex flex-col items-center w-10/12 my-4">
               <h3 className="pb-2 font-bold text-white">Set {index + 1}</h3>
               <div className="flex bg-slate-200 shadow-lg w-full py-3 justify-evenly items-center rounded-full" key={set.set_id}>
                 <label> Reps: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.reps}></input>

@@ -28,17 +28,18 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
       <div className="border-gray-300 border-l-2 w-3/6 pl-5 relative flex flex-col justify-between">
 
-          <div className="bg-gray-500 flex flex-col rounded-2xl h-[75%] justify-between overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
+          <div className="bg-gray-500 flex flex-col rounded-2xl h-[75%] overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
 
           {exercise.sets?.map( (exercise: any) => {
             return <button className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
                            onClick={toggleCompletedModal}
+                           key={exercise.set_id}
                            > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
           })}
 
           </div>
 
-        <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={toggleAddSetModal}> Add Set </button>
+        <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
 
       </div>
     </div>

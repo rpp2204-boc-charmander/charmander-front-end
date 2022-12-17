@@ -1,6 +1,30 @@
+import { useRef } from 'react';
 import { MdClose } from "react-icons/md";
 
-export default function AddSet({ toggleAddSetModal }: any) {
+import axios from 'axios';
+
+export default function AddSet({ toggleAddSetModal, workoutID }: any) {
+  const weightRef: any = useRef();
+  const repsRef: any = useRef();
+
+  const onSubmit = () => {
+    console.log(workoutID)
+
+    axios.post('api/exercise/create/set', {
+        weight_lbs: Number(weightRef.current.value),
+        reps: Number(repsRef.current.value),
+        workout_exercise_id: workoutID
+      })
+      .then(() => {
+        toggleAddSetModal();
+        console.log('Successfully Added Set')
+      })
+      .catch((error) => {
+        toggleAddSetModal();
+        console.log(error.stack)
+      })
+  }
+
   return (
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={toggleAddSetModal}></div>
@@ -21,13 +45,13 @@ export default function AddSet({ toggleAddSetModal }: any) {
           <div className="bg-slate-100 flex flex-col h-5/6 rounded-2x w-11/12 py-3 rounded-3xl shadow-lg justify-evenly items-center">
             <div className="flex">
               <h3 className="font-bold w-20 text-center"> Weight </h3>
-              <input className="rounded-lg shadow-md" type="number"></input>
+              <input className="rounded-lg shadow-md" type="number" ref={weightRef}></input>
               <p className="ml-3"> lbs </p>
             </div>
 
             <div className="flex w-[290px]">
               <h3 className="font-bold w-20 text-center"> Reps </h3>
-              <input className="rounded-lg shadow-md" type="number"></input>
+              <input className="rounded-lg shadow-md" type="number" ref={repsRef}></input>
             </div>
           </div>
 
@@ -39,7 +63,7 @@ export default function AddSet({ toggleAddSetModal }: any) {
          </div>
 
 
-        <button className="bg-slate-50 hover:bg-slate-200 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md"> Add </button>
+        <button className="bg-slate-50 hover:bg-slate-200 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md" onClick={onSubmit}> Add </button>
 
       </div>
     </div>

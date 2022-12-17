@@ -47,7 +47,7 @@ export default function Exercise() {
 
   useEffect(() => {
     getUserExercises();
-  }, [])
+  })
 
   const getUserExercises = () => {
     //get username and log_date from index im assuming
@@ -76,8 +76,12 @@ export default function Exercise() {
     setCompletedModalState( prevState => !prevState)
   }
 
-  const toggleAddSetModal = () => {
+  const toggleAddSetModal = (workout_id: number) => {
     setAddSetModalState( prevState => !prevState)
+
+    if (workout_id) {
+      setWorkoutID(workout_id)
+    }
   }
 
   const deleteExercise = (id: number) => {
@@ -97,7 +101,7 @@ export default function Exercise() {
       { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
       { editModalState && <EditModal toggleEditModal={toggleEditModal} workoutID={workoutID}/>}
       { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal}/>}
-      { addSetModalState && <AddSet toggleAddSetModal={toggleAddSetModal}/>}
+      { addSetModalState && <AddSet toggleAddSetModal={toggleAddSetModal} workoutID={workoutID}/>}
 
       <div className="grid grid-cols-[25%_75%]">
         <CalorieComponent caloriesBurned={caloriesBurned} toggleAddModal={toggleAddModal}/>
