@@ -30,11 +30,7 @@ const EditItemModal = ({pendingItem, setAllFoods, setCalories, setIsEditShowing,
   const [serving, setServing] = useState(1);
 
   const modalStyling = {
-<<<<<<< HEAD
-    //position: "fixed",
-=======
     // position: "fixed",
->>>>>>> 982ebe7fc277a2da34747958a4f7b83a7cbbabe7
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
