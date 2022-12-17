@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
-const FoodCard = ({ food } : any) => {
-  const [calories, setCalories] = useState(food.CAL)
+export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing } : any) {
+  const [calories, setCalories] = useState(food.CAL);
+  const [consumed, setConsumed] = useState(false);
 
   return (
     <div className="p-4 bg-white rounded-xl shadow-lg mb-4">

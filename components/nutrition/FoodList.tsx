@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import FoodCard from "./FoodCard";
 
 
-const FoodList = ({foodData, setPendingItem, setIsRemoveShowing}) => {
+const FoodList = ({foodData}) => {
   return (
-  <div className="w-3/4">
+  <div>
     {
     foodData.map((food) => {
-        return <FoodCard key={food.ITEM} food={food} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing}/>
+        return <FoodCard key={food.ITEM} food={food} />
       })
     }
   </div>
