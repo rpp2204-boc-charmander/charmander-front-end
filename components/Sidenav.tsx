@@ -31,14 +31,11 @@ export default function Sidenav() {
         </li>
 
         <li>
-<<<<<<< HEAD
           <Link href='/report'>Report</Link>
-=======
           <Link className="flex flex-row items-center hover:text-yellow-400" href='/nutrition'>
             <MdRestaurant className="h-5 w-5 mr-2" />
             Nutrition
           </Link>
->>>>>>> fe51474d89c4036e12c43ce863c677e2c311ff7a
         </li>
 
         <li>
