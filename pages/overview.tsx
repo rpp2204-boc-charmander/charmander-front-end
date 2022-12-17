@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../components/overview/Header";
 import Container from "../components/overview/Container";
+import { MdOutlineSort } from "react-icons/md";
 
 export interface ExerciseObjProps {
   text: string,
@@ -21,8 +22,10 @@ export interface NutritionObjProps {
 }
 
 export interface DateProps {
-  currentDate: Date;
+  currentDate: Date,
   setCurrentDate: Function
+  title: string,
+  Icon: any
 }
 
 export default function Overview() {
@@ -122,6 +125,8 @@ export default function Overview() {
         <Header
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
+          title='Overview'
+          Icon={MdOutlineSort}
         />
 
         <div className="flex flex-col items-center pt-4 pl-12 pr-12">
