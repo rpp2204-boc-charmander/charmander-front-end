@@ -45,6 +45,8 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
     // the google identity script runs
     const google = (window as any).google;
 
+    console.log(process.env.CLIENT_ID)
+
     google.accounts.id.initialize({
       client_id: process.env.CLIENT_ID,
       context: 'signin',

@@ -3,12 +3,9 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'standalone',
-};
-
-module.exports = nextConfig;
-
-module.exports = {
   env: {
-    CLIENT_ID: '256921641374-b9cl93p3rhfshgo14oo628tnj7bf3ng0.apps.googleusercontent.com'
-  },
+    CLIENT_ID: process.env.CLIENT_ID
+  }
 }
+
+module.exports = nextConfig
