@@ -1,5 +1,4 @@
 import { calculateOverrideValues } from 'next/dist/server/font-utils'
-import Image from 'next/Image'
 import { useState } from 'react'
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
