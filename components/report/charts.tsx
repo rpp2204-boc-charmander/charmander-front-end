@@ -73,7 +73,7 @@ let weekData: reports = {
   ]
 }
 
-export default function Charts () {
+export default function Charts (props: any) {
   let reportsData: report[] = weekData.data;
   return (
     <div>
@@ -81,7 +81,7 @@ export default function Charts () {
         {reportsData.map((report, index) => {
           return (
             <li key={index}>
-              <LineChart chartData={report} time={weekData.unix} timespan={weekData.timespan}/>
+              <LineChart chartData={report} time={weekData.unix} timespan={props.timespan}/>
             </li>)})}
       </ul>
     </div>
