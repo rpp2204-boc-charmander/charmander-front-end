@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 interface ExerciseAndNutritionCardProps {
   idx: number,
+  type: string,
   name: string,
   calorie: number,
   sets?: number,
@@ -9,13 +10,11 @@ interface ExerciseAndNutritionCardProps {
   weight?: number,
   portion?: number,
   completed: boolean,
-  exercises: any,
-  setExercises: any
+  setExercises?: any,
+  setNutrition?: any
 }
 
-export default function Card({ name, calorie, sets, reps, weight, portion, completed, exercises, setExercises, idx }: ExerciseAndNutritionCardProps) {
-  const [isCompleted, setIsCompleted] = useState(false);
-
+export default function Card({ idx, type, name, calorie, sets, reps, weight, portion, completed, setExercises, setNutrition }: ExerciseAndNutritionCardProps) {
   let bgColor;
   if (completed) {
     bgColor = "bg-yellow-400";
@@ -24,22 +23,24 @@ export default function Card({ name, calorie, sets, reps, weight, portion, compl
   }
 
   const handleClick = (e: any) => {
-    let exerciseObj = {
-      text: 'blah',
-      calorie:400,
-      weight: '',
-      sets: '',
-      reps: '',
-      completed: ''
-    };
-
-    setExercises((prevState: any) => {
-      let items = [...prevState];
-      let item = {...items[idx]};
-      item.completed = !item.completed;
-      items[idx] = item;
-      return items;
-    })
+    console.log(type);
+    if (type === "exercise") {
+      setExercises((prevState: any) => {
+        let items = [...prevState];
+        let item = {...items[idx]};
+        item.completed = !item.completed;
+        items[idx] = item;
+        return items;
+      })
+    } else {
+      setNutrition((prevState: any) => {
+        let items = [...prevState];
+        let item = {...items[idx]};
+        item.completed = !item.completed;
+        items[idx] = item;
+        return items;
+      })
+    }
   }
 
   return (

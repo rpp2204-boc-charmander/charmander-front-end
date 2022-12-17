@@ -3,29 +3,23 @@ import { MdAdd } from 'react-icons/md';
 import CaloriesCard from "./CaloriesCard";
 import ExerciseAndNutritionCard from "./ExerciseAndNutritionCard";
 import Modal from "./Modal";
-import { ExerciseObjProps } from "../../pages/overview";
+import { ExerciseObjProps, NutritionObjProps } from "../../pages/overview";
 
 interface CaloriesCardProps {
   text: string
-  calorie: number,
-}
-
-interface NutritionCardProps {
-  text: string,
-  calorie: number,
-  portion?: number,
-  completed: boolean
+  calorie: number
 }
 
 interface ContainerProps {
   type: "calories" | "exercise" | "nutrition",
   title: string,
-  cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionCardProps>,
+  cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionObjProps>,
   setExercises?: any,
-  setNutrition?: any
+  setNutrition?: any,
+  bmr: number | 0
 }
 
-export default function Container({ type, title, cards, setExercises, setNutrition }: ContainerProps) {
+export default function Container({ type, title, cards, setExercises, setNutrition, bmr }: ContainerProps) {
   /* const scrollRef = useRef<any>();
 
   const slideScroll = () => {
@@ -44,6 +38,9 @@ export default function Container({ type, title, cards, setExercises, setNutriti
     <div className="flex flex-col min-h-[20rem] items-center mb-[2rem] overflow-hidden max-w-[80vw]">
       <div className="bg-gray-500 flex w-[100%] justify-between rounded-t-3xl h-[4rem] items-center text-[2rem]">
         <div className="ml-5"> {title} </div>
+        {(type === "calories") && (
+          <div className="text-base italic mr-5"> Daily recommended calories: {Math.round(bmr)} </div>
+        )}
         {(type !== "calories") && (
           <MdAdd className="mr-5 cursor-pointer" onClick={() => setIsOpen(true)}/>
         )}
@@ -83,22 +80,25 @@ export default function Container({ type, title, cards, setExercises, setNutriti
               return <ExerciseAndNutritionCard
                 key={index}
                 idx={index}
+                type={type}
                 name={card.text}
                 calorie={card.calorie}
                 sets={card.sets}
                 reps={card.reps}
                 weight={card.weight}
                 completed={card.completed}
-                exercises={cards}
                 setExercises={setExercises}
               />
             } else {
               return <ExerciseAndNutritionCard
                 key={index}
+                idx={index}
+                type={type}
                 name={card.text}
                 calorie={card.calorie}
                 portion={card.portion}
                 completed={card.completed}
+                setNutrition={setNutrition}
               />
             }
           })}
