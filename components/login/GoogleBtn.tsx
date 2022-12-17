@@ -30,11 +30,18 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
 
   function handleUserData (userData:any) {
     console.log(userData)
+    const URL: any = process.env.URL_ENDPOINT
+    const DATA: any = {method: 'GET', body: userData}
     // check if the user id is in the database
+    fetch(URL, DATA)
+    .then((response) => {
       //if it is send them to the overview
-    // if the user is not in the database
-      // send them to the sign up page
-        // autofill user data (name, email, photo)
+    })
+    .catch((err) => {
+      // if the user is not in the database
+        // send them to the sign up page
+          // autofill user data (name, email, photo)
+    })
   }
 
   // initializes connection to GI API and renders login button
@@ -44,8 +51,6 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
     // google object is only defined after
     // the google identity script runs
     const google = (window as any).google;
-
-    console.log(process.env.CLIENT_ID)
 
     google.accounts.id.initialize({
       client_id: process.env.CLIENT_ID,

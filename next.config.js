@@ -4,7 +4,8 @@ const nextConfig = {
   swcMinify: true,
   output: 'standalone',
   env: {
-    CLIENT_ID: process.env.CLIENT_ID
+    CLIENT_ID: process.env.CLIENT_ID,
+    URL_ENDPOINT: process.env.URL_ENDPOINT
   }
 }
 
