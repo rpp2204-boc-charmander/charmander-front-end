@@ -4,7 +4,7 @@ interface CaloriesProp {
 calories: number
 }
 
-const CaloriesWidget = ({calories} : CaloriesProp) => {
+const CaloriesWidget = ({handleShowModal, calories} : CaloriesProp) => {
 
   const prompter = () => {
     alert('Loading food search......')
@@ -38,7 +38,9 @@ const CaloriesWidget = ({calories} : CaloriesProp) => {
         <b className='text-4xl p-6'>{calories}</b>
       </div>
     <button className="w-11/12 mx-2 bg-white text-black hover:bg-gray-200 font-bold py-2 px-4 rounded-3xl static"
-          > + </button>
+          onClick={() => {
+            handleShowModal();
+          }}> + </button>
   </div>
   )
 };

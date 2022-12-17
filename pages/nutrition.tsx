@@ -8,6 +8,8 @@ import { GiForkKnifeSpoon } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
 import Header from "../components/overview/Header";
+import Modal from "../components/nutrition/Modal";
+
 
 interface FoodDataType {
   CAL: string,
@@ -29,7 +31,12 @@ const Nutrition = () => {
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
   const [allFoods, setAllFoods] = useState<any>(foodData);
-  const [ currentDate, setCurrentDate ] = useState(new Date());
+  const [currentDate, setCurrentDate ] = useState(new Date());
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  }
 
   const updateCalories = (foods : []) => {
     let calculatedCalories : number = 0;
@@ -61,7 +68,7 @@ const Nutrition = () => {
       </div>
       <div className="flex flex-row justify-between p-2 w-auto"> */}
       <div className="grid grid-cols-[25%_75%]">
-        <CaloriesWidget calories={calories}/>
+        <CaloriesWidget handleShowModal={handleShowModal} calories={calories}/>
           {isRemoveShowing ?
           <RemoveItemModal
           pendingItem={pendingItem}
@@ -81,6 +88,9 @@ const Nutrition = () => {
           calories={calories}/>
         : null}
         <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
+        {
+        showModal ? ( <Modal />) : ( null )
+      }
       </div>
     </>
   )
