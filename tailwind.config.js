@@ -19,6 +19,9 @@ module.exports = {
       },
       boxShadow: {
         'wellShadow': 'inset 0 10px 4px 0 rgb(0 0 0 / 0.25)',
+      },
+      colors: {
+        'LoginGray' : '#D9D9D9'
       }
     }
   },

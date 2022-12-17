@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
 import Head from "next/head";
 import SignupModal from "../components/login/SignupModal";
-
-import { MdOutlineSort } from "react-icons/md";
 
 const modalStyle = {
   "display" : "table",
   "top" : "50%",
   "margin" : "auto",
-  "-ms-transform": "translateY(50%)",
+  "msTransform": "translateY(50%)",
   "transform": "translateY(50%)"
 }
 
