@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function handler(req: any, res: any) {
   let { username, log_date } = req.query;
 
-  return axios.get(`http://localhost:${process.env.API_PORT}/exercise/list?username=${username}&log_date=${log_date}`)
+  return axios.get(`http://${process.env.BACKEND_URL}/exercise/list?username=${username}&log_date=${log_date}`)
           .then(({ data }) => {
             res.status(200).json(data);
           })

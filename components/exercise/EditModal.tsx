@@ -4,8 +4,6 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 
-
-
 import axios from 'axios';
 
 export default function EditModal({ toggleEditModal, workoutID }: any) {
@@ -40,7 +38,7 @@ export default function EditModal({ toggleEditModal, workoutID }: any) {
       />
      </div>
 
-     <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-[inset_0_2px_5px_0_#404040]">
+     <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well">
 
       { workoutSets.map( (set: any, index: number) => {
         return (

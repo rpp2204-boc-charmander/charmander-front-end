@@ -16,6 +16,9 @@ module.exports = {
       },
       maxHeight: {
         'calories': '250px'
+      },
+      boxShadow: {
+        'well': 'inset 0 2px 5px 0 #404040'
       }
     },
   },
