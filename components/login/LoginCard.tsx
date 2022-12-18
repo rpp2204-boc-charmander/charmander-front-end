@@ -13,7 +13,7 @@ export default function LoginCard() {
 
   const [google, setGoogle] = useState(false);
 
-  const loginCardLg = "fixed top-[30%] left-[65%]  text-black  bg-LoginGray flex flex-col items-center h-[52%] rounded-3xl px-6"
+  const loginCardLg = "fixed top-[30%] left-[65%]  text-black  bg-LoginGray flex flex-col items-center h-max rounded-3xl px-6 pb-6"
   const signUpBtnLg = "h-9 w-full bg-white rounded-2xl text-black p-1 text-center font-light"
 
   return (
@@ -25,7 +25,7 @@ export default function LoginCard() {
       <div className={loginCardLg}>
         <LoginForm />
         <br></br>
-        <a className={signUpBtnLg}>sign up with email</a>
+        <a className={signUpBtnLg} href="/Signup">sign up with email</a>
         <br></br>
         <GoogleBtn
           init={google}
