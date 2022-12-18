@@ -13,7 +13,7 @@ export default function LoginCard() {
 
   const [google, setGoogle] = useState(false);
 
-  const loginCardLg = "fixed top-[30%] left-[65%]  text-black  bg-LoginGray flex flex-col items-center h-[45%] rounded-3xl px-6"
+  const loginCardLg = "fixed top-[30%] left-[65%]  text-black  bg-LoginGray flex flex-col items-center h-[52%] rounded-3xl px-6"
   const signUpBtnLg = "h-9 w-full bg-white rounded-2xl text-black p-1 text-center font-light"
 
   return (
@@ -30,6 +30,7 @@ export default function LoginCard() {
         <GoogleBtn
           init={google}
           reset={setGoogle}/>
+        <br></br>
         <StravaBtn />
       </div>
     </div>
