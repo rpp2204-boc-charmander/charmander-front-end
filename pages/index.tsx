@@ -1,13 +1,16 @@
-import { useState } from "react"
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Layout.module.css'
-import Nutrition from "./nutrition"
+import { useRouter } from 'next/router'
+import { useEffect } from 'react';
 
 export default function Home() {
+
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/login')
+  })
+
   return (
-    <div>
-      <Nutrition />
-    </div>
+    <></>
   )
+
 }
