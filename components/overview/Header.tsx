@@ -64,7 +64,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
   }
 
   return (
-    <div className="bg-white flex flex-row grow justify-between items-center md:h-18 lg:h-24 text-black font-bold sticky top-0 bottom-0 z-50 shadow-lg w-full pl-12 pr-12">
+    <div className="bg-white flex flex-row grow justify-between items-center md:h-18 lg:h-24 text-black font-bold sticky z-50 shadow-lg w-full pl-12 pr-12">
       <div className="flex items-center w-full h-full">
         <Icon className="sm:text-3xl lg:text-6xl mr-5"/>
         <h1 className="sm:text-3xl lg:text-5xl"> {title} </h1>

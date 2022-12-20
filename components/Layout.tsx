@@ -4,9 +4,14 @@ import Link from 'next/link';
 
 export default function Layout({children}:any) {
   return (
-    <div className={styles.container}>
-      <Sidenav />
-      {children}
+    <div className="relative min-h-screen flex">
+      <aside>
+        <Sidenav />
+      </aside>
+
+      <main className='flex-1'>
+        {children}
+      </main>
     </div>
   )
 };
