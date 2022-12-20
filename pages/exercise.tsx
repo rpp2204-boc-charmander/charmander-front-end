@@ -51,7 +51,7 @@ export default function Exercise() {
 
   const getUserExercises = () => {
     //get username and log_date from index im assuming
-    axios.get('api/exercise/list', { params: { username: 'daMountain', log_date: '2022-12-14' } })
+    axios.get('api/exercise/list', { params: { username: 'daMountain', log_date: '2022-12-13' } })
       .then(({ data }) => {
         setExercises(data);
       })

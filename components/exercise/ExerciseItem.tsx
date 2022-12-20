@@ -12,7 +12,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
       <header className="flex bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
 
-        <div className="flex items-center py-3 justify-around w-[30%]">
+        <div className="flex items-center py-3 justify-around w-[40%]">
           <h1 className="text-2xl">{exercise.exercise}</h1>
           <p className="font-bold">{exercise.muscle_group}</p>
         </div>
@@ -29,23 +29,6 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
         <img className="bg-slate-50 w-[240px] place-self-center aspect-square rounded-lg shadow-md" alt="exercise-image"></img>
 
 
-
-        <div className="flex flex-col items-center justify-around h-[250px] px-2">
-
-          <p className="font-bold"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
-
-          <div className="flex flex-col w-full h-[45%] justify-evenly">
-
-          <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
-
-          <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
-                  onClick={completeExercise}> Complete Workout </button>
-
-          </div>
-        </div>
-
-
-
         <div className="p-2 h-[250px]">
 
             <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
@@ -60,6 +43,23 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
             </div>
 
         </div>
+
+        <div className="flex flex-col items-center justify-around h-[250px] px-2">
+
+          <p className="font-bold justify-self-center"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
+
+          <div className="flex flex-col w-full h-[45%] justify-evenly">
+
+          <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
+
+          <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
+                  onClick={completeExercise}> Complete Workout </button>
+
+          </div>
+        </div>
+
+
+
 
       </section>
     </div>
