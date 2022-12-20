@@ -49,31 +49,12 @@ export default function Overview() {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
   }
 
-  // Load dummy data
   useEffect(() => {
-    const exercises = [
-      {text: "Bench Press", calorie: 500, sets: 3, reps: 5, weight: 15, completed: true},
-      {text: "Chair Press", calorie: 500, sets: 3, reps: 5, completed: false},
-      {text: "Desk Press", calorie: 500, sets: 3, reps: 5, completed: false},
-      {text: "Table Press", calorie: 1000, completed: false},
-      {text: "Squats", calorie: 500, completed: false}
-    ];
-    const nutrition = [
-      {text: "Big Mac", calorie: 300, portion: 5, completed: true},
-      {text: "Big Mac", calorie: 300, completed: false},
-      {text: "Big Mac", calorie: 300, completed: false}
-    ];
-    setExercises(exercises);
-    setNutrition(nutrition);
-  }, [currentDate])
-
-  /* useEffect(() => {
-    console.log(convertDateToString(currentDate));
-    axios(`http://localhost:4000/overview/exercise?date=${convertDateToString(currentDate)}`)
+    axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
     .then(result => {
       setExercises(result.data);
     })
-  }, [currentDate]) */
+  }, [currentDate])
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
