@@ -55,7 +55,7 @@ export default function EditModal({ toggleEditModal, workoutID }: any) {
 
      </div>
 
-    <button className="bg-green-500 hover:bg-green-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg"> Confirm Changes </button>
+    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg"> Confirm Changes </button>
 
   </div>
 </div>

@@ -8,40 +8,60 @@ import { GiMuscleUp } from "react-icons/gi";
 
 export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, completeExercise } : any) {
   return (
-    <div className="h-64 max-h-72 rounded-lg overflow-hidden shadow-lg bg-gray-200 mx-5 mt-8 p-4 flex justify-between relative">
-        <AiOutlineDelete size={25} className="absolute top-2 left-2 cursor-pointer" onClick={deleteExercise}/>
-        <AiOutlineEdit size={25} className="absolute top-2 left-10 cursor-pointer" onClick={ () => { toggleEditModal(exercise.id) }}/>
+    <div className="h-[35.3%] rounded-lg shadow-lg bg-gray-200 x-5 mt-8 flex flex-col">
 
-      <div className="flex flex-col w-[80%] items-center justify-evenly">
+      <header className="flex bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
 
-        <h2 className="text-2xl font-bold text-center">{exercise.exercise}</h2>
-
-        <div className="flex w-[80%] justify-between">
-          <p className="flex bg-slate-50 shadow-md w-36 h-8 rounded-full justify-evenly items-center font-bold"> <GiMuscleUp /> {exercise.muscle_group}</p>
-          <p className="flex bg-slate-50 shadow-md w-72 h-8 rounded-full justify-evenly items-center font-bold"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
+        <div className="flex items-center py-3 justify-around w-[30%]">
+          <h1 className="text-2xl">{exercise.exercise}</h1>
+          <p className="font-bold">{exercise.muscle_group}</p>
         </div>
 
-        <button className="bg-green-500 hover:bg-green-400 shadow-lg rounded-full w-[50%] h-[20%] font-bold text-slate-50"
-                onClick={completeExercise}> Complete Workout </button>
+        <div className="flex mr-3">
+          <AiOutlineEdit size={25} className="cursor-pointer" onClick={ () => { toggleEditModal(exercise.id) }}/>
+          <AiOutlineDelete size={25} className="ml-2 cursor-pointer" onClick={deleteExercise}/>
+        </div>
 
-      </div>
+      </header>
 
-      <div className="border-gray-300 border-l-2 w-3/6 pl-5 relative flex flex-col justify-between">
+      <section className="grid grid-cols-[25%_40%_35%] h-[250px]">
 
-          <div className="bg-gray-500 flex flex-col rounded-2xl h-[75%] overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
+        <img className="bg-slate-50 w-[240px] place-self-center aspect-square rounded-lg shadow-md" alt="exercise-image"></img>
 
-          {exercise.sets?.map( (exercise: any) => {
-            return <button className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
-                           onClick={toggleCompletedModal}
-                           key={exercise.set_id}
-                           > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
-          })}
+
+
+        <div className="flex flex-col items-center justify-around h-[250px] px-2">
+
+          <p className="font-bold"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
+
+          <div className="flex flex-col w-full h-[45%] justify-evenly">
+
+          <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
+
+          <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
+                  onClick={completeExercise}> Complete Workout </button>
 
           </div>
+        </div>
 
-        <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
 
-      </div>
+
+        <div className="p-2 h-[250px]">
+
+            <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
+
+            {exercise.sets?.map( (exercise: any) => {
+              return <button className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
+              onClick={toggleCompletedModal}
+              key={exercise.set_id}
+              > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
+            })}
+
+            </div>
+
+        </div>
+
+      </section>
     </div>
   )
 };

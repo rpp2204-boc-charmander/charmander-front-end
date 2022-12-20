@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import Exercise from '../pages/exercise';
-import Home from '../pages/index';
+import { render, screen } from '@testing-library/react'
+import Exercise from '../pages/exercise'
+// import Home from '../pages/index';
 
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
 
 // describe('Home', () => {
 //   it('renders a heading', () => {

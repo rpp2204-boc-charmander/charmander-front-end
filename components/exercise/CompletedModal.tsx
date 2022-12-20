@@ -20,8 +20,8 @@ export default function CompletedModal({ toggleCompletedModal }: any) {
          </div>
 
          <div className="flex w-full justify-between items-center mt-4 bg-gray-500 rounded-full shadow-[inset_0_2px_5px_0_#404040]">
-          <button className="bg-green-500 hover:bg-green-400 text-slate-50 w-5/12 rounded-full px-10 py-4 font-bold my-3 ml-3 shadow-md" onClick={toggleCompletedModal}> Confirm </button>
-          <button className="bg-red-500 hover:bg-red-400 text-slate-50 w-5/12 rounded-full px-10 py-4 font-bold my-3 mr-3 shadow-md" onClick={toggleCompletedModal}> Cancel </button>
+          <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-5/12 rounded-full px-10 py-4 font-bold my-3 ml-3 shadow-md" onClick={toggleCompletedModal}> Confirm </button>
+          <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-5/12 rounded-full px-10 py-4 font-bold my-3 mr-3 shadow-md" onClick={toggleCompletedModal}> Cancel </button>
          </div>
 
       </div>
