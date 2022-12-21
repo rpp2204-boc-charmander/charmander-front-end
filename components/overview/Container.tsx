@@ -42,7 +42,7 @@ export default function Container({ type, title, cards, setExercises, setNutriti
   })
 
   return (
-    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
+    <div className="flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
       <div className="bg-gray-500 flex flex-row h-[4rem] items-center text-[2rem] text-white justify-between w-full">
         <div className="ml-5"> {title} </div>
         {(type === "calories") && (
@@ -68,7 +68,23 @@ export default function Container({ type, title, cards, setExercises, setNutriti
         <div className="bg-gray-300 flex flex-row h-[16rem] justify-between
           items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] scrollbar-hide border w-[75rem]"
         >
-          {cards.map((card: any, index: any) => {
+          {cards.length === 0 && type === "exercise" && (
+            <div className="flex w-full justify-center">
+              <div className="text-white text-2xl flex justify-center">
+                No workout has been added
+              </div>
+            </div>
+          )}
+
+          {cards.length === 0 && type === "nutrition" && (
+            <div className="flex w-full justify-center">
+              <div className="text-white text-2xl flex justify-center">
+                No meal has been added
+              </div>
+            </div>
+          )}
+
+          {cards.length !== 0 && cards.map((card: any, index: any) => {
             if (type === "calories") {
               let textColor = "text-black"
               if (index === 2) {
