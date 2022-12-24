@@ -57,7 +57,7 @@ export default function Exercise() {
 
   const getUserExercises = () => {
     //get username and log_date from index im assuming
-    return axios.get('api/exercise/workout/list', { params: { user_id: 1, log_date: '2022-12-13' } });
+    return axios.get('api/exercise/workout/list', { params: { user_id: 4, log_date: '2022-12-13' } });
   }
 
     const deleteSet = (set_id: number) => {
