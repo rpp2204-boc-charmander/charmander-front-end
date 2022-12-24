@@ -19,7 +19,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
         <div className="flex mr-3">
           <AiOutlineEdit size={25} className="cursor-pointer" onClick={ () => { toggleEditModal(exercise.id) }}/>
-          <AiOutlineDelete size={25} className="ml-2 cursor-pointer" onClick={deleteExercise}/>
+          <AiOutlineDelete size={25} className="ml-2 cursor-pointer" onClick={ () => { deleteExercise(exercise.id) }}/>
         </div>
 
       </header>
