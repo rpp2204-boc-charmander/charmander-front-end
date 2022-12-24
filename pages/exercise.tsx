@@ -46,53 +46,68 @@ export default function Exercise() {
   const [ caloriesBurned, setCaloriesBurned ] = useState(0)
 
   useEffect(() => {
-    getUserExercises();
-  }, [addSetModalState])
-
-  const getUserExercises = () => {
-    //get username and log_date from index im assuming
-    axios.get('api/exercise/list', { params: { username: 'daMountain', log_date: '2022-12-13' } })
+    getUserExercises()
       .then(({ data }) => {
         setExercises(data);
       })
       .catch(error => {
         console.log(error.stack)
       })
+  }, [addSetModalState])
+
+  const getUserExercises = () => {
+    //get username and log_date from index im assuming
+    return axios.get('api/exercise/workout/list', { params: { user_id: 1, log_date: '2022-12-13' } });
   }
 
-  const toggleAddModal = () => {
-    setAddModalState( prevState => !prevState)
-  }
-
-  const toggleEditModal = (workout_id: number) => {
-    setEditModalState( prevState => !prevState)
-
-    if (workout_id) {
-      setWorkoutID(workout_id)
+    const deleteSet = (set_id: number) => {
+      axios.delete('api/exercise/sets', { params: { set_id }})
+      .then(() => {
+        console.log('Successfully Deleted Set');
+      })
+      .catch(error => {
+        console.log(error.stack);
+      })
     }
-  }
 
-  const toggleCompletedModal = () => {
-    setCompletedModalState( prevState => !prevState)
-  }
+    const deleteExercise = (workout_exercise_id: number) => {
+      axios.delete('api/exercise/workout', { params: { workout_exercise_id }})
+      .then(() => {
+        console.log('Successfully Deleted Workout');
+      })
+      .catch(error => {
+        console.log(error.stack);
+      })
+    };
 
-  const toggleAddSetModal = (workout_id: number) => {
-    setAddSetModalState( prevState => !prevState)
-
-    if (workout_id) {
-      setWorkoutID(workout_id)
+    const toggleAddModal = () => {
+      setAddModalState( prevState => !prevState)
     }
-  }
 
-  const deleteExercise = (id: number) => {
-    //alerts for now, will work on functionality later
+    const toggleEditModal = (workout_id: number) => {
+      setEditModalState( prevState => !prevState)
 
-    alert('Are you sure you want to remove this exercise?')
-  };
+      if (workout_id) {
+        setWorkoutID(workout_id)
+      }
+    }
 
-  const completeExercise = () => {
-    alert('Complete Exercise?')
-  }
+    const toggleCompletedModal = () => {
+      setCompletedModalState( prevState => !prevState)
+    }
+
+    const toggleAddSetModal = (workout_id: number) => {
+      setAddSetModalState( prevState => !prevState)
+
+      if (workout_id) {
+        setWorkoutID(workout_id)
+      }
+    }
+
+
+    const completeExercise = () => {
+      alert('Complete Exercise?')
+    }
 
   return (
     <>
