@@ -1,6 +1,7 @@
 {
   "users": [
     {
+      "thirdParty_id": 26977117,
       "user": "anthony",
       "pswd": "nextjs"
     }

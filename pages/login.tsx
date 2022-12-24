@@ -3,6 +3,7 @@ import Head from 'next/head';
 import LoginCard from '../components/login/LoginCard';
 import { IoIosFitness} from 'react-icons/io';
 import { MdOutlineFastfood } from 'react-icons/md'
+import Strava from './strava/[...exchange_token]';
 
 const Login = () => {
 
@@ -29,6 +30,7 @@ const Login = () => {
         </div>
       </div >
         <LoginCard />
+        <Strava />
       </main>
     </div>
   )
