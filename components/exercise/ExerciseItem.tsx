@@ -1,4 +1,6 @@
 import styles from "../../styles/Exercise.module.css"
+import { useState } from "react"
+import axios from 'axios'
 
 import { AiOutlineEdit } from "react-icons/ai";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -6,7 +8,42 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { GiMuscleUp } from "react-icons/gi";
 
 
-export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, completeExercise } : any) {
+export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, getExerciseSets, getUserExercises, setExercises} : any) {
+  const [ confirm, setConfirm ] = useState(false);
+
+  const completeExercise = async (workout_exercise_id: number) => {
+    //get sets for exercise
+    try {
+      const { data: sets } = await getExerciseSets(workout_exercise_id);
+      let confirm = true;
+
+      if (!sets.length) {
+       console.log('No Sets ):')
+       setConfirm(true);
+       return;
+      }
+
+      sets.forEach( (set: any) => {
+        if (!set.reps_actual) {
+          //handle if one set is still uncompleted
+          setConfirm(true);
+          return confirm = false;
+        }
+      })
+
+      if (confirm) {
+        await axios.put('api/exercise/workout', null, { params: { workout_exercise_id }});
+        const { data: newWorkout } = await getUserExercises();
+
+        setExercises(newWorkout);
+        setConfirm(false)
+      }
+    } catch (error: any) {
+      console.log(error.stack);
+    }
+  }
+
+
   return (
     <div className="h-[35.3%] rounded-lg shadow-lg bg-gray-200 x-5 mt-8 flex flex-col">
 
@@ -34,7 +71,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
             <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
 
             {exercise.sets?.map( (exercise: any) => {
-              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold ${exercise.reps_actual && 'bg-green-400 hover:bg-green-500 hover:text-white'}`}
+              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-600 text-white'}`}
               onClick={ () => { toggleCompletedModal(exercise.set_id) }}
               key={exercise.set_id}
               > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
@@ -44,16 +81,23 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
         </div>
 
-        <div className="flex flex-col items-center justify-around h-[250px] px-2">
+        <div className="flex flex-col items-center justify-around h-[250px] px-2 relative">
 
           <p className="font-bold justify-self-center"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
 
           <div className="flex flex-col w-full h-[45%] justify-evenly">
 
-          <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
+          { confirm && <p className="absolute text-red-500 top-[35%] left-[32%]"> Incomplete Sets</p> }
 
-          <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
-                  onClick={completeExercise}> Complete Exercise </button>
+          { !exercise.is_complete &&
+            <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
+          }
+
+          { exercise.is_complete ?
+            <p className='bg-green-500 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50 flex justify-center items-center'> Exercise Completed </p> :
+            <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
+                  onClick={ () => { completeExercise(exercise.id) }}> Complete Exercise
+            </button>}
 
           </div>
         </div>

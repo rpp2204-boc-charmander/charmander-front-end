@@ -73,10 +73,10 @@ export default function Exercise() {
 
   const deleteSet = async (set_id: number) => {
     try {
-      const result = await axios.delete('api/exercise/sets', { params: { set_id }});
-      const newSets = await getExerciseSets(workoutID);
+      await axios.delete('api/exercise/sets', { params: { set_id }});
+      const { data: newSets } = await getExerciseSets(workoutID);
 
-      setEditSets(newSets.data);
+      setEditSets(newSets);
     } catch (error :any) {
       console.log(error.stack);
     }
@@ -84,14 +84,26 @@ export default function Exercise() {
 
   const deleteExercise = async (workout_exercise_id: number) => {
     try {
-      const result = await axios.delete('api/exercise/workout', { params: { workout_exercise_id }});
-      const newWorkout = await getUserExercises();
+      await axios.delete('api/exercise/workout', { params: { workout_exercise_id }});
+      const { data: newWorkout } = await getUserExercises();
 
-      setExercises(newWorkout.data);
+      setExercises(newWorkout);
     } catch (error: any) {
       console.log(error.stack);
     }
   };
+
+  //COMPLETE FUNCTIONS
+
+  const completeSet = (actual_reps: number, set_id: number) => {
+    axios.put('api/exercise/set', null, { params: { set_id, actual_reps }})
+      .then( () => {
+        toggleCompletedModal(set_id);
+      })
+      .catch( error => {
+        console.log(error.stack);
+      })
+   }
 
   //TOGGLE MODALS
 
@@ -121,23 +133,6 @@ export default function Exercise() {
     setWorkoutID(workout_id)
   }
 
-  //COMPLETE FUNCTIONS
-
-  const completeSet = (actual_reps: number, set_id: number) => {
-     axios.put('api/exercise/set', null, { params: { set_id, actual_reps }})
-       .then( () => {
-        toggleCompletedModal(set_id);
-       })
-       .catch( error => {
-        console.log(error.stack);
-       })
-  }
-
-
-  const completeExercise = () => {
-    alert('Complete Exercise?')
-  }
-
   return (
     <>
       <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Exercise' Icon={MdOutlineFitnessCenter}/>
@@ -154,7 +149,9 @@ export default function Exercise() {
                       deleteExercise={deleteExercise}
                       toggleCompletedModal={toggleCompletedModal}
                       toggleAddSetModal={toggleAddSetModal}
-                      completeExercise={completeExercise}/>
+                      getExerciseSets={getExerciseSets}
+                      getUserExercises={getUserExercises}
+                      setExercises={setExercises}/>
       </div>
     </>
   )
