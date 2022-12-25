@@ -34,7 +34,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
             <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
 
             {exercise.sets?.map( (exercise: any) => {
-              return <button className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
+              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold ${exercise.reps_actual && 'bg-green-400 hover:bg-green-500 hover:text-white'}`}
               onClick={ () => { toggleCompletedModal(exercise.set_id) }}
               key={exercise.set_id}
               > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>

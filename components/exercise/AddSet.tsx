@@ -1,27 +1,36 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { MdClose } from "react-icons/md";
 
 import axios from 'axios';
 
 export default function AddSet({ toggleAddSetModal, workoutID }: any) {
+  const [ confirm, setConfirm ] = useState(false);
+
   const weightRef: any = useRef();
   const repsRef: any = useRef();
 
   const onSubmit = () => {
+    let weight_lbs = Number(weightRef.current.value);
+    let reps = Number(repsRef.current.value);
 
-    axios.post('api/exercise/create/set', {
-        weight_lbs: Number(weightRef.current.value),
-        reps: Number(repsRef.current.value),
-        workout_exercise_id: workoutID
-      })
-      .then(() => {
-        toggleAddSetModal();
-        console.log('Successfully Added Set')
-      })
-      .catch((error) => {
-        toggleAddSetModal();
-        console.log(error.stack)
-      })
+    if (weight_lbs && reps) {
+      axios.post('api/exercise/create/set', {
+          weight_lbs,
+          reps,
+          workout_exercise_id: workoutID
+        })
+        .then(() => {
+          toggleAddSetModal();
+          console.log('Successfully Added Set')
+        })
+        .catch((error) => {
+          toggleAddSetModal();
+          console.log(error.stack)
+        })
+    } else {
+      setConfirm(true);
+    }
+
   }
 
   return (
@@ -41,7 +50,9 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
 
          <div className="bg-gray-500 flex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-well">
 
-          <div className="bg-slate-100 flex flex-col h-5/6 w-11/12 py-3 rounded-2xl shadow-lg justify-evenly items-center">
+          <div className="bg-slate-100 flex flex-col h-5/6 w-11/12 py-3 rounded-2xl shadow-lg justify-evenly items-center relative">
+
+          { confirm && <p className="absolute text-red-500 top-0"> Please Set Reps and Weight </p>}
 
             <div className="flex w-[290px]">
               <h3 className="font-bold w-20 text-center"> Reps </h3>
@@ -56,9 +67,7 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
 
           </div>
 
-
          </div>
-
 
         <button className="bg-slate-50 hover:bg-slate-200 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md" onClick={onSubmit}> Add </button>
 
