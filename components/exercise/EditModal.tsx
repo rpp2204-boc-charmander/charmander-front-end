@@ -14,7 +14,7 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
   flex flex-col items-center w-[40%] h-[60%] rounded-3xl pl-10 pr-10">
 
      <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
-      <div className="title text-[2rem] font-bold"> Edit Workout </div>
+      <div className="title text-[2rem] font-bold"> Edit Exercise </div>
       <MdClose
         className="text-[2rem] cursor-pointer"
         onClick={ () => { toggleEditModal(workoutID) }}

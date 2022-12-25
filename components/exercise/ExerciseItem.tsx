@@ -26,7 +26,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
       <section className="grid grid-cols-[25%_40%_35%] h-[250px]">
 
-        <img className="bg-slate-50 w-[225px] place-self-center aspect-square rounded-lg shadow-md" alt="exercise-image" src={exercise.photo_url}></img>
+        <img className="bg-slate-50 w-[215px] place-self-center aspect-square rounded-lg shadow-md" alt="exercise-image" src={exercise.photo_url}></img>
 
 
         <div className="p-2 h-[250px]">
@@ -35,7 +35,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
             {exercise.sets?.map( (exercise: any) => {
               return <button className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
-              onClick={toggleCompletedModal}
+              onClick={ () => { toggleCompletedModal(exercise.set_id) }}
               key={exercise.set_id}
               > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
             })}
@@ -53,7 +53,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
           <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
 
           <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
-                  onClick={completeExercise}> Complete Workout </button>
+                  onClick={completeExercise}> Complete Exercise </button>
 
           </div>
         </div>

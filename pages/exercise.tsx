@@ -31,6 +31,7 @@ export default function Exercise() {
 
   //IDs
   const [ workoutID, setWorkoutID ] = useState(1);
+  const [ setID, setSetID ] = useState(1);
 
   //Exercises
   const [ exercises, setExercises ] = useState([]);
@@ -55,7 +56,9 @@ export default function Exercise() {
       .catch(error => {
         console.log(error.stack)
       })
-  }, [addSetModalState, editModalState])
+  }, [addSetModalState, editModalState, completedModalState])
+
+  //GET FUNCTIONS
 
   const getUserExercises = () => {
     //get username and log_date from index im assuming
@@ -65,6 +68,8 @@ export default function Exercise() {
   const getExerciseSets = (workout_id: number) => {
     return axios.get('api/exercise/list/sets', { params: { workout_exercise_id: workout_id }})
   }
+
+  //DELETE FUNCTIONS
 
   const deleteSet = async (set_id: number) => {
     try {
@@ -88,6 +93,8 @@ export default function Exercise() {
     }
   };
 
+  //TOGGLE MODALS
+
   const toggleAddModal = () => {
     setAddModalState( prevState => !prevState)
   }
@@ -104,13 +111,26 @@ export default function Exercise() {
       })
   }
 
-  const toggleCompletedModal = () => {
+  const toggleCompletedModal = (set_id: number) => {
     setCompletedModalState( prevState => !prevState)
+    setSetID(set_id);
   }
 
   const toggleAddSetModal = (workout_id: number) => {
     setAddSetModalState( prevState => !prevState)
     setWorkoutID(workout_id)
+  }
+
+  //COMPLETE FUNCTIONS
+
+  const completeSet = (actual_reps: number, set_id: number) => {
+     axios.put('api/exercise/set', null, { params: { set_id, actual_reps }})
+       .then( () => {
+        toggleCompletedModal(set_id);
+       })
+       .catch( error => {
+        console.log(error.stack);
+       })
   }
 
 
@@ -124,7 +144,7 @@ export default function Exercise() {
 
       { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
       { editModalState && <EditModal toggleEditModal={toggleEditModal} deleteSet={deleteSet} workoutID={workoutID} sets={editSets}/>}
-      { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal}/>}
+      { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal} completeSet={completeSet} setID={setID}/>}
       { addSetModalState && <AddSet toggleAddSetModal={toggleAddSetModal} workoutID={workoutID}/>}
 
       <div className="grid grid-cols-[25%_75%]">
