@@ -1,13 +1,36 @@
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
+import { MdClose } from "react-icons/md";
 
 export default function SearchModal({ toggleAddModal }: any) {
-  return <div className="bg-gray-400 p-5 absolute shadow-xl rounded-2xl w-4/6 h-4/6 max-w-xl top-40 left-80 flex-col">
-    <input type="search" placeholder="Search for exercise or body part" className="shadow-lg w-5/6 h-10 rounded-lg"></input>
-    <button className="mx-2"> <BsSearch size={25}/> </button>
-    <button className="ml-3"onClick={toggleAddModal}><AiOutlineCloseCircle size={25}/></button>
-    <div className="h-5.5/6 my-5 bg-white rounded-lg overflow-scroll"></div>
-    <button className="w-11/12 mx-2 bg-white text-black hover:bg-gray-300 font-bold py-2 px-4 rounded-3xl static">Add</button>
-  </div>
+  return (<div>
+            <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={toggleAddModal}></div>
+
+            <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
+            flex flex-col items-center w-[70%] h-[80%] rounded-3xl pl-10 pr-10"
+            >
+              <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
+                <div className="title text-[2rem] font-bold"> Exercise Search </div>
+                <MdClose
+                  className="text-[2rem] cursor-pointer"
+                  onClick={toggleAddModal}
+                />
+              </div>
+
+              <div className="search w-[100%] flex flex-row pb-6">
+                <input className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl" id="search" type="text" placeholder="Seach by name or body part"></input>
+              </div>
+
+              <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well"> </div>
+
+
+
+              <div className="buttonContainer flex w-[50%] justify-between p-5">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Add Exercise </button>
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Add and Mark As Completed </button>
+              </div>
+
+            </div>
+          </div>)
 }
