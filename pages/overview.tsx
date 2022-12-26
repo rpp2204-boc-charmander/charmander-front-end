@@ -1,31 +1,31 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import Head from "next/head";
-import Header from "../components/overview/Header";
-import Container from "../components/overview/Container";
-import { MdOutlineSort } from "react-icons/md";
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Header from '../components/overview/Header';
+import Container from '../components/overview/Container';
+import { MdOutlineSort } from 'react-icons/md';
 
 export interface ExerciseObjProps {
-  text: string,
-  calorie: number,
-  sets?: number,
-  reps?: number,
-  weight?: number,
-  completed: boolean
+  text: string;
+  calorie: number;
+  sets?: number;
+  reps?: number;
+  weight?: number;
+  completed: boolean;
 }
 
 export interface NutritionObjProps {
-  text: string,
-  calorie: number,
-  portion?: number,
-  completed: boolean
+  text: string;
+  calorie: number;
+  portion?: number;
+  completed: boolean;
 }
 
 export interface DateProps {
-  currentDate: Date,
-  setCurrentDate: Function
-  title: string,
-  Icon: any
+  currentDate: Date;
+  setCurrentDate: Function;
+  title: string;
+  Icon: any;
 }
 
 export default function Overview() {
@@ -47,25 +47,32 @@ export default function Overview() {
   // Helper function
   const convertDateToString = (date: any) => {
     return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  }
+  };
 
   // Load dummy data
   useEffect(() => {
     const exercises = [
-      {text: "Bench Press", calorie: 500, sets: 3, reps: 5, weight: 15, completed: true},
-      {text: "Chair Press", calorie: 500, sets: 3, reps: 5, completed: false},
-      {text: "Desk Press", calorie: 500, sets: 3, reps: 5, completed: false},
-      {text: "Table Press", calorie: 1000, completed: false},
-      {text: "Squats", calorie: 500, completed: false}
+      {
+        text: 'Bench Press',
+        calorie: 500,
+        sets: 3,
+        reps: 5,
+        weight: 15,
+        completed: true,
+      },
+      { text: 'Chair Press', calorie: 500, sets: 3, reps: 5, completed: false },
+      { text: 'Desk Press', calorie: 500, sets: 3, reps: 5, completed: false },
+      { text: 'Table Press', calorie: 1000, completed: false },
+      { text: 'Squats', calorie: 500, completed: false },
     ];
     const nutrition = [
-      {text: "Big Mac", calorie: 300, portion: 5, completed: true},
-      {text: "Big Mac", calorie: 300, completed: false},
-      {text: "Big Mac", calorie: 300, completed: false}
+      { text: 'Big Mac', calorie: 300, portion: 5, completed: true },
+      { text: 'Big Mac', calorie: 300, completed: false },
+      { text: 'Big Mac', calorie: 300, completed: false },
     ];
     setExercises(exercises);
     setNutrition(nutrition);
-  }, [currentDate])
+  }, [currentDate]);
 
   /* useEffect(() => {
     console.log(convertDateToString(currentDate));
@@ -98,29 +105,29 @@ export default function Overview() {
   // Calculate total calorie burned
   useEffect(() => {
     let sum = 0;
-    exercises.map(exercise => {
+    exercises.map((exercise) => {
       if (exercise.completed) {
         sum += exercise.calorie;
       }
-    })
-    setcaloriesBurned(prevState => sum);
-  }, [exercises])
+    });
+    setcaloriesBurned((prevState) => sum);
+  }, [exercises]);
 
   // Calculate total calorie consumed
   useEffect(() => {
     let sum = 0;
-    nutrition.map(food => {
+    nutrition.map((food) => {
       if (food.completed) {
         sum += food.calorie;
       }
-    })
-    setcaloriesConsumed(prevState => sum);
-  }, [nutrition])
+    });
+    setcaloriesConsumed((prevState) => sum);
+  }, [nutrition]);
 
   // Calculate net calories
   useEffect(() => {
-    setNetCalories(prevState => caloriesConsumed - caloriesBurned)
-  }, [caloriesConsumed, caloriesBurned])
+    setNetCalories((prevState) => caloriesConsumed - caloriesBurned);
+  }, [caloriesConsumed, caloriesBurned]);
 
   return (
     <div>
@@ -133,7 +140,7 @@ export default function Overview() {
         <Header
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
-          title='Overview'
+          title="Overview"
           Icon={MdOutlineSort}
         />
 
@@ -142,9 +149,9 @@ export default function Overview() {
             type="calories"
             title="Calories"
             cards={[
-              {calorie: caloriesConsumed, text: "Calories Consumed"},
-              {calorie: caloriesBurned, text: "Calories Burned"},
-              {calorie: netCalories, text: "Net Calories"}
+              { calorie: caloriesConsumed, text: 'Calories Consumed' },
+              { calorie: caloriesBurned, text: 'Calories Burned' },
+              { calorie: netCalories, text: 'Net Calories' },
             ]}
             bmr={bmr}
           />
@@ -167,5 +174,5 @@ export default function Overview() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,17 +1,15 @@
-import Head from "next/head";
-import SignupModal from "../components/login/SignupModal";
+import Head from 'next/head';
+import SignupModal from '../components/login/SignupModal';
 
 const modalStyle = {
-  "display" : "table",
-  "top" : "50%",
-  "margin" : "auto",
-  "msTransform": "translateY(50%)",
-  "transform": "translateY(50%)"
-}
-
+  display: 'table',
+  top: '50%',
+  margin: 'auto',
+  msTransform: 'translateY(50%)',
+  transform: 'translateY(50%)',
+};
 
 export default function Signup() {
-
   return (
     <div>
       <Head>
@@ -22,5 +20,5 @@ export default function Signup() {
         <SignupModal />
       </div>
     </div>
-  )
+  );
 }
