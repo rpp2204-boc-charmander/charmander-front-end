@@ -35,7 +35,7 @@ export default function App({
   );
 }
 
-App.getInitialProps = async () => {
+App.getInitialProps = async (ctx) => {
   const authid = '78y2q6efgyucbu3rfb';
 
   const res = await axios.get(

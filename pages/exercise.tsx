@@ -13,13 +13,16 @@ import { MdOutlineFitnessCenter } from 'react-icons/md';
 /**
    *
   TODO:
-  1. Add exercise search component
+  1. Fetch data for default exercise and muscle groups on page load
 
    */
 
-export default function Exercise({ user_id, date }): JSX.Element {
-  console.log('date: ', date);
-
+export default function Exercise({
+  user_id,
+  date,
+  default_exercises,
+  muscle_groups,
+}): JSX.Element {
   // Date
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -42,7 +45,6 @@ export default function Exercise({ user_id, date }): JSX.Element {
     getUserExercises()
       .then(({ data }) => {
         setExercises(data);
-        A;
       })
       .catch((error) => {
         console.log(error.stack);
@@ -125,7 +127,13 @@ export default function Exercise({ user_id, date }): JSX.Element {
         Icon={MdOutlineFitnessCenter}
       />
 
-      {addModalState && <SearchModal toggleAddModal={toggleAddModal} />}
+      {addModalState && (
+        <SearchModal
+          toggleAddModal={toggleAddModal}
+          default_exercises={default_exercises}
+          muscle_groups={muscle_groups}
+        />
+      )}
       {editModalState && (
         <EditModal toggleEditModal={toggleEditModal} workoutID={workoutID} />
       )}
@@ -152,4 +160,38 @@ export default function Exercise({ user_id, date }): JSX.Element {
       </div>
     </>
   );
+}
+
+interface Exercises {
+  exercise_id: number;
+  exercise: string;
+  muscle_group_id: number;
+  muscle_group: string;
+}
+
+interface MuscleGroups {
+  muscle_group_id: number;
+  muscle_group: string;
+}
+
+interface GetDefaultExerciseList {
+  exercises: Exercises[];
+  muscle_groups: MuscleGroups[];
+}
+
+export async function getStaticProps(): Promise<any> {
+  try {
+    const { data } = await axios.get<GetDefaultExerciseList>(
+      `${String(process.env.BACKEND_URL)}/exercise/default/list`
+    );
+
+    return {
+      props: {
+        default_exercises: data.exercises,
+        muscle_groups: data.muscle_groups,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }

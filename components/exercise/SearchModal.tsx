@@ -1,6 +1,15 @@
 import { MdClose } from 'react-icons/md';
+import React, { useState } from 'react';
+// import getDefaultExercises from './libs/getDefaultExercises';
 
-export default function SearchModal({ toggleAddModal }: any): JSX.Element {
+export default function SearchModal({
+  toggleAddModal,
+  default_exercises,
+  muscle_groups,
+}: any): JSX.Element {
+  // const [defaultExercises, setDefaultExercises] = useState([]);
+  // const [muscleGroups, setMscleGroups] = useState([]);
+
   return (
     <div>
       <div
