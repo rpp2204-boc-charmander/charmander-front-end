@@ -6,6 +6,7 @@ import axios from 'axios';
 export default function AddSet({ toggleAddSetModal, workoutID }: any) {
   const [ confirm, setConfirm ] = useState(false);
 
+
   const weightRef: any = useRef();
   const repsRef: any = useRef();
 

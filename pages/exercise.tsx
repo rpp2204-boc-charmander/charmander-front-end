@@ -15,16 +15,6 @@ import { MdOutlineFitnessCenter } from 'react-icons/md';
 
 import mockData from '../mocks/exercisedata.json';
 
-const getCaloriesBurned = (exercises: any): number => {
-  let total = 0;
-
-  exercises.forEach( (exercise: any) => {
-    total += exercise.total_calories_burned;
-  })
-
-  return total;
-}
-
 export default function Exercise() {
   //Date
   const [ currentDate, setCurrentDate ] = useState(new Date());
@@ -111,16 +101,42 @@ export default function Exercise() {
     setAddModalState( prevState => !prevState)
   }
 
-  const toggleEditModal = (workout_id: number) => {
-    getExerciseSets(workout_id)
+  const toggleEditModal = (workout_id: number, repsRefs: [], weightsRefs: []) => {
+    //if repsRefs and weightRefs are both defined, call put request
+    if (repsRefs && weightsRefs) {
+      let reps = repsRefs.map( (rep: any) => {
+        return Number(rep.value);
+      })
+
+      let weights = weightsRefs.map( (weight: any) => {
+        return Number(weight.value);
+      })
+
+      axios.put('api/exercise/workout/sets', {
+        reps,
+        weights,
+        workout_id
+      })
       .then(({ data }) => {
-        setEditSets(data);
+        console.log('Successfully Updated Sets')
         setEditModalState( prevState => !prevState)
-        setWorkoutID(workout_id)
       })
       .catch( error => {
-        console.log(error.stack);
+        console.log(error.stack)
       })
+
+    } else {
+      getExerciseSets(workout_id)
+        .then(({ data }) => {
+          setEditSets(data);
+          setEditModalState( prevState => !prevState)
+          setWorkoutID(workout_id)
+        })
+        .catch( error => {
+          console.log(error.stack);
+        })
+    }
+
   }
 
   const toggleCompletedModal = (set_id: number) => {

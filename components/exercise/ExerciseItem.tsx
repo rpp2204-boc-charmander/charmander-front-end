@@ -15,7 +15,6 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
     //get sets for exercise
     try {
       const { data: sets } = await getExerciseSets(workout_exercise_id);
-      let confirm = true;
 
       if (!sets.length) {
        console.log('No Sets ):')
@@ -23,21 +22,18 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
        return;
       }
 
-      sets.forEach( (set: any) => {
-        if (!set.reps_actual) {
-          //handle if one set is still uncompleted
+      for (var i = 0; i < sets.length; i++) {
+        if (!sets[i].reps_actual) {
           setConfirm(true);
-          return confirm = false;
+          return;
         }
-      })
-
-      if (confirm) {
-        await axios.put('api/exercise/workout', null, { params: { workout_exercise_id }});
-        const { data: newWorkout } = await getUserExercises();
-
-        setExercises(newWorkout);
-        setConfirm(false)
       }
+
+      await axios.put('api/exercise/workout', null, { params: { workout_exercise_id }});
+      const { data: newWorkout } = await getUserExercises();
+
+      setExercises(newWorkout);
+      setConfirm(false)
     } catch (error: any) {
       console.log(error.stack);
     }
@@ -95,7 +91,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
           { exercise.is_complete ?
             <p className='bg-green-500 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50 flex justify-center items-center'> Exercise Completed </p> :
-            <button className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
+            <button className="bg-blue-500 hover:bg-blue-600 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
                   onClick={ () => { completeExercise(exercise.id) }}> Complete Exercise
             </button>}
 

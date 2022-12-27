@@ -1,12 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 
 import axios from 'axios';
+import { resolveProjectReferencePath } from 'typescript';
 
 export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets }: any) {
+  const repRefs: any = useRef([]);
+  const weightRefs: any = useRef([]);
+
   return  <div>
   <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={ () => { toggleEditModal(workoutID) }}></div>
 
@@ -23,13 +27,13 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
 
      <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well">
 
-      { sets.map( (set: any, index: number) => {
+      { sets.map( (set: any, i: number) => {
         return (
           <div className="flex flex-col items-center w-10/12 my-4" key={set.set_id}>
-              <h3 className="pb-2 font-bold text-white">Set {index + 1}</h3>
+              <h3 className="pb-2 font-bold text-white">Set {i + 1}</h3>
               <div className="flex bg-slate-200 shadow-lg w-full py-3 justify-evenly items-center rounded-full">
-                <label> Reps: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.reps}></input>
-                <label> Weight: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.weight_lbs}></input>
+                <label> Reps: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.reps} ref={(el) => { repRefs.current[i] = el }}></input>
+                <label> Weight: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.weight_lbs} ref={(el) => { weightRefs.current[i] = el }}></input>
                 <button className="bg-red-500 hover:bg-red-400 py-2 px-2 rounded-full shadow-lg text-white" onClick={ () => { deleteSet(set.set_id) } } > <MdDeleteOutline /> </button>
               </div>
           </div>
@@ -38,7 +42,7 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
 
      </div>
 
-    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg"> Confirm Changes </button>
+    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg" onClick={ () => { toggleEditModal(workoutID, repRefs.current, weightRefs.current ) }}> Confirm Changes </button>
 
   </div>
 </div>
