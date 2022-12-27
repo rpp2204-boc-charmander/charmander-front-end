@@ -3,13 +3,13 @@ import {
   MdOutlineLogin,
   MdPassword,
   MdSentimentSatisfiedAlt,
-} from 'react-icons/md';
-import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
-import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
-import * as EmailValidator from 'email-validator';
-import bcrypt from 'bcryptjs';
-import axios from 'axios';
+} from "react-icons/md";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+import * as EmailValidator from "email-validator";
+import bcrypt from "bcryptjs";
+import axios from "axios";
 
 export interface LoginProps {
   email: any;
@@ -19,9 +19,9 @@ export interface LoginProps {
 export default function LoginForm() {
   const router = useRouter();
 
-  const [email, setEmail] = useState('email');
-  const [pswd, setPswd] = useState('password');
-  const [pswdType, setPswdType] = useState('password');
+  const [email, setEmail] = useState("email");
+  const [pswd, setPswd] = useState("password");
+  const [pswdType, setPswdType] = useState("password");
   const [pswdErr, setPswdErr] = useState(false);
   const [emailErr, setEmailErr] = useState(false);
   const [pswdVisible, setPswdVisible] = useState(false);
@@ -29,7 +29,7 @@ export default function LoginForm() {
   function handleChange(e: any, target: string) {
     let value = e.target.value;
 
-    if (target === 'email') {
+    if (target === "email") {
       setEmail(value);
     } else {
       setPswd(value);
@@ -60,12 +60,12 @@ export default function LoginForm() {
 
         .then((res) => {
           if (Object.keys(res.data).length === 0) {
-            router.push('/Signup');
+            router.push("/Signup");
           } else {
             const hash = res.data;
 
             if (bcrypt.compareSync(pswd, hash)) {
-              router.push('/overview');
+              router.push("/overview");
               setPswdErr(false);
             } else {
               setPswdErr(true);
@@ -77,9 +77,9 @@ export default function LoginForm() {
   }
 
   const emailInputLg =
-    'bg-white shadow rounded w-full h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med text-black font-extralight';
+    "bg-white shadow rounded w-full h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med text-black font-extralight";
   const pswdInputLg =
-    'bg-white shadow rounded-l w-[90%] h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med; text-black font-extralight';
+    "bg-white shadow rounded-l w-[90%] h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med; text-black font-extralight";
 
   return (
     <form className="w-full">
@@ -90,7 +90,7 @@ export default function LoginForm() {
           className={emailInputLg}
           type="email"
           placeholder="email"
-          onChange={(e) => handleChange(e, 'email')}
+          onChange={(e) => handleChange(e, "email")}
         ></input>
         <div>
           {!emailErr ? (
@@ -108,7 +108,7 @@ export default function LoginForm() {
           className={pswdInputLg}
           type={pswdType}
           placeholder="password"
-          onChange={(e) => handleChange(e, 'pswd')}
+          onChange={(e) => handleChange(e, "pswd")}
         ></input>
 
         {pswdVisible ? (
@@ -117,7 +117,7 @@ export default function LoginForm() {
             className="sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1 bg-white rounded-r text-gray-500"
             onClick={() => {
               setPswdVisible(false);
-              setPswdType('password');
+              setPswdType("password");
             }}
           />
         ) : (
@@ -126,7 +126,7 @@ export default function LoginForm() {
             className="sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1 bg-white rounded-r text-gray-500"
             onClick={() => {
               setPswdVisible(true);
-              setPswdType('text');
+              setPswdType("text");
             }}
           />
         )}
@@ -156,7 +156,7 @@ export default function LoginForm() {
         <button
           type="button"
           className="grow hover:text-purple-700 underline text-right font-extralight"
-          onClick={() => console.log('hi')}
+          onClick={() => console.log("hi")}
         >
           forgot password?
         </button>

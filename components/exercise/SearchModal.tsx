@@ -3,7 +3,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 import { MdClose } from 'react-icons/md';
 
-export default function SearchModal({ toggleAddModal }: any) {
+export default function SearchModal({ toggleAddModal }: any): JSX.Element {
   return (
     <div>
       <div

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import FoodCard from './FoodCard';
+import React, { useState } from "react";
+import FoodCard from "./FoodCard";
 
 interface foodDataType {
   CAL: string;

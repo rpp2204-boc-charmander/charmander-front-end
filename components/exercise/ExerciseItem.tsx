@@ -1,9 +1,9 @@
-import styles from '../../styles/Exercise.module.css';
+import styles from "../../styles/Exercise.module.css";
 
-import { AiOutlineEdit } from 'react-icons/ai';
-import { AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 
-import { GiMuscleUp } from 'react-icons/gi';
+import { GiMuscleUp } from "react-icons/gi";
 
 export default function ExerciseItem({
   exercise,
@@ -55,9 +55,9 @@ export default function ExerciseItem({
                   onClick={toggleCompletedModal}
                   key={exercise.set_id}
                 >
-                  {' '}
-                  {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual:{' '}
-                  {exercise.reps_actual}{' '}
+                  {" "}
+                  {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual:{" "}
+                  {exercise.reps_actual}{" "}
                 </button>
               );
             })}
@@ -66,7 +66,7 @@ export default function ExerciseItem({
 
         <div className="flex flex-col items-center justify-around h-[250px] px-2">
           <p className="font-bold justify-self-center">
-            {' '}
+            {" "}
             Estimated Calories Burned: {exercise.est_cals_burned}
           </p>
 
@@ -77,16 +77,16 @@ export default function ExerciseItem({
                 toggleAddSetModal(exercise.id);
               }}
             >
-              {' '}
-              Add Set{' '}
+              {" "}
+              Add Set{" "}
             </button>
 
             <button
               className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
               onClick={completeExercise}
             >
-              {' '}
-              Complete Workout{' '}
+              {" "}
+              Complete Workout{" "}
             </button>
           </div>
         </div>

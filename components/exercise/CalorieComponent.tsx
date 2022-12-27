@@ -1,4 +1,4 @@
-import CaloriesBurned from './CaloriesBurned';
+import CaloriesBurned from "./CaloriesBurned";
 
 export default function CalorieComponent({
   caloriesBurned,
@@ -11,8 +11,8 @@ export default function CalorieComponent({
         className="w-11/12 mx-2 bg-white text-black hover:bg-gray-200 font-bold py-2 px-4 rounded-3xl static"
         onClick={toggleAddModal}
       >
-        {' '}
-        +{' '}
+        {" "}
+        +{" "}
       </button>
     </div>
   );

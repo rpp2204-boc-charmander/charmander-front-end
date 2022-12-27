@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 interface CaloriesProp {
   calories: number;
@@ -6,7 +6,7 @@ interface CaloriesProp {
 
 const CaloriesWidget = ({ calories }: CaloriesProp) => {
   const prompter = () => {
-    alert('Loading food search......');
+    alert("Loading food search......");
   };
 
   return (

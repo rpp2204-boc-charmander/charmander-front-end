@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import ExerciseList from '../components/exercise/ExerciseList';
@@ -8,11 +8,7 @@ import EditModal from '../components/exercise/EditModal';
 import CompletedModal from '../components/exercise/CompletedModal';
 import AddSet from '../components/exercise/AddSet';
 import Header from '../components/overview/Header';
-import Modal from '../components/overview/Modal';
-
-import styles from '../styles/Exercise.module.css';
 import { MdOutlineFitnessCenter } from 'react-icons/md';
-import mockData from '../mocks/exercisedata.json';
 
 const getCaloriesBurned = (exercises: []): number => {
   let total = 0;
@@ -24,23 +20,23 @@ const getCaloriesBurned = (exercises: []): number => {
   return total;
 };
 
-export default function Exercise() {
-  //Date
+export default function Exercise(): JSX.Element {
+  // Date
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  //IDs
+  // IDs
   const [workoutID, setWorkoutID] = useState(1);
 
-  //Exercises
+  // Exercises
   const [exercises, setExercises] = useState([]);
 
-  //Modals
+  // Modals
   const [addModalState, setAddModalState] = useState(false);
   const [editModalState, setEditModalState] = useState(false);
   const [completedModalState, setCompletedModalState] = useState(false);
   const [addSetModalState, setAddSetModalState] = useState(false);
 
-  //Calories
+  // Calories
   const [caloriesBurned, setCaloriesBurned] = useState(0);
 
   useEffect(() => {
@@ -53,14 +49,14 @@ export default function Exercise() {
       });
   }, [addSetModalState]);
 
-  const getUserExercises = () => {
-    //get username and log_date from index im assuming
-    return axios.get('api/exercise/workout/list', {
+  const getUserExercises = async () => {
+    // get username and log_date from index im assuming
+    return await axios.get('api/exercise/workout/list', {
       params: { user_id: 4, log_date: '2022-12-13' },
     });
   };
 
-  const deleteSet = (set_id: number) => {
+  const deleteSet = (set_id: number): void => {
     axios
       .delete('api/exercise/sets', { params: { set_id } })
       .then(() => {
@@ -71,7 +67,7 @@ export default function Exercise() {
       });
   };
 
-  const deleteExercise = (workout_exercise_id: number) => {
+  const deleteExercise = (workout_exercise_id: number): void => {
     axios
       .delete('api/exercise/workout', { params: { workout_exercise_id } })
       .then(() => {
@@ -82,33 +78,44 @@ export default function Exercise() {
       });
   };
 
-  const toggleAddModal = () => {
+  const toggleAddModal = (): void => {
     setAddModalState((prevState) => !prevState);
   };
 
-  const toggleEditModal = (workout_id: number) => {
+  const toggleEditModal = (workout_id: number): void => {
     setEditModalState((prevState) => !prevState);
 
-    if (workout_id) {
+    if (workout_id !== 0) {
       setWorkoutID(workout_id);
     }
   };
 
-  const toggleCompletedModal = () => {
+  const toggleCompletedModal = (): void => {
     setCompletedModalState((prevState) => !prevState);
   };
 
-  const toggleAddSetModal = (workout_id: number) => {
+  const toggleAddSetModal = (workout_id: number): void => {
     setAddSetModalState((prevState) => !prevState);
 
-    if (workout_id) {
+    if (workout_id !== 0) {
       setWorkoutID(workout_id);
     }
   };
 
-  const completeExercise = () => {
+  const completeExercise = (): void => {
     alert('Complete Exercise?');
   };
+
+  /**
+   *
+  TODO:
+  1. Refactor how currentDate is used. Suggestion: Date needs to be passed down as a component
+
+
+  IMPORTANT:
+  1. How is data going to be passed down to exercise?
+   *
+   */
 
   return (
     <>

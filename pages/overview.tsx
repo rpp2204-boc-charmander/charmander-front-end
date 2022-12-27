@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Header from '../components/overview/Header';
-import Container from '../components/overview/Container';
-import { MdOutlineSort } from 'react-icons/md';
+import axios from "axios";
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import Header from "../components/overview/Header";
+import Container from "../components/overview/Container";
+import { MdOutlineSort } from "react-icons/md";
 
 export interface ExerciseObjProps {
   text: string;
@@ -42,7 +42,7 @@ export default function Overview() {
   const weight = 0; // in kg
   const height = 0; // in cm
   const age = 0;
-  const sex = 'female';
+  const sex = "female";
 
   // Helper function
   const convertDateToString = (date: any) => {
@@ -53,22 +53,22 @@ export default function Overview() {
   useEffect(() => {
     const exercises = [
       {
-        text: 'Bench Press',
+        text: "Bench Press",
         calorie: 500,
         sets: 3,
         reps: 5,
         weight: 15,
         completed: true,
       },
-      { text: 'Chair Press', calorie: 500, sets: 3, reps: 5, completed: false },
-      { text: 'Desk Press', calorie: 500, sets: 3, reps: 5, completed: false },
-      { text: 'Table Press', calorie: 1000, completed: false },
-      { text: 'Squats', calorie: 500, completed: false },
+      { text: "Chair Press", calorie: 500, sets: 3, reps: 5, completed: false },
+      { text: "Desk Press", calorie: 500, sets: 3, reps: 5, completed: false },
+      { text: "Table Press", calorie: 1000, completed: false },
+      { text: "Squats", calorie: 500, completed: false },
     ];
     const nutrition = [
-      { text: 'Big Mac', calorie: 300, portion: 5, completed: true },
-      { text: 'Big Mac', calorie: 300, completed: false },
-      { text: 'Big Mac', calorie: 300, completed: false },
+      { text: "Big Mac", calorie: 300, portion: 5, completed: true },
+      { text: "Big Mac", calorie: 300, completed: false },
+      { text: "Big Mac", calorie: 300, completed: false },
     ];
     setExercises(exercises);
     setNutrition(nutrition);
@@ -88,7 +88,7 @@ export default function Overview() {
     const weight = 70; // in kg
     const height = 175; // in cm
     const age = 30;
-    const sex = 'female';
+    const sex = "female";
 
     let bmr = 0;
     let s = -161;
@@ -149,9 +149,9 @@ export default function Overview() {
             type="calories"
             title="Calories"
             cards={[
-              { calorie: caloriesConsumed, text: 'Calories Consumed' },
-              { calorie: caloriesBurned, text: 'Calories Burned' },
-              { calorie: netCalories, text: 'Net Calories' },
+              { calorie: caloriesConsumed, text: "Calories Consumed" },
+              { calorie: caloriesBurned, text: "Calories Burned" },
+              { calorie: netCalories, text: "Net Calories" },
             ]}
             bmr={bmr}
           />

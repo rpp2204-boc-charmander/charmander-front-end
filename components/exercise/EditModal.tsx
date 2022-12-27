@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { MdClose } from 'react-icons/md';
-import { MdDeleteOutline } from 'react-icons/md';
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { MdClose } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 
-import axios from 'axios';
+import axios from "axios";
 
 export default function EditModal({ toggleEditModal, workoutID }: any) {
   const [workoutSets, setWorkoutSets] = useState([]);
@@ -15,7 +15,7 @@ export default function EditModal({ toggleEditModal, workoutID }: any) {
 
   const getWorkoutSets = (workout_id: number) => {
     axios
-      .get('api/exercise/list/sets', {
+      .get("api/exercise/list/sets", {
         params: { workout_exercise_id: workout_id },
       })
       .then(({ data }) => {
@@ -54,21 +54,21 @@ export default function EditModal({ toggleEditModal, workoutID }: any) {
                   className="flex bg-slate-200 shadow-lg w-full py-3 justify-evenly items-center rounded-full"
                   key={set.set_id}
                 >
-                  <label> Reps: </label>{' '}
+                  <label> Reps: </label>{" "}
                   <input
                     type="number"
                     className="w-1/6 rounded-lg shadow-md"
                     defaultValue={set.reps}
                   ></input>
-                  <label> Weight: </label>{' '}
+                  <label> Weight: </label>{" "}
                   <input
                     type="number"
                     className="w-1/6 rounded-lg shadow-md"
                     defaultValue={set.weight_lbs}
                   ></input>
                   <button className="bg-red-500 hover:bg-red-400 py-2 px-2 rounded-full shadow-lg text-white">
-                    {' '}
-                    <MdDeleteOutline />{' '}
+                    {" "}
+                    <MdDeleteOutline />{" "}
                   </button>
                 </div>
               </div>
@@ -77,8 +77,8 @@ export default function EditModal({ toggleEditModal, workoutID }: any) {
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg">
-          {' '}
-          Confirm Changes{' '}
+          {" "}
+          Confirm Changes{" "}
         </button>
       </div>
     </div>

@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import {
   MdOutlineSort,
   MdNavigateBefore,
   MdNavigateNext,
-} from "react-icons/md";
-import { DateProps } from "../../pages/overview";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+} from 'react-icons/md';
+import { DateProps } from '../../pages/overview';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 export default function Header({
   currentDate,
@@ -14,7 +14,7 @@ export default function Header({
   title,
   Icon,
 }: DateProps) {
-  const [formattedDate, setFormattedDate] = useState("");
+  const [formattedDate, setFormattedDate] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -23,8 +23,8 @@ export default function Header({
   }, [currentDate]);
 
   useEffect(() => {
-    document.addEventListener("click", (event: any) => {
-      if (event.target.id !== "calendar") {
+    document.addEventListener('click', (event: any) => {
+      if (event.target.id !== 'calendar') {
         setIsOpen(false);
       }
     });
@@ -32,27 +32,27 @@ export default function Header({
 
   const dateFormatter = function () {
     const weekdays: { [key: number]: string } = {
-      0: "Sunday",
-      1: "Monday",
-      2: "Tuesday",
-      3: "Wednesday",
-      4: "Thursday",
-      5: "Friday",
-      6: "Saturday",
+      0: 'Sunday',
+      1: 'Monday',
+      2: 'Tuesday',
+      3: 'Wednesday',
+      4: 'Thursday',
+      5: 'Friday',
+      6: 'Saturday',
     };
     const months: { [key: number]: string } = {
-      0: "January",
-      1: "February",
-      2: "March",
-      3: "April",
-      4: "May",
-      5: "June",
-      6: "July",
-      7: "August",
-      8: "September",
-      9: "October",
-      10: "November",
-      11: "December",
+      0: 'January',
+      1: 'February',
+      2: 'March',
+      3: 'April',
+      4: 'May',
+      5: 'June',
+      6: 'July',
+      7: 'August',
+      8: 'September',
+      9: 'October',
+      10: 'November',
+      11: 'December',
     };
     return `${weekdays[currentDate?.getDay()]}, ${
       months[currentDate?.getMonth()]
