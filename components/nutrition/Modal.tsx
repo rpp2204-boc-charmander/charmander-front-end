@@ -1,6 +1,6 @@
 import FoodCardModal from "./FoodCardModal";
 import axios from 'axios';
-import Image from 'next/Image';
+import Image from 'next/image';
 
 import { useState, useEffect } from "react";
 
@@ -19,7 +19,7 @@ const Modal = () => {
   }
 
   const handleSelect = (food) => {
-    // console.log(food);
+    console.log(JSON.stringify(food.measures));
     setFoodList(foodList.concat([food]));
     setPreview([]);
     document.getElementById('search-form').value = ""

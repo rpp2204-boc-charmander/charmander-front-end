@@ -1,6 +1,10 @@
-import Image from 'next/Image'
+import Image from 'next/image'
 import { useState } from 'react'
 import { measureMemory } from 'vm';
+
+interface FoodCardModalProps {
+  info: Object
+}
 
 const FoodCardModal = ({ info }) => {
 
@@ -39,6 +43,7 @@ const FoodCardModal = ({ info }) => {
     info.unit = label;
     info.grams = grams;
   }
+  console.log('ello')
 
   return (
     <div className="flex flex-row items-center border space-x-8">
