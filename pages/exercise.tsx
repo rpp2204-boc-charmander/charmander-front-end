@@ -10,17 +10,16 @@ import AddSet from '../components/exercise/AddSet';
 import Header from '../components/overview/Header';
 import { MdOutlineFitnessCenter } from 'react-icons/md';
 
-const getCaloriesBurned = (exercises: []): number => {
-  let total = 0;
+/**
+   *
+  TODO:
+  1. Add exercise search component
 
-  exercises.forEach((exercise: { total_calories_burned: number }) => {
-    total += exercise.total_calories_burned;
-  });
+   */
 
-  return total;
-};
+export default function Exercise({ user_id, date }): JSX.Element {
+  console.log('date: ', date);
 
-export default function Exercise(): JSX.Element {
   // Date
   const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -43,6 +42,7 @@ export default function Exercise(): JSX.Element {
     getUserExercises()
       .then(({ data }) => {
         setExercises(data);
+        A;
       })
       .catch((error) => {
         console.log(error.stack);
@@ -52,7 +52,7 @@ export default function Exercise(): JSX.Element {
   const getUserExercises = async () => {
     // get username and log_date from index im assuming
     return await axios.get('api/exercise/workout/list', {
-      params: { user_id: 4, log_date: '2022-12-13' },
+      params: { user_id, log_date: date },
     });
   };
 
@@ -106,16 +106,15 @@ export default function Exercise(): JSX.Element {
     alert('Complete Exercise?');
   };
 
-  /**
-   *
-  TODO:
-  1. Refactor how currentDate is used. Suggestion: Date needs to be passed down as a component
+  const getCaloriesBurned = (exercises: []): number => {
+    let total = 0;
 
+    exercises.forEach((exercise: { total_calories_burned: number }) => {
+      total += exercise.total_calories_burned;
+    });
 
-  IMPORTANT:
-  1. How is data going to be passed down to exercise?
-   *
-   */
+    return total;
+  };
 
   return (
     <>

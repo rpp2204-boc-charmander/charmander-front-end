@@ -1,6 +1,3 @@
-import { BsSearch } from 'react-icons/bs';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
-
 import { MdClose } from 'react-icons/md';
 
 export default function SearchModal({ toggleAddModal }: any): JSX.Element {
@@ -40,10 +37,6 @@ export default function SearchModal({ toggleAddModal }: any): JSX.Element {
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             {' '}
             Add Exercise{' '}
-          </button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {' '}
-            Add and Mark As Completed{' '}
           </button>
         </div>
       </div>
