@@ -101,9 +101,11 @@ export default function Exercise() {
     setAddModalState( prevState => !prevState)
   }
 
-  const toggleEditModal = (workout_id: number, repsRefs: [], weightsRefs: []) => {
+  const toggleEditModal = (workout_id: number, repsRefs: [], weightsRefs: [], setIDs: []) => {
     //if repsRefs and weightRefs are both defined, call put request
     if (repsRefs && weightsRefs) {
+      setIDs.sort();
+
       let reps = repsRefs.map( (rep: any) => {
         return Number(rep.value);
       })
@@ -115,7 +117,7 @@ export default function Exercise() {
       axios.put('api/exercise/workout/sets', {
         reps,
         weights,
-        workout_id
+        setIDs
       })
       .then(({ data }) => {
         console.log('Successfully Updated Sets')

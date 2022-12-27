@@ -8,6 +8,7 @@ import axios from 'axios';
 import { resolveProjectReferencePath } from 'typescript';
 
 export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets }: any) {
+  let setIDs: number[] = [];
   const repRefs: any = useRef([]);
   const weightRefs: any = useRef([]);
 
@@ -28,6 +29,9 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
      <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well">
 
       { sets.map( (set: any, i: number) => {
+
+        setIDs.push(set.set_id);
+
         return (
           <div className="flex flex-col items-center w-10/12 my-4" key={set.set_id}>
               <h3 className="pb-2 font-bold text-white">Set {i + 1}</h3>
@@ -42,7 +46,7 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
 
      </div>
 
-    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg" onClick={ () => { toggleEditModal(workoutID, repRefs.current, weightRefs.current ) }}> Confirm Changes </button>
+    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg" onClick={ () => { toggleEditModal(workoutID, repRefs.current, weightRefs.current, setIDs ) }}> Confirm Changes </button>
 
   </div>
 </div>
