@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const appId = process.env.EDAMAM_APPLICATION_ID;
 const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
-const Modal = () => {
+const Modal = ({ showModal }) => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
@@ -95,8 +95,12 @@ const Modal = () => {
         <div className="space-x-12 mt-5 mb-2">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
             handleSubmit();
+            showModal();
           }}>Add</button>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add as completed</button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
+            handleSubmit();
+            showModal();
+          }}>Add as completed</button>
         </div>
       </div>
     </div>
