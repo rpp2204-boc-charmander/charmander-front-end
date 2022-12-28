@@ -19,7 +19,13 @@ const Modal = () => {
   }
 
   const handleSelect = (food) => {
-    console.log(JSON.stringify(food.measures));
+    axios.get('http://localhost:4000/nutrition/list/foods',{
+      params: food
+      })
+      .then((response) => {
+        console.log('response: ', response);
+      })
+
     setFoodList(foodList.concat([food]));
     setPreview([]);
     document.getElementById('search-form').value = ""

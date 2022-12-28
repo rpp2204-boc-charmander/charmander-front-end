@@ -43,7 +43,6 @@ const FoodCardModal = ({ info }) => {
     info.unit = label;
     info.grams = grams;
   }
-  console.log('ello')
 
   return (
     <div className="flex flex-row items-center border space-x-8">
