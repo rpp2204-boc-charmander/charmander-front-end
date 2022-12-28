@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { MdOutlineSort, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { DateProps } from "../../pages/overview";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -12,6 +12,14 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
     setFormattedDate(dateFormatter());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDate])
+
+  useEffect(() => {
+    document.addEventListener("click", (event: any) => {
+      if (event.target.id !== "calendar") {
+        setIsOpen(false);
+      }
+    })
+  })
 
   const dateFormatter = function() {
     const weekdays: {[key: number]: string} = {
@@ -68,12 +76,12 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
         </div>
 
         <div className="flex flex-col justify-center">
-          <div className="sm:w-52 lg:w-96 flex justify-center" onClick={handleCalendarClick}>
+          <div className="sm:w-52 lg:w-96 flex justify-center" id="calendar" onClick={handleCalendarClick}>
             {formattedDate}
           </div>
 
           {isOpen && (
-            <div className="pt-48 flex justify-center">
+            <div className="pt-48 flex justify-center" id="calendar">
               <Calendar onChange={onChange} />
             </div>
           )}

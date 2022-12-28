@@ -6,6 +6,10 @@ import { MdOutlineFastfood } from 'react-icons/md'
 
 const Login = () => {
 
+  const titleLg = 'fixed top-[45%] left-[20%] text-LoginGray flex flex-col items-center text-6xl'
+  const foodIconLg = 'test-xl'
+  const exerciseIconLg = 'test-7xl'
+
   return (
     <div>
       <Head>
@@ -14,14 +18,13 @@ const Login = () => {
         <link rel='icon' href="/flavion.ico" />
       </Head>
       <main>
-
-      <div className="fixed top-[45%] left-[20%] text-black flex flex-col items-center text-6xl ">
+      <div className={titleLg}>
         <h1>My Heath Coach</h1>
         <div className="flex flex-row w-full mt-3">
           <div className="grow"></div>
-          <MdOutlineFastfood className="test-xl" />
+          <MdOutlineFastfood className={foodIconLg} />
           <div className="grow"></div>
-          <IoIosFitness className="text-7xl" />
+          <IoIosFitness className={foodIconLg} />
           <div className="grow"></div>
         </div>
       </div >

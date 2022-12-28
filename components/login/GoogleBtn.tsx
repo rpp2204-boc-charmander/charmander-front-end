@@ -1,5 +1,7 @@
+import React from 'react';
 import { useRouter } from 'next/router';
 import jwt_decode from "jwt-decode";
+import axios from 'axios';
 
 
 interface GoogleProps {
@@ -15,33 +17,17 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
 
     const token:any = await response.credential
     const responsePayload:any = jwt_decode(token);
-
-     console.log("ID: " + responsePayload.sub);
-     console.log('Full Name: ' + responsePayload.name);
-     console.log('Given Name: ' + responsePayload.given_name);
-     console.log('Family Name: ' + responsePayload.family_name);
-     console.log("Image URL: " + responsePayload.picture);
-     console.log("Email: " + responsePayload.email);
-     console.log(responsePayload);
-
-     handleUserData(responsePayload)
-
-  }
-
-  function handleUserData (userData:any) {
-    console.log(userData)
-    const URL: any = process.env.URL_ENDPOINT
-    const DATA: any = {method: 'GET', body: userData}
-    // check if the user id is in the database
-    fetch(URL, DATA)
-    .then((response) => {
-      //if it is send them to the overview
-    })
-    .catch((err) => {
-      // if the user is not in the database
-        // send them to the sign up page
-          // autofill user data (name, email, photo)
-    })
+    axios
+      .get(`${process.env.AUTH}?email=${responsePayload.email}`)
+      .then(res => {
+        if (Object.keys(res.data).length === 0) {
+          console.log('No Account');
+          router.push('/Signup')
+        } else{
+          router.push('/overview')
+        }
+     })
+     .catch(err => router.push('/signup'))
   }
 
   // initializes connection to GI API and renders login button
@@ -63,7 +49,7 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
       document.getElementById('google_btn'),
       {
         shape: "pill",
-        theme: 'filled_white', size: 'large',
+        theme: 'filled_black', size: 'large',
       }
     );
   }
