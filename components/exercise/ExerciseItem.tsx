@@ -8,7 +8,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { GiMuscleUp } from "react-icons/gi";
 
 
-export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, getExerciseSets, getUserExercises, setExercises} : any) {
+export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, getExerciseSets, getUserExercises, setExercises, setCaloriesBurned } : any) {
   const [ confirm, setConfirm ] = useState(false);
 
   const completeExercise = async (workout_exercise_id: number) => {
@@ -29,10 +29,11 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
         }
       }
 
-      await axios.put('api/exercise/workout', null, { params: { workout_exercise_id }});
+      await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id: 7, log_date: '2022-12-13' }});
       const { data: newWorkout } = await getUserExercises();
 
-      setExercises(newWorkout);
+      setExercises(newWorkout.result);
+      setCaloriesBurned(newWorkout.total_cals_burned);
       setConfirm(false)
     } catch (error: any) {
       console.log(error.stack);
@@ -67,9 +68,10 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
             <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
 
             {exercise.sets?.map( (exercise: any) => {
-              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-600 text-white'}`}
+              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-500 text-white'}`}
               onClick={ () => { toggleCompletedModal(exercise.set_id) }}
               key={exercise.set_id}
+              disabled={ exercise.reps_actual ? true : false }
               > {exercise.reps} Reps | {exercise.weight_lbs} lbs | Actual: {exercise.reps_actual} </button>
             })}
 

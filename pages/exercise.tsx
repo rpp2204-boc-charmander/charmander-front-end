@@ -41,7 +41,8 @@ export default function Exercise() {
   useEffect(() => {
     getUserExercises()
       .then(({ data }) => {
-        setExercises(data);
+        setExercises(data.result);
+        setCaloriesBurned(data.total_cals_burned)
       })
       .catch(error => {
         console.log(error.stack)
@@ -52,7 +53,7 @@ export default function Exercise() {
 
   const getUserExercises = () => {
     //get username and log_date from index im assuming
-    return axios.get('api/exercise/workout/list', { params: { user_id: 4, log_date: '2022-12-13' } });
+    return axios.get('api/exercise/workout/list', { params: { user_id: 7, log_date: '2022-12-13' } });
   }
 
   const getExerciseSets = (workout_id: number) => {
@@ -77,7 +78,7 @@ export default function Exercise() {
       await axios.delete('api/exercise/workout', { params: { workout_exercise_id }});
       const { data: newWorkout } = await getUserExercises();
 
-      setExercises(newWorkout);
+      setExercises(newWorkout.result);
     } catch (error: any) {
       console.log(error.stack);
     }
@@ -86,7 +87,7 @@ export default function Exercise() {
   //COMPLETE FUNCTIONS
 
   const completeSet = (actual_reps: number, set_id: number) => {
-    axios.put('api/exercise/set', null, { params: { set_id, actual_reps }})
+    axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id: 7 }})
       .then( () => {
         toggleCompletedModal(set_id);
       })
@@ -128,6 +129,7 @@ export default function Exercise() {
       })
 
     } else {
+
       getExerciseSets(workout_id)
         .then(({ data }) => {
           setEditSets(data);
@@ -169,6 +171,7 @@ export default function Exercise() {
                       toggleAddSetModal={toggleAddSetModal}
                       getExerciseSets={getExerciseSets}
                       getUserExercises={getUserExercises}
+                      setCaloriesBurned={setCaloriesBurned}
                       setExercises={setExercises}/>
       </div>
     </>
