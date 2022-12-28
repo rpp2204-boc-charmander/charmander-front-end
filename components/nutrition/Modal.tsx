@@ -87,12 +87,12 @@ const Modal = () => {
           {
             foodList.map((food, index) => {
               return (
-                <FoodCardModal key={index} info={food}/>
+                <FoodCardModal key={index} info={food} />
               )
             })
           }
         </div>
-        <div>
+        <div className="space-x-12 mt-5">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
             handleSubmit();
           }}>Add</button>
