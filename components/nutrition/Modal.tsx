@@ -92,11 +92,11 @@ const Modal = () => {
             })
           }
         </div>
-        <div className="space-x-10">
-          <button onClick={() => {
+        <div>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
             handleSubmit();
           }}>Add</button>
-          <button>Add as completed</button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Add as completed</button>
         </div>
       </div>
     </div>
