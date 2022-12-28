@@ -83,7 +83,7 @@ const Modal = () => {
           }
 
         </div>
-        <div className="list bg-slate-600">
+        <div className="overflow-y-auto">
           {
             foodList.map((food, index) => {
               return (
@@ -92,7 +92,7 @@ const Modal = () => {
             })
           }
         </div>
-        <div className="space-x-12 mt-5">
+        <div className="space-x-12 mt-5 mb-2">
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
             handleSubmit();
           }}>Add</button>
