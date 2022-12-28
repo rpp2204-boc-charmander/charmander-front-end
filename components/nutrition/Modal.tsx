@@ -58,7 +58,7 @@ const Modal = ({ showModal }) => {
         <div>
           <h4>Nutrition Search</h4>
           <form>
-            <input id="search-form"placeholder="search by name" onChange={(e) => {
+            <input id="search-form"placeholder="search by name" className="shadow-lg w-5/6 h-10 rounded-lg mt-3" onChange={(e) => {
               handleSearch(e)
             }}></input>
           </form>
