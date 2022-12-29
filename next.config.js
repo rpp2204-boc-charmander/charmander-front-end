@@ -8,7 +8,13 @@ const nextConfig = {
     AUTH: process.env.AUTH,
     STRAVA_ID: process.env.STRAVA_ID,
     STRAVA_SECRET: process.env.STRAVA_SECRET,
-    BACKEND_URL: process.env.BACKEND_URL
+    STRAVA_REFRESH: process.env.STRAVA_REFRESH,
+    STRAVA_REDIRECT: process.env.STRAVA_REDIRECT,
+    FITBIT_ID: process.env.FITBIT_ID,
+    FITBIT_SECRET: process.env.FITBIT_SECRET,
+    FITBIT_SCOPE: process.env.FITBIT_SCOPE,
+    FITBIT_RESPONSE_TYPE: process.env.FITBIT_CODE,
+    DB_ENDPOINT: process.env.DB_ENDPOINT
   }
   // async redirects() {
   //   return [
