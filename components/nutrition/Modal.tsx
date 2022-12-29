@@ -55,7 +55,7 @@ const Modal = ({ showModal, date }) => {
     } else if (foodList.length === 1) {
       setFoodList([]);
     }
-    console.log(key)
+    // console.log(key)
   }
 
   useEffect(() => {
