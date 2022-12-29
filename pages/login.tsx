@@ -6,9 +6,8 @@ import { FitbitProvider } from '../context/FitbitProvider'
 
 const Login = () => {
   const titleLg =
-    "fixed top-[45%] left-[20%] text-LoginGray flex flex-col items-center text-6xl";
-  const foodIconLg = "test-xl";
-  const exerciseIconLg = "test-7xl";
+    "fixed top-[45%] left-[20%] text-black flex flex-col items-center text-6xl";
+  const IconLg = "text-black";
 
   return (
     <FitbitProvider>
@@ -23,9 +22,9 @@ const Login = () => {
           <h1>My Heath Coach</h1>
           <div className="flex flex-row w-full mt-3">
             <div className="grow"></div>
-            <MdOutlineFastfood className={foodIconLg} />
+            <MdOutlineFastfood className={IconLg} />
             <div className="grow"></div>
-            <IoIosFitness className={foodIconLg} />
+            <IoIosFitness className={IconLg} />
             <div className="grow"></div>
           </div>
         </div >
