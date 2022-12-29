@@ -44,9 +44,9 @@ export default function Overview( { currentDate, setTitle, setIcon, setShowCalen
 
   useEffect(() => {
     setTitle('Overview');
-    setIcon((prevState: any) => {
-      return MdOutlineSort;
-    });
+    setIcon((prevState: any) => (
+      MdOutlineSort
+    ));
     setShowCalendar(true);
   }, [setTitle, setIcon, setShowCalendar])
 
@@ -118,7 +118,7 @@ export default function Overview( { currentDate, setTitle, setIcon, setShowCalen
   }, [caloriesConsumed, caloriesBurned])
 
   return (
-    <div className="flex flex-col grow">
+    <div className="flex flex-col grow bg-white">
       <Head>
         <title> My Health Coach </title>
         <link rel="icon" href="/favicon.ico" />

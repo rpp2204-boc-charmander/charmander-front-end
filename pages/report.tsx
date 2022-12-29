@@ -1,15 +1,26 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Header from '../components/report/header';
 import Charts from '../components/report/charts';
+import { MdOutlineAssignment } from "react-icons/md";
+import { ChildProps } from "../components/Layout";
 
-export default function Report(showCalendar) {
+export default function Report({ currentDate, setTitle, setIcon, setShowCalendar }: ChildProps) {
   const [timespan, setTimespan]: any = useState('week');
 
   function handleclick(e: any) {
     e.preventDefault();
     setTimespan(e.target.name);
   }
+
+  useEffect(() => {
+    setTitle('Report');
+    setIcon((prevState: any) => (
+      MdOutlineAssignment
+    ));
+    setShowCalendar(false);
+  }, [setTitle, setIcon, setShowCalendar])
+
   return (
     <div>
       <Head>

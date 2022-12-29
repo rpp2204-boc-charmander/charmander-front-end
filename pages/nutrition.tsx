@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 import FoodList from "../components/nutrition/FoodList";
 import EditItemModal from "../components/nutrition/EditItemModal";
@@ -7,6 +7,8 @@ import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
+import { ChildProps } from "../components/Layout";
+import { MdRestaurant } from "react-icons/md";
 
 interface FoodDataType {
   CAL: string,
@@ -23,7 +25,7 @@ interface FoodDataType {
   CATEGORY: string
 }
 
-const Nutrition = () => {
+const Nutrition = ({ currentDate, setTitle, setIcon, setShowCalendar }: ChildProps) => {
   const [pendingItem, setPendingItem] = useState<FoodDataType>({} as FoodDataType);
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
@@ -39,9 +41,17 @@ const Nutrition = () => {
 
   const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
+  useEffect(() => {
+    setTitle('Nutrition');
+    setIcon((prevState: any) => (
+      MdRestaurant
+    ));
+    setShowCalendar(true);
+  }, [setTitle, setIcon, setShowCalendar])
+
   return (
     <>
-      <div className="flex justify-between flex-row mb-10 w-auto">
+      <div className="flex justify-between flex-row mb-10 w-auto bg-white">
         <div className="flex flex-row">
           <GiForkKnifeSpoon className="text-3xl mr-2"/>
           <div className="text-3xl">Nutrition</div>
