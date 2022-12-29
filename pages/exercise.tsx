@@ -9,6 +9,7 @@ import CompletedModal from '../components/exercise/CompletedModal';
 import AddSet from '../components/exercise/AddSet';
 import Header from "../components/overview/Header";
 import Modal from "../components/overview/Modal";
+import { ChildProps } from "../components/Layout";
 
 import styles from '../styles/Exercise.module.css';
 import { MdOutlineFitnessCenter } from 'react-icons/md';
@@ -26,9 +27,9 @@ const getCaloriesBurned = (exercises: any): number => {
 }
 
 
-export default function Exercise() {
+export default function Exercise({ currentDate, setTitle, setIcon, setShowCalendar }: ChildProps) {
   //Date
-  const [ currentDate, setCurrentDate ] = useState(new Date());
+  //const [ currentDate, setCurrentDate ] = useState(new Date());
 
   //IDs
   const [ workoutID, setWorkoutID ] = useState(1);
@@ -44,6 +45,14 @@ export default function Exercise() {
 
   //Calories
   const [ caloriesBurned, setCaloriesBurned ] = useState(0)
+
+  useEffect(() => {
+    setTitle('Exercise');
+    setIcon((prevState: any) => (
+      MdOutlineFitnessCenter
+    ));
+    setShowCalendar(true);
+  }, [setTitle, setIcon, setShowCalendar])
 
   useEffect(() => {
     getUserExercises()
@@ -111,8 +120,6 @@ export default function Exercise() {
 
   return (
     <>
-      <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Exercise' Icon={MdOutlineFitnessCenter}/>
-
       { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
       { editModalState && <EditModal toggleEditModal={toggleEditModal} workoutID={workoutID}/>}
       { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal}/>}

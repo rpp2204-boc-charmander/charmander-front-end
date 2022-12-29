@@ -1,10 +1,18 @@
 import { useState, useEffect } from "react";
-import { MdOutlineSort, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
-import { DateProps } from "../../pages/overview";
+import { MdNavigateBefore, MdNavigateNext, MdMenu } from "react-icons/md";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-export default function Header({ currentDate, setCurrentDate, title, Icon }: DateProps) {
+export interface HeaderProps {
+  currentDate: Date,
+  setCurrentDate: Function
+  title: string,
+  Icon: any,
+  showCalendar: boolean,
+  setToggleSidebar: Function
+}
+
+export default function Header({ currentDate, setCurrentDate, title, Icon, showCalendar, setToggleSidebar }: HeaderProps) {
   const [formattedDate, setFormattedDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -63,14 +71,25 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
     setIsOpen((prevState) => (!prevState));
   }
 
+  const handleMenuClick = function() {
+    setToggleSidebar((prevState: number) => {
+      if (prevState === 1) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+  }
+
   return (
-    <div className="bg-white flex flex-row grow justify-between items-center md:h-18 lg:h-24 text-black font-bold sticky top-0 bottom-0 z-50 shadow-lg w-full pl-12 pr-12">
+    <div className="bg-white flex flex-row grow justify-between items-center h-16 lg:h-24 text-black font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
+
       <div className="flex items-center w-full h-full">
-        <Icon className="sm:text-3xl lg:text-6xl mr-5"/>
-        <h1 className="sm:text-3xl lg:text-5xl"> {title} </h1>
+        {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
+        <h1 className="text-3xl lg:text-5xl"> {title} </h1>
       </div>
 
-      <div className="sm:text-base lg:text-xl flex flex-row h-full items-center">
+      {showCalendar && (<div className="hidden text-xl lg:flex flex-row items-center">
         <div>
           <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
@@ -81,7 +100,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
           </div>
 
           {isOpen && (
-            <div className="pt-48 flex justify-center" id="calendar">
+            <div className="pt-48 lg:flex justify-center" id="calendar">
               <Calendar onChange={onChange} />
             </div>
           )}
@@ -90,7 +109,12 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
         <div>
           <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
+      </div>)}
+
+      <div className="flex items-center text-3xl lg:hidden">
+        <MdMenu onClick={handleMenuClick}/>
       </div>
+
     </div>
   )
 }
