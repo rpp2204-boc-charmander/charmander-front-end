@@ -19,7 +19,7 @@ export default function Layout({ children }: any) {
 
   return (
     <div className="relative min-h-screen flex">
-      <aside>
+      <aside className="absolute inset-y-0 left-0 transform -translate-x-full lg:relative lg:flex flex-row lg:translate-x-0 transition duration-200 ease-in-out">
         <Sidenav />
       </aside>
 

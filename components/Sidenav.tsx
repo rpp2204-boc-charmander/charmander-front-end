@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Sidenav() {
   return (
-    <div className="flex flex-row">
+    <div>
       <div className="flex flex-col grow bg-gray-500 h-[100vh] w-48 top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
         <div className="flex flex-col items-center">
           <div>
