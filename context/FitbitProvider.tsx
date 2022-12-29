@@ -33,7 +33,7 @@ export function FitbitProvider({ children }: Props) {
 export const useFitbitContext = () => {
   const fitbitContext = useContext(FitbitContext);
 
-  if(!fitbitContext) throw new Error('FitbitContext Provider Error')
+  // if(!fitbitContext) throw new Error('FitbitContext Provider Error')
 
   return fitbitContext
 }

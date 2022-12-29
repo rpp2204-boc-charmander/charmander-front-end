@@ -1,8 +1,9 @@
-import Script from "next/script";
-import GoogleBtn from "./GoogleBtn";
-import LoginForm from "./LoginForm";
-import { useState } from "react";
-import StravaBtn from "./StravaBtn";
+import Script from 'next/script';
+import GoogleBtn from './GoogleBtn';
+import LoginForm from './LoginForm';
+import { useState } from 'react'
+import StravaBtn from './StravaBtn';
+import FitbitBtn from './FitbitBtn';
 
 export interface GoogleProps {
   init: boolean;
@@ -38,6 +39,8 @@ export default function LoginCard() {
         <GoogleBtn init={google} reset={setGoogle} />
         <br></br>
         <StravaBtn />
+        <br></br>
+        <FitbitBtn />
       </div>
     </div>
   );

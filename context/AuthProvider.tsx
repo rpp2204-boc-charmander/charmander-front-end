@@ -92,7 +92,7 @@ export default function AuthProvider({ children }: Props) {
 export const useAuthContext = () => {
   const authContext = useContext(AuthContext)
 
-  if(!authContext) throw new Error ('AuthContext Provider Error')
+  // if(!authContext) throw new Error ('AuthContext Provider Error')
 
   return authContext
 }
