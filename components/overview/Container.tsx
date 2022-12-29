@@ -42,15 +42,15 @@ export default function Container({ type, title, cards, setExercises, setNutriti
   })
 
   return (
-    <div className="flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
-      <div className="bg-gray-500 flex flex-row h-[4rem] items-center text-[2rem] text-white justify-between w-full">
-        <div className="ml-5"> {title} </div>
+    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden h-[25vh] lg:rounded-3xl lg:h-[20rem] w-full lg:w-[80vw] max-w-[75rem]">
+      <div className="bg-gray-500 flex flex-row h-[3rem] lg:h-[4rem] items-center text-white justify-between w-full">
+        <div className="ml-5 text-base sm:text-[2rem]"> {title} </div>
         {(type === "calories") && (
-          <div className="text-base italic mr-5"> Recommended daily consumption: {Math.round(bmr)} </div>
+          <div className="text-xs lg:text-base italic mr-5"> Recommended daily consumption: {Math.round(bmr)} </div>
         )}
         {(type !== "calories") && (
           <div className="flex flex-row grow items-center justify-between">
-            <div className="text-base italic ml-5"> {numberOfCompleted} of {cards.length} items completed </div>
+            <div className="text-xs lg:text-base italic ml-5"> {numberOfCompleted} of {cards.length} items completed </div>
             <MdAdd className="mr-5 cursor-pointer" onClick={() => setIsOpen(true)}/>
           </div>
         )}
@@ -64,9 +64,9 @@ export default function Container({ type, title, cards, setExercises, setNutriti
         setNutrition={setNutrition}
       ></Modal>
 
-      <div className="relative">
-        <div className="bg-gray-300 flex flex-row h-[16rem] justify-between
-          items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] scrollbar-hide border w-[75rem]"
+      <div className="relative w-full h-full">
+        <div className="bg-gray-300 flex flex-row min-h-full lg:h-[16rem] justify-between
+          items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border w-full"
         >
           {cards.length === 0 && type === "exercise" && (
             <div className="flex w-full justify-center">

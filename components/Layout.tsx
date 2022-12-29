@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import { useState, useEffect } from "react";
 import Sidenav from './Sidenav';
 import Header from "./overview/Header";
@@ -16,10 +16,12 @@ export default function Layout({ children }: any) {
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
   const [showCalendar, setShowCalendar] = useState(false);
+  const [toggleSidebar, setToggleSidebar] = useState(0)
+  const translate = ["-translate-x-full", ""];
 
   return (
     <div className="relative min-h-screen flex">
-      <aside className="absolute inset-y-0 left-0 transform -translate-x-full lg:relative lg:flex flex-row lg:translate-x-0 transition duration-200 ease-in-out">
+      <aside className={`z-50 absolute inset-y-0 left-0 transform ${translate[toggleSidebar]} lg:relative lg:flex flex-row lg:translate-x-0 transition duration-300 ease-in-out`}>
         <Sidenav />
       </aside>
 
@@ -30,15 +32,18 @@ export default function Layout({ children }: any) {
           title={title}
           Icon={icon}
           showCalendar={showCalendar}
+          setToggleSidebar={setToggleSidebar}
         />
 
-        {React.cloneElement(children, {
-          currentDate: currentDate,
-          setTitle: setTitle,
-          setIcon: setIcon,
-          showCalendar: showCalendar,
-          setShowCalendar: setShowCalendar
-        })}
+        <div>
+          {React.cloneElement(children, {
+            currentDate: currentDate,
+            setTitle: setTitle,
+            setIcon: setIcon,
+            showCalendar: showCalendar,
+            setShowCalendar: setShowCalendar
+          })}
+        </div>
       </main>
     </div>
   )

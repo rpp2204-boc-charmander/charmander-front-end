@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { MdNavigateBefore, MdNavigateNext, MdMenu } from "react-icons/md";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -8,10 +8,11 @@ export interface HeaderProps {
   setCurrentDate: Function
   title: string,
   Icon: any,
-  showCalendar: boolean
+  showCalendar: boolean,
+  setToggleSidebar: Function
 }
 
-export default function Header({ currentDate, setCurrentDate, title, Icon, showCalendar }: HeaderProps) {
+export default function Header({ currentDate, setCurrentDate, title, Icon, showCalendar, setToggleSidebar }: HeaderProps) {
   const [formattedDate, setFormattedDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -70,8 +71,19 @@ export default function Header({ currentDate, setCurrentDate, title, Icon, showC
     setIsOpen((prevState) => (!prevState));
   }
 
+  const handleMenuClick = function() {
+    setToggleSidebar((prevState: number) => {
+      if (prevState === 1) {
+        return 0;
+      } else {
+        return 1;
+      }
+    });
+  }
+
   return (
-    <div className="bg-white sm:bg-blue-300 md:bg-red-300 lg:bg-green-300 xl:bg-violet-300 flex flex-row grow justify-between items-center h-16 lg:h-24 text-black font-bold sticky z-50 shadow-lg w-full pl-12 pr-12">
+    <div className="bg-white flex flex-row grow justify-between items-center h-16 lg:h-24 text-black font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
+
       <div className="flex items-center w-full h-full">
         {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
         <h1 className="text-3xl lg:text-5xl"> {title} </h1>
@@ -98,6 +110,11 @@ export default function Header({ currentDate, setCurrentDate, title, Icon, showC
           <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
       </div>)}
+
+      <div className="flex items-center text-3xl lg:hidden">
+        <MdMenu onClick={handleMenuClick}/>
+      </div>
+
     </div>
   )
 }

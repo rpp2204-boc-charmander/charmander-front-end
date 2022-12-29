@@ -118,14 +118,14 @@ export default function Overview( { currentDate, setTitle, setIcon, setShowCalen
   }, [caloriesConsumed, caloriesBurned])
 
   return (
-    <div>
+    <div className="flex flex-col grow">
       <Head>
         <title> My Health Coach </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-white flex flex-col w-[100%]">
-        <div className="flex flex-col items-center pt-4 pl-12 pr-12">
+      <div className="flex flex-col grow w-[100%]">
+        <div className="flex flex-col items-center pt-4 lg:pl-[2%] lg:pr-[2%]">
           <Container
             type="calories"
             title="Calories"
