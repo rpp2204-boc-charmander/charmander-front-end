@@ -82,7 +82,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon, showC
   }
 
   return (
-    <div className="bg-white flex flex-row grow justify-between items-center h-16 lg:h-24 text-black font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
+    <div className="z-40 bg-white flex flex-row grow justify-between items-center h-16 lg:h-24 text-black font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
 
       <div className="flex items-center w-full h-full">
         {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
@@ -111,7 +111,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon, showC
         </div>
       </div>)}
 
-      <div className="flex items-center text-3xl lg:hidden">
+      <div className="flex items-center text-3xl lg:hidden hover:text-yellow-400">
         <MdMenu onClick={handleMenuClick}/>
       </div>
 
