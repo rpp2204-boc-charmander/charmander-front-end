@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 
 const MuscleGroups = ({
   muscle_groups,
