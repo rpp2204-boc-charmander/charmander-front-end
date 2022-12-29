@@ -1,5 +1,5 @@
 import { MdClose } from "react-icons/md";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import SelectExercises from "./SelectExercises";
 import MuscleGroups from "./MuscleGroups";
 import axios from "axios";
@@ -14,6 +14,7 @@ export default function SearchModal({
   const [customExercises, setCustomExercises] = useState([]);
   const [showDefault, setShowDefault] = useState(true);
   const [showCustom, setShowCustom] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const getCustomExercises = async () => {
@@ -34,7 +35,15 @@ export default function SearchModal({
     getCustomExercises();
   }, []);
 
-  console.log("render");
+  const all_exercises = [...default_exercises, ...customExercises];
+
+  const filtered_exercises = all_exercises.filter((exercise) =>
+    exercise.exercise.toLowerCase().includes(query)
+  );
+
+  const filtered_custom_exercises = customExercises.filter((exercise) =>
+    exercise.exercise.toLowerCase().includes(query)
+  );
 
   return (
     <div>
@@ -56,6 +65,8 @@ export default function SearchModal({
             id="search"
             type="text"
             placeholder="Seach by name or body part"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           ></input>
         </div>
         <div className="flex flex-row content-center space-x-4">
@@ -66,7 +77,7 @@ export default function SearchModal({
               setShowCustom(false);
             }}
           >
-            Default Exercises
+            All Exercises
           </div>
           <div
             className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
@@ -78,9 +89,19 @@ export default function SearchModal({
             Custom Exercises
           </div>
         </div>
-        <MuscleGroups muscle_groups={muscle_groups} />
-        {showDefault && <SelectExercises exercises={default_exercises} />}
-        {showCustom && <SelectExercises exercises={customExercises} />}
+        <MuscleGroups
+          muscle_groups={muscle_groups}
+          clearSearchOnClick={(e) => setQuery("")}
+        />
+        {showDefault && (
+          <SelectExercises exercises={filtered_exercises} query={query} />
+        )}
+        {showCustom && (
+          <SelectExercises
+            exercises={filtered_custom_exercises}
+            query={query}
+          />
+        )}
 
         <div className="buttonContainer flex w-[50%] justify-between p-5">
           <button className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">

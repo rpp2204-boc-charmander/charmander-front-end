@@ -1,15 +1,15 @@
 interface Props {}
 
-const GroupSearchExercises = ({ exercises }: Props): JSX.Element => {
+const GroupSearchExercises = ({ exercises, query }: Props): JSX.Element => {
   return (
     <div className="ml-2 mb-2 ">
-      {exercises.map((item) => {
+      {exercises.map((exercise) => {
         return (
           <div
             className="m-2 rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
-            key={item.exercise_id}
+            key={exercise.exercise_id}
           >
-            {item.exercise}
+            {exercise.exercise}
           </div>
         );
       })}

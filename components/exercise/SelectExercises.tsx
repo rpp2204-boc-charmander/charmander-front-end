@@ -1,10 +1,16 @@
 import GroupSearchExercises from "./GroupSearchExercises";
+import { useEffect, useRef } from "react";
 
 interface Props {}
 
-const SelectExercises = ({ exercises }: Props): JSX.Element => {
+const SelectExercises = ({ exercises, query }: Props): JSX.Element => {
   console.log("exercises in select: ", exercises);
 
+  const itemsRef = useRef([]);
+
+  // useEffect(() => {
+  //   itemsRef.current = itemsRef.current.slice(0, exercises.length);
+  // }, [exercises]);
   const groups = exercises.reduce((acc, obj) => {
     const { muscle_group, muscle_group_id } = obj;
 
@@ -26,10 +32,13 @@ const SelectExercises = ({ exercises }: Props): JSX.Element => {
             key={muscle_group_id}
             className="flex w-full flex-col justify-start"
           >
-            <div className="mb-2 text-2xl font-semibold text-gray-800">
+            <div
+              id={muscle_group_id}
+              className="mb-2 text-2xl font-semibold text-gray-800"
+            >
               {muscle_group}
             </div>
-            <GroupSearchExercises exercises={group_exercises} />
+            <GroupSearchExercises exercises={group_exercises} query={query} />
           </div>
         );
       })}
@@ -38,14 +47,3 @@ const SelectExercises = ({ exercises }: Props): JSX.Element => {
 };
 
 export default SelectExercises;
-/* Rectangle 29 */
-
-// position: absolute;
-// width: 988px;
-// height: 465px;
-// left: 0px;
-// top: 0px;
-
-// background: #8A8A8A;
-// box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.25);
-// border-radius: 5px;
