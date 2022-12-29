@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
-import { MdOutlineSort, MdNavigateBefore, MdNavigateNext } from "react-icons/md";
-import { DateProps } from "../../pages/overview";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-export default function Header({ currentDate, setCurrentDate, title, Icon }: DateProps) {
+export interface HeaderProps {
+  currentDate: Date,
+  setCurrentDate: Function
+  title: string,
+  Icon: any,
+  showCalendar: boolean
+}
+
+export default function Header({ currentDate, setCurrentDate, title, Icon, showCalendar }: HeaderProps) {
   const [formattedDate, setFormattedDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -66,11 +73,11 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
   return (
     <div className="bg-white flex flex-row grow justify-between items-center md:h-18 lg:h-24 text-black font-bold sticky z-50 shadow-lg w-full pl-12 pr-12">
       <div className="flex items-center w-full h-full">
-        <Icon className="sm:text-3xl lg:text-6xl mr-5"/>
+        {Icon && <Icon className="sm:text-3xl lg:text-6xl mr-5"/>}
         <h1 className="sm:text-3xl lg:text-5xl"> {title} </h1>
       </div>
 
-      <div className="sm:text-base lg:text-xl flex flex-row h-full items-center">
+      {showCalendar && (<div className="sm:text-base lg:text-xl flex flex-row h-full items-center">
         <div>
           <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
@@ -90,7 +97,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
         <div>
           <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
-      </div>
+      </div>)}
     </div>
   )
 }

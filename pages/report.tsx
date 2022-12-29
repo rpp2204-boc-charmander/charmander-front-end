@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '../components/report/header';
 import Charts from '../components/report/charts';
 
-export default function Report() {
+export default function Report(showCalendar) {
   const [timespan, setTimespan]: any = useState('week');
 
   function handleclick(e: any) {

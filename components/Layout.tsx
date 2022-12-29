@@ -1,8 +1,22 @@
+import React from "react";
+import { useState, useEffect } from "react";
 import Sidenav from './Sidenav';
-import styles from '../styles/Layout.module.css';
-import Link from 'next/link';
+import Header from "./overview/Header";
 
-export default function Layout({children}:any) {
+export interface ChildProps {
+  currentDate: Date,
+  setTitle: Function,
+  setIcon: Function,
+  showCalendar: boolean,
+  setShowCalendar: Function
+}
+
+export default function Layout({ children }: any) {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [title, setTitle] = useState("");
+  const [icon, setIcon] = useState("");
+  const [showCalendar, setShowCalendar] = useState(false);
+
   return (
     <div className="relative min-h-screen flex">
       <aside>
@@ -10,7 +24,21 @@ export default function Layout({children}:any) {
       </aside>
 
       <main className='flex-1'>
-        {children}
+        <Header
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+          title={title}
+          Icon={icon}
+          showCalendar={showCalendar}
+        />
+
+        {React.cloneElement(children, {
+          currentDate: currentDate,
+          setTitle: setTitle,
+          setIcon: setIcon,
+          showCalendar: showCalendar,
+          setShowCalendar: setShowCalendar
+        })}
       </main>
     </div>
   )

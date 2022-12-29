@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Head from "next/head";
-import Header from "../components/overview/Header";
 import Container from "../components/overview/Container";
 import { MdOutlineSort } from "react-icons/md";
+import { ChildProps } from "../components/Layout";
 
 export interface ExerciseObjProps {
   text: string,
@@ -21,16 +21,9 @@ export interface NutritionObjProps {
   completed: boolean
 }
 
-export interface DateProps {
-  currentDate: Date,
-  setCurrentDate: Function
-  title: string,
-  Icon: any
-}
-
-export default function Overview() {
+export default function Overview( { currentDate, setTitle, setIcon, setShowCalendar }: ChildProps ) {
   // States
-  const [currentDate, setCurrentDate] = useState(new Date());
+  //const [currentDate, setCurrentDate] = useState(new Date());
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
   const [caloriesBurned, setcaloriesBurned] = useState(0);
   const [netCalories, setNetCalories] = useState(0);
@@ -50,9 +43,30 @@ export default function Overview() {
   }
 
   useEffect(() => {
-    axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
+    setTitle('Overview');
+    setIcon((prevState: any) => {
+      return MdOutlineSort;
+    });
+    setShowCalendar(true);
+  }, [setTitle, setIcon, setShowCalendar])
+
+  useEffect(() => {
+    //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
+    axios(`http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`)
     .then(result => {
-      setExercises(result.data);
+      let data = result.data;
+      let exercise: ExerciseObjProps = {
+        text: "",
+        calorie: 0,
+        completed: false
+      };
+      let newData = data.map((item: any) => {
+        exercise.text = item.exercise;
+        exercise.calorie = item.est_cals_burned;
+        exercise.completed = false;
+        return exercise;
+      })
+      setExercises(newData);
     })
   }, [currentDate])
 
@@ -111,13 +125,6 @@ export default function Overview() {
       </Head>
 
       <div className="bg-white flex flex-col w-[100%]">
-        <Header
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-          title='Overview'
-          Icon={MdOutlineSort}
-        />
-
         <div className="flex flex-col items-center pt-4 pl-12 pr-12">
           <Container
             type="calories"
