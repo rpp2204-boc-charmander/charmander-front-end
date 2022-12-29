@@ -20,7 +20,7 @@ export default function StravaBtn() {
 
   return (
     <div
-      className="h-9 w-full bg-[#FC4C02] rounded-2xl text-black p-1 item-center "
+      className="item-center h-9 w-full rounded-2xl bg-[#FC4C02] p-1 text-black "
       onClick={() => handleLogin()}
     >
       <Image

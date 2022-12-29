@@ -83,9 +83,9 @@ export default function LoginForm() {
 
   return (
     <form className="w-full">
-      <h2 className="text-xl pt-6">login</h2>
+      <h2 className="pt-6 text-xl">login</h2>
       <br></br>
-      <div className="search w-full flex flex-col">
+      <div className="search flex w-full flex-col">
         <input
           className={emailInputLg}
           type="email"
@@ -96,14 +96,14 @@ export default function LoginForm() {
           {!emailErr ? (
             <div key="" className="h-6"></div>
           ) : (
-            <p className="text-xs text-red-600 dark:text-purple-700 h-6">
+            <p className="h-6 text-xs text-red-600 dark:text-purple-700">
               <span className="font-medium">Um...Hello?</span> That's not an
               email.
             </p>
           )}
         </div>
       </div>
-      <div className="search w-[100%] flex flex-row">
+      <div className="search flex w-[100%] flex-row">
         <input
           className={pswdInputLg}
           type={pswdType}
@@ -114,7 +114,7 @@ export default function LoginForm() {
         {pswdVisible ? (
           <AiFillEyeInvisible
             key="hidePswd"
-            className="sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1 bg-white rounded-r text-gray-500"
+            className="rounded-r bg-white text-gray-500 sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1"
             onClick={() => {
               setPswdVisible(false);
               setPswdType("password");
@@ -123,7 +123,7 @@ export default function LoginForm() {
         ) : (
           <AiFillEye
             key="showPswd"
-            className="sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1 bg-white rounded-r text-gray-500"
+            className="rounded-r bg-white text-gray-500 sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1"
             onClick={() => {
               setPswdVisible(true);
               setPswdType("text");
@@ -138,24 +138,24 @@ export default function LoginForm() {
         ) : (
           <p
             id="outlined_error_help"
-            className="text-xs text-red-600 dark:text-purple-700 h-6"
+            className="h-6 text-xs text-red-600 dark:text-purple-700"
           >
             <span className="font-medium">Oh, snapp!</span> Wrong password.
           </p>
         )}
         {/* {pswdErr} */}
       </div>
-      <div className="flex flex-row w-[100%]">
+      <div className="flex w-[100%] flex-row">
         <button
           type="button"
-          className="items-start  hover:text-purple-700 underline font-extralight"
+          className="items-start  font-extralight underline hover:text-purple-700"
           onClick={() => authenticate()}
         >
           enter
         </button>
         <button
           type="button"
-          className="grow hover:text-purple-700 underline text-right font-extralight"
+          className="grow text-right font-extralight underline hover:text-purple-700"
           onClick={() => console.log("hi")}
         >
           forgot password?

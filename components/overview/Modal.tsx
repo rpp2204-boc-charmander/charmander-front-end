@@ -65,30 +65,30 @@ export default function Modal({
 
   return (
     <div>
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50"></div>
+      <div className="fixed inset-0 z-50 bg-black bg-opacity-50"></div>
 
       <div
-        className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
-      flex flex-col items-center w-[70%] h-[80%] rounded-3xl pl-10 pr-10"
+        className="fixed top-[50%] left-[50%] z-50 flex h-[80%] w-[70%] translate-x-[-50%]
+      translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-300 pl-10 pr-10 text-black"
       >
-        <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
+        <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
           <div className="title text-[2rem] font-bold"> Exercise Search </div>
           <MdClose
-            className="text-[2rem] cursor-pointer"
+            className="cursor-pointer text-[2rem]"
             onClick={() => setIsOpen(false)}
           />
         </div>
 
-        <div className="search w-[100%] flex flex-row pb-6">
+        <div className="search flex w-[100%] flex-row pb-6">
           <input
-            className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl"
+            className="focus:shadow-outline h-[4rem] w-full rounded bg-white py-2 px-3 text-xl leading-tight shadow focus:outline-none"
             id="search"
             type="text"
             placeholder="Seach by name or body part"
           ></input>
         </div>
 
-        <div className="modalCardContainer w-[100%] bg-gray-500 flex flex-col p-5 overflow-hidden overflow-y-scroll scrollbar-hide border">
+        <div className="modalCardContainer flex w-[100%] flex-col overflow-hidden overflow-y-scroll border bg-gray-500 p-5 scrollbar-hide">
           <ModalCard
             newExerciseInfo={newExerciseInfo}
             setNewExerciseInfo={setNewExerciseInfo}
@@ -98,14 +98,14 @@ export default function Modal({
 
         <div className="buttonContainer flex w-[50%] justify-between p-5">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
             onClick={handleAddExercise}
           >
             {" "}
             Add Exercise{" "}
           </button>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
             onClick={() => setIsOpen(false)}
           >
             {" "}

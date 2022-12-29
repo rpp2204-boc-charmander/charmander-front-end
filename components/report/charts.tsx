@@ -63,7 +63,7 @@ export default function Charts(props: any) {
   let reportsData: report[] = weekData.data;
   return (
     <div>
-      <ul className="w-full h-full overflow-auto">
+      <ul className="h-full w-full overflow-auto">
         {reportsData.map((report, index) => {
           return (
             <li key={index}>

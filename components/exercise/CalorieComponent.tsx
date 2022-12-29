@@ -5,10 +5,10 @@ export default function CalorieComponent({
   toggleAddModal,
 }: any) {
   return (
-    <div className="max-w-xxs min-w-min max-h-calories overflow-hidden rounded-lg shadow-lg bg-gray-300 mt-8 flex flex-col justify-self-center">
+    <div className="mt-8 flex max-h-calories min-w-min max-w-xxs flex-col justify-self-center overflow-hidden rounded-lg bg-gray-300 shadow-lg">
       <CaloriesBurned caloriesBurned={caloriesBurned} />
       <button
-        className="w-11/12 mx-2 bg-white text-black hover:bg-gray-200 font-bold py-2 px-4 rounded-3xl static"
+        className="static mx-2 w-11/12 rounded-3xl bg-white py-2 px-4 font-bold text-black hover:bg-gray-200"
         onClick={toggleAddModal}
       >
         {" "}

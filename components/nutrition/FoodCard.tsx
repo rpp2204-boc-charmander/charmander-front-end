@@ -12,7 +12,7 @@ export default function FoodCard({
   const [consumed, setConsumed] = useState(false);
 
   return (
-    <div className="p-4 bg-white rounded-xl shadow-lg mb-4 hover:bg-slate-200">
+    <div className="mb-4 rounded-xl bg-white p-4 shadow-lg hover:bg-slate-200">
       <div
         style={{
           display: "flex",
@@ -57,8 +57,8 @@ export default function FoodCard({
           <button
             className={
               consumed
-                ? "bg-green-500 hover:bg-green-200 text-black text-xl py-2 px-4 rounded-full border border-black w-32 h-7 flex justify-center items-center mb-4 shadow"
-                : "bg-white hover:bg-green-500 text-black text-xl py-2 px-4 rounded-full border border-black w-32 h-7 flex justify-center items-center mb-4 shadow"
+                ? "mb-4 flex h-7 w-32 items-center justify-center rounded-full border border-black bg-green-500 py-2 px-4 text-xl text-black shadow hover:bg-green-200"
+                : "mb-4 flex h-7 w-32 items-center justify-center rounded-full border border-black bg-white py-2 px-4 text-xl text-black shadow hover:bg-green-500"
             }
             onClick={() => {
               setConsumed(!consumed);

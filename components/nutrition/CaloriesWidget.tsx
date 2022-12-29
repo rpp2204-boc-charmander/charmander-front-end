@@ -12,22 +12,22 @@ const CaloriesWidget = ({ calories }: CaloriesProp) => {
   return (
     <>
       <div className="caloriesWidget">
-        <div className="flex items-center justify-center p-2 max-w-sm mx-auto bg-gray-300 rounded-xl shadow-lg space-x-5 w-48">
+        <div className="mx-auto flex w-48 max-w-sm items-center justify-center space-x-5 rounded-xl bg-gray-300 p-2 shadow-lg">
           <div>
-            <div className="flex flex-col items-center justify-center bg-white rounded-xl">
+            <div className="flex flex-col items-center justify-center rounded-xl bg-white">
               <div className="p-8">
-                <div className="text-sm font-medium text-black flex justify-center truncate">
+                <div className="flex justify-center truncate text-sm font-medium text-black">
                   calories gained
                 </div>
-                <div className="italic text-sm font-medium text-black flex justify-center">
+                <div className="flex justify-center text-sm font-medium italic text-black">
                   (estimated)
                 </div>
               </div>
-              <p className="p-4 text-3xl text-black flex justify-center">
+              <p className="flex justify-center p-4 text-3xl text-black">
                 {calories}
               </p>
               <button
-                className="bg-white hover:bg-green-700 text-black text-3xl py-2 px-4 rounded-full border border-black w-32 h-7 flex justify-center items-center mb-4 shadow"
+                className="mb-4 flex h-7 w-32 items-center justify-center rounded-full border border-black bg-white py-2 px-4 text-3xl text-black shadow hover:bg-green-700"
                 onClick={prompter}
               >
                 +

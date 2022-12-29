@@ -27,26 +27,26 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
   return (
     <div>
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-50"
+        className="fixed inset-0 z-50 bg-black bg-opacity-50"
         onClick={toggleAddSetModal}
       ></div>
 
       <div
-        className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
-      flex flex-col items-center w-[40%] h-[35%] rounded-3xl pl-10 pr-10"
+        className="fixed top-[50%] left-[50%] z-50 flex h-[35%] w-[40%] translate-x-[-50%]
+      translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-300 pl-10 pr-10 text-black"
       >
-        <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
+        <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
           <div className="title text-[2rem] font-bold"> Add Set </div>
           <MdClose
-            className="text-[2rem] cursor-pointer"
+            className="cursor-pointer text-[2rem]"
             onClick={toggleAddSetModal}
           />
         </div>
 
-        <div className="bg-gray-500 flex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-well">
-          <div className="bg-slate-100 flex flex-col h-5/6 w-11/12 py-3 rounded-2xl shadow-lg justify-evenly items-center">
+        <div className="no-scrollbar flex h-[50%] w-full flex-col items-center justify-around overflow-y-scroll rounded-2xl bg-gray-500 shadow-well">
+          <div className="flex h-5/6 w-11/12 flex-col items-center justify-evenly rounded-2xl bg-slate-100 py-3 shadow-lg">
             <div className="flex w-[290px]">
-              <h3 className="font-bold w-20 text-center"> Reps </h3>
+              <h3 className="w-20 text-center font-bold"> Reps </h3>
               <input
                 className="rounded-lg shadow-md"
                 type="number"
@@ -55,7 +55,7 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
             </div>
 
             <div className="flex">
-              <h3 className="font-bold w-20 text-center"> Weight </h3>
+              <h3 className="w-20 text-center font-bold"> Weight </h3>
               <input
                 className="rounded-lg shadow-md"
                 type="number"
@@ -67,7 +67,7 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
         </div>
 
         <button
-          className="bg-slate-50 hover:bg-slate-200 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md"
+          className="mt-4 w-full rounded-full bg-slate-50 px-10 py-4 font-bold shadow-md hover:bg-slate-200"
           onClick={onSubmit}
         >
           {" "}

@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  output: 'standalone',
+  output: "standalone",
   env: {
     CLIENT_ID: process.env.CLIENT_ID,
     AUTH: process.env.AUTH,
@@ -13,8 +13,8 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/strava/:slug*',
-        destination: '/overview', // Matched parameters can be used in the destination
+        source: "/strava/:slug*",
+        destination: "/overview", // Matched parameters can be used in the destination
         permanent: true,
       },
     ];

@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import axios from 'axios';
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
 
 export default async function handler(req: any, res: any) {
   const { user_id, log_date } = req.query;

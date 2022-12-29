@@ -1,14 +1,14 @@
 /* gloabal google */
-import Head from 'next/head';
-import LoginCard from '../components/login/LoginCard';
-import { IoIosFitness } from 'react-icons/io';
-import { MdOutlineFastfood } from 'react-icons/md';
+import Head from "next/head";
+import LoginCard from "../components/login/LoginCard";
+import { IoIosFitness } from "react-icons/io";
+import { MdOutlineFastfood } from "react-icons/md";
 
 const Login = () => {
   const titleLg =
-    'fixed top-[45%] left-[20%] text-LoginGray flex flex-col items-center text-6xl';
-  const foodIconLg = 'test-xl';
-  const exerciseIconLg = 'test-7xl';
+    "fixed top-[45%] left-[20%] text-LoginGray flex flex-col items-center text-6xl";
+  const foodIconLg = "test-xl";
+  const exerciseIconLg = "test-7xl";
 
   return (
     <div>
@@ -23,7 +23,7 @@ const Login = () => {
       <main>
         <div className={titleLg}>
           <h1>My Heath Coach</h1>
-          <div className="flex flex-row w-full mt-3">
+          <div className="mt-3 flex w-full flex-row">
             <div className="grow"></div>
             <MdOutlineFastfood className={foodIconLg} />
             <div className="grow"></div>

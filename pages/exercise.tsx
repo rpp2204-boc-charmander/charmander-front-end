@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import ExerciseList from "../components/exercise/ExerciseList";
@@ -138,7 +138,7 @@ export default function Exercise({
     <>
       {addModalState && (
         <SearchModal
-          date={query_date}
+          query_date={query_date}
           user_id={user_id}
           toggleAddModal={toggleAddModal}
           default_exercises={default_exercises}

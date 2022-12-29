@@ -1,5 +1,4 @@
-import React, { use } from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Sidenav from "./Sidenav";
 import Header from "./overview/Header";
 
@@ -11,7 +10,7 @@ export interface ChildProps {
   setShowCalendar: Function;
 }
 
-export default function Layout({ children }: any) {
+export default function Layout({ children }: any): JSX.Element {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
@@ -19,7 +18,7 @@ export default function Layout({ children }: any) {
   const [toggleSidebar, setToggleSidebar] = useState(0);
   const translate = ["-translate-x-full", ""];
 
-  const month = currentDate.getUTCMonth() + 1; //months from 1-12
+  const month = currentDate.getUTCMonth() + 1; // months from 1-12
   const day = currentDate.getUTCDate();
   const year = currentDate.getUTCFullYear();
 
@@ -46,11 +45,11 @@ export default function Layout({ children }: any) {
         <div>
           {React.cloneElement(children, {
             query_date: date_string_for_query,
-            currentDate: currentDate,
-            setTitle: setTitle,
-            setIcon: setIcon,
-            showCalendar: showCalendar,
-            setShowCalendar: setShowCalendar,
+            currentDate,
+            setTitle,
+            setIcon,
+            showCalendar,
+            setShowCalendar,
           })}
         </div>
       </main>

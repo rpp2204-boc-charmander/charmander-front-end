@@ -1,5 +1,5 @@
-import ExerciseItem from './ExerciseItem';
-import styles from '../../styles/Exercise.module.css';
+import ExerciseItem from "./ExerciseItem";
+import styles from "../../styles/Exercise.module.css";
 
 export default function ExerciseList({
   exercises,
@@ -10,7 +10,7 @@ export default function ExerciseList({
   completeExercise,
 }: any) {
   return (
-    <div className="h-[90vh] max-w-screen-lg overflow-auto no-scrollbar">
+    <div className="no-scrollbar h-[90vh] max-w-screen-lg overflow-auto">
       {exercises.map((exercise: any) => {
         return (
           <ExerciseItem

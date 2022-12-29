@@ -53,21 +53,21 @@ const EditItemModal = ({
         <p>{`How many servings of ${pendingItem.ITEM} will you be consuming?`}</p>
         <input
           type="text"
-          className="outline black"
+          className="black outline"
           value={serving}
           onChange={(e) => {
             setServing(Number(e.target.value));
           }}
         />
-        <div className="p-10 flex flex-row justify-center">
+        <div className="flex flex-row justify-center p-10">
           <button
-            className="mr-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
+            className="mr-2 rounded border border-red-500 bg-transparent py-2 px-4 font-semibold text-red-700 hover:border-transparent hover:bg-red-500 hover:text-white"
             onClick={() => setIsEditShowing(false)}
           >
             Cancel
           </button>
           <button
-            className="ml-2 bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
+            className="ml-2 rounded border border-green-500 bg-transparent py-2 px-4 font-semibold text-green-700 hover:border-transparent hover:bg-green-500 hover:text-white"
             onClick={() => {
               setIsEditShowing(false);
               setServing(serving);
