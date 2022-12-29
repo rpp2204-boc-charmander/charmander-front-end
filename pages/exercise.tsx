@@ -9,6 +9,7 @@ import CompletedModal from '../components/exercise/CompletedModal';
 import AddSet from '../components/exercise/AddSet';
 import Header from "../components/overview/Header";
 import Modal from "../components/overview/Modal";
+import IncompleteModal from '../components/exercise/IncompleteModal';
 
 import styles from '../styles/Exercise.module.css';
 import { MdOutlineFitnessCenter } from 'react-icons/md';
@@ -35,8 +36,12 @@ export default function Exercise() {
   const [ completedModalState, setCompletedModalState ] = useState(false);
   const [ addSetModalState, setAddSetModalState ] = useState(false);
 
+
   //Calories
   const [ caloriesBurned, setCaloriesBurned ] = useState(0)
+
+  //Confirmations
+  const [ workoutConfirm, setWorkoutConfirm ] = useState(false);
 
   useEffect(() => {
     getUserExercises()
@@ -96,6 +101,35 @@ export default function Exercise() {
       })
    }
 
+  const completeExercise = async (workout_exercise_id: number) => {
+  //get sets for exercise
+  try {
+    const { data: sets } = await getExerciseSets(workout_exercise_id);
+
+    if (!sets.length) {
+      console.log('No Sets ):')
+      setWorkoutConfirm(true);
+      return;
+    }
+
+    for (var i = 0; i < sets.length; i++) {
+      if (!sets[i].reps_actual) {
+        setWorkoutConfirm(true);
+        return;
+      }
+    }
+
+    await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id: 7, log_date: '2022-12-13' }});
+    const { data: newWorkout } = await getUserExercises();
+
+    setExercises(newWorkout.result);
+    setCaloriesBurned(newWorkout.total_cals_burned);
+    setWorkoutConfirm(false)
+  } catch (error: any) {
+    console.log(error.stack);
+  }
+}
+
   //TOGGLE MODALS
 
   const toggleAddModal = () => {
@@ -104,15 +138,16 @@ export default function Exercise() {
 
   const toggleEditModal = (workout_id: number, repsRefs: [], weightsRefs: [], setIDs: []) => {
     //if repsRefs and weightRefs are both defined, call put request
+
     if (repsRefs && weightsRefs) {
       setIDs.sort();
 
       let reps = repsRefs.map( (rep: any) => {
-        return Number(rep.value);
+        return Number(rep?.value);
       })
 
       let weights = weightsRefs.map( (weight: any) => {
-        return Number(weight.value);
+        return Number(weight?.value);
       })
 
       axios.put('api/exercise/workout/sets', {
@@ -161,6 +196,7 @@ export default function Exercise() {
       { editModalState && <EditModal toggleEditModal={toggleEditModal} deleteSet={deleteSet} workoutID={workoutID} sets={editSets}/>}
       { completedModalState && <CompletedModal toggleCompletedModal={toggleCompletedModal} completeSet={completeSet} setID={setID}/>}
       { addSetModalState && <AddSet toggleAddSetModal={toggleAddSetModal} workoutID={workoutID}/>}
+      { workoutConfirm && <IncompleteModal setWorkoutConfirm={setWorkoutConfirm}/>}
 
       <div className="grid grid-cols-[25%_75%]">
         <CalorieComponent caloriesBurned={caloriesBurned} toggleAddModal={toggleAddModal}/>
@@ -169,10 +205,7 @@ export default function Exercise() {
                       deleteExercise={deleteExercise}
                       toggleCompletedModal={toggleCompletedModal}
                       toggleAddSetModal={toggleAddSetModal}
-                      getExerciseSets={getExerciseSets}
-                      getUserExercises={getUserExercises}
-                      setCaloriesBurned={setCaloriesBurned}
-                      setExercises={setExercises}/>
+                      completeExercise={completeExercise}/>
       </div>
     </>
   )

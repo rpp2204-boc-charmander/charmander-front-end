@@ -46,7 +46,8 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
 
      </div>
 
-    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg" onClick={ () => { toggleEditModal(workoutID, repRefs.current, weightRefs.current, setIDs ) }}> Confirm Changes </button>
+    <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg"
+            onClick={ () => { toggleEditModal(workoutID, repRefs.current, weightRefs.current, setIDs ) }}> Confirm Changes </button>
 
   </div>
 </div>
