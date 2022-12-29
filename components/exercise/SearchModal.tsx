@@ -1,51 +1,90 @@
-import { MdClose } from 'react-icons/md';
-import React, { useState } from 'react';
+import { MdClose } from "react-icons/md";
+import { useState, useEffect } from "react";
+import SelectExercises from "./SelectExercises";
+import MuscleGroups from "./MuscleGroups";
+import axios from "axios";
 // import getDefaultExercises from './libs/getDefaultExercises';
 
 export default function SearchModal({
   toggleAddModal,
   default_exercises,
   muscle_groups,
+  user_id,
 }: any): JSX.Element {
-  // const [defaultExercises, setDefaultExercises] = useState([]);
-  // const [muscleGroups, setMscleGroups] = useState([]);
+  const [customExercises, setCustomExercises] = useState([]);
+  const [showDefault, setShowDefault] = useState(true);
+  const [showCustom, setShowCustom] = useState(false);
+
+  useEffect(() => {
+    const getCustomExercises = async () => {
+      try {
+        const { data } = await axios.get(
+          `${String(
+            process.env.BACKEND_URL
+          )}/exercise/custom/list?user_id=${user_id}`
+        );
+
+        setCustomExercises(data);
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getCustomExercises();
+  }, []);
+
+  console.log("render");
 
   return (
     <div>
       <div
-        className="fixed inset-0 bg-black bg-opacity-50 z-50"
-        onClick={toggleAddModal}
-      ></div>
-
-      <div
-        className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
-            flex flex-col items-center w-[70%] h-[80%] rounded-3xl pl-10 pr-10"
+        className="fixed top-[50%] left-[50%] z-50 flex h-[80%] w-[70%] translate-x-[-50%]
+            translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-400  pl-10 pr-10 text-black"
       >
-        <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
+        <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
           <div className="title text-[2rem] font-bold"> Exercise Search </div>
           <MdClose
-            className="text-[2rem] cursor-pointer"
+            className="cursor-pointer text-[2rem]"
             onClick={toggleAddModal}
           />
         </div>
 
-        <div className="search w-[100%] flex flex-row pb-6">
+        <div className="search flex w-[100%] flex-row pb-6 ">
           <input
-            className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl"
+            className="focus:shadow-outline h-[4rem] w-full rounded bg-white py-2 px-3 text-xl leading-tight shadow focus:outline-none"
             id="search"
             type="text"
             placeholder="Seach by name or body part"
           ></input>
         </div>
-
-        <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well">
-          {' '}
+        <div className="flex flex-row content-center space-x-4">
+          <div
+            className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
+            onClick={() => {
+              setShowDefault(true);
+              setShowCustom(false);
+            }}
+          >
+            Default Exercises
+          </div>
+          <div
+            className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
+            onClick={() => {
+              setShowDefault(false);
+              setShowCustom(true);
+            }}
+          >
+            Custom Exercises
+          </div>
         </div>
+        <MuscleGroups muscle_groups={muscle_groups} />
+        {showDefault && <SelectExercises exercises={default_exercises} />}
+        {showCustom && <SelectExercises exercises={customExercises} />}
 
         <div className="buttonContainer flex w-[50%] justify-between p-5">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            {' '}
-            Add Exercise{' '}
+          <button className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">
+            Add Exercise
           </button>
         </div>
       </div>

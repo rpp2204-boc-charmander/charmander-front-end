@@ -14,16 +14,16 @@ export default function ExerciseItem({
   completeExercise,
 }: any) {
   return (
-    <div className="h-[35.3%] rounded-lg shadow-lg bg-gray-200 x-5 mt-8 flex flex-col">
-      <header className="flex bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
-        <div className="flex items-center py-3 justify-around w-[45%]">
-          <h1 className="text-2xl text-left pl-5 w-full">
+    <div className="x-5 mt-8 flex h-[35.3%] flex-col rounded-lg bg-gray-200 shadow-lg">
+      <header className="flex items-center justify-between rounded-t-lg bg-gray-400 font-bold text-white">
+        <div className="flex w-[45%] items-center justify-around py-3">
+          <h1 className="w-full pl-5 text-left text-2xl">
             {exercise.exercise}
           </h1>
           <p className="font-bold">{exercise.muscle_group}</p>
         </div>
 
-        <div className="flex mr-3">
+        <div className="mr-3 flex">
           <AiOutlineEdit
             size={25}
             className="cursor-pointer"
@@ -39,19 +39,19 @@ export default function ExerciseItem({
         </div>
       </header>
 
-      <section className="grid grid-cols-[25%_40%_35%] h-[250px]">
+      <section className="grid h-[250px] grid-cols-[25%_40%_35%]">
         <img
-          className="bg-slate-50 w-[225px] place-self-center aspect-square rounded-lg shadow-md"
+          className="aspect-square w-[225px] place-self-center rounded-lg bg-gray-300 shadow-md"
           alt="exercise-image"
           src={exercise.photo_url}
         ></img>
 
-        <div className="p-2 h-[250px]">
-          <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
+        <div className="h-[250px] p-2">
+          <div className="no-scrollbar flex h-full flex-col overflow-y-scroll rounded-2xl border-2 bg-gray-500 shadow-[inset_0_2px_8px_0_#404040]">
             {exercise.sets?.map((exercise: any) => {
               return (
                 <button
-                  className="bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold"
+                  className="mx-2 my-2 w-[95%] rounded-2xl bg-slate-50 py-3 text-center font-bold shadow-md hover:bg-slate-300"
                   onClick={toggleCompletedModal}
                   key={exercise.set_id}
                 >
@@ -64,15 +64,15 @@ export default function ExerciseItem({
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-around h-[250px] px-2">
-          <p className="font-bold justify-self-center">
+        <div className="flex h-[250px] flex-col items-center justify-around px-2">
+          <p className="justify-self-center font-bold">
             {" "}
             Estimated Calories Burned: {exercise.est_cals_burned}
           </p>
 
-          <div className="flex flex-col w-full h-[45%] justify-evenly">
+          <div className="flex h-[45%] w-full flex-col justify-evenly">
             <button
-              className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold"
+              className="w-full self-center rounded-full bg-slate-50 px-5 py-2 font-bold shadow-lg hover:bg-slate-300"
               onClick={() => {
                 toggleAddSetModal(exercise.id);
               }}
@@ -82,7 +82,7 @@ export default function ExerciseItem({
             </button>
 
             <button
-              className="bg-blue-500 hover:bg-blue-400 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
+              className="h-[40%] w-full rounded-full bg-blue-500 font-bold text-slate-50 shadow-lg hover:bg-blue-400"
               onClick={completeExercise}
             >
               {" "}

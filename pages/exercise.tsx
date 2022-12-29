@@ -129,6 +129,7 @@ export default function Exercise({
 
       {addModalState && (
         <SearchModal
+          user_id={user_id}
           toggleAddModal={toggleAddModal}
           default_exercises={default_exercises}
           muscle_groups={muscle_groups}

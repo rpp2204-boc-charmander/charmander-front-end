@@ -1,9 +1,9 @@
-import { useRef, useEffect, useState } from "react";
-import { MdAdd } from "react-icons/md";
-import CaloriesCard from "./CaloriesCard";
-import ExerciseAndNutritionCard from "./ExerciseAndNutritionCard";
-import Modal from "./Modal";
-import { ExerciseObjProps, NutritionObjProps } from "../../pages/overview";
+import { useRef, useEffect, useState } from 'react';
+import { MdAdd } from 'react-icons/md';
+import CaloriesCard from './CaloriesCard';
+import ExerciseAndNutritionCard from './ExerciseAndNutritionCard';
+import Modal from './Modal';
+import { ExerciseObjProps, NutritionObjProps } from '../../pages/overview';
 
 interface CaloriesCardProps {
   text: string;
@@ -11,7 +11,7 @@ interface CaloriesCardProps {
 }
 
 interface ContainerProps {
-  type: "calories" | "exercise" | "nutrition";
+  type: 'calories' | 'exercise' | 'nutrition';
   title: string;
   //cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionObjProps>,
   cards: any;
@@ -52,17 +52,17 @@ export default function Container({
     <div className="flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
       <div className="bg-gray-500 flex flex-row h-[4rem] items-center text-[2rem] text-white justify-between w-full">
         <div className="ml-5"> {title} </div>
-        {type === "calories" && (
+        {type === 'calories' && (
           <div className="text-base italic mr-5">
-            {" "}
-            Recommended daily consumption: {Math.round(bmr)}{" "}
+            {' '}
+            Recommended daily consumption: {Math.round(bmr)}{' '}
           </div>
         )}
-        {type !== "calories" && (
+        {type !== 'calories' && (
           <div className="flex flex-row grow items-center justify-between">
             <div className="text-base italic ml-5">
-              {" "}
-              {numberOfCompleted} of {cards.length} items completed{" "}
+              {' '}
+              {numberOfCompleted} of {cards.length} items completed{' '}
             </div>
             <MdAdd
               className="mr-5 cursor-pointer"
@@ -85,7 +85,7 @@ export default function Container({
           className="bg-gray-300 flex flex-row h-[16rem] justify-between
           items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] scrollbar-hide border w-[75rem]"
         >
-          {cards.length === 0 && type === "exercise" && (
+          {cards.length === 0 && type === 'exercise' && (
             <div className="flex w-full justify-center">
               <div className="text-white text-2xl flex justify-center">
                 No workout has been added
@@ -93,7 +93,7 @@ export default function Container({
             </div>
           )}
 
-          {cards.length === 0 && type === "nutrition" && (
+          {cards.length === 0 && type === 'nutrition' && (
             <div className="flex w-full justify-center">
               <div className="text-white text-2xl flex justify-center">
                 No meal has been added
@@ -103,16 +103,16 @@ export default function Container({
 
           {cards.length !== 0 &&
             cards.map((card: any, index: any) => {
-              if (type === "calories") {
-                let textColor = "text-black";
+              if (type === 'calories') {
+                let textColor = 'text-black';
                 if (index === 2) {
                   if (card.calorie >= 0) {
-                    textColor = "text-green-500";
+                    textColor = 'text-green-500';
                   } else {
-                    textColor = "text-red-500";
+                    textColor = 'text-red-500';
                   }
                 } else {
-                  textColor = "text-black";
+                  textColor = 'text-black';
                 }
                 return (
                   <CaloriesCard
@@ -122,7 +122,7 @@ export default function Container({
                     text={card.text}
                   />
                 );
-              } else if (type === "exercise") {
+              } else if (type === 'exercise') {
                 return (
                   <ExerciseAndNutritionCard
                     key={index}

@@ -29,6 +29,7 @@ module.exports = {
       },
       colors: {
         LoginGray: "#D9D9D9",
+        ExerciseSearchBackground: "#8A8A8A",
       },
     },
   },
