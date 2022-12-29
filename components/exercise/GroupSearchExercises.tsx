@@ -1,9 +1,7 @@
-interface Props {}
-
 const GroupSearchExercises = ({
   exercises,
   handleAddExerciseToWorkout,
-}: Props): JSX.Element => {
+}: any): JSX.Element => {
   return (
     <div className="ml-2 mb-2 ">
       {exercises.map((exercise) => {

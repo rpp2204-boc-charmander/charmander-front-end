@@ -1,12 +1,10 @@
 import GroupSearchExercises from "./GroupSearchExercises";
 import { useEffect, useRef } from "react";
 
-interface Props {}
-
 const SelectExercises = ({
   exercises,
   handleAddExerciseToWorkout,
-}: Props): JSX.Element => {
+}: any): JSX.Element => {
   console.log("exercises in select: ", exercises);
 
   const itemsRef = useRef([]);

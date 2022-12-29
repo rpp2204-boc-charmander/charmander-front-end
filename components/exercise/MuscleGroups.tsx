@@ -1,9 +1,7 @@
-interface Props {}
-
 const MuscleGroups = ({
   muscle_groups,
   clearSearchOnClick,
-}: Props): JSX.Element => {
+}: any): JSX.Element => {
   return (
     <ul className="y-1 m-2 flex flex-row content-center space-x-4">
       {muscle_groups.map((item) => {
