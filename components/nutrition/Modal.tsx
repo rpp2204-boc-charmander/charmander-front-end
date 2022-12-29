@@ -1,6 +1,6 @@
 import FoodCardModal from "./FoodCardModal";
 import axios from 'axios';
-import Image from 'next/Image';
+import Image from 'next/image';
 
 import { useState, useEffect } from "react";
 
@@ -24,7 +24,13 @@ const Modal = ({ showModal }) => {
   }
 
   const handleSelect = (food) => {
-    // console.log(food);
+    axios.get('http://localhost:4000/nutrition/list/foods',{
+      params: food
+      })
+      .then((response) => {
+        console.log('response: ', response);
+      })
+
     setFoodList(foodList.concat([food]));
     setPreview([]);
     document.getElementById('search-form').value = ""

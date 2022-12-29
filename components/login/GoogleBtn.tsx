@@ -1,6 +1,4 @@
-/* global google */
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import jwt_decode from "jwt-decode";
 
 
@@ -32,20 +30,30 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
 
   function handleUserData (userData:any) {
     console.log(userData)
+    const URL: any = process.env.URL_ENDPOINT
+    const DATA: any = {method: 'GET', body: userData}
     // check if the user id is in the database
+    fetch(URL, DATA)
+    .then((response) => {
       //if it is send them to the overview
-    // if the user is not in the database
-      // send them to the sign up page
-        // autofill user data (name, email, photo)
+    })
+    .catch((err) => {
+      // if the user is not in the database
+        // send them to the sign up page
+          // autofill user data (name, email, photo)
+    })
   }
 
   // initializes connection to GI API and renders login button
   function initGoogle () {
 
-    const client = "256921641374-b9cl93p3rhfshgo14oo628tnj7bf3ng0.apps.googleusercontent.com"
+    //keeps linter from throwing error
+    // google object is only defined after
+    // the google identity script runs
+    const google = (window as any).google;
 
     google.accounts.id.initialize({
-      client_id: client,
+      client_id: process.env.CLIENT_ID,
       context: 'signin',
       ux_mode: 'popup',
       callback: handleResponse,
@@ -63,7 +71,6 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
   if (init) {
     initGoogle()
   }
-
 
   return (
     <div id='google_btn' />

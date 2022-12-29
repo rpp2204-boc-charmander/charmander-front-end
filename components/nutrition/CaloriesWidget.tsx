@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 
 interface CaloriesProp {
-calories: number
+calories: number,
+handleShowModal: Function
 }
 
 const CaloriesWidget = ({handleShowModal, calories} : CaloriesProp) => {
-
-  const prompter = () => {
-    alert('Loading food search......')
-  }
 
   return (
     // <>

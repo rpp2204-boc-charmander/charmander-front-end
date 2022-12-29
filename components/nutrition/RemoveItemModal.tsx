@@ -63,7 +63,7 @@ const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShow
 
             setIsRemoveShowing(false);
             setAllFoods(newFoodsList);
-            // setCalories(prevCalories => calories - pendingItem.CAL);
+            setCalories(prevCalories => calories - pendingItem.CAL);
 
           }}>
             Confirm

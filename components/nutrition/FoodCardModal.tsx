@@ -1,6 +1,10 @@
-import Image from 'next/Image'
+import Image from 'next/image'
 import { useState } from 'react'
 // import { measureMemory } from 'vm';
+
+interface FoodCardModalProps {
+  info: Object
+}
 
 const FoodCardModal = ({ info }) => {
 
