@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import "../styles/globals.css";
 import axios from "axios";
 import type { AppProps } from "next/app";
+import AuthProvider from '../contexts/AuthProvider'
 
 interface IProps {
   Component: any;
@@ -14,15 +15,17 @@ export default function App({
   pageProps,
   userData,
 }: IProps): JSX.Element {
-  const user_id = userData.user_id;
 
-  const essential_props = { user_id };
+const user_id = userData.user_id;
+const essential_props = { user_id };
 
   return (
-    <Layout>
-      <Component {...pageProps} {...essential_props} />
-    </Layout>
-  );
+    <AuthProvider>
+      <Layout>
+          <Component {...pageProps} {...essential_props} />
+      </Layout>
+    </AuthProvider>
+  )
 }
 
 App.getInitialProps = async (ctx: any) => {
