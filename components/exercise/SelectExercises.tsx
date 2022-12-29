@@ -3,7 +3,10 @@ import { useEffect, useRef } from "react";
 
 interface Props {}
 
-const SelectExercises = ({ exercises, query }: Props): JSX.Element => {
+const SelectExercises = ({
+  exercises,
+  handleAddExerciseToWorkout,
+}: Props): JSX.Element => {
   console.log("exercises in select: ", exercises);
 
   const itemsRef = useRef([]);
@@ -38,7 +41,10 @@ const SelectExercises = ({ exercises, query }: Props): JSX.Element => {
             >
               {muscle_group}
             </div>
-            <GroupSearchExercises exercises={group_exercises} query={query} />
+            <GroupSearchExercises
+              exercises={group_exercises}
+              handleAddExerciseToWorkout={handleAddExerciseToWorkout}
+            />
           </div>
         );
       })}

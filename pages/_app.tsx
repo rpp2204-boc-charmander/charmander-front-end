@@ -1,7 +1,7 @@
-import Layout from '../components/Layout';
-import '../styles/globals.css';
-import axios from 'axios';
-import type { AppProps } from 'next/app';
+import Layout from "../components/Layout";
+import "../styles/globals.css";
+import axios from "axios";
+import type { AppProps } from "next/app";
 
 interface IProps {
   Component: any;
@@ -21,7 +21,7 @@ export default function App({
   pageProps,
   userData,
 }: IProps): JSX.Element {
-  const date = '2022-12-26';
+  const date = "2022-12-26";
   const user_id = userData.user_id;
 
   // must pass these props to every component because every component needs to know user_id and date
@@ -36,7 +36,7 @@ export default function App({
 }
 
 App.getInitialProps = async (ctx) => {
-  const authid = '78y2q6efgyucbu3rfb';
+  const authid = "78y2q6efgyucbu3rfb";
 
   const res = await axios.get(
     `${String(process.env.BACKEND_URL)}/user/${authid}`

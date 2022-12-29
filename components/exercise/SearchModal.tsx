@@ -10,6 +10,8 @@ export default function SearchModal({
   default_exercises,
   muscle_groups,
   user_id,
+  date,
+  handleFetchExercises,
 }: any): JSX.Element {
   const [customExercises, setCustomExercises] = useState([]);
   const [showDefault, setShowDefault] = useState(true);
@@ -34,6 +36,20 @@ export default function SearchModal({
 
     getCustomExercises();
   }, []);
+
+  const handleAddExerciseToWorkout = async (exercise_id) => {
+    try {
+      const res = await axios.post(
+        `${String(
+          process.env.BACKEND_URL
+        )}/exercise/create?user_id=${user_id}&exercise_id=${exercise_id}&log_date=${date}`
+      );
+      toggleAddModal();
+      handleFetchExercises();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const all_exercises = [...default_exercises, ...customExercises];
 
@@ -91,22 +107,25 @@ export default function SearchModal({
         </div>
         <MuscleGroups
           muscle_groups={muscle_groups}
-          clearSearchOnClick={(e) => setQuery("")}
+          clearSearchOnClick={() => setQuery("")}
         />
         {showDefault && (
-          <SelectExercises exercises={filtered_exercises} query={query} />
+          <SelectExercises
+            exercises={filtered_exercises}
+            handleAddExerciseToWorkout={handleAddExerciseToWorkout}
+          />
         )}
         {showCustom && (
           <SelectExercises
             exercises={filtered_custom_exercises}
-            query={query}
+            handleAddExerciseToWorkout={handleAddExerciseToWorkout}
           />
         )}
 
         <div className="buttonContainer flex w-[50%] justify-between p-5">
-          <button className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">
+          {/* <button className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">
             Add Exercise
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

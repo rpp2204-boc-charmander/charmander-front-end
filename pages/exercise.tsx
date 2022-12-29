@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import ExerciseList from '../components/exercise/ExerciseList';
-import CalorieComponent from '../components/exercise/CalorieComponent';
-import SearchModal from '../components/exercise/SearchModal';
-import EditModal from '../components/exercise/EditModal';
-import CompletedModal from '../components/exercise/CompletedModal';
-import AddSet from '../components/exercise/AddSet';
-import Header from '../components/overview/Header';
-import { MdOutlineFitnessCenter } from 'react-icons/md';
+import ExerciseList from "../components/exercise/ExerciseList";
+import CalorieComponent from "../components/exercise/CalorieComponent";
+import SearchModal from "../components/exercise/SearchModal";
+import EditModal from "../components/exercise/EditModal";
+import CompletedModal from "../components/exercise/CompletedModal";
+import AddSet from "../components/exercise/AddSet";
+import Header from "../components/overview/Header";
+import { MdOutlineFitnessCenter } from "react-icons/md";
 
 /**
    *
@@ -37,6 +37,7 @@ export default function Exercise({
   const [editModalState, setEditModalState] = useState(false);
   const [completedModalState, setCompletedModalState] = useState(false);
   const [addSetModalState, setAddSetModalState] = useState(false);
+  const [fetchExercises, setfetchExercises] = useState(false);
 
   // Calories
   const [caloriesBurned, setCaloriesBurned] = useState(0);
@@ -49,20 +50,20 @@ export default function Exercise({
       .catch((error) => {
         console.log(error.stack);
       });
-  }, [addSetModalState]);
+  }, [addSetModalState, fetchExercises]);
 
   const getUserExercises = async () => {
     // get username and log_date from index im assuming
-    return await axios.get('api/exercise/workout/list', {
+    return await axios.get("api/exercise/workout/list", {
       params: { user_id, log_date: date },
     });
   };
 
   const deleteSet = (set_id: number): void => {
     axios
-      .delete('api/exercise/sets', { params: { set_id } })
+      .delete("api/exercise/sets", { params: { set_id } })
       .then(() => {
-        console.log('Successfully Deleted Set');
+        console.log("Successfully Deleted Set");
       })
       .catch((error) => {
         console.log(error.stack);
@@ -71,9 +72,9 @@ export default function Exercise({
 
   const deleteExercise = (workout_exercise_id: number): void => {
     axios
-      .delete('api/exercise/workout', { params: { workout_exercise_id } })
+      .delete("api/exercise/workout", { params: { workout_exercise_id } })
       .then(() => {
-        console.log('Successfully Deleted Workout');
+        console.log("Successfully Deleted Workout");
       })
       .catch((error) => {
         console.log(error.stack);
@@ -96,16 +97,20 @@ export default function Exercise({
     setCompletedModalState((prevState) => !prevState);
   };
 
-  const toggleAddSetModal = (workout_id: number): void => {
+  const toggleAddSetModal = (workout_id: number) => {
     setAddSetModalState((prevState) => !prevState);
 
-    if (workout_id !== 0) {
+    if (workout_id) {
       setWorkoutID(workout_id);
     }
   };
 
+  const handleFetchExercises = (workout_id: number): void => {
+    setfetchExercises((prevState) => !prevState);
+  };
+
   const completeExercise = (): void => {
-    alert('Complete Exercise?');
+    alert("Complete Exercise?");
   };
 
   const getCaloriesBurned = (exercises: []): number => {
@@ -129,10 +134,12 @@ export default function Exercise({
 
       {addModalState && (
         <SearchModal
+          date={date}
           user_id={user_id}
           toggleAddModal={toggleAddModal}
           default_exercises={default_exercises}
           muscle_groups={muscle_groups}
+          handleFetchExercises={handleFetchExercises}
         />
       )}
       {editModalState && (
