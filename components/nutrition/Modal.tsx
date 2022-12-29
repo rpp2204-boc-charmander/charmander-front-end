@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const appId = process.env.EDAMAM_APPLICATION_ID;
 const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
-const Modal = ({ showModal }) => {
+const Modal = ({ showModal, date }) => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
@@ -37,6 +37,7 @@ const Modal = ({ showModal }) => {
   }
 
   const handleAdd = () => {
+    foodList.date = date;
     console.log(foodList)
   }
 
