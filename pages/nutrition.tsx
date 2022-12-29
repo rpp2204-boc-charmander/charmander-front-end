@@ -1,12 +1,14 @@
-import React, { useState, useRef } from 'react';
-import CaloriesWidget from '../components/nutrition/CaloriesWidget';
-import FoodList from '../components/nutrition/FoodList';
-import EditItemModal from '../components/nutrition/EditItemModal';
-import RemoveItemModal from '../components/nutrition/RemoveItemModal';
-import foodData from '../mocks/foodData.json';
-import { GiForkKnifeSpoon } from 'react-icons/gi';
-import { GrClose } from 'react-icons/gr';
-import { getDisplayName } from 'next/dist/shared/lib/utils';
+import React, { useState, useRef, useEffect } from "react";
+import CaloriesWidget from "../components/nutrition/CaloriesWidget";
+import FoodList from "../components/nutrition/FoodList";
+import EditItemModal from "../components/nutrition/EditItemModal";
+import RemoveItemModal from "../components/nutrition/RemoveItemModal";
+import foodData from "../mocks/foodData.json";
+import { GiForkKnifeSpoon } from "react-icons/gi";
+import { GrClose } from "react-icons/gr";
+import { getDisplayName } from "next/dist/shared/lib/utils";
+import { ChildProps } from "../components/Layout";
+import { MdRestaurant } from "react-icons/md";
 
 interface FoodDataType {
   CAL: string;
@@ -23,7 +25,12 @@ interface FoodDataType {
   CATEGORY: string;
 }
 
-const Nutrition = () => {
+const Nutrition = ({
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
+}: ChildProps) => {
   const [pendingItem, setPendingItem] = useState<FoodDataType>(
     {} as FoodDataType
   );
@@ -41,24 +48,30 @@ const Nutrition = () => {
 
   const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
+  useEffect(() => {
+    setTitle("Nutrition");
+    setIcon((prevState: any) => MdRestaurant);
+    setShowCalendar(true);
+  }, [setTitle, setIcon, setShowCalendar]);
+
   return (
     <>
-      <div className="flex justify-between flex-row mb-10 w-auto">
+      <div className="mb-10 flex w-auto flex-row justify-between bg-white">
         <div className="flex flex-row">
-          <GiForkKnifeSpoon className="text-3xl mr-2" />
+          <GiForkKnifeSpoon className="mr-2 text-3xl" />
           <div className="text-3xl">Nutrition</div>
         </div>
         <div className="inline-flex">
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+          <button className="rounded-l bg-gray-300 py-2 px-4 font-bold text-gray-800 hover:bg-gray-400">
             Prev
           </button>
-          <p className="flex items-center ml-5 mr-5">Today</p>
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+          <p className="ml-5 mr-5 flex items-center">Today</p>
+          <button className="rounded-r bg-gray-300 py-2 px-4 font-bold text-gray-800 hover:bg-gray-400">
             Next
           </button>
         </div>
       </div>
-      <div className="flex flex-row justify-between p-2 w-auto">
+      <div className="flex w-auto flex-row justify-between p-2">
         <CaloriesWidget calories={calories} />
         {isRemoveShowing ? (
           <RemoveItemModal

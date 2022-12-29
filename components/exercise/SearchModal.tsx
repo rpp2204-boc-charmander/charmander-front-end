@@ -10,7 +10,7 @@ export default function SearchModal({
   default_exercises,
   muscle_groups,
   user_id,
-  date,
+  query_date,
   handleFetchExercises,
 }: any): JSX.Element {
   const [customExercises, setCustomExercises] = useState([]);
@@ -19,7 +19,7 @@ export default function SearchModal({
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    const getCustomExercises = async () => {
+    const getCustomExercises = async (): Promise<any> => {
       try {
         const { data } = await axios.get(
           `${String(
@@ -34,15 +34,15 @@ export default function SearchModal({
       }
     };
 
-    getCustomExercises();
-  }, []);
+    void getCustomExercises();
+  }, [user_id]);
 
   const handleAddExerciseToWorkout = async (exercise_id) => {
     try {
       const res = await axios.post(
         `${String(
           process.env.BACKEND_URL
-        )}/exercise/create?user_id=${user_id}&exercise_id=${exercise_id}&log_date=${date}`
+        )}/exercise/create?user_id=${user_id}&exercise_id=${exercise_id}&log_date=${query_date}`
       );
       toggleAddModal();
       handleFetchExercises();

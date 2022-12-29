@@ -57,12 +57,14 @@ export default function Card({
   return (
     <div
       onClick={handleClick}
-      className={`${bgColor} flex flex-col text-black mr-[2rem] rounded-3xl h-[11rem] sm:w-[18rem] min-w-[18rem]
-      justify-center items-center last:mr-[0rem] shadow-xl hover:shadow-2xl cursor-pointer`}
+      className={`${bgColor} mr-[2rem] flex h-[16vh] w-[50vw] cursor-pointer flex-col items-center justify-center rounded-3xl
+      text-center text-black shadow-xl last:mr-[0rem] hover:shadow-2xl lg:h-[11rem] lg:w-[18rem]`}
     >
-      <div className="text-[2rem] font-bold">{name}</div>
+      <div className="text-base font-bold lg:pb-6 lg:text-[2rem]">{name}</div>
 
-      <div className="text-[1.5rem] text-right">{calorie} calories</div>
+      <div className="text-right text-base lg:text-[1.5rem]">
+        {calorie} calories
+      </div>
 
       <div className="pt-1">
         {portion && <div className="text-[1rem]">{portion} g</div>}

@@ -21,12 +21,11 @@ export default function App({
   pageProps,
   userData,
 }: IProps): JSX.Element {
-  const date = "2022-12-26";
   const user_id = userData.user_id;
 
   // must pass these props to every component because every component needs to know user_id and date
   // date can't be changed inside each component. Need to pass date as props to components
-  const essential_props = { date, user_id };
+  const essential_props = { user_id };
 
   return (
     <Layout>

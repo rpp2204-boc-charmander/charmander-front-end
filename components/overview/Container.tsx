@@ -1,9 +1,9 @@
-import { useRef, useEffect, useState } from 'react';
-import { MdAdd } from 'react-icons/md';
-import CaloriesCard from './CaloriesCard';
-import ExerciseAndNutritionCard from './ExerciseAndNutritionCard';
-import Modal from './Modal';
-import { ExerciseObjProps, NutritionObjProps } from '../../pages/overview';
+import { useRef, useEffect, useState } from "react";
+import { MdAdd } from "react-icons/md";
+import CaloriesCard from "./CaloriesCard";
+import ExerciseAndNutritionCard from "./ExerciseAndNutritionCard";
+import Modal from "./Modal";
+import { ExerciseObjProps, NutritionObjProps } from "../../pages/overview";
 
 interface CaloriesCardProps {
   text: string;
@@ -11,7 +11,7 @@ interface CaloriesCardProps {
 }
 
 interface ContainerProps {
-  type: 'calories' | 'exercise' | 'nutrition';
+  type: "calories" | "exercise" | "nutrition";
   title: string;
   //cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionObjProps>,
   cards: any;
@@ -29,11 +29,9 @@ export default function Container({
   bmr,
 }: ContainerProps) {
   /* const scrollRef = useRef<any>();
-
   const slideScroll = () => {
     console.log('Hello');
   }
-
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', slideScroll)
@@ -49,20 +47,20 @@ export default function Container({
   });
 
   return (
-    <div className="flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
-      <div className="bg-gray-500 flex flex-row h-[4rem] items-center text-[2rem] text-white justify-between w-full">
-        <div className="ml-5"> {title} </div>
-        {type === 'calories' && (
-          <div className="text-base italic mr-5">
-            {' '}
-            Recommended daily consumption: {Math.round(bmr)}{' '}
+    <div className="mb-[2rem] flex h-[25vh] w-full max-w-[75rem] flex-col items-center overflow-hidden bg-black lg:h-[20rem] lg:w-[80vw] lg:rounded-3xl">
+      <div className="flex h-[3rem] w-full flex-row items-center justify-between bg-gray-500 text-white lg:h-[4rem]">
+        <div className="ml-5 text-base sm:text-[2rem]"> {title} </div>
+        {type === "calories" && (
+          <div className="mr-5 text-xs italic lg:text-base">
+            {" "}
+            Recommended daily consumption: {Math.round(bmr)}{" "}
           </div>
         )}
-        {type !== 'calories' && (
-          <div className="flex flex-row grow items-center justify-between">
-            <div className="text-base italic ml-5">
-              {' '}
-              {numberOfCompleted} of {cards.length} items completed{' '}
+        {type !== "calories" && (
+          <div className="flex grow flex-row items-center justify-between">
+            <div className="ml-5 text-xs italic lg:text-base">
+              {" "}
+              {numberOfCompleted} of {cards.length} items completed{" "}
             </div>
             <MdAdd
               className="mr-5 cursor-pointer"
@@ -80,22 +78,22 @@ export default function Container({
         setNutrition={setNutrition}
       ></Modal>
 
-      <div className="relative">
+      <div className="relative h-full w-full">
         <div
-          className="bg-gray-300 flex flex-row h-[16rem] justify-between
-          items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] scrollbar-hide border w-[75rem]"
+          className="flex min-h-full w-full flex-row items-center justify-between
+          overflow-x-scroll border bg-gray-300 bg-fixed pl-2 pr-2 scrollbar-hide lg:h-[16rem] lg:pl-[4rem] lg:pr-[4rem]"
         >
-          {cards.length === 0 && type === 'exercise' && (
+          {cards.length === 0 && type === "exercise" && (
             <div className="flex w-full justify-center">
-              <div className="text-white text-2xl flex justify-center">
+              <div className="flex justify-center text-2xl text-white">
                 No workout has been added
               </div>
             </div>
           )}
 
-          {cards.length === 0 && type === 'nutrition' && (
+          {cards.length === 0 && type === "nutrition" && (
             <div className="flex w-full justify-center">
-              <div className="text-white text-2xl flex justify-center">
+              <div className="flex justify-center text-2xl text-white">
                 No meal has been added
               </div>
             </div>
@@ -103,16 +101,16 @@ export default function Container({
 
           {cards.length !== 0 &&
             cards.map((card: any, index: any) => {
-              if (type === 'calories') {
-                let textColor = 'text-black';
+              if (type === "calories") {
+                let textColor = "text-black";
                 if (index === 2) {
                   if (card.calorie >= 0) {
-                    textColor = 'text-green-500';
+                    textColor = "text-green-500";
                   } else {
-                    textColor = 'text-red-500';
+                    textColor = "text-red-500";
                   }
                 } else {
-                  textColor = 'text-black';
+                  textColor = "text-black";
                 }
                 return (
                   <CaloriesCard
@@ -122,7 +120,7 @@ export default function Container({
                     text={card.text}
                   />
                 );
-              } else if (type === 'exercise') {
+              } else if (type === "exercise") {
                 return (
                   <ExerciseAndNutritionCard
                     key={index}

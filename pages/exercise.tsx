@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 import ExerciseList from "../components/exercise/ExerciseList";
@@ -7,25 +7,30 @@ import SearchModal from "../components/exercise/SearchModal";
 import EditModal from "../components/exercise/EditModal";
 import CompletedModal from "../components/exercise/CompletedModal";
 import AddSet from "../components/exercise/AddSet";
-import Header from "../components/overview/Header";
+import { ChildProps } from "../components/Layout";
+
 import { MdOutlineFitnessCenter } from "react-icons/md";
 
-/**
-   *
-  TODO:
-  1. Fetch data for default exercise and muscle groups on page load
+const getCaloriesBurned = (exercises: any): number => {
+  let total = 0;
 
-   */
+  exercises.forEach((exercise: any) => {
+    total += exercise.total_calories_burned;
+  });
+
+  return total;
+};
 
 export default function Exercise({
+  query_date,
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
   user_id,
-  date,
   default_exercises,
   muscle_groups,
 }): JSX.Element {
-  // Date
-  const [currentDate, setCurrentDate] = useState(new Date());
-
   // IDs
   const [workoutID, setWorkoutID] = useState(1);
 
@@ -42,22 +47,28 @@ export default function Exercise({
   // Calories
   const [caloriesBurned, setCaloriesBurned] = useState(0);
 
-  useEffect(() => {
-    getUserExercises()
-      .then(({ data }) => {
-        setExercises(data);
-      })
-      .catch((error) => {
-        console.log(error.stack);
-      });
-  }, [addSetModalState, fetchExercises]);
+  console.log("query_date: ", query_date);
 
-  const getUserExercises = async () => {
-    // get username and log_date from index im assuming
-    return await axios.get("api/exercise/workout/list", {
-      params: { user_id, log_date: date },
-    });
-  };
+  useEffect(() => {
+    setTitle("Exercise");
+    setIcon((prevState: any) => MdOutlineFitnessCenter);
+    setShowCalendar(true);
+  }, [setTitle, setIcon, setShowCalendar]);
+
+  useEffect(() => {
+    const getUserExercises = async (): Promise<any> => {
+      try {
+        const { data } = await axios.get("api/exercise/workout/list", {
+          params: { user_id, log_date: query_date },
+        });
+        setExercises(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    void getUserExercises();
+  }, [addSetModalState, fetchExercises, currentDate, user_id]);
 
   const deleteSet = (set_id: number): void => {
     axios
@@ -125,16 +136,9 @@ export default function Exercise({
 
   return (
     <>
-      <Header
-        currentDate={currentDate}
-        setCurrentDate={setCurrentDate}
-        title="Exercise"
-        Icon={MdOutlineFitnessCenter}
-      />
-
       {addModalState && (
         <SearchModal
-          date={date}
+          date={query_date}
           user_id={user_id}
           toggleAddModal={toggleAddModal}
           default_exercises={default_exercises}
