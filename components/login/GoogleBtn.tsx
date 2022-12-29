@@ -15,8 +15,10 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
   async function handleResponse(response: any) {
     const token: any = await response.credential;
     const responsePayload: any = jwt_decode(token);
+
+    console.log(responsePayload)
     axios
-      .get(`${process.env.GOOGLE_AUTH}?email=${responsePayload.email}`)
+      .get(`${process.env.BACKEND_URL}/user?email=${responsePayload.email}`)
       .then((res) => {
         if (Object.keys(res.data).length === 0) {
           console.log("No Account");
@@ -26,6 +28,8 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
         }
       })
       // .catch((err) => router.push("/Signup"));
+      .catch((err) => console.log('ITs BREAKING IN GoogleBtn'));
+
   }
 
   // initializes connection to GI API and renders login button

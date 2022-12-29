@@ -7,7 +7,7 @@ export default function StravaBtn() {
   const router = useRouter();
 
   const id = process.env.STRAVA_ID;
-  const redirectUrl = "http://localhost:3000/strava";
+  const redirectUrl = "http://localhost:3000/users/strava";
   const scope = "read";
 
   const handleLogin = () => {
