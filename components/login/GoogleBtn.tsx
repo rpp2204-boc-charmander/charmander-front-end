@@ -16,16 +16,16 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
     const token: any = await response.credential;
     const responsePayload: any = jwt_decode(token);
     axios
-      .get(`${process.env.AUTH}?email=${responsePayload.email}`)
+      .get(`${process.env.GOOGLE_AUTH}?email=${responsePayload.email}`)
       .then((res) => {
         if (Object.keys(res.data).length === 0) {
           console.log("No Account");
-          router.push("/Signup");
+          // router.push("/Signup");
         } else {
           router.push("/overview");
         }
       })
-      .catch((err) => router.push("/signup"));
+      // .catch((err) => router.push("/Signup"));
   }
 
   // initializes connection to GI API and renders login button
