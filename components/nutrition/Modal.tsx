@@ -25,12 +25,12 @@ const Modal = ({ showModal, date }) => {
   }
 
   const handleSelect = (food) => {
-    axios.get('http://localhost:4000/nutrition/list/foods',{
-      params: food
-      })
-      .then((response) => {
-        console.log('response: ', response);
-      })
+    // axios.get('http://localhost:3000/nutrition/list/foods',{
+    //   params: food
+    //   })
+    //   .then((response) => {
+    //     console.log('response: ', response);
+    //   })
 
     setFoodList(foodList.concat([food]));
     setPreview([]);
@@ -81,8 +81,8 @@ const Modal = ({ showModal, date }) => {
             }}
           />
         </div>
-        <div className="search w-[100%] flex flex-row pb-6">
-          <input className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl" id="search" type="text" placeholder="Seach by name or body part" onChange={(e) => {
+        <div id="search-form" className="search w-[100%] flex flex-row pb-6">
+          <input className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl" id="search" type="text" placeholder="Seach by name or restaurant" onChange={(e) => {
             handleSearch(e)
           }}></input>
         </div>
@@ -92,21 +92,21 @@ const Modal = ({ showModal, date }) => {
           }}></input>
         </form> */}
 
-        <div className="z-10 bg-slate-600">
+        <div className="z-10 bg-white overflow-y-auto w-full max-h-44 rounded-xl mb-5">
           {
             preview.length > 0 ? (
               preview.map((food: any, index) => {
                 return (
-                  <div key={index} className=" hover:bg-slate-400 flex flex-row w-96 space-x-8" onClick={(e) => {
+                  <div key={index} className=" hover:bg-slate-400 flex flex-row w-full space-x-8 justify-between p-2 items-center border" onClick={(e) => {
                     handleSelect(food);
                   }}>
                     {
                       food.food.image ? (
-                        <Image src={food.food.image} alt="" width={50} height={50} />
-                      ) : <Image src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="" width={50} height={50} />
+                        <Image src={food.food.image} alt="" width={50} height={50} className="rounded-full ml-4"/>
+                      ) : <Image src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="" width={50} height={50} className="rounded-full ml-4"/>
                     }
                     <div>{food.food.label}</div>
-                    <div>{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
+                    <div className="pr-4">{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
                   </div>
                 )
               })

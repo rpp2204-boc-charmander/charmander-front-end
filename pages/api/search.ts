@@ -17,7 +17,8 @@ export default function handleSearch (req, res) {
       }
     }).then((data) => {
       console.log(data.data.hints.length);
-      res.send(data.data.hints.slice(0, 4));
+      // res.send(data.data.hints.slice(0, 4));
+      res.send(data.data.hints);
     })
   }
   // res.end();
