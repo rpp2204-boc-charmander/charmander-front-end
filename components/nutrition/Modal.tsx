@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const appId = process.env.EDAMAM_APPLICATION_ID;
 const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
-const Modal = () => {
+const Modal = ({ showModal }) => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
@@ -58,7 +58,7 @@ const Modal = () => {
         <div>
           <h4>Nutrition Search</h4>
           <form>
-            <input id="search-form"placeholder="search by name" onChange={(e) => {
+            <input id="search-form"placeholder="search by name" className="shadow-lg w-5/6 h-10 rounded-lg mt-3" onChange={(e) => {
               handleSearch(e)
             }}></input>
           </form>
@@ -83,14 +83,24 @@ const Modal = () => {
           }
 
         </div>
-        <div className="list bg-slate-600">
+        <div className="overflow-y-auto">
           {
             foodList.map((food, index) => {
               return (
-                <FoodCardModal key={index} info={food}/>
+                <FoodCardModal key={index} info={food} />
               )
             })
           }
+        </div>
+        <div className="space-x-12 mt-5 mb-2">
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
+            handleSubmit();
+            showModal();
+          }}>Add</button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
+            handleSubmit();
+            showModal();
+          }}>Add as completed</button>
         </div>
       </div>
     </div>

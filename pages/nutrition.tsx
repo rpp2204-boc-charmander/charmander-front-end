@@ -89,7 +89,7 @@ const Nutrition = () => {
         : null}
         <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
         {
-        showModal ? ( <Modal />) : ( null )
+        showModal ? ( <Modal showModal={handleShowModal}/>) : ( null )
       }
       </div>
     </>

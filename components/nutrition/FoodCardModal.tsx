@@ -1,6 +1,6 @@
 import Image from 'next/Image'
 import { useState } from 'react'
-import { measureMemory } from 'vm';
+// import { measureMemory } from 'vm';
 
 const FoodCardModal = ({ info }) => {
 
@@ -41,7 +41,7 @@ const FoodCardModal = ({ info }) => {
   }
 
   return (
-    <div className="flex flex-row items-center border space-x-8">
+    <div className="flex flex-row items-center border space-x-8 my-3  bg-slate-600 rounded-lg px-4 py-4">
       <Image src={info.food.image} alt='' width={50} height={50}/>
       <div className="flex flex-col">
         <div>{info.food.label}</div>
