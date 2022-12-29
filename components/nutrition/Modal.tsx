@@ -85,7 +85,11 @@ const Modal = ({ showModal, date }) => {
                   <div key={index} className=" hover:bg-slate-400 flex flex-row w-96 space-x-8" onClick={(e) => {
                     handleSelect(food);
                   }}>
-                    <Image src={food.food.image} alt='' width={50} height={50} />
+                    {
+                      food.food.image ? (
+                        <Image src={food.food.image} alt="" width={50} height={50} />
+                      ) : <Image src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="" width={50} height={50} />
+                    }
                     <div>{food.food.label}</div>
                     <div>{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>
                   </div>

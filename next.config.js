@@ -9,6 +9,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.edamam.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org'
+      }
     ],
   },
 };

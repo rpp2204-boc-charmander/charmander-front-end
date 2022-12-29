@@ -46,7 +46,13 @@ const FoodCardModal = ({ info }) => {
 
   return (
     <div className="flex flex-row justify-between items-center border space-x-8 my-3  bg-slate-600 rounded-lg px-4 py-4 w-full">
-      <Image src={info.food.image} alt='' width={90} height={90} className="rounded-full"/>
+      {
+        info.food.image ? (
+          <Image src={info.food.image} alt='' width={90} height={90} className="rounded-full"/>
+        ) : (
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt='' width={90} height={90} className="rounded-full"/>
+        )
+      }
       <div className="flex flex-col">
         <div>{info.food.label}</div>
         <div>{Math.round(info.food.nutrients.ENERC_KCAL)} Kcal/100g</div>
