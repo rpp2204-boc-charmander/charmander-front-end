@@ -49,6 +49,15 @@ const Modal = ({ showModal, date }) => {
     console.log(foodList)
   }
 
+  const removeSelection = (key: any) => {
+    if (foodList.length > 1) {
+      setFoodList(foodList.splice(key, 1));
+    } else if (foodList.length === 1) {
+      setFoodList([]);
+    }
+    console.log(key)
+  }
+
   useEffect(() => {
     if (search !== '') {
       axios({
@@ -120,7 +129,7 @@ const Modal = ({ showModal, date }) => {
           {
             foodList.map((food, index) => {
               return (
-                <FoodCardModal key={index} info={food} />
+                <FoodCardModal listId={index} key={index} info={food} removeSelection={removeSelection}/>
               )
             })
           }

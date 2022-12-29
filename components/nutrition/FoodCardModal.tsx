@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import { useState } from 'react'
-// import { measureMemory } from 'vm';
+import { MdClose } from "react-icons/md";
 
 interface FoodCardModalProps {
   info: Object
 }
 
-const FoodCardModal = ({ info }) => {
+const FoodCardModal = ({ listId, info, removeSelection }) => {
 
   // info.unit = "Gram";
   // info.grams = 1;
@@ -93,6 +93,13 @@ const FoodCardModal = ({ info }) => {
           </select>
         </form>
       </div>
+      <MdClose
+        className="text-[1.25rem] cursor-pointer rounded-full hover:bg-gray-300"
+        onClick={() => {
+          // console.log(key);
+          removeSelection(listId);
+        }}
+      />
     </div>
   )
 }
