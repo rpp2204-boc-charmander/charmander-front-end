@@ -90,16 +90,16 @@ const Modal = ({ showModal, date }) => {
             }}
           />
         </div>
-        <div id="search-form" className="search w-[100%] flex flex-row pb-6">
+        {/* <div id="search-form" className="search w-[100%] flex flex-row pb-6">
           <input className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl" id="search" type="text" placeholder="Seach by name or restaurant" onChange={(e) => {
             handleSearch(e)
           }}></input>
-        </div>
-        {/* <form>
-          <input id="search-form"placeholder="search by name" className="shadow-lg w-5/6 h-10 rounded-lg mt-3" onChange={(e) => {
+        </div> */}
+        <form className="w-full">
+          <input id="search-form" placeholder="search by name" className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl" onChange={(e) => {
             handleSearch(e)
           }}></input>
-        </form> */}
+        </form>
 
         <div className="z-10 bg-white overflow-y-auto w-full max-h-44 rounded-xl mb-5">
           {
