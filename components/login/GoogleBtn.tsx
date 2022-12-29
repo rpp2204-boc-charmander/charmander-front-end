@@ -18,18 +18,19 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
 
     console.log(responsePayload)
     axios
-      .get(`${process.env.BACKEND_URL}/user?email=${responsePayload.email}`)
+      .get(`${process.env.BACKEND_URL}/user/${responsePayload.sub}`)
       .then((res) => {
         if (Object.keys(res.data).length === 0) {
-          console.log("No Account");
-          // router.push("/Signup");
+          //store the first and last name in the database in the database
+          //get the id from the database
+            //store the first name, last name and id in the AuthContext user
+          router.push("/settings");
         } else {
+          //store the user db data in the AuthContext user
           router.push("/overview");
         }
       })
-      // .catch((err) => router.push("/Signup"));
-      .catch((err) => console.log('ITs BREAKING IN GoogleBtn'));
-
+      .catch((err) => router.push("/Signup"));
   }
 
   // initializes connection to GI API and renders login button
