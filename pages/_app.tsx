@@ -2,7 +2,7 @@ import Layout from "../components/Layout";
 import "../styles/globals.css";
 import axios from "axios";
 import type { AppProps } from "next/app";
-import AuthProvider from '../contexts/AuthProvider'
+import AuthProvider from '../context/AuthProvider'
 
 interface IProps {
   Component: any;
