@@ -38,6 +38,13 @@ const Modal = ({ showModal, date }) => {
 
   const handleAdd = () => {
     foodList.date = date;
+    foodList.consumed = false;
+    console.log(foodList)
+  }
+
+  const handleAddConsumed = () => {
+    foodList.date = date;
+    foodList.consumed = true;
     console.log(foodList)
   }
 
@@ -105,7 +112,7 @@ const Modal = ({ showModal, date }) => {
             showModal();
           }}>Add</button>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => {
-            handleAdd();
+            handleAddConsumed();
             showModal();
           }}>Add as completed</button>
         </div>
