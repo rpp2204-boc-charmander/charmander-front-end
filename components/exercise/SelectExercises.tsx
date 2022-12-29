@@ -12,7 +12,7 @@ const SelectExercises = ({
   // useEffect(() => {
   //   itemsRef.current = itemsRef.current.slice(0, exercises.length);
   // }, [exercises]);
-  const groups = exercises.reduce((acc, obj) => {
+  const groups = exercises.reduce((acc: any, obj: any) => {
     const { muscle_group, muscle_group_id } = obj;
 
     const key = muscle_group;
@@ -23,7 +23,7 @@ const SelectExercises = ({
 
   return (
     <div className="h-[70%] w-full items-center overflow-auto overflow-y-scroll rounded-2xl bg-slate-50 p-2 shadow-well">
-      {Object.entries(groups).map((item, index) => {
+      {Object.entries(groups).map((item: any, index) => {
         const muscle_group_id = item[1][0].muscle_group_id;
         const muscle_group = item[1][0].muscle_group;
         const group_exercises = item[1];

@@ -7,7 +7,7 @@
   "extends": [
     // "plugin:react/recommended",
     // "standard-with-typescript",
-    // "next",
+    "next",
     "prettier"
   ],
   "overrides": [],

@@ -30,7 +30,7 @@ export default function Exercise({
   user_id,
   default_exercises,
   muscle_groups,
-}): JSX.Element {
+}: any): JSX.Element {
   // IDs
   const [workoutID, setWorkoutID] = useState(1);
 
@@ -68,7 +68,7 @@ export default function Exercise({
     };
 
     void getUserExercises();
-  }, [addSetModalState, fetchExercises, currentDate, user_id]);
+  }, [addSetModalState, fetchExercises, currentDate, user_id, query_date]);
 
   const deleteSet = (set_id: number): void => {
     axios
