@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const MuscleGroups = ({
   muscle_groups,
   clearSearchOnClick,
@@ -11,6 +13,7 @@ const MuscleGroups = ({
             key={item.muscle_group_id}
             onClick={() => {
               clearSearchOnClick();
+
               try {
                 document
                   .getElementById(item.muscle_group_id)
