@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { MdClose } from "react-icons/md";
 import { useState, useEffect, useRef } from "react";
 import SelectExercises from "./SelectExercises";
