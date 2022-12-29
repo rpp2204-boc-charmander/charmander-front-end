@@ -5,9 +5,9 @@
     "jest": true
   },
   "extends": [
-    "plugin:react/recommended",
+    // "plugin:react/recommended",
     // "standard-with-typescript",
-    "next",
+    // "next",
     "prettier"
   ],
   "overrides": [],
