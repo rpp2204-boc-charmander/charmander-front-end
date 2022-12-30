@@ -31,8 +31,8 @@ export default function Report({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="h-screen">
-        <Header day={"Today"} click={handleclick} />
-        <Charts timespan={timespan} />
+        <Header day={"today"} click={handleclick} />
+        <Charts timespan={timespan} date={currentDate.toISOString().split('T')[0]}/>
       </div>
     </div>
   );

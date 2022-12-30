@@ -1,19 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import LineChart from './lineChart';
-import ScatterChart from './scatterChart';
-
+import axios from 'axios';
 
 interface coord {
   x: number;
   y: number;
 };
-
 interface report {
   maxRep: number;
   type: string;
   data: coord[];
 };
-
 interface reports {
   timespan: string;
   unix: number;
@@ -74,14 +71,46 @@ let weekData: reports = {
 }
 
 export default function Charts (props: any) {
-  let reportsData: report[] = weekData.data;
+  const [reports, setReportData]: any = useState({
+    unix: 0,
+    year: 0,
+    data: []
+  });
+
+  useEffect(() => {
+    let unix: number = new Date(props.date).getTime();
+    let year: number = new Date(props.date).getFullYear();
+    if (reports.year !== year) {
+      axios.get(`http://localhost:8000/report/data/1/'${props.date}'`)
+      .then((result) => {
+        setReportData((prevState: any) => {
+          let reports = {...prevState};
+          reports.unix = unix;
+          reports.year = year;
+          reports.data = result.data;
+          return reports;
+        });
+      }).catch((err) => {
+        console.log(err);
+      });
+    } else if (reports.unix !== unix) {
+      setReportData((prevState: any) => {
+        let reports = {...prevState};
+        reports.unix = unix;
+        return reports;
+      });
+    }
+  }, props.date);
+
+  let reportsData: report[] = reports.data;
+
   return (
     <div>
       <ul className='w-full h-full overflow-auto'>
         {reportsData.map((report, index) => {
           return (
             <li key={index}>
-              <LineChart chartData={report} time={weekData.unix} timespan={props.timespan}/>
+              <LineChart chartData={report} time={reports.unix} timespan={props.timespan}/>
             </li>)})}
       </ul>
     </div>
