@@ -35,7 +35,7 @@ export default function Layout({ children }: any): JSX.Element {
         <Sidebar />
       </aside>
 
-      <main className="flex-1">
+      <main className="flex flex-col w-full">
         <Header
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
@@ -48,7 +48,7 @@ export default function Layout({ children }: any): JSX.Element {
           setTimespan={setTimespan}
         />
 
-        <div>
+        <div className="w-[100%] h-[100%] flex items-center justify-center">
           {React.cloneElement(children, {
             query_date: date_string_for_query,
             currentDate,

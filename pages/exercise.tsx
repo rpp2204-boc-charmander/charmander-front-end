@@ -137,7 +137,7 @@ export default function Exercise({
   };
 
   return (
-    <>
+    <div className="exerciseContainer">
       {addModalState && (
         <SearchModal
           query_date={query_date}
@@ -172,7 +172,7 @@ export default function Exercise({
           completeExercise={completeExercise}
         />
       </div>
-    </>
+    </div>
   );
 }
 

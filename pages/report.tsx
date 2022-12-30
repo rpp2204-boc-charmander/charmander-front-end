@@ -21,10 +21,8 @@ export default function Report({
   }, [setTitle, setIcon, setShowCalendar, setShowReportButtons]);
 
   return (
-    <div>
-      <div className="h-screen">
-        <Charts timespan={timespan} />
-      </div>
+    <div className="h-[100%] w-[100%] flex items-center justify-center">
+      <Charts timespan={timespan} />
     </div>
   );
 }

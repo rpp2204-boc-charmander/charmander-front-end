@@ -103,7 +103,7 @@ export default function Header({
   }
 
   return (
-    <div className="z-40 bg-white dark:bg-slate-700 flex flex-row grow justify-between items-center h-16 lg:h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
+    <div className="z-40 bg-gray-50 dark:bg-slate-600 flex flex-row justify-between items-center h-16 lg:h-32 lg:max-h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
 
       <div className="flex items-center w-full h-full">
         {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
@@ -122,7 +122,7 @@ export default function Header({
             </div>
 
             {isOpen && (
-              <div className="pt-48 lg:flex justify-center dark:text-black" id="calendar">
+              <div className="pt-56 lg:flex justify-center dark:text-black" id="calendar">
                 <Calendar onChange={onChange} />
               </div>
             )}
@@ -138,7 +138,7 @@ export default function Header({
         <div className="hidden min-w-[20rem] lg:flex flex-row justify-between">
           <button
             onClick={handleReportButtonsClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
             name="week"
           >
             Week
@@ -146,7 +146,7 @@ export default function Header({
 
           <button
             onClick={handleReportButtonsClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
             name="month"
           >
             Month
@@ -154,7 +154,7 @@ export default function Header({
 
           <button
             onClick={handleReportButtonsClick}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
             name="year"
           >
             Year
