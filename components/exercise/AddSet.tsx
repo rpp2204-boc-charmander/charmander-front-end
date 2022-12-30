@@ -69,7 +69,7 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
 
          </div>
 
-        <button className="bg-slate-50 hover:bg-slate-200 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md" onClick={onSubmit}> Add </button>
+        <button className="bg-blue-500 hover:bg-blue-600 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md" onClick={onSubmit}> Add </button>
 
       </div>
     </div>
