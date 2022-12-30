@@ -19,6 +19,18 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.edamam.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org'
+      }
+    ],
+  },
 };
 
 module.exports = nextConfig;
