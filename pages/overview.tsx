@@ -26,6 +26,7 @@ export default function Overview({
   setTitle,
   setIcon,
   setShowCalendar,
+  setShowReportButtons
 }: ChildProps) {
   // States
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
@@ -48,16 +49,16 @@ export default function Overview({
 
   useEffect(() => {
     setTitle("Overview");
-    setIcon((prevState: any) => MdOutlineSort);
+    setIcon(() => MdOutlineSort);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
+  // Get workout data
   useEffect(() => {
     //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
     axios(
-      `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(
-        currentDate
-      )}`
+      `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`
     ).then((result) => {
       let data = result.data;
       let exercise: ExerciseObjProps = {
@@ -74,6 +75,8 @@ export default function Overview({
       setExercises(newData);
     });
   }, [currentDate]);
+
+
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
@@ -123,41 +126,34 @@ export default function Overview({
   }, [caloriesConsumed, caloriesBurned]);
 
   return (
-    <div className="flex flex-col grow">
-      <Head>
-        <title> My Health Coach </title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="h-[100%] w-[100%] flex items-center justify-center">
+      <div className="h-full w-full p-3 flex flex-col items-center justify-center">
+        <Container
+          type="calories"
+          title="Calories"
+          cards={[
+            { calorie: caloriesConsumed, text: "Calories Consumed" },
+            { calorie: caloriesBurned, text: "Calories Burned" },
+            { calorie: netCalories, text: "Net Calories" },
+          ]}
+          bmr={bmr}
+        />
 
-      <div className="flex flex-col grow w-[100%] h-screen]">
-        <div className="flex flex-col items-center pt-4 lg:pl-[2%] lg:pr-[2%]">
-          <Container
-            type="calories"
-            title="Calories"
-            cards={[
-              { calorie: caloriesConsumed, text: "Calories Consumed" },
-              { calorie: caloriesBurned, text: "Calories Burned" },
-              { calorie: netCalories, text: "Net Calories" },
-            ]}
-            bmr={bmr}
-          />
+        <Container
+          type="exercise"
+          title="Exercise"
+          cards={exercises}
+          setExercises={setExercises}
+          bmr={bmr}
+        />
 
-          <Container
-            type="exercise"
-            title="Exercise"
-            cards={exercises}
-            setExercises={setExercises}
-            bmr={bmr}
-          />
-
-          <Container
-            type="nutrition"
-            title="Nutrition"
-            cards={nutrition}
-            setNutrition={setNutrition}
-            bmr={bmr}
-          />
-        </div>
+        <Container
+          type="nutrition"
+          title="Nutrition"
+          cards={nutrition}
+          setNutrition={setNutrition}
+          bmr={bmr}
+        />
       </div>
     </div>
   );

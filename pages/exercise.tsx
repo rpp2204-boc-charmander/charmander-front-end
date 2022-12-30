@@ -14,7 +14,18 @@ import { ChildProps } from "../components/Layout";
 
 import { MdOutlineFitnessCenter } from "react-icons/md";
 
-export default function Exercise({ query_date, currentDate, setTitle, setIcon, setShowCalendar, user_id, default_exercises, muscle_groups }: any): JSX.Element {
+export default function Exercise({
+  query_date,
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
+  user_id,
+  default_exercises,
+  muscle_groups,
+  setShowReportButtons
+}: any): JSX.Element {
+
   console.log("query_date: ", query_date);
 
   // IDs
@@ -42,8 +53,9 @@ export default function Exercise({ query_date, currentDate, setTitle, setIcon, s
 
   useEffect(() => {
     setTitle("Exercise");
-    setIcon((prevState: any) => MdOutlineFitnessCenter);
+    setIcon(() => MdOutlineFitnessCenter);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   useEffect(() => {
@@ -193,7 +205,7 @@ const completeExercise = async (workout_exercise_id: number) => {
   };
 
   return (
-    <>
+    <div className="exerciseContainer">
       {addModalState && (
         <SearchModal
           query_date={query_date}
@@ -241,7 +253,7 @@ const completeExercise = async (workout_exercise_id: number) => {
           completeExercise={completeExercise}
         />
       </div>
-    </>
+    </div>
   );
 }
 

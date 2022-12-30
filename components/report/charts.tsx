@@ -62,20 +62,20 @@ let weekData: reports = {
 export default function Charts(props: any) {
   let reportsData: report[] = weekData.data;
   return (
-    <div>
-      <ul className="h-full w-full overflow-auto">
-        {reportsData.map((report, index) => {
-          return (
-            <li key={index}>
+    <ul className="h-full w-full p-3 flex flex-col items-evenly justify-center">
+      {reportsData.map((report, index) => {
+        return (
+          <div className="w-full flex justify-center items-center">
+            <li className="mb-14 flex bg-gray-200 h-[25rem] w-full max-w-[65rem] rounded-3xl justify-center items-center chart-container" key={index}>
               <LineChart
                 chartData={report}
                 time={weekData.unix}
                 timespan={props.timespan}
               />
             </li>
-          );
-        })}
-      </ul>
-    </div>
+          </div>
+        );
+      })}
+    </ul>
   );
 }

@@ -9,6 +9,9 @@ export interface ChildProps {
   setIcon: Function;
   showCalendar: boolean;
   setShowCalendar: Function;
+  setShowReportButtons: Function;
+  timespan: String;
+  setTimespan: Function
 }
 
 export default function Layout({ children }: any): JSX.Element {
@@ -17,12 +20,13 @@ export default function Layout({ children }: any): JSX.Element {
   const [icon, setIcon] = useState("");
   const [showCalendar, setShowCalendar] = useState(false);
   const [toggleSidebar, setToggleSidebar] = useState(0);
-  const translate = ["-translate-x-full", ""];
+  const [showReportButtons, setShowReportButtons] = useState(false);
+  const [timespan, setTimespan] = useState("week");
 
+  const translate = ["-translate-x-full", ""];
   const month = currentDate.getUTCMonth() + 1; // months from 1-12
   const day = currentDate.getUTCDate();
   const year = currentDate.getUTCFullYear();
-
   const date_string_for_query = `${year}/${month}/${day}`;
 
   return (
@@ -31,7 +35,7 @@ export default function Layout({ children }: any): JSX.Element {
         <Sidebar />
       </aside>
 
-      <main className="flex-1">
+      <main className="flex flex-col w-full">
         <Header
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
@@ -39,9 +43,12 @@ export default function Layout({ children }: any): JSX.Element {
           Icon={icon}
           showCalendar={showCalendar}
           setToggleSidebar={setToggleSidebar}
+          showReportButtons={showReportButtons}
+          timespan={timespan}
+          setTimespan={setTimespan}
         />
 
-        <div>
+        <div className="w-[100%] h-[100%] flex items-center justify-center">
           {React.cloneElement(children, {
             query_date: date_string_for_query,
             currentDate,
@@ -49,6 +56,10 @@ export default function Layout({ children }: any): JSX.Element {
             setIcon,
             showCalendar,
             setShowCalendar,
+            showReportButtons,
+            setShowReportButtons,
+            timespan,
+            setTimespan
           })}
         </div>
       </main>
