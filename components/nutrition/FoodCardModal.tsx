@@ -27,6 +27,13 @@ const FoodCardModal = ({ listId, info, removeSelection }) => {
     // console.log(e.target.value)
     setAmount(Number(e.target.value));
     info.amount = Number(e.target.value);
+    if(!info.unit) {
+      info.totalGrams = amount * 10;
+      info.totalCalories = Math.round(info.totalGrams*info.food.nutrients.ENERC_KCAL/100)
+    } else if (info.unit) {
+      info.totalGrams = info.amount * info.grams;
+      info.totalCalories = Math.round(info.totalGrams*info.food.nutrients.ENERC_KCAL/100)
+    }
   }
 
   const handleUnitChange = (e) => {
@@ -39,9 +46,14 @@ const FoodCardModal = ({ listId, info, removeSelection }) => {
     setUnit({
       label: label,
       grams: grams
-    })
+    });
     info.unit = label;
-    info.grams = grams;
+    info.grams = Number(grams);
+    // info.totalCalories = Math.round(amount*unit.grams*info.food.nutrients.ENERC_KCAL/100)
+    // info.totalGrams = Math.round(amount*unit.grams);
+    // console.log(info.amount);
+    // info.totalGrams = info.grams*info.amount;
+    // info.totalCalories = Math.round(info.totalGrams*info.food.nutrients.ENERC_KCAL/100);
   }
 
   return (

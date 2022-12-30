@@ -38,7 +38,7 @@ const Modal = ({ showModal, date }) => {
   }
 
   const handleAdd = () => {
-    const foodLog: any = {};
+    let foodLog: any = {};
     foodLog.date = date;
     foodLog.consumed = false;
     foodLog.items = foodList;
@@ -46,9 +46,11 @@ const Modal = ({ showModal, date }) => {
   }
 
   const handleAddConsumed = () => {
-    foodList.date = date;
-    foodList.consumed = true;
-    console.log(foodList)
+    let foodLog: any = {};
+    foodLog.date = date;
+    foodLog.consumed = true;
+    foodLog.items = foodList;
+    console.log(foodLog)
   }
 
   const removeSelection = (key: any) => {
