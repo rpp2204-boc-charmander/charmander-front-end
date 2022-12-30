@@ -42,15 +42,3 @@ export default function LoginCard() {
     </div>
   );
 }
-
-        <LoginForm />
-        <br></br>
-        <div className="h-9 w-full bg-white rounded-2xl text-black p-1 text-center font-light">sign up with email</div>
-        <br></br>
-        <GoogleBtn
-          init={google}
-          reset={setGoogle}/>
-      </div>
-    </div>
-  )
-}
