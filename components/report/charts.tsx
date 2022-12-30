@@ -63,11 +63,11 @@ export default function Charts(props: any) {
   let reportsData: report[] = weekData.data;
   return (
     <div>
-      <ul className="h-full w-full p-3">
+      <ul className="h-full w-full p-5">
         {reportsData.map((report, index) => {
           return (
-            <div className="pb-5 w-full flex justify-center">
-              <li className="flex grow bg-gray-300 h-[20rem] max-w-[75rem] rounded-3xl justify-center items-center" key={index}>
+            <div className="pb-5 w-full flex flex-col items-center">
+              <li className="flex grow bg-gray-300 h-[20rem] w-full max-w-[75rem] rounded-3xl justify-center items-center" key={index}>
                 <LineChart
                   chartData={report}
                   time={weekData.unix}
