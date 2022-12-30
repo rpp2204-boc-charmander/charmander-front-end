@@ -80,7 +80,7 @@ export default function Container({
 
       <div className="relative w-full h-full">
         <div className="z-0 bg-gray-300 flex flex-row min-h-full lg:h-[16rem] justify-between
-          items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border w-full"
+          items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border-r border-l w-full"
         >
           {cards.length === 0 && type === "exercise" && (
             <div className="flex w-full justify-center">
