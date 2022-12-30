@@ -24,9 +24,22 @@ const nextConfig = {
         source: '/',
         destination: '/login', // Matched parameters can be used in the destination
         permanent: true
+      },
+    ],
+  },
+  
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.edamam.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org'
       }
-    ]
-  }
-}
+    ],
+  },
+};
 
 module.exports = nextConfig
