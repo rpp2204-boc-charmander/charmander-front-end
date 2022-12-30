@@ -9,7 +9,7 @@ export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, se
   const [consumed, setConsumed] = useState(false);
 
   return (
-    <div className="p-4 bg-white rounded-xl shadow-lg mb-4 hover:bg-slate-200">
+    <div className="p-4 bg-white rounded-xl shadow-lg mb-4 hover:bg-slate-200 text-black">
       <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", height: "90px"}}>
       <div style={{display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "space-between"}}>
           <h3 className="w-3/5 font-bold">{food.ITEM}</h3>

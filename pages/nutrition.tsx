@@ -1,16 +1,14 @@
-
 // @ts-nocheck
-import React, { useState, useRef } from "react";
+
+import React, { useState, useRef, useEffect } from "react";
 import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 import FoodList from "../components/nutrition/FoodList";
 import EditItemModal from "../components/nutrition/EditItemModal";
 import RemoveItemModal from "../components/nutrition/RemoveItemModal";
 import foodData from "../mocks/foodData.json";
-import { GiForkKnifeSpoon } from "react-icons/gi";
-import { GrClose } from "react-icons/gr";
-import { getDisplayName } from "next/dist/shared/lib/utils";
-import Header from "../components/Header";
 import Modal from "../components/nutrition/Modal";
+import { ChildProps } from "../components/Layout";
+import { MdRestaurant } from "react-icons/md";
 
 
 interface FoodDataType {
@@ -28,12 +26,17 @@ interface FoodDataType {
   CATEGORY: string
 }
 
-const Nutrition = () => {
+const Nutrition = ({
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
+  setShowReportButtons
+}: ChildProps) => {
   const [pendingItem, setPendingItem] = useState<FoodDataType>({} as FoodDataType);
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
   const [allFoods, setAllFoods] = useState<any>(foodData);
-  const [currentDate, setCurrentDate ] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
 
   const handleShowModal = () => {
@@ -48,11 +51,18 @@ const Nutrition = () => {
     return calculatedCalories;
   }
 
+  useEffect(() => {
+    setTitle("Nutrition");
+    setIcon((prevState: any) => MdRestaurant);
+    setShowCalendar(true);
+    setShowReportButtons(false);
+  }, [setTitle, setIcon, setShowCalendar]);
+
   const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
   return (
     <>
-      <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Nutrition' Icon={GiForkKnifeSpoon}/>
+      {/* <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Nutrition' Icon={GiForkKnifeSpoon}/> */}
       {/* <div className="flex justify-between flex-row mb-10 w-auto">
         <div className="flex flex-row">
           <GiForkKnifeSpoon className="text-3xl mr-2"/>
