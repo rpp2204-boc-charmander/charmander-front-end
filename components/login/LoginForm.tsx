@@ -88,8 +88,8 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
     "bg-white shadow rounded-l w-[90%] h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med; text-black font-extralight";
 
   return (
-    <form className="w-full">
-      <h2 className="pt-6 text-xl">login</h2>
+    <form className="w-full flex flex-col items-center">
+      <h2 className="pt-6 text-3xl text-black dark:text-white font-bold">Login</h2>
       <br></br>
       <div className="search flex w-full flex-col">
         <input

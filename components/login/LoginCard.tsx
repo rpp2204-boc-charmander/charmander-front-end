@@ -18,7 +18,7 @@ export default function LoginCard({ setUserId }: LoginProps) {
   const [google, setGoogle] = useState(false);
 
   const loginCardLg =
-    "fixed top-[30%] left-[65%]  text-black  bg-LoginGray flex flex-col items-center h-max rounded-3xl px-6 pb-6";
+    "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-max p-3";
   const signUpBtnLg =
     "h-9 w-full bg-white rounded-2xl text-black p-1 text-center font-light";
 
@@ -38,7 +38,7 @@ export default function LoginCard({ setUserId }: LoginProps) {
           setUserId={setUserId}/>
         <br></br>
         <a className={signUpBtnLg} href="/Signup">
-          sign up with email
+          Sign up with email
         </a>
         <br></br>
         <StravaBtn
