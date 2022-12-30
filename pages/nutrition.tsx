@@ -1,3 +1,5 @@
+
+// @ts-nocheck
 import React, { useState, useRef } from "react";
 import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 import FoodList from "../components/nutrition/FoodList";
@@ -7,7 +9,7 @@ import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
-import Header from "../components/overview/Header";
+import Header from "../components/Header";
 import Modal from "../components/nutrition/Modal";
 
 
