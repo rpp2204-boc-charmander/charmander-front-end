@@ -56,10 +56,11 @@ export default function LoginForm() {
 
     if (emailValid) {
       axios
-        .get(`${process.env.AUTH}?email=${email}`)
+        .get(`${process.env.BACKEND_URL}/user/?email=${email}`)
 
         .then((res) => {
           if (Object.keys(res.data).length === 0) {
+
             router.push("/Signup");
           } else {
             const hash = res.data;
@@ -151,14 +152,14 @@ export default function LoginForm() {
           className="items-start  font-extralight underline hover:text-purple-700"
           onClick={() => authenticate()}
         >
-          enter
+          {/* enter */}
         </button>
         <button
           type="button"
           className="grow text-right font-extralight underline hover:text-purple-700"
-          onClick={() => console.log("hi")}
+          onClick={() => authenticate()}
         >
-          forgot password?
+          enter
         </button>
       </div>
     </form>

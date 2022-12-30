@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -48,8 +48,8 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
     });
 
     google.accounts.id.renderButton(document.getElementById("google_btn"), {
-      shape: "pill",
-      theme: "filled_black",
+      'shape': "pill",
+      theme: "filled_white",
       size: "large",
     });
   }
@@ -58,5 +58,7 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
     initGoogle();
   }
 
-  return <div id="google_btn" />;
+  return (
+    <div className='p-0' id="google_btn"/>
+  )
 }

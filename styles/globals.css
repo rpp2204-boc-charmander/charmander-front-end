@@ -33,7 +33,6 @@ a {
   }
 }
 
-<<<<<<< HEAD
 html,
 body {
   padding: 0;
@@ -58,15 +57,13 @@ a {
   html {
     color-scheme: dark;
   }
-  body {
-    color: black;
-    background: white;
-=======
+}
+
 @layer components {
   body {
     @apply bg-white text-black dark:bg-slate-700 dark:text-white;
->>>>>>> main
   }
 }
+
 
 

@@ -36,11 +36,11 @@ export default function LoginCard() {
           sign up with email
         </a>
         <br></br>
-        <GoogleBtn init={google} reset={setGoogle} />
-        <br></br>
         <StravaBtn />
         <br></br>
         <FitbitBtn />
+        <br></br>
+        <GoogleBtn init={google} reset={setGoogle} />
       </div>
     </div>
   );
