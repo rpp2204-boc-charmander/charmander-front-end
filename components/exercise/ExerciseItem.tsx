@@ -7,7 +7,6 @@ import { AiOutlineDelete } from "react-icons/ai";
 
 import { GiMuscleUp } from "react-icons/gi";
 
-
 export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, completeExercise } : any) {
 
   return (
@@ -25,13 +24,14 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
           <AiOutlineEdit size={25} className="cursor-pointer" onClick={ () => { toggleEditModal(exercise.id) }}/>
           <AiOutlineDelete size={25} className="ml-2 cursor-pointer" onClick={ () => { deleteExercise(exercise.id) }}/>
         </div>
-
       </header>
 
-      <section className="grid grid-cols-[25%_40%_35%] h-[250px]">
-
-        <img className="bg-slate-50 w-[215px] place-self-center aspect-square rounded-lg shadow-md" alt="exercise-image" src={exercise.photo_url}></img>
-
+      <section className="grid h-[250px] grid-cols-[25%_40%_35%]">
+        <img
+          className="aspect-square w-[225px] place-self-center rounded-lg bg-gray-300 shadow-md"
+          alt="exercise-image"
+          src={exercise.photo_url}
+        ></img>
 
         <div className="pb-2 pt-3 h-[245px]">
 
@@ -67,8 +67,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
           </div>
         </div>
-
       </section>
     </div>
-  )
-};
+  );
+}

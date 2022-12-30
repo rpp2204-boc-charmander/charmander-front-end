@@ -1,16 +1,18 @@
-require('dotenv').config()
-
-import type { NextApiRequest, NextApiResponse } from 'next'
-import axios from 'axios';
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
 
 export default function handler(req: any, res: any) {
   let { user_id, log_date } = req.query;
 
-  return axios.get(`${process.env.API_URL}/exercise/workout/list?user_id=${user_id}&log_date=${log_date}`)
-          .then(({ data }) => {
-            res.status(200).json(data);
-          })
-          .catch( error => {
-            res.status(400).send(error.stack);
-          })
+  console.log('PROCESS ENV', process.env.API_URL)
+
+  res.status(200);
+
+  // return axios.get(`${process.env.API_URL}/exercise/workout/list?user_id=${user_id}&log_date=${log_date}`)
+  //         .then(({ data }) => {
+  //           res.status(200).json(data);
+  //         })
+  //         .catch( error => {
+  //           res.status(400).send(error.stack);
+  //         })
 }

@@ -1,7 +1,6 @@
-require('dotenv').config()
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
 
-import type { NextApiRequest, NextApiResponse } from 'next'
-import axios from 'axios';
 
 export default function handler(req: any, res: any) {
   let { workout_exercise_id } = req.query;

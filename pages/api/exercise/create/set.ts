@@ -1,9 +1,7 @@
-require('dotenv').config()
+import type { NextApiRequest, NextApiResponse } from "next";
+import axios from "axios";
 
-import type { NextApiRequest, NextApiResponse } from 'next'
-import axios from 'axios';
-
-export default function handler(req: any, res: any) {
+export default async function handler(req: any, res: any) {
   let { weight_lbs, reps, workout_exercise_id  } = req.body;
 
   return axios.post(`${process.env.API_URL}/exercise/create/set?weight_lbs=${weight_lbs}&reps=${reps}&workout_exercise_id=${workout_exercise_id}`)
