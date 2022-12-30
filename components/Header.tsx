@@ -104,7 +104,7 @@ export default function Header({
 
   return (
     <>
-      <div className="z-40 bg-gray-50 dark:bg-slate-600 flex flex-row justify-between items-center h-16 lg:h-32 lg:max-h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-3 pr-3 lg:pl-12 lg:pr-12">
+      <div className="z-40 bg-white dark:bg-slate-600 flex flex-row justify-between items-center h-16 lg:h-32 lg:max-h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-3 pr-3 lg:pl-12 lg:pr-12">
 
         <div className="flex items-center w-full h-full">
           {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
@@ -171,7 +171,7 @@ export default function Header({
 
       <div className="flex justify-center w-full lg:hidden">
         {showCalendar && (
-          <div className="text-xl flex flex-row items-center justify-between w-full p-3">
+          <div className="font-bold text-xl flex flex-row items-center justify-between w-full p-3">
             <div>
               <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
             </div>

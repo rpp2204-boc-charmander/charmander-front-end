@@ -46,6 +46,7 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
       shape: "pill",
       theme: "filled_black",
       size: "large",
+      padding: 0
     });
   }
 
