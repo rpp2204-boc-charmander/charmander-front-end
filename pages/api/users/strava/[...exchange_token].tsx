@@ -15,26 +15,48 @@ export default async function GetStrava (req: any, res: any) {
     axios
     .post('https://www.strava.com/oauth/token', OPTIONS)
     .then(response => {
-      // get the  user id @ res.data.athlete.id
-      const userId: string = response.data.athlete.id
+      const user: any= response.data.athlete
       // check if that user id exists in the database
       axios
-        .get(`http://localhost:4000/user/${userId}`)
+        .get(`${process.env.BACKEND_URL}/user/${user.id}`)
         .then(userData => {
 
-          // if it does exist
+          // If the user exists
           if (typeof userData.data === 'object') {
-            // gather the user information from the response
-            const { user_id } = userData.data
-            // redirect to overview
-            res.status(200).redirect('/overview')
-            // return the _id for the user
+            const { id, firstname, lastname, height, weight, sex, profile } = userData.data
+            // store the user data in context
+            res.status(200).redirect(`/overview/?id=${id}`)
           }
 
-          // if it does not exist
+          // If the user does not exist
           if (typeof userData.data === 'string') {
-            // redirect to user settings with the info filled in
-            res.status(200).redirect('/settings')
+
+            const options = {
+              method: 'POST',
+              url: `${process.env.BACKEND_URL}/user/create`,
+              headers: {
+                'content-type': 'application/json'
+              },
+              data:
+              {
+                  'auth_id':  user.id,
+                  'firstname':  user.firstname,
+                  'lastname':  user.lastname,
+                  'email':  null,
+                  'user_password':  null,
+                  'weight_lbs':  user.weight,
+                  'height_inches':  null,
+                  'sex':  user.sex,
+                  'profile_pic':  user.profile
+              }
+            }
+
+            axios
+              .request(options)
+              .then((newUserData: any) => {
+                // store the user data in context
+                res.status(200).redirect(`/settings`)
+              })
           }
         })
 

@@ -5,7 +5,8 @@ const nextConfig = {
   output: 'standalone',
   env: {
     CLIENT_ID: process.env.CLIENT_ID,
-    GOOGLE_AUTH: process.env.GOOGLE_AUTH,
+    BACKEND_URL: process.env.BACKEND_URL,
+    FRONTEND_URL: process.env.FRONTEND_URL,
     STRAVA_ID: process.env.STRAVA_ID,
     STRAVA_SECRET: process.env.STRAVA_SECRET,
     STRAVA_REFRESH: process.env.STRAVA_REFRESH,
@@ -15,7 +16,7 @@ const nextConfig = {
     FITBIT_SCOPE: process.env.FITBIT_SCOPE,
     FITBIT_RESPONSE_TYPE: process.env.FITBIT_CODE,
     DB_ENDPOINT: process.env.DB_ENDPOINT,
-    BACKEND_URL: process.env.BACKEND_URL
+    API_URL: process.env.API_URL
   },
   async redirects () {
     return [

@@ -11,8 +11,6 @@ export default function StravaBtn() {
   const scope = "read";
 
   const handleLogin = () => {
-    console.log("strava click");
-    // window.location =
     router.push(
       `http://www.strava.com/oauth/authorize?client_id=${id}&response_type=code&redirect_uri=${redirectUrl}/exchange_token&approval_prompt=force&scope=${scope}`
     );
