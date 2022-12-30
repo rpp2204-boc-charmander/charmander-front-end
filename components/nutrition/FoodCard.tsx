@@ -39,5 +39,5 @@ export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, se
         </div>
       </div>
     </div>
-  )
-};
+  );
+}

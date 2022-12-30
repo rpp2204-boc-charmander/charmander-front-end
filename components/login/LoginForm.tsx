@@ -1,63 +1,169 @@
-import { MdOutlinePassword, MdOutlineLogin, MdPassword } from 'react-icons/md';
-import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import {
+  MdOutlinePassword,
+  MdOutlineLogin,
+  MdPassword,
+  MdSentimentSatisfiedAlt,
+} from "react-icons/md";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+import * as EmailValidator from "email-validator";
+import bcrypt from "bcryptjs";
+import axios from "axios";
 
 export interface LoginProps {
-  email: string,
-  password: string,
+  email: any;
+  password: string;
 }
 
 export default function LoginForm() {
   const router = useRouter();
 
-  const email = useRef(Array<LoginProps>)
-  const password = useRef(Array<LoginProps>)
+  const [email, setEmail] = useState("email");
+  const [pswd, setPswd] = useState("password");
+  const [pswdType, setPswdType] = useState("password");
+  const [pswdErr, setPswdErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+  const [pswdVisible, setPswdVisible] = useState(false);
 
-  function handleChange (e:any, target:string) {
-    let value = e.target.value
+  function handleChange(e: any, target: string) {
+    let value = e.target.value;
 
-    if (target === 'email') {
-      email.current = (value)
+    if (target === "email") {
+      setEmail(value);
     } else {
-      password.current = (value)
+      setPswd(value);
     }
-    console.log(email, password)
   }
 
-  function submit () {
-    //send the user name and password to the database
-    // if the user is in the database
-      // direct them to the overview
-    // if the user is not in the database
-      // direct them to signup
+  function authenticate() {
+    // if(pswd === 'tony') {
+    //   setPswdErr(true)
+    // } else {
+    //   setPswdErr(false)
+    // }
+
+    // var salt = bcrypt.genSaltSync(10);
+    // var hash = bcrypt.hashSync(pswd, salt);
+    // console.log(hash)
+
+    //Validate email
+    const emailValid = EmailValidator.validate(email);
+
+    if (!emailValid) {
+      setEmailErr(true);
+    }
+
+    if (emailValid) {
+      axios
+        .get(`${process.env.AUTH}?email=${email}`)
+
+        .then((res) => {
+          if (Object.keys(res.data).length === 0) {
+            router.push("/Signup");
+          } else {
+            const hash = res.data;
+
+            if (bcrypt.compareSync(pswd, hash)) {
+              router.push("/overview");
+              setPswdErr(false);
+            } else {
+              setPswdErr(true);
+            }
+          }
+        })
+        .catch((err) => alert(err));
+    }
   }
+
+  const emailInputLg =
+    "bg-white shadow rounded w-full h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med text-black font-extralight";
+  const pswdInputLg =
+    "bg-white shadow rounded-l w-[90%] h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med; text-black font-extralight";
 
   return (
     <form className="w-full">
-      <h2 className="text-xl pt-6">login</h2>
+      <h2 className="pt-6 text-xl">login</h2>
       <br></br>
-      <div className="search w-full flex flex-row pb-6" >
+      <div className="search flex w-full flex-col">
         <input
-          className="bg-white shadow rounded w-full h-[2rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-med text-black font-extralight"
-          id="search"
+          className={emailInputLg}
           type="email"
           placeholder="email"
-          onChange={(e) => handleChange(e, 'email')}></input>
+          onChange={(e) => handleChange(e, "email")}
+        ></input>
+        <div>
+          {!emailErr ? (
+            <div key="" className="h-6"></div>
+          ) : (
+            <p className="h-6 text-xs text-red-600 dark:text-purple-700">
+              <span className="font-medium">Um...Hello?</span> That's not an
+              email.
+            </p>
+          )}
+        </div>
       </div>
-      <div className="search w-[100%] flex flex-row pb-6">
-        <input className="bg-white shadow rounded w-full h-[2rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-med; text-black font-extralight"
-          id="search"
-          type="text"
+      <div className="search flex w-[100%] flex-row">
+        <input
+          className={pswdInputLg}
+          type={pswdType}
           placeholder="password"
-          onChange={(e) => handleChange(e, 'pswd')}></input>
+          onChange={(e) => handleChange(e, "pswd")}
+        ></input>
+
+        {pswdVisible ? (
+          <AiFillEyeInvisible
+            key="hidePswd"
+            className="rounded-r bg-white text-gray-500 sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1"
+            onClick={() => {
+              setPswdVisible(false);
+              setPswdType("password");
+            }}
+          />
+        ) : (
+          <AiFillEye
+            key="showPswd"
+            className="rounded-r bg-white text-gray-500 sm:h-[2rem] sm:w-7 sm:pr-1 sm:pl-1"
+            onClick={() => {
+              setPswdVisible(true);
+              setPswdType("text");
+            }}
+          />
+        )}
+        {/* {pswdIcon} */}
       </div>
-      <div className="flex flex-row w-[100%]">
+      <div>
+        {!pswdErr ? (
+          <div key="" className="h-6"></div>
+        ) : (
+          <p
+            id="outlined_error_help"
+            className="h-6 text-xs text-red-600 dark:text-purple-700"
+          >
+            <span className="font-medium">Oh, snapp!</span> Wrong password.
+          </p>
+        )}
+        {/* {pswdErr} */}
+      </div>
+      <div className="flex w-[100%] flex-row">
         <button
           type="button"
-          className="items-start  hover:text-yellow-400 underline font-extralight"
-          onClick={() => router.push('/overview')}>enter</button>
-
-
+          className="items-start  font-extralight underline hover:text-purple-700"
+          onClick={() => authenticate()}
+        >
+          enter
+        </button>
+        <button
+          type="button"
+          className="grow text-right font-extralight underline hover:text-purple-700"
+          onClick={() => console.log("hi")}
+        >
+          forgot password?
+        </button>
+      </div>
+    </form>
+  );
+}
 
         <button
           type='button'
