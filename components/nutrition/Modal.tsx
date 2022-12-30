@@ -38,9 +38,11 @@ const Modal = ({ showModal, date }) => {
   }
 
   const handleAdd = () => {
-    foodList.date = date;
-    foodList.consumed = false;
-    console.log(foodList)
+    const foodLog: any = {};
+    foodLog.date = date;
+    foodLog.consumed = false;
+    foodLog.items = foodList;
+    console.log(foodLog)
   }
 
   const handleAddConsumed = () => {
