@@ -7,9 +7,8 @@ import SearchModal from "../components/exercise/SearchModal";
 import EditModal from "../components/exercise/EditModal";
 import CompletedModal from '../components/exercise/CompletedModal';
 import AddSet from '../components/exercise/AddSet';
-import Modal from "../components/overview/Modal";
 import IncompleteModal from '../components/exercise/IncompleteModal';
-import { ChildProps } from "../components/Layout";
+// import { ChildProps } from "../components/Layout";
 
 import { MdOutlineFitnessCenter } from "react-icons/md";
 
