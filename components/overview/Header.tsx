@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState, useEffect } from "react";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { DateProps } from "../../pages/overview";
