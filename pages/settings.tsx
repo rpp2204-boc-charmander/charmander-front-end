@@ -6,7 +6,7 @@ import UserExperience from '../components/settings/UserExperience'
 import UserMetrics from '../components/settings/UserMetrics'
 
 
-export default function Settings({ setTitle, setIcon, setShowCalendar }: ChildProps) {
+export default function Settings({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) {
 
   const {theme, setTheme} = useTheme()
 
@@ -14,6 +14,7 @@ export default function Settings({ setTitle, setIcon, setShowCalendar }: ChildPr
     setTitle('Settings');
     setIcon(() => (MdOutlineSettings));
     setShowCalendar(false);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   return (

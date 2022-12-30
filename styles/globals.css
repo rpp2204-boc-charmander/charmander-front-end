@@ -61,7 +61,7 @@ a {
 
 @layer components {
   body {
-    @apply bg-white text-black dark:bg-slate-700 dark:text-white;
+    @apply bg-gray-100 text-black dark:bg-slate-700 dark:text-white;
   }
 }
 

@@ -6,7 +6,7 @@ import { ChildProps } from "../components/Layout";
 import { useEffect } from "react";
 import { FitbitProvider } from '../context/FitbitProvider'
 
-const Login = ({ setTitle, setIcon, setShowCalendar }: ChildProps) => {
+const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) => {
   const titleLg =
     "fixed top-[45%] left-[20%] text-black flex flex-col items-center text-6xl";
   const IconLg = "text-black";
@@ -15,6 +15,7 @@ const Login = ({ setTitle, setIcon, setShowCalendar }: ChildProps) => {
     setTitle("Welcome");
     setIcon("");
     setShowCalendar(false);
+    setShowReportButtons(false);
   }, [setTitle, setShowCalendar]);
 
   return (
