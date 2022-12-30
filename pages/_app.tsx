@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
 import "../styles/globals.css";
 import axios from "axios";
+import AuthProvider from '../context/AuthProvider'
 
 interface IProps {
   Component: any;
@@ -16,11 +17,17 @@ interface IProps {
   pageProps,
   userData,
 }: IProps): JSX.Element {
-  const user_id = userData.user_id;
 
-  const essential_props = { user_id };
+const user_id = userData.user_id;
+const essential_props = { user_id };
 
   return (
+    <AuthProvider>
+      <Layout>
+          <Component {...pageProps} {...essential_props} />
+      </Layout>
+    </AuthProvider>
+  )
     <ThemeProvider attribute='class'>
       <Layout>
         <Component {...pageProps} {...essential_props} />
@@ -45,9 +52,11 @@ App.getInitialProps = async (ctx: any) => {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute='class'>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
     </ThemeProvider>
   )
 }
