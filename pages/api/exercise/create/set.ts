@@ -4,7 +4,7 @@ import axios from "axios";
 export default async function handler(req: any, res: any) {
   let { weights, reps, workout_exercise_id  } = req.body;
 
-  return axios.post(`${process.env.API_URL}/exercise/create/set`, {
+  return axios.post(`${process.env.BACKEND_URL}/exercise/create/set`, {
             weights,
             reps,
             workout_exercise_id

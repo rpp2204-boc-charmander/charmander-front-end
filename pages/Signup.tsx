@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 import Head from "next/head";
 import SignupModal from "../components/login/SignupModal";
 
@@ -6,7 +9,7 @@ const modalStyle = {
   top: "50%",
   margin: "auto",
   msTransform: "translateY(50%)",
-  transform: "translateY(50%)",
+  transform: "translateY(50%)"
 };
 
 export default function Signup() {

@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function handler(req: any, res: any) {
   let { reps, weights, setIDs } = req.body;
 
-  return axios.put(`${process.env.API_URL}/exercise/workout/sets`, {
+  return axios.put(`${process.env.BACKEND_URL}/exercise/workout/sets`, {
             reps,
             weights,
             setIDs

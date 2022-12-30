@@ -15,7 +15,7 @@ const nextConfig = {
       {
         source: "/strava/:slug*",
         destination: "/overview", // Matched parameters can be used in the destination
-        permanent: true,
+        permanent: true
       },
     ];
   },
@@ -23,7 +23,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'www.edamam.com',
+        hostname: 'www.edamam.com'
       },
       {
         protocol: 'https',
