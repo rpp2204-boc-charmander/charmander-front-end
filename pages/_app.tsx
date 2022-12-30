@@ -1,7 +1,9 @@
-import Layout from "../components/Layout";
+import Layout from '../components/Layout'
+import '../styles/globals.css'
+import type { AppProps } from 'next/app'
+import { ThemeProvider } from 'next-themes'
 import "../styles/globals.css";
 import axios from "axios";
-import type { AppProps } from "next/app";
 import AuthProvider from '../context/AuthProvider'
 
 interface IProps {
@@ -10,7 +12,7 @@ interface IProps {
   userData: { user_id: number; log_date: string };
 }
 
-export default function App({
+/* export default function App({
   Component,
   pageProps,
   userData,
@@ -26,6 +28,12 @@ const essential_props = { user_id };
       </Layout>
     </AuthProvider>
   )
+    <ThemeProvider attribute='class'>
+      <Layout>
+        <Component {...pageProps} {...essential_props} />
+      </Layout>
+    </ThemeProvider>
+  );
 }
 
 App.getInitialProps = async (ctx: any) => {
@@ -39,4 +47,16 @@ App.getInitialProps = async (ctx: any) => {
   return {
     userData: res.data,
   };
-};
+}; */
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider attribute='class'>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </AuthProvider>
+    </ThemeProvider>
+  )
+}

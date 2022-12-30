@@ -10,9 +10,8 @@ export default function Card({
   textColor = "text-black",
 }: CaloriesCardProps) {
   return (
-    <div
-      className="m-1 flex h-[16vh] w-[30vw] cursor-pointer flex-col items-center justify-center
-      rounded-3xl bg-white text-black shadow-xl hover:shadow-2xl lg:h-[11rem] lg:w-[18rem]"
+    <div className="bg-white flex flex-col text-black min-w-[30vw] min-h-[16vh] lg:min-h-[11rem] lg:min-w-[18rem]
+      justify-center items-center rounded-3xl shadow-xl hover:shadow-2xl cursor-pointer m-1"
     >
       <div className={`text-auto lg:text-[3rem] ${textColor} font-bold`}>
         {calorie}

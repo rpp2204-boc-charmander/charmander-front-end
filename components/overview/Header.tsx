@@ -91,53 +91,39 @@ export default function Header({
   };
 
   return (
-    <div className="sticky flex h-16 w-full grow flex-row items-center justify-between bg-white pl-5 pr-5 font-bold text-black shadow-lg lg:h-24 lg:pl-12 lg:pr-12">
-      <div className="flex h-full w-full items-center">
-        {Icon && <Icon className="mr-5 text-3xl lg:text-6xl" />}
+    <div className="z-40 bg-white dark:bg-slate-700 flex flex-row grow justify-between items-center h-16 lg:h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
+
+      <div className="flex items-center w-full h-full">
+        {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
         <h1 className="text-3xl lg:text-5xl"> {title} </h1>
       </div>
 
-      {showCalendar && (
-        <div className="hidden flex-row items-center text-xl lg:flex">
-          <div>
-            <MdNavigateBefore
-              onClick={() => {
-                dateChanger(-1);
-              }}
-              className="h-14 w-14 cursor-pointer hover:text-yellow-400"
-            />
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <div
-              className="flex justify-center sm:w-52 lg:w-96"
-              id="calendar"
-              onClick={handleCalendarClick}
-            >
-              {formattedDate}
-            </div>
-
-            {isOpen && (
-              <div className="justify-center pt-48 lg:flex" id="calendar">
-                <Calendar onChange={onChange} />
-              </div>
-            )}
-          </div>
-
-          <div>
-            <MdNavigateNext
-              onClick={() => {
-                dateChanger(1);
-              }}
-              className="h-14 w-14 cursor-pointer hover:text-yellow-400"
-            />
-          </div>
+      {showCalendar && (<div className="hidden text-xl lg:flex flex-row items-center">
+        <div>
+          <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
         </div>
-      )}
 
-      <div className="flex items-center text-3xl lg:hidden">
-        <MdMenu onClick={handleMenuClick} />
+        <div className="flex flex-col justify-center">
+          <div className="sm:w-52 lg:w-96 flex justify-center" id="calendar" onClick={handleCalendarClick}>
+            {formattedDate}
+          </div>
+
+          {isOpen && (
+            <div className="pt-48 lg:flex justify-center dark:text-black" id="calendar">
+              <Calendar onChange={onChange} />
+            </div>
+          )}
+        </div>
+
+        <div>
+          <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
+        </div>
+      </div>)}
+
+      <div className="flex items-center text-3xl lg:hidden hover:text-yellow-400">
+        <MdMenu onClick={handleMenuClick}/>
       </div>
+
     </div>
-  );
+  )
 }

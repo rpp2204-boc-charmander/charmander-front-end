@@ -55,10 +55,8 @@ export default function Card({
   };
 
   return (
-    <div
-      onClick={handleClick}
-      className={`${bgColor} mr-[2rem] flex h-[16vh] w-[50vw] cursor-pointer flex-col items-center justify-center rounded-3xl
-      text-center text-black shadow-xl last:mr-[0rem] hover:shadow-2xl lg:h-[11rem] lg:w-[18rem]`}
+    <div onClick={handleClick} className={`${bgColor} flex flex-col text-black mr-[2rem] rounded-3xl min-w-[30vw] min-h-[16vh] lg:min-h-[11rem] lg:min-w-[18rem]
+      justify-center items-center last:mr-[0rem] shadow-xl hover:shadow-2xl cursor-pointer text-center`}
     >
       <div className="text-base font-bold lg:pb-6 lg:text-[2rem]">{name}</div>
 
