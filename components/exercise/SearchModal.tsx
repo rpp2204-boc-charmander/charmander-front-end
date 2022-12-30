@@ -1,36 +1,135 @@
-import { BsSearch } from "react-icons/bs";
-import { AiOutlineCloseCircle } from "react-icons/ai";
+// @ts-nocheck
 
 import { MdClose } from "react-icons/md";
+import { useState, useEffect, useRef } from "react";
+import SelectExercises from "./SelectExercises";
+import MuscleGroups from "./MuscleGroups";
+import axios from "axios";
+// import getDefaultExercises from './libs/getDefaultExercises';
 
-export default function SearchModal({ toggleAddModal }: any) {
-  return (<div>
-            <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={toggleAddModal}></div>
+export default function SearchModal({
+  toggleAddModal,
+  default_exercises,
+  muscle_groups,
+  user_id,
+  query_date,
+  handleFetchExercises,
+}: any): JSX.Element {
+  const [customExercises, setCustomExercises] = useState([]);
+  const [showDefault, setShowDefault] = useState(true);
+  const [showCustom, setShowCustom] = useState(false);
+  const [query, setQuery] = useState("");
 
-            <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
-            flex flex-col items-center w-[70%] h-[80%] rounded-3xl pl-10 pr-10"
-            >
-              <div className="w-[100%] header flex flex-row justify-between pt-4 pb-4 items-center">
-                <div className="title text-[2rem] font-bold"> Exercise Search </div>
-                <MdClose
-                  className="text-[2rem] cursor-pointer"
-                  onClick={toggleAddModal}
-                />
-              </div>
+  useEffect(() => {
+    const getCustomExercises = async (): Promise<any> => {
+      try {
+        const { data } = await axios.get(
+          `${String(
+            process.env.BACKEND_URL
+          )}/exercise/custom/list?user_id=${user_id}`
+        );
 
-              <div className="search w-[100%] flex flex-row pb-6">
-                <input className="bg-white shadow rounded w-full h-[4rem] py-2 px-3 leading-tight focus:outline-none focus:shadow-outline text-xl" id="search" type="text" placeholder="Seach by name or body part"></input>
-              </div>
+        setCustomExercises(data);
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-              <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well"> </div>
+    void getCustomExercises();
+  }, [user_id]);
 
+  const handleAddExerciseToWorkout = async (exercise_id) => {
+    try {
+      const res = await axios.post(
+        `${String(
+          process.env.BACKEND_URL
+        )}/exercise/create?user_id=${user_id}&exercise_id=${exercise_id}&log_date=${query_date}`
+      );
+      toggleAddModal();
+      handleFetchExercises();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const all_exercises = [...default_exercises, ...customExercises];
 
-              <div className="buttonContainer flex w-[50%] justify-between p-5">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Add Exercise </button>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> Add and Mark As Completed </button>
-              </div>
+  const filtered_exercises = all_exercises.filter((exercise) =>
+    exercise.exercise.toLowerCase().includes(query)
+  );
 
-            </div>
-          </div>)
+  const filtered_custom_exercises = customExercises.filter((exercise) =>
+    exercise.exercise.toLowerCase().includes(query)
+  );
+
+  return (
+    <div>
+      <div
+        className="fixed top-[50%] left-[50%] z-50 flex h-[80%] w-[70%] translate-x-[-50%]
+            translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-400  pl-10 pr-10 text-black"
+      >
+        <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
+          <div className="title text-[2rem] font-bold"> Exercise Search </div>
+          <MdClose
+            className="cursor-pointer text-[2rem]"
+            onClick={toggleAddModal}
+          />
+        </div>
+
+        <div className="search flex w-[100%] flex-row pb-6 ">
+          <input
+            className="focus:shadow-outline h-[4rem] w-full rounded bg-white py-2 px-3 text-xl leading-tight shadow focus:outline-none"
+            id="search"
+            type="text"
+            placeholder="Seach by name or body part"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          ></input>
+        </div>
+        <div className="flex flex-row content-center space-x-4">
+          <div
+            className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
+            onClick={() => {
+              setShowDefault(true);
+              setShowCustom(false);
+            }}
+          >
+            All Exercises
+          </div>
+          <div
+            className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
+            onClick={() => {
+              setShowDefault(false);
+              setShowCustom(true);
+            }}
+          >
+            Custom Exercises
+          </div>
+        </div>
+        <MuscleGroups
+          muscle_groups={muscle_groups}
+          clearSearchOnClick={() => setQuery("")}
+        />
+        {showDefault && (
+          <SelectExercises
+            exercises={filtered_exercises}
+            handleAddExerciseToWorkout={handleAddExerciseToWorkout}
+          />
+        )}
+        {showCustom && (
+          <SelectExercises
+            exercises={filtered_custom_exercises}
+            handleAddExerciseToWorkout={handleAddExerciseToWorkout}
+          />
+        )}
+
+        <div className="buttonContainer flex w-[50%] justify-between p-5">
+          {/* <button className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">
+            Add Exercise
+          </button> */}
+        </div>
+      </div>
+    </div>
+  );
 }

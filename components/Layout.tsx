@@ -4,20 +4,26 @@ import Sidebar from './Sidebar';
 import Header from "./overview/Header";
 
 export interface ChildProps {
-  currentDate: Date,
-  setTitle: Function,
-  setIcon: Function,
-  showCalendar: boolean,
-  setShowCalendar: Function
+  currentDate: Date;
+  setTitle: Function;
+  setIcon: Function;
+  showCalendar: boolean;
+  setShowCalendar: Function;
 }
 
-export default function Layout({ children }: any) {
+export default function Layout({ children }: any): JSX.Element {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
   const [showCalendar, setShowCalendar] = useState(false);
-  const [toggleSidebar, setToggleSidebar] = useState(0)
+  const [toggleSidebar, setToggleSidebar] = useState(0);
   const translate = ["-translate-x-full", ""];
+
+  const month = currentDate.getUTCMonth() + 1; // months from 1-12
+  const day = currentDate.getUTCDate();
+  const year = currentDate.getUTCFullYear();
+
+  const date_string_for_query = `${year}/${month}/${day}`;
 
   return (
     <div className="relative min-h-screen flex">
@@ -25,7 +31,7 @@ export default function Layout({ children }: any) {
         <Sidebar />
       </aside>
 
-      <main className='flex-1'>
+      <main className="flex-1">
         <Header
           currentDate={currentDate}
           setCurrentDate={setCurrentDate}
@@ -37,14 +43,15 @@ export default function Layout({ children }: any) {
 
         <div>
           {React.cloneElement(children, {
-            currentDate: currentDate,
-            setTitle: setTitle,
-            setIcon: setIcon,
-            showCalendar: showCalendar,
-            setShowCalendar: setShowCalendar
+            query_date: date_string_for_query,
+            currentDate,
+            setTitle,
+            setIcon,
+            showCalendar,
+            setShowCalendar,
           })}
         </div>
       </main>
     </div>
-  )
-};
+  );
+}
