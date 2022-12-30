@@ -47,8 +47,8 @@ export default function Container({
   });
 
   return (
-    <div className="mb-[2rem] flex h-[25vh] w-full max-w-[75rem] flex-col items-center overflow-hidden bg-black lg:h-[20rem] lg:w-[80vw] lg:rounded-3xl">
-      <div className="flex h-[3rem] w-full flex-row items-center justify-between bg-gray-500 text-white lg:h-[4rem]">
+    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden h-[25vh] lg:rounded-3xl lg:h-[20rem] w-screen lg:w-[80vw] max-w-[75rem]">
+      <div className="bg-gray-500 flex flex-row h-[3rem] lg:h-[4rem] items-center text-white justify-between w-full">
         <div className="ml-5 text-base sm:text-[2rem]"> {title} </div>
         {type === "calories" && (
           <div className="mr-5 text-xs italic lg:text-base">
@@ -78,10 +78,9 @@ export default function Container({
         setNutrition={setNutrition}
       ></Modal>
 
-      <div className="relative h-full w-full">
-        <div
-          className="flex min-h-full w-full flex-row items-center justify-between
-          overflow-x-scroll border bg-gray-300 bg-fixed pl-2 pr-2 scrollbar-hide lg:h-[16rem] lg:pl-[4rem] lg:pr-[4rem]"
+      <div className="relative w-full h-full">
+        <div className="z-0 bg-gray-300 flex flex-row min-h-full lg:h-[16rem] justify-between
+          items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border w-full"
         >
           {cards.length === 0 && type === "exercise" && (
             <div className="flex w-full justify-center">
