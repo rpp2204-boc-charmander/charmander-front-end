@@ -3,7 +3,11 @@ import { useRouter } from "next/router";
 import strava from "/public/strava/strava_orange.svg";
 import Image from "next/image";
 
-export default function StravaBtn() {
+export interface StravaProps {
+  setUserId: Function
+}
+
+export default function StravaBtn({ setUserId }: StravaProps) {
   const router = useRouter();
 
   const id = process.env.STRAVA_ID;

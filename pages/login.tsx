@@ -6,7 +6,7 @@ import { ChildProps } from "../components/Layout";
 import { useEffect } from "react";
 import { FitbitProvider } from '../context/FitbitProvider'
 
-const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) => {
+const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userId, setUserId  }: ChildProps) => {
   const titleLg =
     "fixed top-[45%] left-[20%] text-black flex flex-col items-center text-6xl";
   const IconLg = "text-black";
@@ -14,9 +14,10 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: Chi
   useEffect(() => {
     setTitle("Welcome");
     setIcon("");
+    setUserId('0')
     setShowCalendar(false);
     setShowReportButtons(false);
-  }, [setTitle, setShowCalendar]);
+  }, [setTitle, setShowCalendar, userId]);
 
   return (
     <FitbitProvider>
@@ -37,7 +38,8 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: Chi
             <div className="grow"></div>
           </div>
         </div >
-          <LoginCard />
+          <LoginCard
+            setUserId={setUserId}/>
         </main>
       </div>
     </FitbitProvider>

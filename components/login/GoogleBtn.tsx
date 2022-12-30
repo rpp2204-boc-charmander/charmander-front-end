@@ -5,7 +5,8 @@ import axios from "axios";
 
 interface GoogleProps {
   init: boolean;
-  reset?: any;
+  reset: Function;
+  setUserId: Function
 }
 
 export default function GoogleBtn({ init, reset }: GoogleProps) {

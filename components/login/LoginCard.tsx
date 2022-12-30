@@ -5,12 +5,16 @@ import { useState } from 'react'
 import StravaBtn from './StravaBtn';
 import FitbitBtn from './FitbitBtn';
 
+export interface LoginProps {
+  setUserId: Function
+}
+
 export interface GoogleProps {
   init: boolean;
   reset?: any;
 }
 
-export default function LoginCard() {
+export default function LoginCard({ setUserId }: LoginProps) {
   const [google, setGoogle] = useState(false);
 
   const loginCardLg =
@@ -30,17 +34,23 @@ export default function LoginCard() {
       />
 
       <div className={loginCardLg}>
-        <LoginForm />
+        <LoginForm
+          setUserId={setUserId}/>
         <br></br>
         <a className={signUpBtnLg} href="/Signup">
           sign up with email
         </a>
         <br></br>
-        <StravaBtn />
+        <StravaBtn
+          setUserId={setUserId}/>
         <br></br>
-        <FitbitBtn />
+        <FitbitBtn
+          setUserId={setUserId}/>
         <br></br>
-        <GoogleBtn init={google} reset={setGoogle} />
+        <GoogleBtn
+          init={google}
+          reset={setGoogle}
+          setUserId={setUserId} />
       </div>
     </div>
   );
