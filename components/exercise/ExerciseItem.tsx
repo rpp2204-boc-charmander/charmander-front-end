@@ -12,7 +12,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
   return (
     <div className="h-[35.3%] rounded-lg shadow-lg bg-gray-200 x-5 mt-8 flex flex-col">
 
-      <header className="flex bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
+      <header className="flex w-full bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
 
         <div className="flex items-center py-3 justify-around w-[45%]">
           <h1 className="text-2xl text-left pl-5 w-full">{exercise.exercise}
@@ -26,7 +26,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
         </div>
       </header>
 
-      <section className="grid h-[250px] grid-cols-[25%_40%_35%]">
+      <section className="grid h-[250px] w-full grid-cols-[25%_40%_35%]">
         <img
           className="aspect-square w-[225px] place-self-center rounded-lg bg-gray-300 shadow-md"
           alt="exercise-image"

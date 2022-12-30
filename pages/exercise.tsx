@@ -204,7 +204,7 @@ const completeExercise = async (workout_exercise_id: number) => {
   };
 
   return (
-    <div className="exerciseContainer">
+    <div className="exerciseContainer w-full h-full">
       {addModalState && (
         <SearchModal
           query_date={query_date}
