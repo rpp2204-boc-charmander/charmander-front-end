@@ -63,16 +63,18 @@ export default function Charts(props: any) {
   let reportsData: report[] = weekData.data;
   return (
     <div>
-      <ul className="h-full w-full overflow-auto">
+      <ul className="h-full w-full p-3">
         {reportsData.map((report, index) => {
           return (
-            <li key={index}>
-              <LineChart
-                chartData={report}
-                time={weekData.unix}
-                timespan={props.timespan}
-              />
-            </li>
+            <div className="pb-5 w-full flex justify-center">
+              <li className="flex grow bg-gray-300 h-[20rem] max-w-[75rem] rounded-3xl justify-center items-center" key={index}>
+                <LineChart
+                  chartData={report}
+                  time={weekData.unix}
+                  timespan={props.timespan}
+                />
+              </li>
+            </div>
           );
         })}
       </ul>

@@ -47,7 +47,7 @@ export default function Container({
   });
 
   return (
-    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden h-[25vh] lg:rounded-3xl lg:h-[20rem] w-screen lg:w-[80vw] max-w-[75rem]">
+    <div className="flex flex-col items-center mb-[2rem] overflow-hidden h-[25vh] lg:rounded-3xl lg:h-[20rem] w-screen lg:w-[80vw] max-w-[75rem]">
       <div className="bg-gray-500 flex flex-row h-[3rem] lg:h-[4rem] items-center text-white justify-between w-full">
         <div className="ml-5 text-base sm:text-[2rem]"> {title} </div>
         {type === "calories" && (
