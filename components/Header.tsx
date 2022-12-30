@@ -171,29 +171,57 @@ export default function Header({
 
       <div className="flex justify-center w-full lg:hidden">
         {showCalendar && (
-            <div className="text-xl flex flex-row items-center justify-between w-full">
-              <div>
-                <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
-              </div>
-
-              <div className="relative flex flex-col justify-center basis-80">
-                <div className="w-full flex justify-center" id="calendar" onClick={handleCalendarClick}>
-                  {formattedDate}
-                </div>
-
-                {isOpen && (
-                  <div className="z-40 absolute pt-60 dark:text-black" id="calendar">
-                    <Calendar onChange={onChange} />
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
-              </div>
+          <div className="text-xl flex flex-row items-center justify-between w-full p-3">
+            <div>
+              <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
             </div>
-          )}
-        </div>
+
+            <div className="relative flex flex-col justify-center basis-80">
+              <div className="w-full flex justify-center" id="calendar" onClick={handleCalendarClick}>
+                {formattedDate}
+              </div>
+
+              {isOpen && (
+                <div className="z-40 absolute pt-60 dark:text-black" id="calendar">
+                  <Calendar onChange={onChange} />
+                </div>
+              )}
+            </div>
+
+            <div>
+              <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
+            </div>
+          </div>
+        )}
+
+        {showReportButtons && (
+          <div className="flex lg:hidden w-full flex-row p-3 justify-center space-x-5">
+            <button
+              onClick={handleReportButtonsClick}
+              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              name="week"
+            >
+              Week
+            </button>
+
+            <button
+              onClick={handleReportButtonsClick}
+              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              name="month"
+            >
+              Month
+            </button>
+
+            <button
+              onClick={handleReportButtonsClick}
+              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              name="year"
+            >
+              Year
+            </button>
+          </div>
+        )}
+      </div>
     </>
   )
 }
