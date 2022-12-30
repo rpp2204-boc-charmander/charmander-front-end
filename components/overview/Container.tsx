@@ -1,32 +1,37 @@
 import { useRef, useEffect, useState } from "react";
-import { MdAdd } from 'react-icons/md';
+import { MdAdd } from "react-icons/md";
 import CaloriesCard from "./CaloriesCard";
 import ExerciseAndNutritionCard from "./ExerciseAndNutritionCard";
 import Modal from "./Modal";
 import { ExerciseObjProps, NutritionObjProps } from "../../pages/overview";
 
 interface CaloriesCardProps {
-  text: string
-  calorie: number
+  text: string;
+  calorie: number;
 }
 
 interface ContainerProps {
-  type: "calories" | "exercise" | "nutrition",
-  title: string,
+  type: "calories" | "exercise" | "nutrition";
+  title: string;
   //cards: Array<CaloriesCardProps> | Array<ExerciseObjProps> | Array<NutritionObjProps>,
-  cards: any,
-  setExercises?: any,
-  setNutrition?: any,
-  bmr: number | 0
+  cards: any;
+  setExercises?: any;
+  setNutrition?: any;
+  bmr: number | 0;
 }
 
-export default function Container({ type, title, cards, setExercises, setNutrition, bmr }: ContainerProps) {
+export default function Container({
+  type,
+  title,
+  cards,
+  setExercises,
+  setNutrition,
+  bmr,
+}: ContainerProps) {
   /* const scrollRef = useRef<any>();
-
   const slideScroll = () => {
     console.log('Hello');
   }
-
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', slideScroll)
@@ -39,19 +44,28 @@ export default function Container({ type, title, cards, setExercises, setNutriti
     if (card.completed === true) {
       numberOfCompleted++;
     }
-  })
+  });
 
   return (
-    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden rounded-3xl min-h-[20rem] w-[75rem]">
-      <div className="bg-gray-500 flex flex-row h-[4rem] items-center text-[2rem] text-white justify-between w-full">
-        <div className="ml-5"> {title} </div>
-        {(type === "calories") && (
-          <div className="text-base italic mr-5"> Recommended daily consumption: {Math.round(bmr)} </div>
+    <div className="bg-black flex flex-col items-center mb-[2rem] overflow-hidden h-[25vh] lg:rounded-3xl lg:h-[20rem] w-screen lg:w-[80vw] max-w-[75rem]">
+      <div className="bg-gray-500 flex flex-row h-[3rem] lg:h-[4rem] items-center text-white justify-between w-full">
+        <div className="ml-5 text-base sm:text-[2rem]"> {title} </div>
+        {type === "calories" && (
+          <div className="mr-5 text-xs italic lg:text-base">
+            {" "}
+            Recommended daily consumption: {Math.round(bmr)}{" "}
+          </div>
         )}
-        {(type !== "calories") && (
-          <div className="flex flex-row grow items-center justify-between">
-            <div className="text-base italic ml-5"> {numberOfCompleted} of {cards.length} items completed </div>
-            <MdAdd className="mr-5 cursor-pointer" onClick={() => setIsOpen(true)}/>
+        {type !== "calories" && (
+          <div className="flex grow flex-row items-center justify-between">
+            <div className="ml-5 text-xs italic lg:text-base">
+              {" "}
+              {numberOfCompleted} of {cards.length} items completed{" "}
+            </div>
+            <MdAdd
+              className="mr-5 cursor-pointer"
+              onClick={() => setIsOpen(true)}
+            />
           </div>
         )}
       </div>
@@ -64,56 +78,79 @@ export default function Container({ type, title, cards, setExercises, setNutriti
         setNutrition={setNutrition}
       ></Modal>
 
-      <div className="relative">
-        <div className="bg-gray-300 flex flex-row h-[16rem] justify-between
-          items-center bg-fixed overflow-x-scroll pl-[4rem] pr-[4rem] scrollbar-hide border w-[75rem]"
+      <div className="relative w-full h-full">
+        <div className="z-0 bg-gray-300 flex flex-row min-h-full lg:h-[16rem] justify-between
+          items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border w-full"
         >
-          {cards.map((card: any, index: any) => {
-            if (type === "calories") {
-              let textColor = "text-black"
-              if (index === 2) {
-                if (card.calorie >= 0) {
-                  textColor = "text-green-500";
+          {cards.length === 0 && type === "exercise" && (
+            <div className="flex w-full justify-center">
+              <div className="flex justify-center text-2xl text-white">
+                No workout has been added
+              </div>
+            </div>
+          )}
+
+          {cards.length === 0 && type === "nutrition" && (
+            <div className="flex w-full justify-center">
+              <div className="flex justify-center text-2xl text-white">
+                No meal has been added
+              </div>
+            </div>
+          )}
+
+          {cards.length !== 0 &&
+            cards.map((card: any, index: any) => {
+              if (type === "calories") {
+                let textColor = "text-black";
+                if (index === 2) {
+                  if (card.calorie >= 0) {
+                    textColor = "text-green-500";
+                  } else {
+                    textColor = "text-red-500";
+                  }
                 } else {
-                  textColor = "text-red-500";
+                  textColor = "text-black";
                 }
+                return (
+                  <CaloriesCard
+                    textColor={textColor}
+                    key={index}
+                    calorie={card.calorie}
+                    text={card.text}
+                  />
+                );
+              } else if (type === "exercise") {
+                return (
+                  <ExerciseAndNutritionCard
+                    key={index}
+                    idx={index}
+                    type={type}
+                    name={card.text}
+                    calorie={card.calorie}
+                    sets={card.sets}
+                    reps={card.reps}
+                    weight={card.weight}
+                    completed={card.completed}
+                    setExercises={setExercises}
+                  />
+                );
               } else {
-                textColor = "text-black";
+                return (
+                  <ExerciseAndNutritionCard
+                    key={index}
+                    idx={index}
+                    type={type}
+                    name={card.text}
+                    calorie={card.calorie}
+                    portion={card.portion}
+                    completed={card.completed}
+                    setNutrition={setNutrition}
+                  />
+                );
               }
-              return <CaloriesCard
-                textColor={textColor}
-                key={index}
-                calorie={card.calorie}
-                text={card.text}
-              />
-            } else if (type === "exercise") {
-              return <ExerciseAndNutritionCard
-                key={index}
-                idx={index}
-                type={type}
-                name={card.text}
-                calorie={card.calorie}
-                sets={card.sets}
-                reps={card.reps}
-                weight={card.weight}
-                completed={card.completed}
-                setExercises={setExercises}
-              />
-            } else {
-              return <ExerciseAndNutritionCard
-                key={index}
-                idx={index}
-                type={type}
-                name={card.text}
-                calorie={card.calorie}
-                portion={card.portion}
-                completed={card.completed}
-                setNutrition={setNutrition}
-              />
-            }
-          })}
+            })}
         </div>
       </div>
     </div>
-  )
+  );
 }

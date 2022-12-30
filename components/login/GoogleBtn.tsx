@@ -1,53 +1,35 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
-
+import axios from "axios";
 
 interface GoogleProps {
-  init: boolean,
-  reset?: any
+  init: boolean;
+  reset?: any;
 }
 
-export default function GoogleBtn( { init, reset }: GoogleProps) {
-  const router = useRouter()
+export default function GoogleBtn({ init, reset }: GoogleProps) {
+  const router = useRouter();
 
   // handles responses from GI API login attempt
-  async function handleResponse(response:any ) {
-
-    const token:any = await response.credential
-    const responsePayload:any = jwt_decode(token);
-
-     console.log("ID: " + responsePayload.sub);
-     console.log('Full Name: ' + responsePayload.name);
-     console.log('Given Name: ' + responsePayload.given_name);
-     console.log('Family Name: ' + responsePayload.family_name);
-     console.log("Image URL: " + responsePayload.picture);
-     console.log("Email: " + responsePayload.email);
-     console.log(responsePayload);
-
-     handleUserData(responsePayload)
-
-  }
-
-  function handleUserData (userData:any) {
-    console.log(userData)
-    const URL: any = process.env.URL_ENDPOINT
-    const DATA: any = {method: 'GET', body: userData}
-    // check if the user id is in the database
-    fetch(URL, DATA)
-    .then((response) => {
-      //if it is send them to the overview
-    })
-    .catch((err) => {
-      // if the user is not in the database
-        // send them to the sign up page
-          // autofill user data (name, email, photo)
-    })
+  async function handleResponse(response: any) {
+    const token: any = await response.credential;
+    const responsePayload: any = jwt_decode(token);
+    axios
+      .get(`${process.env.AUTH}?email=${responsePayload.email}`)
+      .then((res) => {
+        if (Object.keys(res.data).length === 0) {
+          console.log("No Account");
+          router.push("/Signup");
+        } else {
+          router.push("/overview");
+        }
+      })
+      .catch((err) => router.push("/signup"));
   }
 
   // initializes connection to GI API and renders login button
-  function initGoogle () {
-
+  function initGoogle() {
     //keeps linter from throwing error
     // google object is only defined after
     // the google identity script runs
@@ -55,25 +37,21 @@ export default function GoogleBtn( { init, reset }: GoogleProps) {
 
     google.accounts.id.initialize({
       client_id: process.env.CLIENT_ID,
-      context: 'signin',
-      ux_mode: 'popup',
+      context: "signin",
+      ux_mode: "popup",
       callback: handleResponse,
     });
 
-    google.accounts.id.renderButton(
-      document.getElementById('google_btn'),
-      {
-        shape: "pill",
-        theme: 'filled_white', size: 'large',
-      }
-    );
+    google.accounts.id.renderButton(document.getElementById("google_btn"), {
+      shape: "pill",
+      theme: "filled_black",
+      size: "large",
+    });
   }
 
   if (init) {
-    initGoogle()
+    initGoogle();
   }
 
-  return (
-    <div id='google_btn' />
-  )
+  return <div id="google_btn" />;
 }
