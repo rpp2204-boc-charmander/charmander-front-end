@@ -30,6 +30,7 @@ export default function Exercise({
   user_id,
   default_exercises,
   muscle_groups,
+  setShowReportButtons
 }: any): JSX.Element {
   // IDs
   const [workoutID, setWorkoutID] = useState(1);
@@ -51,8 +52,9 @@ export default function Exercise({
 
   useEffect(() => {
     setTitle("Exercise");
-    setIcon((prevState: any) => MdOutlineFitnessCenter);
+    setIcon(() => MdOutlineFitnessCenter);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   useEffect(() => {

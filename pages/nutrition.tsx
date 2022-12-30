@@ -30,6 +30,7 @@ const Nutrition = ({
   setTitle,
   setIcon,
   setShowCalendar,
+  setShowReportButtons
 }: ChildProps) => {
   const [pendingItem, setPendingItem] = useState<FoodDataType>(
     {} as FoodDataType
@@ -52,6 +53,7 @@ const Nutrition = ({
     setTitle("Nutrition");
     setIcon((prevState: any) => MdRestaurant);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   return (

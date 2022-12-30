@@ -26,6 +26,7 @@ export default function Overview({
   setTitle,
   setIcon,
   setShowCalendar,
+  setShowReportButtons
 }: ChildProps) {
   // States
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
@@ -48,16 +49,16 @@ export default function Overview({
 
   useEffect(() => {
     setTitle("Overview");
-    setIcon((prevState: any) => MdOutlineSort);
+    setIcon(() => MdOutlineSort);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
+  // Get workout data
   useEffect(() => {
     //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
     axios(
-      `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(
-        currentDate
-      )}`
+      `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`
     ).then((result) => {
       let data = result.data;
       let exercise: ExerciseObjProps = {
@@ -74,6 +75,8 @@ export default function Overview({
       setExercises(newData);
     });
   }, [currentDate]);
+
+
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {

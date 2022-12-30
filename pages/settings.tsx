@@ -3,7 +3,7 @@ import { useEffect} from 'react'
 import { MdOutlineSettings } from 'react-icons/md'
 import { useTheme } from 'next-themes'
 
-export default function Settings({ setTitle, setIcon, setShowCalendar }: ChildProps) {
+export default function Settings({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) {
 
   const {theme, setTheme} = useTheme()
 
@@ -11,6 +11,7 @@ export default function Settings({ setTitle, setIcon, setShowCalendar }: ChildPr
     setTitle('Settings');
     setIcon(() => (MdOutlineSettings));
     setShowCalendar(false);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   return (
