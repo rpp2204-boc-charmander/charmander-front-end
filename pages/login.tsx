@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Script from 'next/script';
 import Head from "next/head";
 import LoginCard from "../components/login/LoginCard";
 import { ChildProps } from "../components/Layout";
@@ -8,6 +9,8 @@ import LoginImage from "public/38501.png";
 import Image from "next/image";
 
 const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userId, setUserId  }: ChildProps) => {
+
+  const [google, setGoogle] = useState(false)
 
   const titleLg =
     "fixed top-[45%] left-[20%] text-black flex flex-col items-center text-6xl";
@@ -23,6 +26,15 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
 
   return (
     <div className="flex justify-center items-center w-full h-full p-3">
+      <Script
+        src="https://accounts.google.com/gsi/client"
+        async
+        defer
+        onLoad={() => {
+          setGoogle(true);
+        }}
+      />
+
       <Head>
         <title>My Health Coach</title>
         <meta
@@ -37,7 +49,9 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
         </div>
         <div className="bg-LoginGray dark:bg-slate-600 flex grow basis-[40%] h-full justify-center items-center rounded-tr-2xl rounded-br-2xl">
           <LoginCard
-            setUserId={setUserId}/>
+            setUserId={setUserId}
+            setGoogle={setGoogle}
+            google={google}/>
         </div>
       </main>
     </div>

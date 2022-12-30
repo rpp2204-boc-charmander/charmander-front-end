@@ -6,19 +6,15 @@ import StravaBtn from './StravaBtn';
 import FitbitBtn from './FitbitBtn';
 
 export interface LoginProps {
-  setUserId: Function
+  setUserId: Function;
+  setGoogle: Function;
+  google: boolean
 }
 
-export interface GoogleProps {
-  init: boolean;
-  reset?: any;
-}
-
-export default function LoginCard({ setUserId }: LoginProps) {
-  const [google, setGoogle] = useState(false);
+export default function LoginCard({ setUserId, setGoogle, google }: LoginProps) {
 
   const loginCardLg =
-    "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-max p-3";
+    "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-full p-2";
   const signUpBtnLg =
     "h-9 w-full bg-white rounded-2xl text-black p-1 text-center font-light";
 
@@ -48,8 +44,7 @@ export default function LoginCard({ setUserId }: LoginProps) {
           setUserId={setUserId}/>
         <br></br>
         <GoogleBtn
-          init={google}
-          reset={setGoogle}
+          google={google}
           setUserId={setUserId} />
       </div>
     </div>

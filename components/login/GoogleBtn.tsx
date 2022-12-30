@@ -4,12 +4,11 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 interface GoogleProps {
-  init: boolean;
-  reset: Function;
+  google: boolean;
   setUserId: Function
 }
 
-export default function GoogleBtn({ init, reset }: GoogleProps) {
+export default function GoogleBtn({ google, setUserId }: GoogleProps) {
   const router = useRouter();
 
   // handles responses from GI API login attempt
@@ -56,7 +55,7 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
     });
   }
 
-  if (init) {
+  if (google) {
     initGoogle();
   }
 
