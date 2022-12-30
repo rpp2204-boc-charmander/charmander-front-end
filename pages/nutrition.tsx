@@ -30,6 +30,7 @@ const Nutrition = ({
   setTitle,
   setIcon,
   setShowCalendar,
+  setShowReportButtons
 }: ChildProps) => {
   const [pendingItem, setPendingItem] = useState<FoodDataType>(
     {} as FoodDataType
@@ -52,10 +53,11 @@ const Nutrition = ({
     setTitle("Nutrition");
     setIcon((prevState: any) => MdRestaurant);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   return (
-    <>
+    <div className="nutritionContainer">
       <div className="mb-10 flex w-auto flex-row justify-between bg-white">
         <div className="flex flex-row">
           <GiForkKnifeSpoon className="mr-2 text-3xl" />
@@ -100,7 +102,7 @@ const Nutrition = ({
           setIsEditShowing={setIsEditShowing}
         />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -6,9 +6,8 @@ import { MdOutlineFastfood } from "react-icons/md";
 import { ChildProps } from "../components/Layout";
 import { useEffect } from "react";
 
-const Login = ({ currentDate, setTitle, setIcon, setShowCalendar }: ChildProps) => {
-  const titleLg =
-    "fixed top-[45%] left-[20%] text-LoginGray flex flex-col items-center text-6xl";
+const Login = ({ currentDate, setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) => {
+  const titleLg = "fixed top-[45%] left-[20%] text-LoginGray flex flex-col items-center text-6xl";
   const foodIconLg = "test-xl";
   const exerciseIconLg = "test-7xl";
 
@@ -16,6 +15,7 @@ const Login = ({ currentDate, setTitle, setIcon, setShowCalendar }: ChildProps) 
     setTitle("Welcome");
     setIcon("");
     setShowCalendar(false);
+    setShowReportButtons(false);
   }, [setTitle, setShowCalendar]);
 
   return (

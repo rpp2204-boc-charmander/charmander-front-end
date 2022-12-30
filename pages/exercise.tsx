@@ -53,8 +53,9 @@ export default function Exercise({
 
   useEffect(() => {
     setTitle("Exercise");
-    setIcon((prevState: any) => MdOutlineFitnessCenter);
+    setIcon(() => MdOutlineFitnessCenter);
     setShowCalendar(true);
+    setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
   useEffect(() => {
@@ -204,7 +205,7 @@ const completeExercise = async (workout_exercise_id: number) => {
   };
 
   return (
-    <>
+    <div className="exerciseContainer">
       {addModalState && (
         <SearchModal
           query_date={query_date}
@@ -252,7 +253,7 @@ const completeExercise = async (workout_exercise_id: number) => {
           completeExercise={completeExercise}
         />
       </div>
-    </>
+    </div>
   );
 }
 

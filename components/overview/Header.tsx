@@ -10,6 +10,9 @@ export interface HeaderProps {
   Icon: any;
   showCalendar: boolean;
   setToggleSidebar: Function;
+  showReportButtons: boolean;
+  timespan: String;
+  setTimespan: Function
 }
 
 export default function Header({
@@ -19,7 +22,11 @@ export default function Header({
   Icon,
   showCalendar,
   setToggleSidebar,
+  showReportButtons,
+  timespan,
+  setTimespan
 }: HeaderProps) {
+
   const [formattedDate, setFormattedDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -90,35 +97,70 @@ export default function Header({
     });
   };
 
+  const handleReportButtonsClick = function (e: any) {
+    e.preventDefault();
+    setTimespan(e.target.name);
+  }
+
   return (
-    <div className="z-40 bg-white dark:bg-slate-700 flex flex-row grow justify-between items-center h-16 lg:h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
+    <div className="z-40 bg-gray-50 dark:bg-slate-600 flex flex-row justify-between items-center h-16 lg:h-32 lg:max-h-24 text-black dark:text-white font-bold sticky shadow-lg w-full pl-5 pr-5 lg:pl-12 lg:pr-12">
 
       <div className="flex items-center w-full h-full">
         {Icon && <Icon className="text-3xl lg:text-6xl mr-5"/>}
         <h1 className="text-3xl lg:text-5xl"> {title} </h1>
       </div>
 
-      {showCalendar && (<div className="hidden text-xl lg:flex flex-row items-center">
-        <div>
-          <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
-        </div>
-
-        <div className="flex flex-col justify-center">
-          <div className="sm:w-52 lg:w-96 flex justify-center" id="calendar" onClick={handleCalendarClick}>
-            {formattedDate}
+      {showCalendar && (
+        <div className="hidden text-xl lg:flex flex-row items-center">
+          <div>
+            <MdNavigateBefore onClick={() => {dateChanger(-1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
           </div>
 
-          {isOpen && (
-            <div className="pt-48 lg:flex justify-center dark:text-black" id="calendar">
-              <Calendar onChange={onChange} />
+          <div className="flex flex-col justify-center">
+            <div className="sm:w-52 lg:w-96 flex justify-center" id="calendar" onClick={handleCalendarClick}>
+              {formattedDate}
             </div>
-          )}
-        </div>
 
-        <div>
-          <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
+            {isOpen && (
+              <div className="pt-56 lg:flex justify-center dark:text-black" id="calendar">
+                <Calendar onChange={onChange} />
+              </div>
+            )}
+          </div>
+
+          <div>
+            <MdNavigateNext onClick={() => {dateChanger(1)}} className="h-14 w-14 hover:text-yellow-400 cursor-pointer"/>
+          </div>
         </div>
-      </div>)}
+      )}
+
+      {showReportButtons && (
+        <div className="hidden min-w-[20rem] lg:flex flex-row justify-between">
+          <button
+            onClick={handleReportButtonsClick}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+            name="week"
+          >
+            Week
+          </button>
+
+          <button
+            onClick={handleReportButtonsClick}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+            name="month"
+          >
+            Month
+          </button>
+
+          <button
+            onClick={handleReportButtonsClick}
+            className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+            name="year"
+          >
+            Year
+          </button>
+        </div>
+      )}
 
       <div className="flex items-center text-3xl lg:hidden hover:text-yellow-400">
         <MdMenu onClick={handleMenuClick}/>
