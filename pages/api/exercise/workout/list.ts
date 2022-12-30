@@ -4,9 +4,6 @@ import axios from "axios";
 export default function handler(req: any, res: any) {
   let { user_id, log_date } = req.query;
 
-  console.log('PROCESS ENV', process.env.API_URL)
-
-
   return axios.get(`${process.env.API_URL}/exercise/workout/list?user_id=${user_id}&log_date=${log_date}`)
           .then(({ data }) => {
             res.status(200).json(data);
