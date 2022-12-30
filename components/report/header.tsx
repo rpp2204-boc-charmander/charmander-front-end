@@ -1,20 +1,37 @@
-import React from 'react';
-import {TbClipboardList} from 'react-icons/tb';
+import React from "react";
+import { TbClipboardList } from "react-icons/tb";
 
-export default function Header (props: any) {
-
+export default function Header(props: any) {
   return (
-    <div className='bg-gray-400 flex flex-row justify-between items-center h-[6rem] mb-[3rem]'>
-      <div className='flex items-center'>
-        <TbClipboardList className='inline h-36 w-1/6 mr-5'/>
-        <h1 className='inline text-[4rem]'> Report </h1>
+    <div className="mb-[3rem] flex h-[6rem] flex-row items-center justify-between bg-gray-400">
+      <div className="flex items-center">
+        <TbClipboardList className="mr-5 inline h-36 w-1/6" />
+        <h1 className="inline text-[4rem]"> Report </h1>
       </div>
-      <div className='justify-between items-center inline-block w-1/3'>
-        <button className='text-[20px] mr-[.5rem] border-solid border-2' name='week' onClick={props.click}>Week</button>
-        <button className='text-[20px] m-[.5rem] border-solid border-2' name='month' onClick={props.click}>Month</button>
-        <button className='text-[20px] ml-[.5rem] border-solid border-2' name='year' onClick={props.click}>Year</button>
+      <div className="inline-block w-1/3 items-center justify-between">
+        <button
+          className="mr-[.5rem] border-2 border-solid text-[20px]"
+          name="week"
+          onClick={props.click}
+        >
+          Week
+        </button>
+        <button
+          className="m-[.5rem] border-2 border-solid text-[20px]"
+          name="month"
+          onClick={props.click}
+        >
+          Month
+        </button>
+        <button
+          className="ml-[.5rem] border-2 border-solid text-[20px]"
+          name="year"
+          onClick={props.click}
+        >
+          Year
+        </button>
       </div>
-      <div className='text-[4rem]'>{props.day}</div>
+      <div className="text-[4rem]">{props.day}</div>
     </div>
   );
-};
+}
