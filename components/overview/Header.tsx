@@ -100,7 +100,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon, showC
           </div>
 
           {isOpen && (
-            <div className="pt-48 lg:flex justify-center" id="calendar">
+            <div className="pt-48 lg:flex justify-center dark:text-black" id="calendar">
               <Calendar onChange={onChange} />
             </div>
           )}
