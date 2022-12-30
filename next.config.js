@@ -22,7 +22,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/login', // Matched parameters can be used in the destination
+        destination: '/login',
         permanent: true
       }
     ]
