@@ -126,35 +126,33 @@ export default function Overview({
   }, [caloriesConsumed, caloriesBurned]);
 
   return (
-    <div className="h-[100%] w-[100%] flex items-center justify-center">
-      <div className="h-full w-full p-3 flex flex-col items-center justify-center">
-        <Container
-          type="calories"
-          title="Calories"
-          cards={[
-            { calorie: caloriesConsumed, text: "Calories Consumed" },
-            { calorie: caloriesBurned, text: "Calories Burned" },
-            { calorie: netCalories, text: "Net Calories" },
-          ]}
-          bmr={bmr}
-        />
+    <div className="h-full w-full p-3 flex flex-col justify-between lg:items-center lg:justify-center">
+      <Container
+        type="calories"
+        title="Calories"
+        cards={[
+          { calorie: caloriesConsumed, text: "Calories Consumed" },
+          { calorie: caloriesBurned, text: "Calories Burned" },
+          { calorie: netCalories, text: "Net Calories" },
+        ]}
+        bmr={bmr}
+      />
 
-        <Container
-          type="exercise"
-          title="Exercise"
-          cards={exercises}
-          setExercises={setExercises}
-          bmr={bmr}
-        />
+      <Container
+        type="exercise"
+        title="Exercise"
+        cards={exercises}
+        setExercises={setExercises}
+        bmr={bmr}
+      />
 
-        <Container
-          type="nutrition"
-          title="Nutrition"
-          cards={nutrition}
-          setNutrition={setNutrition}
-          bmr={bmr}
-        />
-      </div>
+      <Container
+        type="nutrition"
+        title="Nutrition"
+        cards={nutrition}
+        setNutrition={setNutrition}
+        bmr={bmr}
+      />
     </div>
   );
 }

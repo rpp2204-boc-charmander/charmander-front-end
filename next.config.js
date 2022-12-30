@@ -13,12 +13,24 @@ const nextConfig = {
   async redirects () {
     return [
       {
-        source: '/strava/:slug*',
-        destination: '/overview', // Matched parameters can be used in the destination
-        permanent: true
+        source: "/strava/:slug*",
+        destination: "/overview", // Matched parameters can be used in the destination
+        permanent: true,
+      },
+    ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.edamam.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org'
       }
-    ]
-  }
-}
+    ],
+  },
+};
 
 module.exports = nextConfig

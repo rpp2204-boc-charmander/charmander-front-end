@@ -1,7 +1,7 @@
 import React, { use } from "react";
 import { useState, useEffect } from "react";
 import Sidebar from './Sidebar';
-import Header from "./overview/Header";
+import Header from "./Header";
 
 export interface ChildProps {
   currentDate: Date;
