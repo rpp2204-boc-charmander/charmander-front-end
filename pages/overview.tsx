@@ -26,7 +26,8 @@ export default function Overview({
   setTitle,
   setIcon,
   setShowCalendar,
-  setShowReportButtons
+  setShowReportButtons,
+  userId
 }: ChildProps) {
   // States
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
@@ -56,6 +57,7 @@ export default function Overview({
 
   // Get workout data
   useEffect(() => {
+    console.log(userId);
     //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
     axios(
       `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`
