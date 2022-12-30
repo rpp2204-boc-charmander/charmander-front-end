@@ -163,7 +163,7 @@ export default function Header({
           </div>
         )}
 
-        <div className="flex items-center text-3xl lg:hidden hover:text-yellow-400">
+        <div className="flex items-center text-3xl lg:hidden hover:text-yellow-400 cursor-pointer">
           <MdMenu onClick={handleMenuClick}/>
         </div>
 
