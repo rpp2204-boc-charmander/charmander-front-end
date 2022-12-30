@@ -4,7 +4,7 @@ import { DateProps } from "../../pages/overview";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-export default function Header({ currentDate, setCurrentDate, title, Icon }: DateProps) {
+export default function Header({ currentDate, setCurrentDate, setLoaded, title, Icon }: DateProps) {
   const [formattedDate, setFormattedDate] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,6 +44,7 @@ export default function Header({ currentDate, setCurrentDate, title, Icon }: Dat
     const msToChange = 86_400_000 * numberOfDays;
     const newDate = new Date(currentDate.getTime() + msToChange);
     setCurrentDate(newDate);
+    setLoaded(false);
   }
 
   const onChange = (date: any) => {

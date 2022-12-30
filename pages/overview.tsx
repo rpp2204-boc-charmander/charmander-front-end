@@ -24,7 +24,8 @@ export interface DateProps {
   currentDate: Date,
   setCurrentDate: Function
   title: string,
-  Icon: any
+  Icon: any,
+  setLoaded: Function
 }
 
 export default function Overview() {

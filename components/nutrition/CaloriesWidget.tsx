@@ -29,16 +29,16 @@ const CaloriesWidget = ({handleShowModal, calories} : CaloriesProp) => {
     //   </div>
     // </div>
     // </>
-    <div className="max-w-xxs min-w-min max-h-calories overflow-hidden rounded-lg shadow-lg bg-gray-300 mt-8 flex flex-col justify-self-center">
-      <div className="h-4.5/6 rounded-lg bg-white shadow-inner m-3 flex flex-col justify-center items-center text-center overflow-hidden">
-        <p className='text-sm p-6'>Calories Gained (Estimate)</p>
-        <b className='text-4xl p-6'>{calories}</b>
-      </div>
-    <button className="w-11/12 mx-2 bg-white text-black hover:bg-gray-200 font-bold py-2 px-4 rounded-3xl static"
+  <div className="max-w-xxs min-w-min max-h-calories overflow-hidden rounded-lg shadow-lg bg-gray-300 mt-8 flex flex-col justify-self-center">
+  <div className="h-4.5/6 rounded-lg bg-white shadow-inner m-3 flex flex-col justify-center items-center text-center overflow-hidden">
+      <p className='text-sm'>Total Calories (Estimate)</p>
+      <b className='text-4xl'>{calories}</b>
+    </div>
+  <button className="w-11/12 mx-2 bg-white text-black hover:bg-gray-200 font-bold py-2 px-4 rounded-3xl static"
           onClick={() => {
             handleShowModal();
           }}> + </button>
-  </div>
+</div>
   )
 };
 

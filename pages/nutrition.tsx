@@ -5,6 +5,9 @@ import EditItemModal from "../components/nutrition/EditItemModal";
 import RemoveItemModal from "../components/nutrition/RemoveItemModal";
 import foodData from "../mocks/foodData.json";
 import { GiForkKnifeSpoon } from "react-icons/gi";
+import Header from "../components/overview/Header";
+import Modal from "../components/nutrition/Modal";
+import axios from "axios";
 import { GrClose } from "react-icons/gr";
 import { getDisplayName } from "next/dist/shared/lib/utils";
 import { ChildProps } from "../components/Layout";
@@ -25,80 +28,88 @@ interface FoodDataType {
   CATEGORY: string;
 }
 
-const Nutrition = ({
-  currentDate,
-  setTitle,
-  setIcon,
-  setShowCalendar,
-}: ChildProps) => {
-  const [pendingItem, setPendingItem] = useState<FoodDataType>(
-    {} as FoodDataType
-  );
+
+const Nutrition = () => {
+  const [pendingItem, setPendingItem] = useState<FoodDataType>({} as FoodDataType);
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
-  const [allFoods, setAllFoods] = useState<any>(foodData);
+  const [allFoods, setAllFoods] = useState<any>([]);
+  const [currentDate, setCurrentDate ] = useState(new Date());
+  const [showModal, setShowModal] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
-  const updateCalories = (foods: []) => {
-    let calculatedCalories: number = 0;
-    foods.map((food: FoodDataType) => {
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  }
+
+  const updateCalories = (foods : []) => {
+    let calculatedCalories : number = 0;
+    foods.map((food : FoodDataType) => {
       calculatedCalories += Number(food.CAL);
-    });
+    })
     return calculatedCalories;
-  };
+  }
 
   const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
   useEffect(() => {
-    setTitle("Nutrition");
-    setIcon((prevState: any) => MdRestaurant);
-    setShowCalendar(true);
-  }, [setTitle, setIcon, setShowCalendar]);
+    if(!loaded){
+      axios.get('http://localhost:4000/nutrition/list/foodLog',{
+        params: {
+          user: 1,
+          date: currentDate
+        }
+      })
+      .then((response) => {
+        setAllFoods(response.data);
+        setLoaded(true);
+      })
+    }
+    });
 
   return (
     <>
-      <div className="mb-10 flex w-auto flex-row justify-between bg-white">
+      <Header currentDate={currentDate} setCurrentDate={setCurrentDate} setLoaded={setLoaded} title='Nutrition' Icon={GiForkKnifeSpoon}/>
+      {/* <div className="flex justify-between flex-row mb-10 w-auto">
         <div className="flex flex-row">
-          <GiForkKnifeSpoon className="mr-2 text-3xl" />
+          <GiForkKnifeSpoon className="text-3xl mr-2"/>
           <div className="text-3xl">Nutrition</div>
         </div>
         <div className="inline-flex">
-          <button className="rounded-l bg-gray-300 py-2 px-4 font-bold text-gray-800 hover:bg-gray-400">
+          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
             Prev
           </button>
-          <p className="ml-5 mr-5 flex items-center">Today</p>
-          <button className="rounded-r bg-gray-300 py-2 px-4 font-bold text-gray-800 hover:bg-gray-400">
+          <p className="flex items-center ml-5 mr-5">Today</p>
+          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
             Next
           </button>
         </div>
       </div>
-      <div className="flex w-auto flex-row justify-between p-2">
-        <CaloriesWidget calories={calories} />
-        {isRemoveShowing ? (
+      <div className="flex flex-row justify-between p-2 w-auto"> */}
+      <div className="grid grid-cols-[25%_75%]">
+        <CaloriesWidget handleShowModal={handleShowModal} calories={calories}/>
+          {isRemoveShowing ?
           <RemoveItemModal
-            pendingItem={pendingItem}
-            setIsRemoveShowing={setIsRemoveShowing}
-            setCalories={setCalories}
-            setAllFoods={setAllFoods}
-            allFoods={allFoods}
-            calories={calories}
-          />
-        ) : null}
-        {isEditShowing ? (
-          <EditItemModal
-            pendingItem={pendingItem}
-            setIsEditShowing={setIsEditShowing}
-            setCalories={setCalories}
-            setAllFoods={setAllFoods}
-            allFoods={allFoods}
-            calories={calories}
-          />
-        ) : null}
-        <FoodList
-          foodData={allFoods}
-          setPendingItem={setPendingItem}
+          pendingItem={pendingItem}
           setIsRemoveShowing={setIsRemoveShowing}
+          setCalories={setCalories}
+          setAllFoods={setAllFoods}
+          allFoods={allFoods}
+          calories={calories}/>
+          : null}
+          {isEditShowing ?
+          <EditItemModal
+          pendingItem={pendingItem}
           setIsEditShowing={setIsEditShowing}
-        />
+          setCalories={setCalories}
+          setAllFoods={setAllFoods}
+          allFoods={allFoods}
+          calories={calories}/>
+        : null}
+        <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
+        {
+        showModal ? ( <Modal showModal={handleShowModal} date={currentDate} setLoaded={setLoaded}/>) : ( null )
+      }
       </div>
     </>
   );

@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import { useState } from 'react'
-// import { measureMemory } from 'vm';
+import { MdClose } from "react-icons/md";
 
 interface FoodCardModalProps {
   info: Object
 }
 
-const FoodCardModal = ({ info }) => {
+const FoodCardModal = ({ listId, info, removeSelection }) => {
 
   // info.unit = "Gram";
   // info.grams = 1;
@@ -45,8 +45,14 @@ const FoodCardModal = ({ info }) => {
   }
 
   return (
-    <div className="flex flex-row items-center border space-x-8 my-3  bg-slate-600 rounded-lg px-4 py-4">
-      <Image src={info.food.image} alt='' width={50} height={50}/>
+    <div className="flex flex-row justify-between items-center border space-x-8 my-3 bg-white rounded-lg px-4 py-4 w-full">
+      {
+        info.food.image ? (
+          <Image src={info.food.image} alt='' width={90} height={90} className="rounded-full"/>
+        ) : (
+          <Image src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt='' width={90} height={90} className="rounded-full"/>
+        )
+      }
       <div className="flex flex-col">
         <div>{info.food.label}</div>
         <div>{Math.round(info.food.nutrients.ENERC_KCAL)} Kcal/100g</div>
@@ -60,14 +66,14 @@ const FoodCardModal = ({ info }) => {
       }
       <div className="flex flex-col">
         <form>
-          <label>Custom Amount</label>
-          <input placeholder="enter number in grams" onChange={(e) => {
+          <label>Amount</label>
+          <input placeholder="enter number in grams" className="shadow-lg w-6/10 h-6 rounded-lg mb-3 ml-3" onChange={(e) => {
             handleAmountChange(e)
           }}></input>
         </form>
         <form>
           <label>Unit</label>
-          <select defaultValue="Gram, 1 grams" onChange={(e) => {
+          <select defaultValue="Gram, 1 grams" className="shadow-lg w-6/10 h-6 rounded-lg ml-10" onChange={(e) => {
             handleUnitChange(e)
           }}>
             {
@@ -87,6 +93,13 @@ const FoodCardModal = ({ info }) => {
           </select>
         </form>
       </div>
+      <MdClose
+        className="text-[1.25rem] cursor-pointer rounded-full hover:bg-gray-300"
+        onClick={() => {
+          // console.log(key);
+          removeSelection(listId);
+        }}
+      />
     </div>
   )
 }

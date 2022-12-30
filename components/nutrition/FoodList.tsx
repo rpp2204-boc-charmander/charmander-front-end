@@ -28,6 +28,7 @@ const FoodList = ({foodData, setPendingItem, setIsRemoveShowing, setIsEditShowin
   <div className="w-3/4">
     {
     foodData.map((food) => {
+      console.log('food: ', food);
         return <FoodCard key={food.ITEM} food={food} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
       })
     }
