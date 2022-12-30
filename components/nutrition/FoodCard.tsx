@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { calculateOverrideValues } from 'next/dist/server/font-utils'
 import { useState } from 'react'
 import { BsTrash } from "react-icons/bs";

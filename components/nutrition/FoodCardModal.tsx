@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Image from 'next/image'
 import { useState } from 'react'
 import { MdClose } from "react-icons/md";
@@ -5,6 +7,7 @@ import { MdClose } from "react-icons/md";
 interface FoodCardModalProps {
   info: Object
 }
+
 
 const FoodCardModal = ({ listId, info, removeSelection }) => {
 

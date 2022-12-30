@@ -1,3 +1,4 @@
+// @ts-nocheck
 import FoodCardModal from "./FoodCardModal";
 import axios from 'axios';
 import Image from 'next/image';

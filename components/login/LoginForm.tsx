@@ -164,12 +164,3 @@ export default function LoginForm() {
     </form>
   );
 }
-
-        <button
-          type='button'
-          className="grow hover:text-yellow-400 underline text-right font-extralight"
-          onClick={() => console.log("Recover Password")}>forgot password?</button>
-      </div>
-    </form>
-  )
-}
