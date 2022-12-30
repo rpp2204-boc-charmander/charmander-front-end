@@ -14,7 +14,18 @@ import { ChildProps } from "../components/Layout";
 
 import { MdOutlineFitnessCenter } from "react-icons/md";
 
-export default function Exercise({ query_date, currentDate, setTitle, setIcon, setShowCalendar, user_id, default_exercises, muscle_groups }: any): JSX.Element {
+export default function Exercise({
+  query_date,
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
+  user_id,
+  default_exercises,
+  muscle_groups,
+  setShowReportButtons
+}: any): JSX.Element {
+
   console.log("query_date: ", query_date);
 
   // IDs
