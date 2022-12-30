@@ -11,7 +11,9 @@ export interface ChildProps {
   setShowCalendar: Function;
   setShowReportButtons: Function;
   timespan: String;
-  setTimespan: Function
+  setTimespan: Function;
+  userId:  String;
+  setUserId: Function
 }
 
 export default function Layout({ children }: any): JSX.Element {
@@ -22,6 +24,7 @@ export default function Layout({ children }: any): JSX.Element {
   const [toggleSidebar, setToggleSidebar] = useState(0);
   const [showReportButtons, setShowReportButtons] = useState(false);
   const [timespan, setTimespan] = useState("week");
+  const [userId,  setUserId] = useState("1")
 
   const translate = ["-translate-x-full", ""];
   const month = currentDate.getUTCMonth() + 1; // months from 1-12
@@ -46,6 +49,8 @@ export default function Layout({ children }: any): JSX.Element {
           showReportButtons={showReportButtons}
           timespan={timespan}
           setTimespan={setTimespan}
+          setUserId={setUserId}
+          userId={userId}
         />
 
         <div className="w-[100%] h-[100%] flex items-center justify-center">
@@ -59,7 +64,9 @@ export default function Layout({ children }: any): JSX.Element {
             showReportButtons,
             setShowReportButtons,
             timespan,
-            setTimespan
+            setTimespan,
+            setUserId,
+            userId
           })}
         </div>
       </main>

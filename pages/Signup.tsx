@@ -1,3 +1,6 @@
+/* eslint-disable */
+// @ts-nocheck
+
 import Head from "next/head";
 import SignupModal from "../components/login/SignupModal";
 import { ChildProps } from "../components/Layout";

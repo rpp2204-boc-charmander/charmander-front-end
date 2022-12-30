@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 
 type prevServing = number;
@@ -87,3 +88,4 @@ const EditItemModal = ({
 };
 
 export default EditItemModal;
+

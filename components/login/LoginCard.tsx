@@ -1,19 +1,20 @@
-import Script from "next/script";
-import GoogleBtn from "./GoogleBtn";
-import LoginForm from "./LoginForm";
-import { useState } from "react";
-import StravaBtn from "./StravaBtn";
+import Script from 'next/script';
+import GoogleBtn from './GoogleBtn';
+import LoginForm from './LoginForm';
+import { useState } from 'react'
+import StravaBtn from './StravaBtn';
+import FitbitBtn from './FitbitBtn';
 
-export interface GoogleProps {
-  init: boolean;
-  reset?: any;
+export interface LoginProps {
+  setUserId: Function;
+  setGoogle: Function;
+  google: boolean
 }
 
-export default function LoginCard() {
-  const [google, setGoogle] = useState(false);
+export default function LoginCard({ setUserId, setGoogle, google }: LoginProps) {
 
   const loginCardLg =
-    "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-max p-3";
+    "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-full p-2";
   const signUpBtnLg =
     "h-9 w-full bg-white rounded-2xl text-black p-1 text-center font-light";
 
@@ -29,15 +30,22 @@ export default function LoginCard() {
       />
 
       <div className={loginCardLg}>
-        <LoginForm />
+        <LoginForm
+          setUserId={setUserId}/>
         <br></br>
         <a className={signUpBtnLg} href="/Signup">
           Sign up with email
         </a>
         <br></br>
-        <GoogleBtn init={google} reset={setGoogle} />
+        <StravaBtn
+          setUserId={setUserId}/>
         <br></br>
-        <StravaBtn />
+        <FitbitBtn
+          setUserId={setUserId}/>
+        <br></br>
+        <GoogleBtn
+          google={google}
+          setUserId={setUserId} />
       </div>
     </div>
   );
