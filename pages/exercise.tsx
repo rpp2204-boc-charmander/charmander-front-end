@@ -60,9 +60,7 @@ export default function Exercise({ query_date, currentDate, setTitle, setIcon, s
 //GET FUNCTIONS
 
 const getUserExercises = () => {
-console.log('get User')
-
-return axios.get('api/exercise/workout/list', { params: { user_id, log_date: query_date } });
+return axios.get('api/exercise/workout/list', { params: { user_id: 7, log_date: query_date } });
 }
 
 const getExerciseSets = (workout_id: number) => {
@@ -71,33 +69,33 @@ return axios.get('api/exercise/list/sets', { params: { workout_exercise_id: work
 
 //DELETE FUNCTIONS
 
-const deleteSet = (set_id: number): void => {
-  axios
-    .delete("api/exercise/sets", { params: { set_id } })
-    .then(() => {
-      console.log("Successfully Deleted Set");
-    })
-    .catch((error) => {
-      console.log(error.stack);
-    });
-};
+const deleteSet = async (set_id: number) => {
+  try {
+    await axios.delete('api/exercise/sets', { params: { set_id }});
+    const { data: newSets } = await getExerciseSets(workoutID);
 
-const deleteExercise = (workout_exercise_id: number): void => {
-  axios
-    .delete("api/exercise/workout", { params: { workout_exercise_id } })
-    .then(() => {
-      console.log("Successfully Deleted Workout");
-    })
-    .catch((error) => {
-      console.log(error.stack);
-    });
+    setEditSets(newSets);
+  } catch (error :any) {
+    console.log(error.stack);
+  }
+}
+
+const deleteExercise = async (workout_exercise_id: number) => {
+  try {
+    await axios.delete('api/exercise/workout', { params: { workout_exercise_id }});
+    const { data: newWorkout } = await getUserExercises();
+
+    setExercises(newWorkout.result);
+  } catch (error: any) {
+    console.log(error.stack);
+  }
 };
 
 
 //COMPLETE FUNCTIONS
 
 const completeSet = (actual_reps: number, set_id: number) => {
-axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id }})
+axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id: 7 }})
   .then( () => {
     toggleCompletedModal(set_id);
   })
@@ -124,7 +122,7 @@ const completeExercise = async (workout_exercise_id: number) => {
       }
     }
 
-    await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id, log_date: query_date }});
+    await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id: 7, log_date: query_date }});
     const { data: newWorkout } = await getUserExercises();
 
       setExercises(newWorkout.result);
