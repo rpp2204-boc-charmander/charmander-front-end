@@ -59,7 +59,8 @@ export default function Overview({
     //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
     axios(
       `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`
-    ).then((result) => {
+    )
+    .then((result) => {
       let data = result.data;
       let exercise: ExerciseObjProps = {
         text: "",
@@ -73,6 +74,9 @@ export default function Overview({
         return exercise;
       });
       setExercises(newData);
+    })
+    .catch(error => {
+      setExercises([]);
     });
   }, [currentDate]);
 

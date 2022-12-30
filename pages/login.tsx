@@ -5,7 +5,7 @@ import { IoIosFitness } from "react-icons/io";
 import { MdOutlineFastfood } from "react-icons/md";
 import { ChildProps } from "../components/Layout";
 import { useEffect } from "react";
-import logo from "public/38501.png";
+import LoginImage from "public/38501.png";
 import Image from "next/image";
 
 const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) => {
@@ -32,7 +32,7 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: Chi
       </Head>
       <main className="bg-LoginGreen flex w-[60rem] h-[30rem] justify-center items-center rounded-2xl shadow-xl">
         <div className="flex grow basis-[60%] h-full justify-center items-center">
-          <Image src={logo} alt="Picture" className="object-contain"/>
+          <Image src={LoginImage} alt="Picture" className="object-contain"/>
         </div>
         <div className="bg-LoginGray dark:bg-slate-600 flex grow basis-[40%] h-full justify-center items-center rounded-tr-2xl rounded-br-2xl">
           <LoginCard/>
