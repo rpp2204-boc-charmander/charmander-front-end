@@ -1,7 +1,7 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import Head from "next/head";
 import Container from "../components/overview/Container";
+import Head from "next/head";
+import { useState, useEffect } from "react";
 import { MdOutlineSort } from "react-icons/md";
 import { ChildProps } from "../components/Layout";
 
@@ -23,7 +23,6 @@ export interface NutritionObjProps {
 
 export default function Overview( { currentDate, setTitle, setIcon, setShowCalendar }: ChildProps ) {
   // States
-  //const [currentDate, setCurrentDate] = useState(new Date());
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
   const [caloriesBurned, setcaloriesBurned] = useState(0);
   const [netCalories, setNetCalories] = useState(0);
@@ -118,13 +117,13 @@ export default function Overview( { currentDate, setTitle, setIcon, setShowCalen
   }, [caloriesConsumed, caloriesBurned])
 
   return (
-    <div className="flex flex-col grow bg-white">
+    <div className="flex flex-col grow">
       <Head>
         <title> My Health Coach </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="flex flex-col grow w-[100%]">
+      <div className="flex flex-col grow w-[100%] h-screen]">
         <div className="flex flex-col items-center pt-4 lg:pl-[2%] lg:pr-[2%]">
           <Container
             type="calories"

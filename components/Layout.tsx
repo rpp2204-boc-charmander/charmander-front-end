@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import { useState, useEffect } from "react";
-import Sidenav from './Sidenav';
+import Sidebar from './Sidebar';
 import Header from "./overview/Header";
 
 export interface ChildProps {
@@ -22,7 +22,7 @@ export default function Layout({ children }: any) {
   return (
     <div className="relative min-h-screen flex">
       <aside className={`z-50 absolute inset-y-0 left-0 transform ${translate[toggleSidebar]} lg:relative lg:flex flex-row lg:translate-x-0 transition duration-300 ease-in-out`}>
-        <Sidenav />
+        <Sidebar />
       </aside>
 
       <main className='flex-1'>

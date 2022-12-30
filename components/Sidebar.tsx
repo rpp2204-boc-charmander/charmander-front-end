@@ -1,10 +1,10 @@
 import { MdAccountCircle, MdOutlineSort, MdOutlineFitnessCenter, MdRestaurant, MdOutlineAssignment, MdOutlinePeopleAlt, MdOutlineSettings, MdLogout } from "react-icons/md";
 import Link from 'next/link';
 
-export default function Sidenav() {
+export default function Sidebar() {
   return (
-    <div>
-      <div className="flex flex-col grow bg-gray-500 h-[100vh] w-48 top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
+    <div className="flex grow bg-gray-500 dark:bg-stone-900 h-full">
+      <div className="flex flex-col grow max-h-[100vh] w-48 top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
         <div className="flex flex-col items-center">
           <div>
             <MdAccountCircle className="h-32 w-32" />
