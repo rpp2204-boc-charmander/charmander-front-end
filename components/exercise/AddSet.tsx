@@ -58,13 +58,10 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
 
           { confirm && <p className="absolute text-red-500 top-0"> Please Set Reps and Weight </p> }
 
-
-          <div className="no-scrollbar flex h-[50%] w-full flex-col items-center justify-around overflow-y-scroll rounded-2xl bg-gray-500 shadow-well">
-            <div className="flex h-5/6 w-11/12 flex-col items-center justify-evenly rounded-2xl bg-slate-100 py-3 shadow-lg">
               <div className="flex w-[290px]">
                 <h3 className="w-20 text-center font-bold"> Reps </h3>
                 <input
-                  className="rounded-lg shadow-md"
+                  className="rounded-lg shadow-md bg-slate-50"
                   type="number"
                   ref={repsRef}
                 ></input>
@@ -73,20 +70,18 @@ export default function AddSet({ toggleAddSetModal, workoutID }: any) {
             <div className="flex">
               <h3 className="w-20 text-center font-bold"> Weight </h3>
               <input
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-md bg-slate-50"
                 type="number"
                 ref={weightRef}
               ></input>
               <span className="ml-3"> lbs </span>
             </div>
+
           </div>
-        </div>
 
          </div>
 
-         </div>
-
-        <button className="bg-blue-500 hover:bg-blue-600 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md" onClick={onSubmit}> Add </button>
+        <button className="bg-blue-500 hover:bg-blue-600 text-slate-50 rounded-full w-full px-10 py-4 font-bold mt-4 shadow-md" onClick={onSubmit}> Add </button>
 
       </div>
 

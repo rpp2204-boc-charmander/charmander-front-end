@@ -38,7 +38,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
             <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
 
             {exercise.sets?.map( (exercise: any) => {
-              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-500 text-white'}`}
+              return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 text-black font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-500 text-slate-50'}`}
               onClick={ () => { toggleCompletedModal(exercise.set_id) }}
               key={exercise.set_id}
               disabled={ exercise.reps_actual ? true : false }
@@ -51,12 +51,12 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
         <div className="flex flex-col items-center justify-around h-[250px] px-2 relative">
 
-          <p className="font-bold justify-self-center"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
+          <p className="font-bold justify-self-center text-black"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
 
           <div className="flex flex-col w-full h-[45%] justify-evenly">
 
           { !exercise.is_complete &&
-            <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
+            <button className="bg-slate-50 hover:bg-slate-300 px-5 py-2 w-full rounded-full shadow-lg self-center font-bold text-black" onClick={ () => {toggleAddSetModal(exercise.id)}}> Add Set </button>
           }
 
           { exercise.is_complete ?

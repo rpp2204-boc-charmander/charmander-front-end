@@ -28,18 +28,7 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
           />
         </div>
 
-
-          <div
-            className="fixed top-[50%] left-[50%] z-50 flex h-[60%] w-[40%] translate-x-[-50%]
-      translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-300 pl-10 pr-10 text-black"
-          >
-            <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
-              <div className="title text-[2rem] font-bold"> Edit Workout </div>
-              <MdClose
-                className="cursor-pointer text-[2rem]"
-                onClick={toggleEditModal}
-              />
-            </div>
+        <div className="bg-gray-500 flex flex-col rounded-2xl h-[70%] w-full items-center overflow-y-scroll shadow-well">
 
           { sets.map( (set: any, i: number) => {
 
@@ -49,19 +38,21 @@ export default function EditModal({ toggleEditModal, workoutID, deleteSet, sets 
               <div className="flex flex-col items-center w-10/12 my-4" key={set.set_id}>
                   <h3 className="pb-2 font-bold text-white">Set {i + 1}</h3>
                   <div className="flex bg-slate-200 shadow-lg w-full py-3 justify-evenly items-center rounded-full">
-                    <label> Reps: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.reps} ref={(el) => { repRefs.current[i] = el }}></input>
-                    <label> Weight: </label> <input type="number" className="w-1/6 rounded-lg shadow-md" defaultValue={set.weight_lbs} ref={(el) => { weightRefs.current[i] = el }}></input>
+                    <label> Reps: </label> <input type="number" className="w-1/6 rounded-lg shadow-md bg-slate-50" defaultValue={set.reps} ref={(el) => { repRefs.current[i] = el }}></input>
+                    <label> Weight: </label> <input type="number" className="w-1/6 rounded-lg shadow-md bg-slate-50" defaultValue={set.weight_lbs} ref={(el) => { weightRefs.current[i] = el }}></input>
                     <button className="bg-red-500 hover:bg-red-400 py-2 px-2 rounded-full shadow-lg text-white" onClick={ () => { deleteSet(set.set_id) } } > <MdDeleteOutline /> </button>
                   </div>
               </div>
                 );
             })}
+
         </div>
 
         <button className="bg-blue-500 hover:bg-blue-400 text-slate-50 w-4/6 rounded-full px-10 py-4 font-bold mt-4 shadow-lg"
                 onClick={ () => { toggleEditModal(workoutID, repRefs.current, weightRefs.current, setIDs ) }}> Confirm Changes </button>
 
-      </div>
+        </div>
+
     </div>
   )
 }
