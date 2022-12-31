@@ -10,6 +10,7 @@ import EditModal from "../components/exercise/EditModal";
 import CompletedModal from "../components/exercise/CompletedModal";
 import AddSet from "../components/exercise/AddSet";
 import IncompleteModal from "../components/exercise/IncompleteModal";
+import LoginConfirmModal from "../components/exercise/LoginConfirmModal";
 // import { ChildProps } from "../components/Layout";
 
 import { MdOutlineFitnessCenter } from "react-icons/md";
@@ -47,6 +48,7 @@ export default function Exercise({
 
   //Confirmations
   const [workoutConfirm, setWorkoutConfirm] = useState(false);
+  const [ loginConfirm, setLoginConfirm ] = useState(false);
 
   //Yey
   const [confetti, setConfetti] = useState(false);
@@ -165,7 +167,11 @@ export default function Exercise({
   };
 
   const toggleAddModal = (): void => {
-    setAddModalState((prevState) => !prevState);
+    if (userId) {
+      setAddModalState((prevState) => !prevState);
+    } else {
+      setLoginConfirm((prevState) => !prevState);
+    }
   };
 
   const toggleEditModal = (
@@ -268,6 +274,9 @@ export default function Exercise({
       )}
       {workoutConfirm && (
         <IncompleteModal setWorkoutConfirm={setWorkoutConfirm} />
+      )}
+      {loginConfirm && (
+        <LoginConfirmModal setLoginConfirm={setLoginConfirm} />
       )}
 
       <div className="lg:grid lg:grid-cols-[25%_75%] sm:flex sm:flex-col h-[90vh]">
