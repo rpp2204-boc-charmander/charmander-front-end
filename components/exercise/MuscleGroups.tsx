@@ -6,11 +6,11 @@ const MuscleGroups = ({
   clearSearchOnClick,
 }: any): JSX.Element => {
   return (
-    <ul className="y-1 m-2 flex flex-row content-center space-x-4">
+    <div className="flex flex-col justify-center py-3 lg:flex-row lg:space-x-4">
       {muscle_groups.map((item: any) => {
         return (
-          <li
-            className="w-30 rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
+          <button
+            className="rounded border border-gray-400 bg-white p-2 text-center text-lg font-semibold text-gray-800 shadow hover:bg-gray-100  sm:w-auto sm:overflow-auto"
             key={item.muscle_group_id}
             onClick={() => {
               clearSearchOnClick();
@@ -25,10 +25,10 @@ const MuscleGroups = ({
             }}
           >
             {item.muscle_group}
-          </li>
+          </button>
         );
       })}
-    </ul>
+    </div>
   );
 };
 
