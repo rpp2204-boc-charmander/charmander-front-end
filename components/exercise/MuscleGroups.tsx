@@ -10,7 +10,7 @@ const MuscleGroups = ({
       {muscle_groups.map((item: any) => {
         return (
           <button
-            className=" rounded border border-gray-400 bg-white py-2 text-center text-lg font-semibold font-semibold text-gray-800 shadow  hover:bg-blue-200  sm:w-auto sm:overflow-auto lg:w-[200px] lg:text-[13px]"
+            className=" rounded border border-gray-400 bg-white py-2 text-center text-lg  font-semibold text-gray-800 shadow  hover:bg-purple-200 sm:w-auto sm:overflow-auto lg:w-[200px] lg:text-[13px]"
             key={item.muscle_group_id}
             onClick={() => {
               clearSearchOnClick();
