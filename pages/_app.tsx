@@ -1,7 +1,7 @@
-import Layout from '../components/Layout'
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from 'next-themes'
+import Layout from '../components/Layout';
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
 import "../styles/globals.css";
 import axios from "axios";
 import AuthProvider from '../context/AuthProvider'
