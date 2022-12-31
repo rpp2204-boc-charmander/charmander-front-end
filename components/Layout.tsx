@@ -2,6 +2,9 @@ import React, { use } from "react";
 import { useState, useEffect } from "react";
 import Sidebar from './Sidebar';
 import Header from "./Header";
+import GoogleBtn from "./login/GoogleBtn";
+import Script from "next/script";
+
 
 export interface ChildProps {
   currentDate: Date;
@@ -25,7 +28,6 @@ export default function Layout({ children }: any): JSX.Element {
   const [showReportButtons, setShowReportButtons] = useState(false);
   const [timespan, setTimespan] = useState("week");
   const [userId,  setUserId] = useState("1")
-
   const translate = ["-translate-x-full", ""];
   const month = currentDate.getUTCMonth() + 1; // months from 1-12
   const day = currentDate.getUTCDate();
