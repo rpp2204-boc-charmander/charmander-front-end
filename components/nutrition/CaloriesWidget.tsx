@@ -30,7 +30,7 @@ const CaloriesWidget = ({handleShowModal, calories} : CaloriesProp) => {
     //   </div>
     // </div>
     // </>
-    <div className="max-w-xxs min-w-min max-h-calories overflow-hidden rounded-lg shadow-lg bg-gray-300 mt-8 flex flex-col justify-self-center text-black">
+    <div className="max-w-xxs min-w-min max-h-calories overflow-hidden rounded-lg shadow-lg bg-gray-300 flex flex-col justify-self-center text-black">
       <div className="h-4.5/6 rounded-lg bg-white shadow-inner m-3 flex flex-col justify-center items-center text-center overflow-hidden">
         <p className='text-sm p-6'>Calories Gained (Estimate)</p>
         <b className='text-4xl p-6'>{calories}</b>
