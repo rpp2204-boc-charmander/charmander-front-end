@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { setMaxListeners } from "events";
 
 interface pendingItemType {
@@ -22,10 +21,11 @@ interface RemoveItemProps {
   setCalories: any,
   setIsRemoveShowing: Function,
   allFoods: pendingItemType[],
-  calories: number
+  calories: number,
+  removeItem: Function
 }
 
-const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShowing, allFoods, calories} : RemoveItemProps) => {
+const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShowing, allFoods, calories, removeItem} : RemoveItemProps) => {
   // const modalStyling = {
   //   position: "fixed",
   //   top: "50%",
@@ -53,19 +53,8 @@ const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShow
             Cancel
           </button>
           <button className="ml-2 bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
-          onClick={() => {
-            let newFoodsList = [];
-
-            for(let item in allFoods){
-              if(allFoods[item].ITEM !== pendingItem.ITEM){
-                newFoodsList.push(allFoods[item]);
-              }
-            }
-
-            setIsRemoveShowing(false);
-            setAllFoods(newFoodsList);
-            setCalories(prevCalories => calories - pendingItem.CAL);
-
+          onClick={(e) => {
+            console.log(pendingItem)
           }}>
             Confirm
           </button>
