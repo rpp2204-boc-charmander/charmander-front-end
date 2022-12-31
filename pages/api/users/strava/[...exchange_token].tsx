@@ -18,7 +18,7 @@ export default async function GetStrava (req: any, res: any) {
       const user: any= response.data.athlete
       // check if that user id exists in the database
       axios
-        .get(`${process.env.BACKEND_URL}/user/${user.id}`)
+        .get(`${process.env.BACKEND_URL}/user/auth/${user.id}`)
         .then(userData => {
 
           // If the user exists

@@ -16,7 +16,8 @@ const nextConfig = {
     FITBIT_SCOPE: process.env.FITBIT_SCOPE,
     FITBIT_RESPONSE_TYPE: process.env.FITBIT_CODE,
     DB_ENDPOINT: process.env.DB_ENDPOINT,
-    API_URL: process.env.API_URL
+    API_URL: process.env.API_URL,
+    LOCAL: process.env.LOCAL
   },
   async redirects () {
     return [
