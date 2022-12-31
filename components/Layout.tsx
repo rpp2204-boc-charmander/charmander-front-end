@@ -32,7 +32,7 @@ export default function Layout({ children }: any): JSX.Element {
   const month = currentDate.getUTCMonth() + 1; // months from 1-12
   const day = currentDate.getUTCDate();
   const year = currentDate.getUTCFullYear();
-  const date_string_for_query = `${year}/${month}/${day}`;
+  const date_string_for_query = `${year}/${month}/${day}`
 
   return (
     <div className="relative min-h-screen flex">
