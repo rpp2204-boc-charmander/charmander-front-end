@@ -8,7 +8,7 @@ export default function UserExperience() {
       <p className='lg:text-2xl'> Dark Mode </p>
       <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[10rem]">
         {/* {theme === 'dark' ? 'On' : 'Off'} */}
-        dark
+        Toggle
       </button>
     </div>
   )
