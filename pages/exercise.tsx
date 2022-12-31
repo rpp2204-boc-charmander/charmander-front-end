@@ -18,13 +18,15 @@ export default function Exercise({
   setTitle,
   setIcon,
   setShowCalendar,
-  user_id,
+  userId,
   default_exercises,
   muscle_groups,
   setShowReportButtons
 }: any): JSX.Element {
 
   console.log("query_date: ", query_date);
+
+  console.log("user_id", userId)
 
   // IDs
   const [workoutID, setWorkoutID] = useState(1);
@@ -65,12 +67,12 @@ export default function Exercise({
       .catch(error => {
         console.log('ERROR GETTING EXERCISES: ', error.stack)
       })
-  }, [addSetModalState, editModalState, completedModalState, currentDate, user_id, query_date])
+  }, [addSetModalState, editModalState, completedModalState, currentDate, userId, query_date])
 
 //GET FUNCTIONS
 
 const getUserExercises = () => {
-return axios.get('api/exercise/workout/list', { params: { user_id: 7, log_date: query_date } });
+return axios.get('api/exercise/workout/list', { params: { user_id: userId, log_date: query_date } });
 }
 
 const getExerciseSets = (workout_id: number) => {
@@ -105,7 +107,7 @@ const deleteExercise = async (workout_exercise_id: number) => {
 //COMPLETE FUNCTIONS
 
 const completeSet = (actual_reps: number, set_id: number) => {
-axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id: 7 }})
+axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id: userId }})
   .then( () => {
     toggleCompletedModal(set_id);
   })
@@ -132,7 +134,7 @@ const completeExercise = async (workout_exercise_id: number) => {
       }
     }
 
-    await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id: 7, log_date: query_date }});
+    await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id: userId, log_date: query_date }});
     const { data: newWorkout } = await getUserExercises();
 
       setExercises(newWorkout.result);
@@ -207,7 +209,7 @@ const completeExercise = async (workout_exercise_id: number) => {
       {addModalState && (
         <SearchModal
           query_date={query_date}
-          user_id={user_id}
+          user_id={userId}
           toggleAddModal={toggleAddModal}
           default_exercises={default_exercises}
           muscle_groups={muscle_groups}
