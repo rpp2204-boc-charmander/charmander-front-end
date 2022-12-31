@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import Container from "../components/overview/Container";
 import Head from "next/head";
@@ -142,7 +143,6 @@ export default function Overview({
           { calorie: netCalories, text: "Net Calories" },
         ]}
         bmr={bmr}
-        userId={userId}
       />
 
       <Container
