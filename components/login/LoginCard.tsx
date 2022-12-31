@@ -1,7 +1,6 @@
 import Script from 'next/script';
 import GoogleBtn from './GoogleBtn';
 import LoginForm from './LoginForm';
-import { useState } from 'react'
 import StravaBtn from './StravaBtn';
 import FitbitBtn from './FitbitBtn';
 

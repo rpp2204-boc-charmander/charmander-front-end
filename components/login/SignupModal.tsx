@@ -4,8 +4,6 @@ import { EnumDeclaration, setConstantValue } from "typescript";
 import bcrypt from "bcryptjs";
 import axios from 'axios';
 import { useRouter } from "next/router";
-import { ChildProps } from "../Layout";
-import { useNavigate } from 'react-router-dom';
 
 export interface SignUpProps{
   setUserId: Function
@@ -15,7 +13,6 @@ export default function SignupModal({
   setUserId,
 }: SignUpProps) {
   const router = useRouter();
-  console.log('setUSERID: ', setUserId);
   // STATE VALUES
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
