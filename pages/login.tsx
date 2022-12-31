@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Script from 'next/script';
+import Router from  'next/router'
 import Head from "next/head";
 import LoginCard from "../components/login/LoginCard";
 import { ChildProps } from "../components/Layout";
@@ -34,7 +35,6 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
           setGoogle(true);
         }}
       />
-
       <Head>
         <title>My Health Coach</title>
         <meta

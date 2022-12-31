@@ -44,7 +44,7 @@ export default function LoginCard({ setUserId, setGoogle, google }: LoginProps) 
           setUserId={setUserId}/>
         <br></br>
         <GoogleBtn
-          google={google}
+          init={google}
           setUserId={setUserId} />
       </div>
     </div>
