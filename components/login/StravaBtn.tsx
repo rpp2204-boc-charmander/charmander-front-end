@@ -4,10 +4,11 @@ import strava from "/public/strava/strava_orange.svg";
 import Image from "next/image";
 
 export interface StravaProps {
-  setUserId: Function
+  setUserId: Function,
+  setCurrentUser: Function
 }
 
-export default function StravaBtn({ setUserId }: StravaProps) {
+export default function StravaBtn({ setUserId, setCurrentUser }: StravaProps) {
   const router = useRouter();
 
   const id = process.env.STRAVA_ID;

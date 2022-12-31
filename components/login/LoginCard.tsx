@@ -7,10 +7,11 @@ import FitbitBtn from './FitbitBtn';
 export interface LoginProps {
   setUserId: Function;
   setGoogle: Function;
-  google: boolean
+  google: boolean,
+  setCurrentUser: Function
 }
 
-export default function LoginCard({ setUserId, setGoogle, google }: LoginProps) {
+export default function LoginCard({ setUserId, setGoogle, google, setCurrentUser }: LoginProps) {
 
   const loginCardLg =
     "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-full p-2";
@@ -37,14 +38,17 @@ export default function LoginCard({ setUserId, setGoogle, google }: LoginProps) 
         </a>
         <br></br>
         <StravaBtn
-          setUserId={setUserId}/>
+          setUserId={setUserId}
+          setCurrentUser={setCurrentUser}/>
         <br></br>
         <FitbitBtn
-          setUserId={setUserId}/>
+          setUserId={setUserId}
+          setCurrentUser={setCurrentUser}/>
         <br></br>
         <GoogleBtn
           init={google}
-          setUserId={setUserId} />
+          setUserId={setUserId}
+          setCurrentUser={setCurrentUser}/>
       </div>
     </div>
   );

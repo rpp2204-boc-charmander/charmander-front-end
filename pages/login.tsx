@@ -7,7 +7,7 @@ import { ChildProps } from "../components/Layout";
 import LoginImage from "public/38501.png";
 import Image from "next/image";
 
-const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userId, setUserId  }: ChildProps) => {
+const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userId, setUserId, currentUser, setCurrentUser  }: ChildProps) => {
 
   const [google, setGoogle] = useState(false)
 
@@ -53,7 +53,8 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
           <LoginCard
             setUserId={setUserId}
             setGoogle={setGoogle}
-            google={google}/>
+            google={google}
+            setCurrentUser={setCurrentUser}/>
         </div>
       </main>
     </div>

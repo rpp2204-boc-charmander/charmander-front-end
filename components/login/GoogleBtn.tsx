@@ -6,10 +6,11 @@ import styles from "../../styles/Login.module.css";
 
 interface GoogleProps {
   init: boolean;
-  setUserId: Function
+  setUserId: Function;
+  setCurrentUser: Function
 }
 
-export default function GoogleBtn({ init, setUserId }: GoogleProps) {
+export default function GoogleBtn({ init, setUserId, setCurrentUser }: GoogleProps) {
   const router = useRouter();
 
   async function handleResponse(googleResponse: any) {
@@ -40,6 +41,7 @@ export default function GoogleBtn({ init, setUserId }: GoogleProps) {
             if (response.data[0].id.length !== 0) {
                 console.log(response.data.id)
                 setUserId(response.data.id)
+                setCurrentUser(response.data)
                 router.push('/overview')
             }
           })

@@ -10,7 +10,11 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 
-export default function Sidebar() {
+export interface SidebarProps {
+  currentUser: any
+}
+
+export default function Sidebar({ currentUser }: SidebarProps) {
   return (
     <div className="flex grow bg-gray-500 dark:bg-slate-800 h-full">
       <div className="flex flex-col grow max-h-[100vh] w-48 top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
@@ -19,9 +23,9 @@ export default function Sidebar() {
             <MdAccountCircle className="h-32 w-32" />
           </div>
 
-          <div className="username pb-1 text-xl"> username </div>
-
-          <div className="names text-sm italic">FirstName LastName </div>
+          <div className="username pb-1 text-xl"> {currentUser ? currentUser.firstname : ''} </div>
+          {console.log(currentUser)}
+          {/* <div className="names text-sm italic">FirstName LastName </div> */}
         </div>
 
         <ul className="flex max-h-[35rem] w-32 grow flex-col justify-between pt-10 pb-[12rem] font-bold">

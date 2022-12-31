@@ -17,7 +17,9 @@ export interface ChildProps {
   setTimespan: Function;
   userId:  String;
   setUserId: Function;
-  query_date: any
+  query_date: any;
+  setCurrentUser: Function,
+  currentUser: any
 }
 
 export default function Layout({ children }: any): JSX.Element {
@@ -29,6 +31,7 @@ export default function Layout({ children }: any): JSX.Element {
   const [showReportButtons, setShowReportButtons] = useState(false);
   const [timespan, setTimespan] = useState("week");
   const [userId,  setUserId] = useState("1")
+  const [currentUser, setCurrentUser] = useState()
   const translate = ["-translate-x-full", ""];
 
   const month = currentDate.getMonth() + 1; // months from 1-12
@@ -39,7 +42,8 @@ export default function Layout({ children }: any): JSX.Element {
   return (
     <div className="flex min-h-screen">
       <aside className={`z-50 absolute inset-y-0 left-0 transform ${translate[toggleSidebar]} lg:relative lg:flex flex-row lg:translate-x-0 transition duration-300 ease-in-out`}>
-        <Sidebar />
+        <Sidebar
+          currentUser={currentUser}/>
       </aside>
 
       <main className="flex flex-col w-full">
@@ -68,7 +72,9 @@ export default function Layout({ children }: any): JSX.Element {
             timespan,
             setTimespan,
             userId,
-            setUserId
+            setUserId,
+            currentUser,
+            setCurrentUser
           })}
         </div>
       </main>
