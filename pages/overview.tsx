@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import { MdOutlineSort } from "react-icons/md";
 import { ChildProps } from "../components/Layout";
+import CompletedModal from '../components/exercise/CompletedModal';
 
 export interface ExerciseObjProps {
   text: string;
@@ -27,7 +28,8 @@ export default function Overview({
   setIcon,
   setShowCalendar,
   setShowReportButtons,
-  userId
+  userId,
+  query_date
 }: ChildProps) {
   // States
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
@@ -57,32 +59,30 @@ export default function Overview({
 
   // Get workout data
   useEffect(() => {
-    console.log(userId);
-    //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
-    axios(
-      `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`
-    )
+    axios('api/exercise/workout/list', { params: { user_id: userId, log_date: query_date } })
     .then((result) => {
-      let data = result.data;
-      let exercise: ExerciseObjProps = {
-        text: "",
-        calorie: 0,
-        completed: false,
-      };
+      let data = result.data.result;
+      console.log(data);
       let newData = data.map((item: any) => {
+        let exercise: ExerciseObjProps = {
+          text: "",
+          calorie: 0,
+          completed: false,
+          sets: 0
+        };
         exercise.text = item.exercise;
         exercise.calorie = item.est_cals_burned;
-        exercise.completed = false;
+        exercise.completed = item.is_complete;
+        exercise.sets = item.sets.length
         return exercise;
       });
+
       setExercises(newData);
     })
     .catch(error => {
       setExercises([]);
     });
   }, [currentDate]);
-
-
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
@@ -142,6 +142,7 @@ export default function Overview({
           { calorie: netCalories, text: "Net Calories" },
         ]}
         bmr={bmr}
+        userId={userId}
       />
 
       <Container
@@ -150,6 +151,7 @@ export default function Overview({
         cards={exercises}
         setExercises={setExercises}
         bmr={bmr}
+        userId={userId}
       />
 
       <Container
@@ -158,6 +160,7 @@ export default function Overview({
         cards={nutrition}
         setNutrition={setNutrition}
         bmr={bmr}
+        userId={userId}
       />
     </div>
   );

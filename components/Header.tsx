@@ -139,7 +139,7 @@ export default function Header({
           <div className="hidden min-w-[20rem] lg:flex flex-row justify-between">
             <button
               onClick={handleReportButtonsClick}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
               name="week"
             >
               Week
@@ -147,7 +147,7 @@ export default function Header({
 
             <button
               onClick={handleReportButtonsClick}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
               name="month"
             >
               Month
@@ -155,7 +155,7 @@ export default function Header({
 
             <button
               onClick={handleReportButtonsClick}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
               name="year"
             >
               Year
@@ -198,7 +198,7 @@ export default function Header({
           <div className="flex lg:hidden w-full flex-row p-3 justify-center space-x-5">
             <button
               onClick={handleReportButtonsClick}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
               name="week"
             >
               Week
@@ -206,7 +206,7 @@ export default function Header({
 
             <button
               onClick={handleReportButtonsClick}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
               name="month"
             >
               Month
@@ -214,7 +214,7 @@ export default function Header({
 
             <button
               onClick={handleReportButtonsClick}
-              className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded"
+              className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
               name="year"
             >
               Year

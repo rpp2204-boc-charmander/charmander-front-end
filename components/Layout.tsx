@@ -16,7 +16,8 @@ export interface ChildProps {
   timespan: String;
   setTimespan: Function;
   userId:  String;
-  setUserId: Function
+  setUserId: Function;
+  query_date: any
 }
 
 export default function Layout({ children }: any): JSX.Element {
@@ -29,6 +30,7 @@ export default function Layout({ children }: any): JSX.Element {
   const [timespan, setTimespan] = useState("week");
   const [userId,  setUserId] = useState("1")
   const translate = ["-translate-x-full", ""];
+
   const month = currentDate.getMonth() + 1; // months from 1-12
   const day = currentDate.getDate();
   const year = currentDate.getFullYear();

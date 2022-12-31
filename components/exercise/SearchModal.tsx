@@ -67,7 +67,7 @@ export default function SearchModal({
     <div>
       <div
         className="fixed top-[50%] left-[50%] z-50 flex h-[80%] w-[70%] translate-x-[-50%]
-            translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-400  pl-10 pr-10 text-black"
+            translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-400 dark:bg-slate-500 pl-10 pr-10 text-black"
       >
         <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
           <div className="title text-[2rem] font-bold"> Exercise Search </div>
