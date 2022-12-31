@@ -56,7 +56,7 @@ export default function LineChart(props: any) {
   useEffect(() => {
     setChartData((prevState: any) => {
       let setup = { ...prevState };
-      setup.datasets[0].label = "testing";
+      setup.datasets[0].label = "Max Weight of the Day";
       setup.datasets[0].data = props.chartData.data;
       return setup;
     });

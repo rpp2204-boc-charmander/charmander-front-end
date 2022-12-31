@@ -87,12 +87,13 @@ export default function Charts (props: any) {
       id.userId = props.userId;
       return id;
     });
-  });
+  }, [props.userId]);
 
   useEffect(() => {
     let unix: number = new Date(props.date).getTime();
     let year: number = new Date(props.date).getFullYear();
     if (reports.year !== year) {
+      console.log('request');
       axios.get(`http://44.198.150.13:3000/report/data/${id.userId}/'${props.date}'`)
       .then((result) => {
         setReportData((prevState: any) => {
@@ -118,10 +119,10 @@ export default function Charts (props: any) {
 
   return (
     <div>
-      <ul className='w-full h-full overflow-auto'>
+      <ul className='w-[80vw] h-[80vw] overflow-y-auto scrollbar-hide'>
         {reportsData.map((report, index) => {
           return (
-            <li key={index} className=''>
+            <li key={index} className='border-2 border-black rounded-xl m-2 bg-slate-200 w-[70vw] h-[48.5%]'>
               <LineChart chartData={report} time={reports.unix} timespan={props.timespan}/>
             </li>)})}
       </ul>
