@@ -1,9 +1,10 @@
 // @ts-nocheck
 
 import { MdClose } from "react-icons/md";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import SelectExercises from "./SelectExercises";
 import MuscleGroups from "./MuscleGroups";
+import AddCustom from "./AddCustom";
 import axios from "axios";
 // import getDefaultExercises from './libs/getDefaultExercises';
 
@@ -19,6 +20,8 @@ export default function SearchModal({
   const [showDefault, setShowDefault] = useState(true);
   const [showCustom, setShowCustom] = useState(false);
   const [query, setQuery] = useState("");
+  const [toggleState, setToggleState] = useState(1);
+  const [fetchCustom, setFetchCustom] = useState(false);
 
   useEffect(() => {
     const getCustomExercises = async (): Promise<any> => {
@@ -37,7 +40,7 @@ export default function SearchModal({
     };
 
     void getCustomExercises();
-  }, [user_id]);
+  }, [user_id, fetchCustom]);
 
   const handleAddExerciseToWorkout = async (exercise_id) => {
     try {
@@ -53,6 +56,10 @@ export default function SearchModal({
     }
   };
 
+  const handleFetchCustom = () => {
+    setFetchCustom((prevState) => !prevState);
+  };
+
   const all_exercises = [...default_exercises, ...customExercises];
 
   const filtered_exercises = all_exercises.filter((exercise) =>
@@ -64,70 +71,103 @@ export default function SearchModal({
   );
 
   return (
-    <div>
-      <div
-        className="fixed top-[50%] left-[50%] z-50 flex h-[80%] w-[70%] translate-x-[-50%]
-            translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-400  pl-10 pr-10 text-black"
-      >
-        <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
-          <div className="title text-[2rem] font-bold"> Exercise Search </div>
-          <MdClose
-            className="cursor-pointer text-[2rem]"
-            onClick={toggleAddModal}
-          />
-        </div>
-
-        <div className="search flex w-[100%] flex-row pb-6 ">
-          <input
-            className="focus:shadow-outline h-[4rem] w-full rounded bg-white py-2 px-3 text-xl leading-tight shadow focus:outline-none"
-            id="search"
-            type="text"
-            placeholder="Seach by name or body part"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          ></input>
-        </div>
-        <div className="flex flex-row content-center space-x-4">
-          <div
-            className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
-            onClick={() => {
-              setShowDefault(true);
-              setShowCustom(false);
-            }}
-          >
-            All Exercises
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="lg:shrink-0">
+        <div className="flex h-screen max-h-screen  w-screen flex-col rounded-3xl bg-gray-400 pl-10 pr-10  text-black dark:bg-slate-600 lg:h-[900px] lg:w-[1000px]">
+          <div className="flex flex-row items-center justify-between pt-4 pb-4">
+            <ul className="flex flex-wrap border-b border-gray-200">
+              <li className="mr-2">
+                <a
+                  href="#"
+                  aria-current="page"
+                  className={
+                    toggleState === 1
+                      ? "active inline-block rounded-t-lg bg-gray-100 py-4 px-4 text-center text-lg font-bold text-blue-600"
+                      : "inline-block rounded-t-lg bg-gray-300 py-4 px-4 text-center text-lg  font-bold text-black  hover:bg-gray-50  dark:bg-slate-500 dark:text-white"
+                  }
+                  onClick={() => setToggleState(1)}
+                >
+                  Exercise Search
+                </a>
+              </li>
+              <li className="mr-2">
+                <a
+                  href="#"
+                  aria-current="false"
+                  className={
+                    toggleState === 2
+                      ? "active inline-block rounded-t-lg bg-gray-100 py-4 px-4 text-center text-lg font-bold text-blue-600"
+                      : "inline-block rounded-t-lg bg-gray-300 py-4 px-4 text-center text-lg  font-bold text-black  hover:bg-gray-50  dark:bg-slate-500 dark:text-white"
+                  }
+                  onClick={() => setToggleState(2)}
+                >
+                  Custom Exercise
+                </a>
+              </li>
+            </ul>
+            <MdClose
+              className="cursor-pointer text-[2rem]"
+              onClick={toggleAddModal}
+            />
           </div>
-          <div
-            className="rounded border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-800 shadow hover:bg-gray-100"
-            onClick={() => {
-              setShowDefault(false);
-              setShowCustom(true);
-            }}
-          >
-            Custom Exercises
-          </div>
-        </div>
-        <MuscleGroups
-          muscle_groups={muscle_groups}
-          clearSearchOnClick={() => setQuery("")}
-        />
-        {showDefault && (
-          <SelectExercises
-            exercises={filtered_exercises}
-            handleAddExerciseToWorkout={handleAddExerciseToWorkout}
-          />
-        )}
-        {showCustom && (
-          <SelectExercises
-            exercises={filtered_custom_exercises}
-            handleAddExerciseToWorkout={handleAddExerciseToWorkout}
-          />
-        )}
+          {toggleState === 1 && (
+            <div className="overflow-auto">
+              <div className="search flex w-[100%] flex-row pb-6">
+                <input
+                  className="focus:shadow-outline h-[4rem] w-full rounded bg-white px-2 text-xl leading-tight shadow focus:outline-none"
+                  id="search"
+                  type="text"
+                  placeholder="Seach by name or body part"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                ></input>
+              </div>
+              <div className="flex flex-row justify-center space-x-4 text-center">
+                <button
+                  className="rounded border border-gray-400  bg-white p-2  text-center  text-lg font-semibold text-gray-800 shadow hover:bg-gray-100"
+                  onClick={() => {
+                    setShowDefault(true);
+                    setShowCustom(false);
+                  }}
+                >
+                  All Exercises
+                </button>
+                <button
+                  className="rounded border border-gray-400  bg-white p-2  text-center  text-lg font-semibold text-gray-800 shadow hover:bg-gray-100"
+                  onClick={() => {
+                    setShowDefault(false);
+                    setShowCustom(true);
+                  }}
+                >
+                  Custom Exercises
+                </button>
+              </div>
+              <MuscleGroups
+                muscle_groups={muscle_groups}
+                clearSearchOnClick={() => setQuery("")}
+              />
 
-        <div className="buttonContainer flex w-[50%] justify-between p-5">
-          {/* <button className="rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700">
-            Add Exercise
-          </button> */}
+              {showDefault && (
+                <SelectExercises
+                  exercises={filtered_exercises}
+                  handleAddExerciseToWorkout={handleAddExerciseToWorkout}
+                />
+              )}
+              {showCustom && (
+                <SelectExercises
+                  exercises={filtered_custom_exercises}
+                  handleAddExerciseToWorkout={handleAddExerciseToWorkout}
+                />
+              )}
+            </div>
+          )}
+          {toggleState === 2 && (
+            <AddCustom
+              handleFetchCustom={handleFetchCustom}
+              user_id={user_id}
+              muscle_groups={muscle_groups}
+            />
+          )}
         </div>
       </div>
     </div>

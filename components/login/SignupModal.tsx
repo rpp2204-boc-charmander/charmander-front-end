@@ -5,7 +5,14 @@ import bcrypt from "bcryptjs";
 import axios from 'axios';
 import { useRouter } from "next/router";
 
-export default function SignupModal() {
+export interface SignUpProps{
+  setUserId: Function
+}
+
+export default function SignupModal({
+  setUserId,
+}: SignUpProps) {
+  const router = useRouter();
   // STATE VALUES
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -38,15 +45,18 @@ export default function SignupModal() {
     return (lastName.length > 1);
   }
 
+
   const emailCheck = async (email: String) => {
-    try {
-      const res = await axios.get(`http://localhost:4000/user/email/${email}`);
-      console.log('RESULT: ', res.data.email);
-      // setEmailExist(res.data.email.length > 0)
-      setEmailExist(res.data.email === undefined ? false : true);
-    } catch (error) {
-      console.log(error);
-    }
+      return axios.get(`${String(process.env.BACKEND_URL)}/user/email/${email}`).then((response) => {
+        console.log('RESULT: ', response.data.email);
+        // setEmailExist(response.data.email.length > 0)
+        console.log('EMAIL EXIST BEFORE: ', emailExist);
+
+        console.log('EMAIL EXIST AFTER: ', emailExist);
+      }).catch((err) => {
+        console.log('ERROR: ', err);
+      });
+
   };
 
   // Check if email is both valid and nonexistent in db.
@@ -76,16 +86,50 @@ export default function SignupModal() {
 
   // Validity checks. POSTS to db. Redirects when successful.
   const handleSubmit = () => {
-    console.log('window', window.innerHeight);
-    emailCheck(email).then(() => {
-      console.log('SUBMIT PRESSED');
-      console.log('FIRST NAME VALID        :', firstNameCheck());
-      console.log('LAST NAME VALID         :', lastNameCheck());
-      console.log('EMAIL IS NOT BEING USED :', !emailExist);
-      console.log('PASSWORDS MATCH         :', passwordCheck());
-      console.log('HEALTH INFO VALID       :', healthCheck())
-      console.log('GENDER                  :', sexCheck());
-    })
+    // auth_id,
+    // firstname,
+    // lastname,
+    // email,
+    // user_password,
+    // weight_lbs,
+    // height_inches,
+    // sex
+
+      // console.log('SUBMIT PRESSED');
+      // console.log('FIRST NAME VALID        :', firstNameCheck());
+      // console.log('LAST NAME VALID         :', lastNameCheck());
+      // console.log('EMAIL IS NOT BEING USED :', email);
+      // console.log('PASSWORDS MATCH         :', passwordCheck());
+      // console.log('HEALTH INFO VALID       :', healthCheck())
+      // console.log('GENDER                  :', sexCheck());
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync(password0, salt);
+
+      const sent = {
+        auth_id: null,
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        user_password: hash,
+        weight_lbs: weight,
+        height_inches: height,
+        sex: sex,
+      };
+
+      console.log('SALT: ', salt)
+      console.log('HASH: ', hash);
+
+      axios({
+      method: 'post',
+      url: `${String(process.env.BACKEND_URL)}/user/create`,
+      headers: {},
+      data: sent
+      }).then(async (response) => {
+
+        console.log('RESPONSE: ', response.data[0].id);
+        await setUserId(response.data[0].id);
+        router.push('/overview');
+      });
   }
 
   return (

@@ -1,14 +1,13 @@
 import { ChildProps } from "../components/Layout"
 import { useEffect} from 'react'
 import { MdOutlineSettings } from 'react-icons/md'
-import { useTheme } from 'next-themes'
+
 import UserExperience from '../components/settings/UserExperience'
 import UserMetrics from '../components/settings/UserMetrics'
+import SettingsContainer from "../components/settings/SettingsContainer"
 
 
 export default function Settings({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) {
-
-  const {theme, setTheme} = useTheme()
 
   useEffect(() => {
     setTitle('Settings');
@@ -18,10 +17,9 @@ export default function Settings({ setTitle, setIcon, setShowCalendar, setShowRe
   }, [setTitle, setIcon, setShowCalendar]);
 
   return (
-    <div>
-      <UserMetrics />
-      <UserExperience />
-      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="bg-blue-300"> Theme </button>
+    <div className="w-full h-full flex flex-col justify-center items-center">
+      <SettingsContainer title="User Metrics" card={<UserMetrics />}/>
+      <SettingsContainer title="User Experience" card={<UserExperience />}/>
     </div>
   );
 }

@@ -17,6 +17,7 @@ interface ContainerProps {
   setExercises?: any;
   setNutrition?: any;
   bmr: number | 0;
+  userId: any
 }
 
 export default function Container({
@@ -26,6 +27,7 @@ export default function Container({
   setExercises,
   setNutrition,
   bmr,
+  userId
 }: ContainerProps) {
   /* const scrollRef = useRef<any>();
   const slideScroll = () => {
@@ -61,10 +63,18 @@ export default function Container({
               {" "}
               {numberOfCompleted} of {cards.length} items completed{" "}
             </div>
-            <MdAdd
-              className="mr-5 cursor-pointer text-2xl"
-              onClick={() => setIsOpen(true)}
-            />
+
+            {type === "exercise" && (
+              <a href='/exercise'>
+                <MdAdd className="mr-5 cursor-pointer text-2xl" />
+              </a>
+            )}
+
+            {type === "nutrition" && (
+              <a href='/nutrition'>
+                <MdAdd className="mr-5 cursor-pointer text-2xl" />
+              </a>
+            )}
           </div>
         )}
       </div>
@@ -78,8 +88,7 @@ export default function Container({
       ></Modal>
 
       <div className="relative w-full h-full">
-        <div className="z-0 bg-gray-300 dark:bg-slate-300 flex flex-row min-h-full lg:h-[16rem] justify-between
-          items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border-r border-l w-full"
+        <div className={`z-0 bg-gray-300 dark:bg-slate-300 flex flex-row min-h-full lg:h-[16rem] ${type === 'calories'? 'justify-between' : 'justify-right'} items-center bg-fixed overflow-x-scroll pl-2 pr-2 lg:pl-[4rem] lg:pr-[4rem] scrollbar-hide border-r border-l w-full`}
         >
           {cards.length === 0 && type === "exercise" && (
             <div className="flex w-full justify-center">
@@ -131,6 +140,7 @@ export default function Container({
                     weight={card.weight}
                     completed={card.completed}
                     setExercises={setExercises}
+                    userId={userId}
                   />
                 );
               } else {
@@ -144,6 +154,7 @@ export default function Container({
                     portion={card.portion}
                     completed={card.completed}
                     setNutrition={setNutrition}
+                    userId={userId}
                   />
                 );
               }
