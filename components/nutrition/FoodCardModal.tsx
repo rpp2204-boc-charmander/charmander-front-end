@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Image from 'next/image'
 import { useState } from 'react'
 import { MdClose } from "react-icons/md";
@@ -6,6 +8,10 @@ interface FoodCardModalProps {
   info: Object
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 const FoodCardModal = ({ listId, info, removeSelection }) => {
 
   // info.unit = "Gram";
@@ -27,6 +33,13 @@ const FoodCardModal = ({ listId, info, removeSelection }) => {
     // console.log(e.target.value)
     setAmount(Number(e.target.value));
     info.amount = Number(e.target.value);
+    if(!info.unit) {
+      info.totalGrams = amount * 10;
+      info.totalCalories = Math.round(info.totalGrams*info.food.nutrients.ENERC_KCAL/100)
+    } else if (info.unit) {
+      info.totalGrams = info.amount * info.grams;
+      info.totalCalories = Math.round(info.totalGrams*info.food.nutrients.ENERC_KCAL/100)
+    }
   }
 
   const handleUnitChange = (e) => {
@@ -39,9 +52,14 @@ const FoodCardModal = ({ listId, info, removeSelection }) => {
     setUnit({
       label: label,
       grams: grams
-    })
+    });
     info.unit = label;
-    info.grams = grams;
+    info.grams = Number(grams);
+    // info.totalCalories = Math.round(amount*unit.grams*info.food.nutrients.ENERC_KCAL/100)
+    // info.totalGrams = Math.round(amount*unit.grams);
+    // console.log(info.amount);
+    // info.totalGrams = info.grams*info.amount;
+    // info.totalCalories = Math.round(info.totalGrams*info.food.nutrients.ENERC_KCAL/100);
   }
 
   return (
@@ -67,13 +85,21 @@ const FoodCardModal = ({ listId, info, removeSelection }) => {
       <div className="flex flex-col">
         <form>
           <label>Amount</label>
+<<<<<<< HEAD
           <input placeholder="enter number in grams" className="shadow-lg w-6/10 h-6 rounded-lg mb-3 ml-3" onChange={(e) => {
+=======
+          <input placeholder="enter number in grams" className="shadow-lg w-6/10 h-6 rounded-lg mb-3 ml-3 bg-white dark:bg-white" onChange={(e) => {
+>>>>>>> main
             handleAmountChange(e)
           }}></input>
         </form>
         <form>
           <label>Unit</label>
+<<<<<<< HEAD
           <select defaultValue="Gram, 1 grams" className="shadow-lg w-6/10 h-6 rounded-lg ml-10" onChange={(e) => {
+=======
+          <select defaultValue="Gram, 1 grams" className="shadow-lg w-6/10 h-6 rounded-lg ml-10 bg-white dark:bg-white" onChange={(e) => {
+>>>>>>> main
             handleUnitChange(e)
           }}>
             {

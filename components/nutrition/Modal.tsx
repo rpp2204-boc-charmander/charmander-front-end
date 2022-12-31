@@ -1,3 +1,4 @@
+// @ts-nocheck
 import FoodCardModal from "./FoodCardModal";
 import axios from 'axios';
 import Image from 'next/image';
@@ -8,7 +9,7 @@ import { useState, useEffect } from "react";
 const appId = process.env.EDAMAM_APPLICATION_ID;
 const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
-const Modal = ({ showModal, date, setLoaded }) => {
+const Modal = ({ showModal, date }) => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
@@ -25,15 +26,12 @@ const Modal = ({ showModal, date, setLoaded }) => {
   }
 
   const handleSelect = (food) => {
-    axios.get('http://localhost:4000/nutrition/list/foods',{
-      params: food
-      })
-      .then((response) => {
-        food.food.foodId = response.data.id;
-        setFoodList(foodList.concat([food]));
-        setPreview([]);
-        document.getElementById('search-form').value = ""
-      })
+    // axios.get('http://localhost:3000/nutrition/list/foods',{
+    //   params: food
+    //   })
+    //   .then((response) => {
+    //     console.log('response: ', response);
+    //   })
 
   }
 
@@ -59,6 +57,22 @@ const Modal = ({ showModal, date, setLoaded }) => {
       .then((response) => {
         setLoaded(false);
       })
+  }
+
+  const handleAdd = () => {
+    let foodLog: any = {};
+    foodLog.date = date;
+    foodLog.consumed = false;
+    foodLog.items = foodList;
+    console.log(foodLog)
+  }
+
+  const handleAddConsumed = () => {
+    let foodLog: any = {};
+    foodLog.date = date;
+    foodLog.consumed = true;
+    foodLog.items = foodList;
+    console.log(foodLog)
   }
 
   const removeSelection = (key: any) => {
@@ -124,7 +138,7 @@ const Modal = ({ showModal, date, setLoaded }) => {
                     {
                       food.food.image ? (
                         <Image src={food.food.image} alt="" width={50} height={50} className="rounded-full ml-4"/>
-                      ) : <Image src={food.food.image} alt="" width={50} height={50} className="rounded-full ml-4"/>
+                      ) : <Image src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" alt="" width={50} height={50} className="rounded-full ml-4"/>
                     }
                     <div>{food.food.label}</div>
                     <div className="pr-4">{Math.round(food.food.nutrients.ENERC_KCAL)} calories</div>

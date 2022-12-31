@@ -1,58 +1,292 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import ExerciseList from "../components/exercise/ExerciseList"
+import ExerciseList from "../components/exercise/ExerciseList";
 import CalorieComponent from "../components/exercise/CalorieComponent";
 import SearchModal from "../components/exercise/SearchModal";
 import EditModal from "../components/exercise/EditModal";
-import Header from "../components/overview/Header";
+import CompletedModal from '../components/exercise/CompletedModal';
+import AddSet from '../components/exercise/AddSet';
+import IncompleteModal from '../components/exercise/IncompleteModal';
+// import { ChildProps } from "../components/Layout";
 
-import styles from '../styles/Exercise.module.css';
-import { MdOutlineFitnessCenter } from 'react-icons/md';
+import { MdOutlineFitnessCenter } from "react-icons/md";
 
-import mockData from '../mocks/exercisedata.json';
+export default function Exercise({
+  query_date,
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
+  userId,
+  default_exercises,
+  muscle_groups,
+  setShowReportButtons
+}: any): JSX.Element {
 
-const getCaloriesBurned = (exercises: any): number => {
-  let total = 0;
+  console.log("query_date: ", query_date);
 
-  exercises.forEach( (exercise: any) => {
-    total += exercise.total_calories_burned;
-  })
+  console.log("user_id", userId)
 
-  return total;
+  // IDs
+  const [workoutID, setWorkoutID] = useState(1);
+  const [ setID, setSetID ] = useState(1);
+
+  // Exercises
+  const [exercises, setExercises] = useState([]);
+
+  // Modals
+  const [addModalState, setAddModalState] = useState(false);
+  const [editModalState, setEditModalState] = useState(false);
+  const [completedModalState, setCompletedModalState] = useState(false);
+  const [addSetModalState, setAddSetModalState] = useState(false);
+  const [fetchExercises, setfetchExercises] = useState(false);
+
+  // Calories
+  const [caloriesBurned, setCaloriesBurned] = useState(0);
+
+  //Sets
+  const [ editSets, setEditSets ] = useState([]);
+
+  //Confirmations
+  const [ workoutConfirm, setWorkoutConfirm ] = useState(false);
+
+  useEffect(() => {
+    setTitle("Exercise");
+    setIcon(() => MdOutlineFitnessCenter);
+    setShowCalendar(true);
+    setShowReportButtons(false);
+  }, [setTitle, setIcon, setShowCalendar]);
+
+  useEffect(() => {
+    getUserExercises()
+      .then(({ data }) => {
+        setExercises(data.result);
+        setCaloriesBurned(data.total_cals_burned)
+      })
+      .catch(error => {
+        console.log('ERROR GETTING EXERCISES: ', error.stack)
+      })
+  }, [addSetModalState, editModalState, completedModalState, currentDate, userId, query_date])
+
+//GET FUNCTIONS
+
+const getUserExercises = () => {
+return axios.get('api/exercise/workout/list', { params: { user_id: userId, log_date: query_date } });
 }
 
+const getExerciseSets = (workout_id: number) => {
+return axios.get('api/exercise/list/sets', { params: { workout_exercise_id: workout_id }})
+}
 
-export default function Exercise() {
-  const [ currentDate, setCurrentDate ] = useState(new Date());
-  const [ exercises, setExercises ] = useState(mockData.data);
-  const [ addModalState, setAddModalState ] = useState(false);
-  const [ editModalState, setEditModalState ] = useState(false);
-  const [ caloriesBurned, setCaloriesBurned ] = useState(getCaloriesBurned(exercises))
+//DELETE FUNCTIONS
 
-  const toggleAddModal = () => {
-    setAddModalState( prevState => !prevState)
+const deleteSet = async (set_id: number) => {
+  try {
+    await axios.delete('api/exercise/sets', { params: { set_id }});
+    const { data: newSets } = await getExerciseSets(workoutID);
+
+    setEditSets(newSets);
+  } catch (error :any) {
+    console.log(error.stack);
+  }
+}
+
+const deleteExercise = async (workout_exercise_id: number) => {
+  try {
+    await axios.delete('api/exercise/workout', { params: { workout_exercise_id }});
+    const { data: newWorkout } = await getUserExercises();
+
+    setExercises(newWorkout.result);
+  } catch (error: any) {
+    console.log(error.stack);
+  }
+};
+
+
+//COMPLETE FUNCTIONS
+
+const completeSet = (actual_reps: number, set_id: number) => {
+axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id: userId }})
+  .then( () => {
+    toggleCompletedModal(set_id);
+  })
+  .catch( error => {
+    console.log(error.stack);
+  })
+}
+
+const completeExercise = async (workout_exercise_id: number) => {
+//get sets for exercise
+  try {
+    const { data: sets } = await getExerciseSets(workout_exercise_id);
+
+    if (!sets.length) {
+      console.log('No Sets ):')
+      setWorkoutConfirm(true);
+      return;
+    }
+
+    for (var i = 0; i < sets.length; i++) {
+      if (!sets[i].reps_actual) {
+        setWorkoutConfirm(true);
+        return;
+      }
+    }
+
+    await axios.put('api/exercise/workout', null, { params: { workout_exercise_id, user_id: userId, log_date: query_date }});
+    const { data: newWorkout } = await getUserExercises();
+
+      setExercises(newWorkout.result);
+      setCaloriesBurned(newWorkout.total_cals_burned);
+      setWorkoutConfirm(false)
+    } catch (error: any) {
+      console.log(error.stack);
+    }
+}
+
+  const toggleAddModal = (): void => {
+    setAddModalState((prevState) => !prevState);
+  };
+
+  const toggleEditModal = (workout_id: number, repsRefs: [], weightsRefs: [], setIDs: []) => {
+    //if repsRefs and weightRefs are both defined, call put request
+
+    if (repsRefs && weightsRefs) {
+      setIDs.sort();
+
+      let reps = repsRefs.map( (rep: any) => {
+        return Number(rep?.value);
+      })
+
+      let weights = weightsRefs.map( (weight: any) => {
+        return Number(weight?.value);
+      })
+
+      axios.put('api/exercise/workout/sets', {
+        reps,
+        weights,
+        setIDs
+      })
+      .then(({ data }) => {
+        console.log('Successfully Updated Sets')
+        setEditModalState( prevState => !prevState)
+      })
+      .catch( error => {
+        console.log(error.stack)
+      })
+
+    } else {
+
+      getExerciseSets(workout_id)
+        .then(({ data }) => {
+          setEditSets(data);
+          setEditModalState( prevState => !prevState)
+          setWorkoutID(workout_id)
+        })
+        .catch( error => {
+          console.log(error.stack);
+        })
+    }
   }
 
-  const toggleEditModal = () => {
-    setEditModalState( prevState => !prevState)
+  const toggleCompletedModal = (set_id: number) => {
+    setCompletedModalState( prevState => !prevState)
+    setSetID(set_id);
   }
 
-  const deleteExercise = (id: number) => {
-    alert('Are you sure you want to remove this exercise?')
+  const toggleAddSetModal = (workout_id: number) => {
+    setAddSetModalState( prevState => !prevState)
+    setWorkoutID(workout_id)
+  }
 
+  const handleFetchExercises = (workout_id: number): void => {
+    setfetchExercises((prevState) => !prevState);
   };
 
   return (
-    <>
-      <Header currentDate={currentDate} setCurrentDate={setCurrentDate} title='Exercise' Icon={MdOutlineFitnessCenter}/>
-
-      { addModalState && <SearchModal toggleAddModal={toggleAddModal}/>}
-      { editModalState && <EditModal toggleEditModal={toggleEditModal}/>}
+    <div className="exerciseContainer w-full h-full">
+      {addModalState && (
+        <SearchModal
+          query_date={query_date}
+          user_id={userId}
+          toggleAddModal={toggleAddModal}
+          default_exercises={default_exercises}
+          muscle_groups={muscle_groups}
+          handleFetchExercises={handleFetchExercises}
+        />
+      )}
+      {editModalState && (
+        <EditModal
+          toggleEditModal={toggleEditModal}
+          deleteSet={deleteSet}
+          workoutID={workoutID}
+          sets={editSets} />
+      )}
+      {completedModalState && (
+        <CompletedModal
+          toggleCompletedModal={toggleCompletedModal}
+          completeSet={completeSet}
+          setID={setID} />
+      )}
+      {addSetModalState && (
+        <AddSet
+          toggleAddSetModal={toggleAddSetModal}
+          workoutID={workoutID} />
+      )}
+      { workoutConfirm && (
+        <IncompleteModal
+          setWorkoutConfirm={setWorkoutConfirm}/>
+      )}
 
       <div className="grid grid-cols-[25%_75%]">
-        <CalorieComponent caloriesBurned={caloriesBurned} toggleAddModal={toggleAddModal}/>
-        <ExerciseList exercises={exercises} toggleEditModal={toggleEditModal} deleteExercise={deleteExercise}/>
+        <CalorieComponent
+          caloriesBurned={caloriesBurned}
+          toggleAddModal={toggleAddModal}
+        />
+        <ExerciseList
+          exercises={exercises}
+          toggleEditModal={toggleEditModal}
+          deleteExercise={deleteExercise}
+          toggleCompletedModal={toggleCompletedModal}
+          toggleAddSetModal={toggleAddSetModal}
+          completeExercise={completeExercise}
+        />
       </div>
-    </>
-  )
+    </div>
+  );
+}
+
+interface Exercises {
+  exercise_id: number;
+  exercise: string;
+  muscle_group_id: number;
+  muscle_group: string;
+}
+
+interface MuscleGroups {
+  muscle_group_id: number;
+  muscle_group: string;
+}
+
+interface GetDefaultExerciseList {
+  exercises: Exercises[];
+  muscle_groups: MuscleGroups[];
+}
+
+export async function getStaticProps(): Promise<any> {
+  try {
+    const { data } = await axios.get<GetDefaultExerciseList>(
+      `${String(process.env.BACKEND_URL)}/exercise/default/list`
+    );
+
+    return {
+      props: {
+        default_exercises: data.exercises,
+        muscle_groups: data.muscle_groups,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }

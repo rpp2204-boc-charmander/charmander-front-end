@@ -1,36 +1,34 @@
-import { useState, useEffect } from "react";
-import Head from "next/head";
-import Header from "../components/overview/Header";
+import axios from "axios";
 import Container from "../components/overview/Container";
+import Head from "next/head";
+import { useState, useEffect } from "react";
 import { MdOutlineSort } from "react-icons/md";
+import { ChildProps } from "../components/Layout";
 
 export interface ExerciseObjProps {
-  text: string,
-  calorie: number,
-  sets?: number,
-  reps?: number,
-  weight?: number,
-  completed: boolean
+  text: string;
+  calorie: number;
+  sets?: number;
+  reps?: number;
+  weight?: number;
+  completed: boolean;
 }
 
 export interface NutritionObjProps {
-  text: string,
-  calorie: number,
-  portion?: number,
-  completed: boolean
+  text: string;
+  calorie: number;
+  portion?: number;
+  completed: boolean;
 }
 
-export interface DateProps {
-  currentDate: Date,
-  setCurrentDate: Function
-  title: string,
-  Icon: any,
-  setLoaded: Function
-}
-
-export default function Overview() {
+export default function Overview({
+  currentDate,
+  setTitle,
+  setIcon,
+  setShowCalendar,
+  setShowReportButtons
+}: ChildProps) {
   // States
-  const [currentDate, setCurrentDate] = useState(new Date());
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
   const [caloriesBurned, setcaloriesBurned] = useState(0);
   const [netCalories, setNetCalories] = useState(0);
@@ -42,25 +40,47 @@ export default function Overview() {
   const weight = 0; // in kg
   const height = 0; // in cm
   const age = 0;
-  const sex = 'female';
+  const sex = "female";
 
-  // Load dummy data
+  // Helper function
+  const convertDateToString = (date: any) => {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  };
+
   useEffect(() => {
-    const exercises = [
-      {text: "Bench Press", calorie: 500, sets: 3, reps: 5, weight: 15, completed: true},
-      {text: "Chair Press", calorie: 500, sets: 3, reps: 5, completed: false},
-      {text: "Desk Press", calorie: 500, sets: 3, reps: 5, completed: false},
-      {text: "Table Press", calorie: 1000, completed: false},
-      {text: "Squats", calorie: 500, completed: false}
-    ];
-    const nutrition = [
-      {text: "Big Mac", calorie: 300, portion: 5, completed: true},
-      {text: "Big Mac", calorie: 300, completed: false},
-      {text: "Big Mac", calorie: 300, completed: false}
-    ];
-    setExercises(exercises);
-    setNutrition(nutrition);
-  }, [currentDate])
+    setTitle("Overview");
+    setIcon(() => MdOutlineSort);
+    setShowCalendar(true);
+    setShowReportButtons(false);
+  }, [setTitle, setIcon, setShowCalendar]);
+
+  // Get workout data
+  useEffect(() => {
+    //axios(`http://44.198.150.13:3000/overview/exercise?date=${convertDateToString(currentDate)}`)
+    axios(
+      `http://44.198.150.13:3000/exercise/workout/list?user_id=1&log_date=${convertDateToString(currentDate)}`
+    )
+    .then((result) => {
+      let data = result.data;
+      let exercise: ExerciseObjProps = {
+        text: "",
+        calorie: 0,
+        completed: false,
+      };
+      let newData = data.map((item: any) => {
+        exercise.text = item.exercise;
+        exercise.calorie = item.est_cals_burned;
+        exercise.completed = false;
+        return exercise;
+      });
+      setExercises(newData);
+    })
+    .catch(error => {
+      setExercises([]);
+    });
+  }, [currentDate]);
+
+
 
   // Calculate BMR with Mifflin-St Jeor equation
   useEffect(() => {
@@ -68,7 +88,7 @@ export default function Overview() {
     const weight = 70; // in kg
     const height = 175; // in cm
     const age = 30;
-    const sex = 'female';
+    const sex = "female";
 
     let bmr = 0;
     let s = -161;
@@ -85,74 +105,58 @@ export default function Overview() {
   // Calculate total calorie burned
   useEffect(() => {
     let sum = 0;
-    exercises.map(exercise => {
+    exercises.map((exercise) => {
       if (exercise.completed) {
         sum += exercise.calorie;
       }
-    })
-    setcaloriesBurned(prevState => sum);
-  }, [exercises])
+    });
+    setcaloriesBurned((prevState) => sum);
+  }, [exercises]);
 
   // Calculate total calorie consumed
   useEffect(() => {
     let sum = 0;
-    nutrition.map(food => {
+    nutrition.map((food) => {
       if (food.completed) {
         sum += food.calorie;
       }
-    })
-    setcaloriesConsumed(prevState => sum);
-  }, [nutrition])
+    });
+    setcaloriesConsumed((prevState) => sum);
+  }, [nutrition]);
 
   // Calculate net calories
   useEffect(() => {
-    setNetCalories(prevState => caloriesConsumed - caloriesBurned)
-  }, [caloriesConsumed, caloriesBurned])
+    setNetCalories((prevState) => caloriesConsumed - caloriesBurned);
+  }, [caloriesConsumed, caloriesBurned]);
 
   return (
-    <div>
-      <Head>
-        <title> My Health Coach </title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="h-full w-full p-3 flex flex-col justify-between lg:items-center lg:justify-center">
+      <Container
+        type="calories"
+        title="Calories"
+        cards={[
+          { calorie: caloriesConsumed, text: "Calories Consumed" },
+          { calorie: caloriesBurned, text: "Calories Burned" },
+          { calorie: netCalories, text: "Net Calories" },
+        ]}
+        bmr={bmr}
+      />
 
-      <div className="bg-white flex flex-col w-[100%]">
-        <Header
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-          title='Overview'
-          Icon={MdOutlineSort}
-        />
+      <Container
+        type="exercise"
+        title="Exercise"
+        cards={exercises}
+        setExercises={setExercises}
+        bmr={bmr}
+      />
 
-        <div className="flex flex-col items-center pt-4 pl-12 pr-12">
-          <Container
-            type="calories"
-            title="Calories"
-            cards={[
-              {calorie: caloriesConsumed, text: "Calories Consumed"},
-              {calorie: caloriesBurned, text: "Calories Burned"},
-              {calorie: netCalories, text: "Net Calories"}
-            ]}
-            bmr={bmr}
-          />
-
-          <Container
-            type="exercise"
-            title="Exercise"
-            cards={exercises}
-            setExercises={setExercises}
-            bmr={bmr}
-          />
-
-          <Container
-            type="nutrition"
-            title="Nutrition"
-            cards={nutrition}
-            setNutrition={setNutrition}
-            bmr={bmr}
-          />
-        </div>
-      </div>
+      <Container
+        type="nutrition"
+        title="Nutrition"
+        cards={nutrition}
+        setNutrition={setNutrition}
+        bmr={bmr}
+      />
     </div>
-  )
+  );
 }
