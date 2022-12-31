@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import styles from "../../styles/Login.module.css";
+import { BsFullscreen } from "react-icons/bs";
 
 interface GoogleProps {
   init: boolean;
@@ -65,16 +66,11 @@ export default function GoogleBtn({ init, setUserId, setCurrentUser }: GooglePro
       });
 
       google.accounts.id.renderButton(document.getElementById("google_btn"), {
-        shape: "pill",
-        theme: "filled_white",
-        size: "large",
-        padding: 0
+        shape: "pill"
       });
     }
 
   return (
-    <div className={styles.hhAclf}>
-        <div className={styles.hhAclf} id="google_btn"/>
-    </div>
+    <div className="flex w-full p-0 justify-center" id="google_btn"/>
   )
 }
