@@ -9,10 +9,10 @@ export default function Sidenav() {
           <MdAccountCircle className="h-32 w-32" />
         </div>
 
-        <div className='username text-xl pb-1'> username </div>
+        <div className='username text-xl pb-1'> kmantan </div>
 
         <div className='names text-sm italic'>
-          FirstName LastName </div>
+          Keenan Aldridge </div>
       </div>
 
       <ul className="w-32 flex flex-col grow max-h-[35rem] justify-between pt-10 pb-[12rem] font-bold">

@@ -19,9 +19,9 @@ export default function Sidebar() {
             <MdAccountCircle className="h-32 w-32" />
           </div>
 
-          <div className="username pb-1 text-xl"> username </div>
+          <div className="username pb-1 text-xl"> kmantan </div>
 
-          <div className="names text-sm italic">FirstName LastName </div>
+          <div className="names text-sm italic">Keenan Aldridge </div>
         </div>
 
         <ul className="flex max-h-[35rem] w-32 grow flex-col justify-between pt-10 pb-[12rem] font-bold">

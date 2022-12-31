@@ -1,4 +1,5 @@
 import { setMaxListeners } from "events";
+import axios from "axios";
 
 interface pendingItemType {
   CAL: string,
@@ -22,10 +23,11 @@ interface RemoveItemProps {
   setIsRemoveShowing: Function,
   allFoods: pendingItemType[],
   calories: number,
-  removeItem: Function
+  removeItem: Function,
+  setLoaded: Function
 }
 
-const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShowing, allFoods, calories, removeItem} : RemoveItemProps) => {
+const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShowing, allFoods, calories, removeItem, setLoaded} : RemoveItemProps) => {
   // const modalStyling = {
   //   position: "fixed",
   //   top: "50%",
@@ -46,15 +48,23 @@ const RemoveItemModal = ({pendingItem, setAllFoods, setCalories, setIsRemoveShow
         padding: "50px",
         zIndex: "1000"}} className="shadow-2xl">
         {/* <GrClose className="absolute top-2 right-2"/> */}
-        <p>{`Are you sure you want to remove ${pendingItem.ITEM}?`}</p>
+        <p className="text-black">{`Are you sure you want to remove ${pendingItem.food_name}?`}</p>
         <div className="p-10 flex flex-row justify-center">
           <button className="mr-2 bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded"
-          onClick={() => setIsRemoveShowing(false)}>
+          onClick={() => {
+            setIsRemoveShowing(false)
+          }}>
             Cancel
           </button>
           <button className="ml-2 bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded"
-          onClick={(e) => {
-            console.log(pendingItem)
+            onClick={() => {
+              axios.delete('http://localhost:4000/nutrition/remove/foodLog', {
+                data: {
+                  logId: pendingItem.id
+                }
+              })
+              setLoaded(false);
+              setIsRemoveShowing(false);
           }}>
             Confirm
           </button>

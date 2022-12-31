@@ -21,20 +21,22 @@ interface FoodListProps {
   foodData: foodDataType[],
   setPendingItem: Function,
   setIsRemoveShowing: Function,
-  setIsEditShowing: Function
+  setIsEditShowing: Function,
+  setLoaded: Function
 }
 
-const FoodList = ({ foodData, setPendingItem, setIsRemoveShowing, setIsEditShowing }: FoodListProps) => {
+const FoodList = ({ foodData, setPendingItem, setIsRemoveShowing, setIsEditShowing, setLoaded }: FoodListProps) => {
   return (
   <div className="w-3/4">
     {
     foodData.map((food) => {
         return <FoodCard
-        key={food.ITEM}
+        key={food.food_name}
         food={food}
         setPendingItem={setPendingItem}
         setIsRemoveShowing={setIsRemoveShowing}
-        setIsEditShowing={setIsEditShowing}/>
+        setIsEditShowing={setIsEditShowing}
+        setLoaded={setLoaded}/>
       })
     }
   </div>

@@ -5,7 +5,6 @@ import CaloriesWidget from "../components/nutrition/CaloriesWidget";
 import FoodList from "../components/nutrition/FoodList";
 import EditItemModal from "../components/nutrition/EditItemModal";
 import RemoveItemModal from "../components/nutrition/RemoveItemModal";
-import foodData from "../mocks/foodData.json";
 import Modal from "../components/nutrition/Modal";
 import { ChildProps } from "../components/Layout";
 import { MdRestaurant } from "react-icons/md";
@@ -32,29 +31,21 @@ const Nutrition = ({
   setTitle,
   setIcon,
   setShowCalendar,
-  setShowReportButtons
+  setShowReportButtons,
+  setLoaded,
+  loaded
 }: ChildProps) => {
   const [pendingItem, setPendingItem] = useState<FoodDataType>({} as FoodDataType);
   const [isEditShowing, setIsEditShowing] = useState<boolean>(false);
   const [isRemoveShowing, setIsRemoveShowing] = useState<boolean>(false);
-  const [allFoods, setAllFoods] = useState<any>(foodData);
+  const [allFoods, setAllFoods] = useState<any>([]);
   const [showModal, setShowModal] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  // const [loaded, setLoaded] = useState(false);
 
   const handleShowModal = () => {
     setShowModal(!showModal);
   }
 
-  const updateCalories = (foods : []) => {
-    let calculatedCalories : number = 0;
-    foods.map((food : FoodDataType) => {
-      let calories =  food.CAL || food.ENERC_KCAL;
-      if(food.CONSUMED){
-        calculatedCalories += Number(food.CAL);
-      }
-    })
-    return calculatedCalories;
-  }
 
   useEffect(() => {
     setTitle("Nutrition");
@@ -63,7 +54,7 @@ const Nutrition = ({
     setShowReportButtons(false);
   }, [setTitle, setIcon, setShowCalendar]);
 
-  const [calories, setCalories] = useState<any>(updateCalories(allFoods));
+  const [calories, setCalories] = useState<any>(0);
 
   const removeItem = (logId : number) => {
     axios.delete('http://localhost:4000/nutrition/remove/foodLog', {
@@ -84,11 +75,27 @@ const Nutrition = ({
         }
       })
       .then((response) => {
-        setAllFoods(response.data);
+        let parsed = response.data;
+        parsed.map((item) => {
+          item.nutrients = JSON.parse(item.nutrients);
+        })
+        setAllFoods(parsed);
+        updateCalories(parsed)
         setLoaded(true);
       })
     }
-    });
+  });
+
+  const updateCalories = (foods : []) => {
+    let calculatedCalories : number = 0;
+    foods.map((food : FoodDataType) => {
+      let calories =  food.nutrients.CAL || food.nutrients.ENERC_KCAL;
+      if(food.consumed){
+        calculatedCalories += Number(calories);
+      }
+    })
+    setCalories(prevCalories => calculatedCalories);
+  };
 
   return (
     <>
@@ -109,7 +116,7 @@ const Nutrition = ({
         </div>
       </div>
       <div className="flex flex-row justify-between p-2 w-auto"> */}
-      <div className="grid grid-cols-[25%_75%]">
+      <div className="flex flex-row w-full h-full">
         <CaloriesWidget handleShowModal={handleShowModal} calories={calories}/>
           {isRemoveShowing ?
           <RemoveItemModal
@@ -119,7 +126,8 @@ const Nutrition = ({
           setCalories={setCalories}
           setAllFoods={setAllFoods}
           allFoods={allFoods}
-          calories={calories}/>
+          calories={calories}
+          setLoaded={setLoaded}/>
           : null}
           {isEditShowing ?
           <EditItemModal
@@ -130,9 +138,9 @@ const Nutrition = ({
           allFoods={allFoods}
           calories={calories}/>
         : null}
-        <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
+        <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing} setLoaded={setLoaded}/>
         {
-        showModal ? ( <Modal showModal={handleShowModal} currentDate={currentDate}/>) : ( null )
+        showModal ? ( <Modal showModal={handleShowModal} currentDate={currentDate} setLoaded={setLoaded}/>) : ( null )
       }
       </div>
     </>

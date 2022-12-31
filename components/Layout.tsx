@@ -16,7 +16,8 @@ export interface ChildProps {
   timespan: String;
   setTimespan: Function;
   userId:  String;
-  setUserId: Function
+  setUserId: Function,
+  setLoaded: Function
 }
 
 export default function Layout({ children }: any): JSX.Element {
@@ -33,6 +34,7 @@ export default function Layout({ children }: any): JSX.Element {
   const day = currentDate.getUTCDate();
   const year = currentDate.getUTCFullYear();
   const date_string_for_query = `${year}/${month}/${day}`;
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <div className="relative min-h-screen flex">
@@ -68,7 +70,8 @@ export default function Layout({ children }: any): JSX.Element {
             timespan,
             setTimespan,
             setUserId,
-            userId
+            userId,
+            setLoaded
           })}
         </div>
       </main>

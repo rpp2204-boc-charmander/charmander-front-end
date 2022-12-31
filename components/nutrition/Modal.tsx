@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 const appId = process.env.EDAMAM_APPLICATION_ID;
 const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
-const Modal = ({ showModal, currentDate }) => {
+const Modal = ({ showModal, currentDate, setLoaded }) => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
@@ -47,7 +47,7 @@ const Modal = ({ showModal, currentDate }) => {
   const handleAdd = async () => {
     const formattedDate = currentDate.toISOString().slice(0, 10);
     let foodLog: any = {};
-    foodLog.date = formattedDate;
+    foodLog.date = currentDate;
     foodLog.consumed = false;
     foodLog.items = foodList;
     foodLog.user = 1;
