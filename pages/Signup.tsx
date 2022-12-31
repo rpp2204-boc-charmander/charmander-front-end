@@ -15,10 +15,11 @@ const modalStyle = {
   transform: "translateY(50%)"
 };
 
-export default function Signup({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userId }: ChildProps) {
+export default function Signup({ setTitle, setIcon, setShowCalendar, setShowReportButtons, setUserId }: ChildProps) {
   // const navigate = useNavigate();
 
   useEffect(() => {
+    setUserId(0);
     setTitle("Welcome");
     setIcon("");
     setShowCalendar(false);
@@ -32,7 +33,7 @@ export default function Signup({ setTitle, setIcon, setShowCalendar, setShowRepo
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div style={modalStyle}>
-        <SignupModal userId={userId}/>
+        <SignupModal setUserId={setUserId}/>
       </div>
     </div>
   );

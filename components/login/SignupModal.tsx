@@ -7,11 +7,15 @@ import { useRouter } from "next/router";
 import { ChildProps } from "../Layout";
 import { useNavigate } from 'react-router-dom';
 
-export default function SignupModal({
-  userId,
-}: ChildProps) {
-  const router = useRouter();
+export interface SignUpProps{
+  setUserId: Function
+}
 
+export default function SignupModal({
+  setUserId,
+}: SignUpProps) {
+  const router = useRouter();
+  console.log('setUSERID: ', setUserId);
   // STATE VALUES
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -44,8 +48,9 @@ export default function SignupModal({
     return (lastName.length > 1);
   }
 
+
   const emailCheck = async (email: String) => {
-      return axios.get(`http://localhost:4000/user/email/${email}`).then((response) => {
+      return axios.get(`${String(process.env.BACKEND_URL)}/user/email/${email}`).then((response) => {
         console.log('RESULT: ', response.data.email);
         // setEmailExist(response.data.email.length > 0)
         console.log('EMAIL EXIST BEFORE: ', emailExist);
@@ -125,8 +130,7 @@ export default function SignupModal({
       }).then(async (response) => {
 
         console.log('RESPONSE: ', response.data[0].id);
-        userId = await response.data[0].id;
-        console.log('USER ID: ', userId);
+        await setUserId(response.data[0].id);
         router.push('/overview');
       });
   }
