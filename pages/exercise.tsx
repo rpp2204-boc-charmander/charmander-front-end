@@ -270,7 +270,7 @@ export default function Exercise({
         <IncompleteModal setWorkoutConfirm={setWorkoutConfirm} />
       )}
 
-      <div className="sm:flex sm:flex-col lg:grid lg:grid-cols-[25%_75%]">
+      <div className="lg:grid lg:grid-cols-[25%_75%] sm:flex sm:flex-col h-[90vh]">
         <CalorieComponent
           caloriesBurned={caloriesBurned}
           toggleAddModal={toggleAddModal}
