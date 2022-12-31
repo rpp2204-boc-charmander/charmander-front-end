@@ -27,8 +27,8 @@ export default function EditModal({
       ></div>
 
       <div
-        className="fixed top-[50%] left-[50%] z-50 flex h-[60%] w-[40%] translate-x-[-50%]
-      translate-y-[-50%] flex-col items-center rounded-3xl bg-gray-300 pl-10 pr-10 text-black"
+        className="fixed top-[50%] left-[50%] z-50 flex h-[60%] translate-x-[-50%] translate-y-[-50%]
+      flex-col items-center rounded-3xl bg-gray-300 pl-10 pr-10 dark:bg-slate-500 sm:w-[95%] lg:w-[40%]"
       >
         <div className="header flex w-[100%] flex-row items-center justify-between pt-4 pb-4">
           <div className="title text-[2rem] font-bold"> Edit Exercise </div>
@@ -40,7 +40,7 @@ export default function EditModal({
           />
         </div>
 
-        <div className="flex h-[70%] w-full flex-col items-center overflow-y-scroll rounded-2xl bg-gray-500 shadow-well">
+        <div className="flex h-[70%] w-full flex-col items-center overflow-y-scroll rounded-2xl bg-gray-500 shadow-well dark:bg-gray-700">
           {sets.map((set: any, i: number) => {
             setIDs.push(set.set_id);
 
@@ -51,24 +51,26 @@ export default function EditModal({
               >
                 <h3 className="pb-2 font-bold text-white">Set {i + 1}</h3>
                 <div className="flex w-full items-center justify-evenly rounded-full bg-slate-200 py-3 shadow-lg">
-                  <label> Reps: </label>{" "}
+                  <label className="text-black"> Reps: </label>
                   <input
                     type="number"
-                    className="w-1/6 rounded-lg bg-slate-50 shadow-md"
+                    className="w-1/6 rounded-lg bg-slate-50 text-black shadow-md"
                     defaultValue={set.reps}
                     ref={(el) => {
                       repRefs.current[i] = el;
                     }}
                   ></input>
-                  <label> Weight: </label>{" "}
+
+                  <label className="text-black"> Weight: </label>
                   <input
                     type="number"
-                    className="w-1/6 rounded-lg bg-slate-50 shadow-md"
+                    className="w-1/6 rounded-lg bg-slate-50 text-black shadow-md"
                     defaultValue={set.weight_lbs}
                     ref={(el) => {
                       weightRefs.current[i] = el;
                     }}
                   ></input>
+
                   <button
                     className="rounded-full bg-red-500 py-2 px-2 text-white shadow-lg hover:bg-red-400"
                     onClick={() => {
@@ -85,7 +87,7 @@ export default function EditModal({
         </div>
 
         <button
-          className="mt-4 w-4/6 rounded-full bg-blue-500 px-10 py-4 font-bold text-slate-50 shadow-lg hover:bg-blue-400"
+          className="mt-4 w-4/6 rounded-full bg-blue-500 px-10 py-4 font-bold text-slate-50 shadow-lg hover:bg-blue-400 sm:mb-4 lg:mb-0"
           onClick={() => {
             toggleEditModal(
               workoutID,

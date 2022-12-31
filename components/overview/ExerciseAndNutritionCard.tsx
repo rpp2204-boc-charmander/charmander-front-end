@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import axios from "axios";
 
 interface ExerciseAndNutritionCardProps {
   idx: number;
@@ -12,6 +12,7 @@ interface ExerciseAndNutritionCardProps {
   completed: boolean;
   setExercises?: any;
   setNutrition?: any;
+  userId: any
 }
 
 export default function Card({
@@ -26,12 +27,23 @@ export default function Card({
   completed,
   setExercises,
   setNutrition,
+  userId
 }: ExerciseAndNutritionCardProps) {
   let bgColor;
   if (completed) {
     bgColor = "bg-yellow-300";
   } else {
     bgColor = "bg-white";
+  }
+
+  const completeSet = (actual_reps: number, set_id: number) => {
+    axios.put('api/exercise/set', null, { params: { set_id, actual_reps, user_id: userId }})
+      /* .then(() => {
+        toggleCompletedModal(set_id);
+      }) */
+      .catch( error => {
+        console.log(error.stack);
+      })
   }
 
   const handleClick = (e: any) => {
@@ -42,7 +54,7 @@ export default function Card({
         item.completed = !item.completed;
         items[idx] = item;
         return items;
-      });
+      })
     } else {
       setNutrition((prevState: any) => {
         let items = [...prevState];
@@ -67,9 +79,15 @@ export default function Card({
       <div className="pt-1">
         {portion && <div className="text-[1rem]">{portion} g</div>}
 
-        {sets && reps && weight && (
+        {/* {sets && reps && weight && (
           <div className="text-[1rem]">
             {weight} lbs | {sets} x {reps}
+          </div>
+        )} */}
+
+        {sets !== 0 && (
+          <div className="text-[1rem">
+            {sets} {sets === 1 ? 'set' : 'sets'}
           </div>
         )}
       </div>

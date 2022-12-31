@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 import axios from "axios";
 
 import ExerciseList from "../components/exercise/ExerciseList";
@@ -23,10 +25,6 @@ export default function Exercise({
   muscle_groups,
   setShowReportButtons,
 }: any): JSX.Element {
-  console.log("query_date: ", query_date);
-
-  console.log("user_id", userId);
-
   // IDs
   const [workoutID, setWorkoutID] = useState(1);
   const [setID, setSetID] = useState(1);
@@ -50,6 +48,10 @@ export default function Exercise({
   //Confirmations
   const [workoutConfirm, setWorkoutConfirm] = useState(false);
 
+  //Yey
+  const [confetti, setConfetti] = useState(false);
+  const { width, height } = useWindowSize();
+
   useEffect(() => {
     setTitle("Exercise");
     setIcon(() => MdOutlineFitnessCenter);
@@ -68,9 +70,9 @@ export default function Exercise({
       });
   }, [
     addSetModalState,
-    addModalState,
     editModalState,
     completedModalState,
+    addModalState,
     currentDate,
     userId,
     query_date,
@@ -156,7 +158,7 @@ export default function Exercise({
 
       setExercises(newWorkout.result);
       setCaloriesBurned(newWorkout.total_cals_burned);
-      setWorkoutConfirm(false);
+      makeConfetti();
     } catch (error: any) {
       console.log(error.stack);
     }
@@ -225,8 +227,17 @@ export default function Exercise({
     setfetchExercises((prevState) => !prevState);
   };
 
+  const makeConfetti = () => {
+    setConfetti(true);
+
+    setTimeout(() => {
+      setConfetti(false);
+    }, 5000);
+  };
+
   return (
     <div className="exerciseContainer h-full w-full">
+      {confetti && <Confetti width={width} height={height} />}
       {addModalState && (
         <SearchModal
           query_date={query_date}
@@ -259,7 +270,7 @@ export default function Exercise({
         <IncompleteModal setWorkoutConfirm={setWorkoutConfirm} />
       )}
 
-      <div className="grid grid-cols-[25%_75%]">
+      <div className="sm:flex sm:flex-col lg:grid lg:grid-cols-[25%_75%]">
         <CalorieComponent
           caloriesBurned={caloriesBurned}
           toggleAddModal={toggleAddModal}

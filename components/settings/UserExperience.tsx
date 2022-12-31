@@ -1,11 +1,15 @@
-import React from 'react'
+import { useTheme } from 'next-themes'
 
-type Props = {}
+export default function UserExperience() {
+  const {theme, setTheme} = useTheme()
 
-function UserExperience({}: Props) {
   return (
-    <div>UserExperience</div>
+    <div className='w-full flex flex-row text-black justify-between items-center'>
+      <p className='lg:text-2xl'> Dark Mode </p>
+      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full w-[10rem]">
+        {/* {theme === 'dark' ? 'On' : 'Off'} */}
+        Toggle
+      </button>
+    </div>
   )
 }
-
-export default UserExperience

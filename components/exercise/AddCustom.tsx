@@ -37,8 +37,11 @@ const AddCustom = ({
   console.log(selectedOption);
 
   return (
-    <div>
-      <h2 className="p-2 text-xl font-semibold">Enter a custom exercise</h2>
+    <div className="flex flex-col">
+      <p1 className="py-3 text-2xl dark:text-white">
+        Don't see an exercise? Make your own!
+      </p1>
+
       <div>
         <Select
           className="w-[200px] text-xl"
@@ -48,10 +51,10 @@ const AddCustom = ({
         />
       </div>
       <input
-        className="focus:shadow-outline my-2 h-[4rem] w-full rounded bg-white px-2 text-xl leading-tight shadow focus:outline-none"
+        className="focus:shadow-outline my-2 h-[4rem] rounded bg-white px-2 text-xl leading-tight shadow focus:outline-none"
         id="search"
         type="text"
-        placeholder="Seach by name or body part"
+        placeholder="Enter custom exercise"
         value={customExercise}
         onChange={(e) => {
           setCustomExercise(e.target.value);

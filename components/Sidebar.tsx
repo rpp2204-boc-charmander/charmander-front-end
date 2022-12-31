@@ -77,7 +77,7 @@ export default function Sidebar() {
 
           <li>
             <Link
-              className="items-cente flex flex-row hover:text-yellow-400"
+              className="items-center flex flex-row hover:text-yellow-400"
               href="/settings"
             >
               <MdOutlineSettings className="mr-2 h-5 w-5" />

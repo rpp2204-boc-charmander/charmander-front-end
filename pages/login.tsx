@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Script from 'next/script';
 import Router from  'next/router'
 import Head from "next/head";
 import LoginCard from "../components/login/LoginCard";
 import { ChildProps } from "../components/Layout";
-import { useEffect } from "react";
 import { FitbitProvider } from '../context/FitbitProvider'
 import LoginImage from "public/38501.png";
 import Image from "next/image";
@@ -20,10 +19,13 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
   useEffect(() => {
     setTitle("My Health Coach");
     setIcon("");
-    setUserId('0')
     setShowCalendar(false);
     setShowReportButtons(false);
   }, [setTitle, setShowCalendar, userId]);
+
+  useEffect(() => {
+    setUserId(0)
+  }, [])
 
   return (
     <div className="flex justify-center items-center w-full h-full p-3">

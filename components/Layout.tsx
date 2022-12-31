@@ -16,7 +16,8 @@ export interface ChildProps {
   timespan: String;
   setTimespan: Function;
   userId:  String;
-  setUserId: Function
+  setUserId: Function;
+  query_date: any
 }
 
 export default function Layout({ children }: any): JSX.Element {
@@ -29,13 +30,14 @@ export default function Layout({ children }: any): JSX.Element {
   const [timespan, setTimespan] = useState("week");
   const [userId,  setUserId] = useState("1")
   const translate = ["-translate-x-full", ""];
-  const month = currentDate.getUTCMonth() + 1; // months from 1-12
-  const day = currentDate.getUTCDate();
-  const year = currentDate.getUTCFullYear();
+
+  const month = currentDate.getMonth() + 1; // months from 1-12
+  const day = currentDate.getDate();
+  const year = currentDate.getFullYear();
   const date_string_for_query = `${year}/${month}/${day}`;
 
   return (
-    <div className="relative min-h-screen flex">
+    <div className="flex min-h-screen">
       <aside className={`z-50 absolute inset-y-0 left-0 transform ${translate[toggleSidebar]} lg:relative lg:flex flex-row lg:translate-x-0 transition duration-300 ease-in-out`}>
         <Sidebar />
       </aside>
@@ -51,8 +53,6 @@ export default function Layout({ children }: any): JSX.Element {
           showReportButtons={showReportButtons}
           timespan={timespan}
           setTimespan={setTimespan}
-          setUserId={setUserId}
-          userId={userId}
         />
 
         <div className="w-[100%] h-[100%] flex items-center justify-center">
@@ -67,8 +67,8 @@ export default function Layout({ children }: any): JSX.Element {
             setShowReportButtons,
             timespan,
             setTimespan,
-            setUserId,
-            userId
+            userId,
+            setUserId
           })}
         </div>
       </main>

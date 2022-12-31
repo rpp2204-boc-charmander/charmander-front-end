@@ -73,7 +73,7 @@ export default function SearchModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="lg:shrink-0">
-        <div className="flex h-screen max-h-screen  w-screen flex-col rounded-3xl bg-gray-300 pl-10 pr-10  text-black lg:h-[900px] lg:w-[1000px]">
+        <div className="flex h-screen max-h-screen  w-screen flex-col rounded-3xl bg-gray-400 pl-10 pr-10  text-black dark:bg-slate-600 lg:h-[900px] lg:w-[1000px]">
           <div className="flex flex-row items-center justify-between pt-4 pb-4">
             <ul className="flex flex-wrap border-b border-gray-200">
               <li className="mr-2">
@@ -82,8 +82,8 @@ export default function SearchModal({
                   aria-current="page"
                   className={
                     toggleState === 1
-                      ? "active inline-block rounded-t-lg bg-gray-100 py-4 px-4 text-center text-lg font-medium text-blue-600"
-                      : "inline-block rounded-t-lg py-4 px-4 text-center text-lg font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-600"
+                      ? "active inline-block rounded-t-lg bg-gray-100 py-4 px-4 text-center text-lg font-bold text-blue-600"
+                      : "inline-block rounded-t-lg bg-gray-300 py-4 px-4 text-center text-lg  font-bold text-black  hover:bg-gray-50  dark:bg-slate-500 dark:text-white"
                   }
                   onClick={() => setToggleState(1)}
                 >
@@ -96,8 +96,8 @@ export default function SearchModal({
                   aria-current="false"
                   className={
                     toggleState === 2
-                      ? "active inline-block rounded-t-lg bg-gray-100 py-4 px-4 text-center text-lg font-medium text-blue-600"
-                      : "inline-block rounded-t-lg py-4 px-4 text-center text-lg font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-600"
+                      ? "active inline-block rounded-t-lg bg-gray-100 py-4 px-4 text-center text-lg font-bold text-blue-600"
+                      : "inline-block rounded-t-lg bg-gray-300 py-4 px-4 text-center text-lg  font-bold text-black  hover:bg-gray-50  dark:bg-slate-500 dark:text-white"
                   }
                   onClick={() => setToggleState(2)}
                 >
