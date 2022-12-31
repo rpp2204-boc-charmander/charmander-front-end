@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Script from 'next/script';
+import Router from  'next/router'
 import Head from "next/head";
 import LoginCard from "../components/login/LoginCard";
 import { ChildProps } from "../components/Layout";
@@ -34,13 +35,13 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
           setGoogle(true);
         }}
       />
-
       <Head>
         <title>My Health Coach</title>
         <meta
           name="login"
           content="My Health Coach Login, Fitness, Nutrition, Exercise"
         />
+        <meta name="google-site-verification" content="d5H1-fc6By3nJIn1pM9axiSz4tO8Z1PORf4L7DSel8s" />
         <link rel="icon" href="/flavion.ico" />
       </Head>
       <main className="bg-LoginGreen flex w-[60rem] h-[30rem] justify-center items-center rounded-2xl shadow-xl">
