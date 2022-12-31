@@ -52,6 +52,15 @@ const Nutrition = () => {
 
   const [calories, setCalories] = useState<any>(updateCalories(allFoods));
 
+  const removeItem = (logId : number) => {
+    axios.delete('http://localhost:4000/nutrition/remove/foodLog', {
+      logId: logId
+    })
+    .then((response) => {
+      setLoaded(false);
+    })
+  };
+
   useEffect(() => {
     if(!loaded){
       axios.get('http://localhost:4000/nutrition/list/foodLog',{
@@ -61,6 +70,7 @@ const Nutrition = () => {
         }
       })
       .then((response) => {
+        console.log('all: ', response)
         setAllFoods(response.data);
         setLoaded(true);
       })
@@ -90,6 +100,7 @@ const Nutrition = () => {
         <CaloriesWidget handleShowModal={handleShowModal} calories={calories}/>
           {isRemoveShowing ?
           <RemoveItemModal
+          removeItem={removeItem}
           pendingItem={pendingItem}
           setIsRemoveShowing={setIsRemoveShowing}
           setCalories={setCalories}

@@ -3,7 +3,14 @@ import { useState } from 'react'
 import { BsTrash } from "react-icons/bs";
 import { AiOutlineEdit,AiOutlineDelete } from "react-icons/ai";
 
-export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, setIsEditShowing } : any) {
+interface FoodListProps {
+  food: object,
+  setPendingItem: Function,
+  setIsRemoveShowing: Function,
+  setIsEditShowing: Function
+}
+
+export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, setIsEditShowing } : FoodListProps) {
   const [calories, setCalories] = useState(food.nutrients.CAL);
   const [consumed, setConsumed] = useState(food.consumed);
 
