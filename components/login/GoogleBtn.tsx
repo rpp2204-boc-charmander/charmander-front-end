@@ -12,52 +12,44 @@ interface GoogleProps {
 export default function GoogleBtn({ init, setUserId }: GoogleProps) {
   const router = useRouter();
 
-  async function handleResponse(response: any) {
-    const token: any = await response.credential;
-    const responsePayload: any = jwt_decode(token);
+  async function handleResponse(googleResponse: any) {
+    const token: any = await googleResponse.credential;
+    const payload: any = jwt_decode(token);
 
-    await axios
-      .get(`${process.env.FRONTEND_URL}/users/googleAuth?auth_id=${responsePayload.sub}`)
+    axios
+      .get(`${process.env.LOCAL}/api/users/googleAuth?auth_id=${payload.sub}`)
 
       .then(response => {
-        if(response.data.length === 0) {
+        console.log(response)
+        if (response.data === '') {
 
             const newUser: any = {
-              'auth_id': responsePayload.sub,
-              'firstname': responsePayload.given_name,
-              'lastname': responsePayload.family_name,
-              'email': responsePayload.email,
+              'auth_id': payload.sub,
+              'firstname': payload.given_name,
+              'lastname': payload.family_name,
+              'email': payload.email,
               'user_password': null,
               'weight_lbs': null,
               'height_inches': null,
               'sex': null,
-              'profile_pic': responsePayload.picture
+              'profile_pic': payload.picture
             }
 
-          axios.post(`${process.env.FRONTEND_URL}/api/users/addUser`, newUser)
+          axios.post(`${process.env.LOCAL}/api/users/addUser`, newUser)
           .then(response => {
-            if (response.data === 'Created') {
-              axios
-                .get(`${process.env.FRONTEND_URL}/api/users/googleAuth?auth_id=${responsePayload.sub}`)
-
-                .then(response => {
-                  setUserId(response.data.id)
-                  router.push('/settings')
-                })
-
+            if (response.data[0].id.length !== 0) {
+                console.log(response.data.id)
+                setUserId(response.data.id)
+                router.push('/overview')
             }
-          })
-          .catch(err => {
-            console.log(err)
           })
         }
-
-        if(response.data.length !== 0) {
+        if (response.data.id) {
           setUserId(response.data.id)
           router.push('/overview')
         }
       })
-      .catch((err) => router.push("/Signup"));
+      .catch((err) => console.log(err));
   }
 
     if(init) {

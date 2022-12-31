@@ -6,7 +6,7 @@ import {
 } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import * as EmailValidator from "email-validator";
 import bcrypt from "bcryptjs";
 import axios from "axios";
@@ -144,7 +144,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
         ) : (
           <p
             id="outlined_error_help"
-            className="h-6 text-xs text-red-600 dark:text-purple-700"
+            className="h-6 text-xs text-slate-700 dark:text-LoginGray p-1"
           >
             <span className="font-medium">Oh, snapp!</span> Wrong password.
           </p>
@@ -161,7 +161,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
         </button>
         <button
           type="button"
-          className="grow text-right font-extralight underline hover:text-purple-700"
+          className="grow text-right font-extralight underline hover:text-LoginGray"
           onClick={() => authenticate()}
         >
           enter
