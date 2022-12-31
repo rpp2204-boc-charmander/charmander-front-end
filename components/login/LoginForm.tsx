@@ -144,7 +144,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
         ) : (
           <p
             id="outlined_error_help"
-            className="h-6 text-xs text-red-600 dark:text-purple-700"
+            className="h-6 text-xs text-slate-700 dark:text-LoginGray p-1"
           >
             <span className="font-medium">Oh, snapp!</span> Wrong password.
           </p>
