@@ -10,7 +10,7 @@ import { GiMuscleUp } from "react-icons/gi";
 export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, completeExercise } : any) {
 
   return (
-    <div className="lg:h-[37.5%] sm:h-[48%] rounded-lg shadow-xl bg-gray-200 dark:bg-slate-600 x-5 lg:mt-8 sm:mt-4 flex flex-col">
+    <div className="lg:h-[310px] sm:h-[48%] rounded-lg shadow-xl bg-gray-200 dark:bg-slate-600 x-5 lg:mt-8 sm:mt-4 flex flex-col">
 
       <header className="flex w-full dark:bg-slate-500 bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
 
