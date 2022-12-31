@@ -65,7 +65,7 @@ export default function UserMetrics() {
           </input>
         </div>
 
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-[10rem]">
+        <button className="bg-gray-500 dark:bg-slate-800 hover:bg-purple-600 dark:hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full w-[10rem]">
           Submit
         </button>
       </div>
