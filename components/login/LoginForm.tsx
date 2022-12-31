@@ -89,7 +89,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
 
   return (
     <form className="w-full flex flex-col items-center">
-      <h2 className="pt-6 text-3xl text-black dark:text-white font-bold">Login</h2>
+      <h2 className="text-3xl text-black dark:text-white font-bold">Login</h2>
       <br></br>
       <div className="search flex w-full flex-col">
         <input
@@ -161,7 +161,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
         </button>
         <button
           type="button"
-          className="grow text-right font-extralight underline hover:text-LoginGray"
+          className="w-full bg-LoginGreen dark:hover:bg-slate-800 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded"
           onClick={() => authenticate()}
         >
           enter
