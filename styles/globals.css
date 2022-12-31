@@ -43,7 +43,7 @@ a {
     @apply bg-white text-black dark:bg-slate-700 dark:text-white;
   }
   .haAclf {
-    @apply bg-[#D9D9D9] dark:bg-slate-700
+    @apply bg-[#D9D9D9] dark:bg-slate-700 p-0 m-0;
   }
 
   .qJTHM {
