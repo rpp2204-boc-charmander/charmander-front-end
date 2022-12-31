@@ -29,6 +29,8 @@ export default async function GetStrava ( req: any, res: any) {
           // If the user exists
           if (typeof userData.data === 'object') {
             const { id, firstname, lastname, height, weight, sex, profile } = userData.data
+
+            res.status(200).redirect(`/overview`)
           }
 
           // If the user does not exist
@@ -58,7 +60,6 @@ export default async function GetStrava ( req: any, res: any) {
               .request(options)
               .then((newUserData: any) => {
                 // setCurrentUser(newUserData.data)
-                // setUserId(newUserData.data.id)
                 res.status(200).redirect(`/settings`)
               })
           }

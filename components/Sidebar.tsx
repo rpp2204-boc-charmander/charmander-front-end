@@ -23,8 +23,7 @@ export default function Sidebar({ currentUser }: SidebarProps) {
             <MdAccountCircle className="h-32 w-32" />
           </div>
 
-          <div className="username pb-1 text-xl"> {currentUser ? currentUser.firstname : ''} </div>
-          {console.log(currentUser)}
+          <div className="username pb-1 text-xl"> {currentUser ? `${currentUser.firstname} ${currentUser.lastname}` : ''} </div>
           {/* <div className="names text-sm italic">FirstName LastName </div> */}
         </div>
 
