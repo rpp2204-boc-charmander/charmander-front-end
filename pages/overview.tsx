@@ -1,3 +1,4 @@
+// @ts-nocheck
 import axios from "axios";
 import Container from "../components/overview/Container";
 import Head from "next/head";
