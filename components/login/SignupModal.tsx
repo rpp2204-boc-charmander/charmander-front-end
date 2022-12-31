@@ -33,9 +33,9 @@ export default function SignupModal({
   const [windowH, setWindowH] = useState(0);
 
   // Working Tailwind Styles
-  const twModalStyle = `flex flex-col align-top items-start pt-[27px] pb-[27px] pr-[25px] pl-[25px] gap-[11px] bottom-80 relative w-[404px] h-auto bg-LoginGray rounded-3xl shadow-md dark:bg-slate-500`;
+  const twModalStyle = `flex flex-col align-top items-start pt-[27px] pb-[27px] pr-[25px] pl-[25px] gap-[7px] bottom-60 relative w-[404px] h-auto bg-LoginGray rounded-3xl shadow-md dark:bg-slate-500`;
   const twSignUpStyle = "w-53 h-auto font-sans not-italic font-bold text-base leading-5 decoration-black flex-auto grow-0";
-  const twInputStyle = "w-full h-10 boxShadow-wellShadow flex-none grow-0 rounded-xl indent-3 dark:bg-white";
+  const twInputStyle = "w-full h-10 boxShadow-wellShadow flex-none grow-0 rounded-xl indent-3 dark:bg-white text-black";
   const twSubmitStyle = "w-53 h-auto font-sans not-italic font-bold text-base leading-5 decoration-black flex-auto grow-0 underline underline-offset-4 cursor-pointer";
 
   // Check if first name is valid.
@@ -49,7 +49,6 @@ export default function SignupModal({
     console.log('LAST NAME: ', lastName);
     return (lastName.length > 1);
   }
-
 
   const emailCheck = () => {
       // return axios.get(`${String(process.env.BACKEND_URL)}/user/email/${email}`).then((response) => {
@@ -81,7 +80,7 @@ export default function SignupModal({
 
   // Check if passwords match.
   const passwordCheck = () => {
-    return (password0 === password1);
+    return (password0.length > 0 && (password0 === password1));
   }
 
   // Check if both height and weight are numbers.
@@ -96,70 +95,69 @@ export default function SignupModal({
 
   // Validity checks. POSTS to db. Redirects when successful.
   const handleSubmit = () => {
-    // auth_id,
-    // firstname,
-    // lastname,
-    // email,
-    // user_password,
-    // weight_lbs,
-    // height_inches,
-    // sex
+    if (firstNameCheck() && lastNameCheck() && passwordCheck() && healthCheck() && sexCheck()) {
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync(password0, salt);
 
-      // console.log('SUBMIT PRESSED');
-      // console.log('FIRST NAME VALID        :', firstNameCheck());
-      // console.log('LAST NAME VALID         :', lastNameCheck());
-      // console.log('EMAIL IS NOT BEING USED :', email);
-      // console.log('PASSWORDS MATCH         :', passwordCheck());
-      // console.log('HEALTH INFO VALID       :', healthCheck())
-      // console.log('GENDER                  :', sexCheck());
+      const sent = {
+        auth_id: null,
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        user_password: hash,
+        weight_lbs: weight,
+        height_inches: height,
+        sex: sex,
+      };
 
-      if (firstNameCheck() && lastNameCheck() && passwordCheck() && healthCheck() && sexCheck()) {
-        var salt = bcrypt.genSaltSync(10);
-        var hash = bcrypt.hashSync(password0, salt);
+      axios({
+      method: 'post',
+      url: `${String(process.env.BACKEND_URL)}/user/create`,
+      headers: {},
+      data: sent
+      }).then(async (response) => {
+        await setUserId(response.data[0].id);
+        router.push('/overview');
+      });
+    }
 
-        const sent = {
-          auth_id: null,
-          firstname: firstName,
-          lastname: lastName,
-          email: email,
-          user_password: hash,
-          weight_lbs: weight,
-          height_inches: height,
-          sex: sex,
-        };
+    if(!firstNameCheck()) {
+      setFnWarn(true);
+    } else {
+      setFnWarn(false);
+    }
 
-        axios({
-        method: 'post',
-        url: `${String(process.env.BACKEND_URL)}/user/create`,
-        headers: {},
-        data: sent
-        }).then(async (response) => {
-          await setUserId(response.data[0].id);
-          router.push('/overview');
-        });
-      }
+    if(!lastNameCheck()) {
+      setLnWarn(true);
+    } else {
+      setLnWarn(false);
+    }
 
-      if(!firstNameCheck()) {
-        setFnWarn(true);
-      }
+    if(!emailCheck()) {
+      setEmWarn(true);
+    } else {
+      setEmWarn(false)
+    }
 
-      if(!lastNameCheck()) {
-        setLnWarn(true);
-      }
+    if(!passwordCheck()) {
+      setPwWarn(true);
+    } else {
+      setPwWarn(false);
+    }
 
-      if(!emailCheck()) {
-        setEmWarn(true);
-      }
+    if(!healthCheck()) {
+      setHealthWarn(true);
+    } else {
+      setHealthWarn(false);
+    }
 
-      if(!healthCheck()) {
-        setHealthWarn(true);
-      }
+    if(!sexCheck()) {
+      setSexWarn(true);
+    } else {
+      setSexWarn(false);
+    }
 
-      if(!sexCheck()) {
-        setSexWarn(true);
-      }
-
-
+    router.push('/Signup')
   }
 
   return (
