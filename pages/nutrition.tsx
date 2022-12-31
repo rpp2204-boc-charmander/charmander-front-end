@@ -27,6 +27,7 @@ interface FoodDataType {
 }
 
 const Nutrition = ({
+  userId,
   currentDate,
   setTitle,
   setIcon,
@@ -101,7 +102,7 @@ const Nutrition = ({
         : null}
         <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
         {
-        showModal ? ( <Modal showModal={handleShowModal} date={currentDate}/>) : ( null )
+        showModal ? ( <Modal showModal={handleShowModal} date={currentDate} user={userId}/>) : ( null )
       }
       </div>
     </>
