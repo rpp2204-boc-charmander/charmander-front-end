@@ -142,7 +142,6 @@ export default function Overview({
           { calorie: netCalories, text: "Net Calories" },
         ]}
         bmr={bmr}
-        userId={userId}
       />
 
       <Container
