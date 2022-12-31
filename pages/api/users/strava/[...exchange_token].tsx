@@ -1,6 +1,11 @@
+import { AsyncResource } from 'async_hooks';
 import axios from 'axios'
 
-export default async function GetStrava (req: any, res: any) {
+export default async function GetStrava ( req: any, res: any) {
+
+  function test () {
+    return 'Here'
+  }
 
   const code = req.query.code
 
@@ -24,8 +29,8 @@ export default async function GetStrava (req: any, res: any) {
           // If the user exists
           if (typeof userData.data === 'object') {
             const { id, firstname, lastname, height, weight, sex, profile } = userData.data
-            // store the user data in context
-            res.status(200).redirect(`/overview/?id=${id}`)
+
+            res.status(200).redirect(`/overview`)
           }
 
           // If the user does not exist
@@ -54,7 +59,7 @@ export default async function GetStrava (req: any, res: any) {
             axios
               .request(options)
               .then((newUserData: any) => {
-                // store the user data in context
+                // setCurrentUser(newUserData.data)
                 res.status(200).redirect(`/settings`)
               })
           }

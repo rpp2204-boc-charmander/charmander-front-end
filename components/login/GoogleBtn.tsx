@@ -6,10 +6,11 @@ import styles from "../../styles/Login.module.css";
 
 interface GoogleProps {
   init: boolean;
-  setUserId: Function
+  setUserId: Function;
+  setCurrentUser: Function
 }
 
-export default function GoogleBtn({ init, setUserId }: GoogleProps) {
+export default function GoogleBtn({ init, setUserId, setCurrentUser }: GoogleProps) {
   const router = useRouter();
 
   async function handleResponse(googleResponse: any) {
@@ -20,7 +21,7 @@ export default function GoogleBtn({ init, setUserId }: GoogleProps) {
       .get(`${process.env.LOCAL}/api/users/googleAuth?auth_id=${payload.sub}`)
 
       .then(response => {
-        console.log(response)
+        console.log('Line24', response.data.id)
         if (response.data === '') {
 
             const newUser: any = {
@@ -37,14 +38,15 @@ export default function GoogleBtn({ init, setUserId }: GoogleProps) {
 
           axios.post(`${process.env.LOCAL}/api/users/addUser`, newUser)
           .then(response => {
-            if (response.data[0].id.length !== 0) {
-                console.log(response.data.id)
+            if (response.data.id !== 0) {
                 setUserId(response.data.id)
+                setCurrentUser(response.data)
                 router.push('/overview')
             }
           })
         }
         if (response.data.id) {
+          setCurrentUser(response.data)
           setUserId(response.data.id)
           router.push('/overview')
         }
@@ -63,7 +65,7 @@ export default function GoogleBtn({ init, setUserId }: GoogleProps) {
       });
 
       google.accounts.id.renderButton(document.getElementById("google_btn"), {
-        'shape': "pill",
+        shape: "pill",
         theme: "filled_white",
         size: "large",
         padding: 0
