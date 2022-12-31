@@ -1,6 +1,7 @@
 import { ChildProps } from "../components/Layout";
 import { useEffect } from "react";
 import { MdOutlinePeopleAlt } from "react-icons/md";
+import Confetti from 'react-confetti'
 
 export default function Friends({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) {
   useEffect(() => {
@@ -11,6 +12,9 @@ export default function Friends({ setTitle, setIcon, setShowCalendar, setShowRep
   }, [setTitle, setShowCalendar]);
 
   return (
-    <p className="text-[5rem] dark:text-white"> You have no friends :( </p>
+    <>
+      <Confetti />
+      <p className="text-[5rem] dark:text-white"> You have no friends :( </p>
+    </>
   )
 }

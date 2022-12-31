@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Confetti from 'react-confetti'
 import axios from "axios";
 
 import ExerciseList from "../components/exercise/ExerciseList";
@@ -46,6 +47,9 @@ export default function Exercise({
 
   //Confirmations
   const [ workoutConfirm, setWorkoutConfirm ] = useState(false);
+
+  //Yey
+  const [ confetti, setConfetti ] = useState(false);
 
   useEffect(() => {
     setTitle("Exercise");
@@ -99,7 +103,6 @@ const deleteExercise = async (workout_exercise_id: number) => {
   }
 };
 
-
 //COMPLETE FUNCTIONS
 
 const completeSet = (actual_reps: number, set_id: number) => {
@@ -135,7 +138,7 @@ const completeExercise = async (workout_exercise_id: number) => {
 
       setExercises(newWorkout.result);
       setCaloriesBurned(newWorkout.total_cals_burned);
-      setWorkoutConfirm(false)
+      makeConfetti();
     } catch (error: any) {
       console.log(error.stack);
     }
@@ -200,8 +203,17 @@ const completeExercise = async (workout_exercise_id: number) => {
     setfetchExercises((prevState) => !prevState);
   };
 
+  const makeConfetti = () => {
+    setConfetti(true);
+
+    setTimeout(() => {
+      setConfetti(false);
+    }, 5000)
+  }
+
   return (
     <div className="exerciseContainer w-full h-full">
+      { confetti && <Confetti />}
       {addModalState && (
         <SearchModal
           query_date={query_date}

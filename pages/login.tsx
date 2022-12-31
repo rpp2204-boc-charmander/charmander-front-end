@@ -20,7 +20,6 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
   useEffect(() => {
     setTitle("My Health Coach");
     setIcon("");
-    setUserId('0')
     setShowCalendar(false);
     setShowReportButtons(false);
   }, [setTitle, setShowCalendar, userId]);
