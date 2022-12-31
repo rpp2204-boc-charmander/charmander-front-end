@@ -27,9 +27,9 @@ export default function Layout({ children }: any): JSX.Element {
   const [userId,  setUserId] = useState("1")
 
   const translate = ["-translate-x-full", ""];
-  const month = currentDate.getUTCMonth() + 1; // months from 1-12
-  const day = currentDate.getUTCDate();
-  const year = currentDate.getUTCFullYear();
+  const month = currentDate.getMonth() + 1; // months from 1-12
+  const day = currentDate.getDate();
+  const year = currentDate.getFullYear();
   const date_string_for_query = `${year}/${month}/${day}`;
 
   return (

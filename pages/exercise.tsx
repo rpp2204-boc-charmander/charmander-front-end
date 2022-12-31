@@ -24,8 +24,6 @@ export default function Exercise({
   setShowReportButtons
 }: any): JSX.Element {
 
-  console.log("query_date: ", query_date);
-
   // IDs
   const [workoutID, setWorkoutID] = useState(1);
   const [ setID, setSetID ] = useState(1);
