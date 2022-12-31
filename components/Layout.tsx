@@ -37,7 +37,7 @@ export default function Layout({ children }: any): JSX.Element {
   const date_string_for_query = `${year}/${month}/${day}`;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="min-h-screen flex">
       <aside className={`z-50 absolute inset-y-0 left-0 transform ${translate[toggleSidebar]} lg:relative lg:flex flex-row lg:translate-x-0 transition duration-300 ease-in-out`}>
         <Sidebar />
       </aside>
