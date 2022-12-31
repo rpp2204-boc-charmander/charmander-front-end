@@ -67,7 +67,7 @@ export default function Exercise({
       .catch(error => {
         console.log('ERROR GETTING EXERCISES: ', error.stack)
       })
-  }, [addSetModalState, editModalState, completedModalState, currentDate, userId, query_date])
+  }, [addSetModalState, editModalState, completedModalState, addModalState, currentDate, userId, query_date])
 
 //GET FUNCTIONS
 
