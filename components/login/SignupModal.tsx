@@ -1,7 +1,9 @@
 import { prependListener } from "process";
-import { useState, useEffect, MouseEventHandler } from "react";
+import { useState, useCallback, useEffect, MouseEventHandler } from "react";
 import { EnumDeclaration, setConstantValue } from "typescript";
+import bcrypt from "bcryptjs";
 import axios from 'axios';
+import { useRouter } from "next/router";
 
 export default function SignupModal() {
   // STATE VALUES
@@ -18,30 +20,35 @@ export default function SignupModal() {
   const [windowH, setWindowH] = useState(0);
 
   // Working Tailwind Styles
-  const twModalStyle = `flex flex-col align-top items-start pt-[27px] pb-[27px] pr-[25px] pl-[25px] gap-[11px] relative w-[404px] h-auto bg-LoginGray rounded-3xl shadow-md`;
+  const twModalStyle = `flex flex-col align-top items-start pt-[27px] pb-[27px] pr-[25px] pl-[25px] gap-[11px] bottom-60 relative w-[404px] h-auto bg-LoginGray rounded-3xl shadow-md`;
   const twSignUpStyle = "w-53 h-auto font-sans not-italic font-bold text-base leading-5 decoration-black flex-auto grow-0";
   const twInputStyle = "w-full h-10 boxShadow-wellShadow flex-none grow-0 rounded-xl indent-3";
   const twSubmitStyle = "w-53 h-auto font-sans not-italic font-bold text-base leading-5 decoration-black flex-auto grow-0 underline underline-offset-4 cursor-pointer";
 
+
   // Check if first name is valid.
   const firstNameCheck = () => {
+    console.log('FIRST NAME: ', firstName);
     return (firstName.length > 1);
   }
 
   // Check if last name is valid.
   const lastNameCheck = () => {
+    console.log('LAST NAME: ', lastName);
     return (lastName.length > 1);
   }
 
   const emailCheck = async (email: String) => {
-    try {
-      const res = await axios.get(`http://localhost:4000/user/email/${email}`);
-      console.log('RESULT: ', res.data.email);
-      // setEmailExist(res.data.email.length > 0)
-      setEmailExist(res.data.email === undefined ? false : true);
-    } catch (error) {
-      console.log(error);
-    }
+      return axios.get(`http://localhost:4000/user/email/${email}`).then((response) => {
+        console.log('RESULT: ', response.data.email);
+        // setEmailExist(response.data.email.length > 0)
+        console.log('EMAIL EXIST BEFORE: ', emailExist);
+
+        console.log('EMAIL EXIST AFTER: ', emailExist);
+      }).catch((err) => {
+        console.log('ERROR: ', err);
+      });
+
   };
 
   // Check if email is both valid and nonexistent in db.
@@ -71,16 +78,48 @@ export default function SignupModal() {
 
   // Validity checks. POSTS to db. Redirects when successful.
   const handleSubmit = () => {
-    console.log('window', window.innerHeight);
-    emailCheck(email).then(() => {
-      console.log('SUBMIT PRESSED');
-      console.log('FIRST NAME VALID        :', firstNameCheck());
-      console.log('LAST NAME VALID         :', lastNameCheck());
-      console.log('EMAIL IS NOT BEING USED :', !emailExist);
-      console.log('PASSWORDS MATCH         :', passwordCheck());
-      console.log('HEALTH INFO VALID       :', healthCheck())
-      console.log('GENDER                  :', sexCheck());
-    })
+    // auth_id,
+    // firstname,
+    // lastname,
+    // email,
+    // user_password,
+    // weight_lbs,
+    // height_inches,
+    // sex
+
+      // console.log('SUBMIT PRESSED');
+      // console.log('FIRST NAME VALID        :', firstNameCheck());
+      // console.log('LAST NAME VALID         :', lastNameCheck());
+      // console.log('EMAIL IS NOT BEING USED :', email);
+      // console.log('PASSWORDS MATCH         :', passwordCheck());
+      // console.log('HEALTH INFO VALID       :', healthCheck())
+      // console.log('GENDER                  :', sexCheck());
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync(password0, salt);
+
+      const sent = {
+        auth_id: null,
+        firstname: firstName,
+        lastname: lastName,
+        email: email,
+        user_password: hash,
+        weight_lbs: weight,
+        height_inches: height,
+        sex: sex,
+      };
+
+
+      console.log('SALT: ', salt)
+      console.log('HASH: ', hash);
+
+      axios({
+      method: 'post',
+      url: 'http://localhost:4000/user/create',
+      headers: {},
+      data: sent
+      }).then((response) => {
+        console.log('RESPONSE: ', response.data[0].id);
+      });
   }
 
   return (
@@ -106,7 +145,9 @@ export default function SignupModal() {
         <option value="N">prefer not to say</option>
       </select>
 
-      <a className={twSubmitStyle} onClick={handleSubmit}> submit </a>
+      <a className={twSubmitStyle} onClick={() => {
+        handleSubmit();
+      }}> submit </a>
     </div>
   );
 }
