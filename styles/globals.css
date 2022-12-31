@@ -42,14 +42,14 @@ a {
   body {
     @apply bg-white text-black dark:bg-slate-700 dark:text-white;
   }
+  .haAclf {
+    @apply bg-[#D9D9D9] dark:bg-slate-700
+  }
+
+  .qJTHM {
+    @apply bg-[#D9D9D9] dark:bg-slate-700
+  }
 }
 
-.haAclf {
-  @apply bg-[#D9D9D9] dark:bg-slate-700
-}
-
-.qJTHM {
-  @apply bg-[#D9D9D9] dark:bg-slate-700
-}
 
 

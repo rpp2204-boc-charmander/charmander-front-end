@@ -4,7 +4,6 @@ import Router from  'next/router'
 import Head from "next/head";
 import LoginCard from "../components/login/LoginCard";
 import { ChildProps } from "../components/Layout";
-import { FitbitProvider } from '../context/FitbitProvider'
 import LoginImage from "public/38501.png";
 import Image from "next/image";
 

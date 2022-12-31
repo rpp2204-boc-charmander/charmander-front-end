@@ -1,78 +1,78 @@
 import React, { useContext } from 'react'
 import axios from 'axios'
 import base64url from 'base64url'
-import { ThirdPartyUserId } from '../../fitbit'
 
 export default function FitbitRoute (req: any, res: any) {
 
     const code = req.query.code
 
-    ThirdPartyUserId(code)
+    const params = {
+        client_id: process.env.FITBIT_ID,
+        grant_type: 'authorization_code',
+        code
+    }
 
-    res.status(200).redirect()
+    const authorization = base64url(`${process.env.FITBIT_ID}:${process.env.FITBIT_SECRET}`)
 
+    const authHeaders = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${authorization}`
+    }
 
-    // const params = {
-    //     client_id: process.env.FITBIT_ID,
-    //     grant_type: 'authorization_code',
-    //     code
-    // }
+    axios
+    .post('https://api.fitbit.com/oauth2/token', params, {
+        headers: authHeaders
+    })
+    .then((user: any) => {
+        const params = {
+            'auth_id': user.data.user_id,
+        }
 
-    // const authorization = base64url(`${process.env.FITBIT_ID}:${process.env.FITBIT_SECRET}`)
+        const headers = {
+            'Authorization': `Bearer ${user.data.access_token}`
+        }
 
-    // const authHeaders = {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //     'Authorization': `Basic ${authorization}`
-    // }
+        axios
+            .get(`${process.env.BACKEND_URL}/user/auth/${params.auth_id}`)
+            .then(response => {
+                console.log('HIIIII', response.data)
+                return
+            })
 
-    // axios
-    // .post('https://api.fitbit.com/oauth2/token', params, {
-    //     headers: authHeaders
-    // })
-    // .then((user: any) => {
+    //     axios
+    //         .post('https://api.fitbit.com/1/user/-/profile.json', params, {
+    //             headers
+    //         })
+    //         .then((userData: any) => {
 
-    //     const userExists = authContext.checkDatabase()
+    //             const {encodedId, firstName, lastName, gender, height, weight, avatar640} = userData.data.user
 
-    //     if (userExists === false) {
-    //         const params = {
-    //             'user-id': user.data.user_id,
-    //         }
+    //             const USER_DATA = {
+    //                 auth_id: encodedId,
+    //                 firstname: firstName,
+    //                 lastname: lastName,
+    //                 email: null,
+    //                 user_password: null,
+    //                 height_inches: Math.round(height * 0.39701),
+    //                 weight_lbs: Math.round(weight * 2.20462),
+    //                 sex: gender,
+    //                 profile_pic: avatar640
+    //             }
+    //             axios
+    //                 .post(`${process.env.BACKEND_URL}/user/create`, USER_DATA)
 
-    //         const headers = {
-    //             'Authorization': `Bearer ${user.data.access_token}`
-    //         }
+    //                 .then(response => {
+    //                     console.log('Here is the create fitbit res', response.data)
+    //                 })
 
-    //         axios
-    //             .post('https://api.fitbit.com/1/user/-/profile.json', params, {
-    //                 headers
-    //             })
-    //             .then((userData: any) => {
-
-    //                 const {encodedId, firstName, lastName, gender, height, weight, avatar640} = userData.data.user
-
-    //                 const USER_DATA = {
-    //                     id: encodedId,
-    //                     firstname: firstName,
-    //                     lastname: lastName,
-    //                     height,
-    //                     weight,
-    //                     sex: gender,
-    //                     profile: avatar640
-    //                 }
-
-
-    //             })
-    //             .catch(err => {
-    //                 throw new Error('Error fetching user profile', err)
-    //             })
-    //     }
-
-
+    //         })
+    //         .catch(err => {
+    //             throw new Error('Error fetching user profile', err)
+    //         })
     // })
     // .catch(err => {
     //     throw new Error('Error fetching user id', err)
-    // })
-
-    res.status(200).send({ data: 'HelloWorld'})
+    })
+    res.status(200).redirect('/overview')
 
 }
