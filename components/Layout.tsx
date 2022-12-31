@@ -16,7 +16,8 @@ export interface ChildProps {
   timespan: String;
   setTimespan: Function;
   userId:  String;
-  setUserId: Function
+  setUserId: Function;
+  query_date: any
 }
 
 export default function Layout({ children }: any): JSX.Element {
