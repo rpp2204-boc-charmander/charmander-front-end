@@ -10,7 +10,7 @@ export default function ExerciseList({
   completeExercise,
 }: any) {
   return (
-    <div className="no-scrollbar h-[90vh] max-w-screen-lg overflow-auto">
+    <div className="no-scrollbar lg:h-[90vh] sm:h-[560px] sm:mt-2 lg:mt-0 sm:mx-3 lg:mx-0 max-w-screen-lg overflow-auto">
       {exercises.map((exercise: any) => {
         return (
           <ExerciseItem
