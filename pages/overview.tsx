@@ -26,7 +26,8 @@ export default function Overview({
   setTitle,
   setIcon,
   setShowCalendar,
-  setShowReportButtons
+  setShowReportButtons,
+  userId
 }: ChildProps) {
   // States
   const [caloriesConsumed, setcaloriesConsumed] = useState(0);
@@ -140,7 +141,7 @@ export default function Overview({
           { calorie: netCalories, text: "Net Calories" },
         ]}
         bmr={bmr}
-      />
+      /> {console.log('USER ID: ', userId)}
 
       <Container
         type="exercise"

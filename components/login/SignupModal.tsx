@@ -35,7 +35,6 @@ export default function SignupModal({
   const twInputStyle = "w-full h-10 boxShadow-wellShadow flex-none grow-0 rounded-xl indent-3";
   const twSubmitStyle = "w-53 h-auto font-sans not-italic font-bold text-base leading-5 decoration-black flex-auto grow-0 underline underline-offset-4 cursor-pointer";
 
-
   // Check if first name is valid.
   const firstNameCheck = () => {
     console.log('FIRST NAME: ', firstName);
