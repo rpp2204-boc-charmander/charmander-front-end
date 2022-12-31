@@ -87,7 +87,7 @@ export default function Charts (props: any) {
       id.userId = props.userId;
       return id;
     });
-  }, [props.userId]);
+  }, [id.userId]);
 
   useEffect(() => {
     let unix: number = new Date(props.date).getTime();
@@ -117,14 +117,18 @@ export default function Charts (props: any) {
   let reportsData: report[] = reports.data;
 
   return (
-    <div>
-      <ul className='w-[80vw] h-[80vw] overflow-y-auto scrollbar-hide'>
+
+      <ul className="h-full w-full p-3 flex flex-col items-evenly justify-center">
         {reportsData.map((report, index) => {
           return (
-            <li key={index} className='border-2 border-black rounded-xl m-2 bg-slate-200 w-[70vw] h-[48.5%]'>
-              <LineChart chartData={report} time={reports.unix} timespan={props.timespan}/>
-            </li>)})}
+            <div className="w-full flex justify-center items-center">
+              <li key={index} className='mb-14 flex bg-gray-200 h-[25rem] w-full max-w-[65rem] rounded-3xl justify-center items-center shadow'>
+                <LineChart chartData={report} time={reports.unix} timespan={props.timespan}/>
+              </li>
+            </div>
+            )
+          })}
       </ul>
-    </div>
+
   );
 };
