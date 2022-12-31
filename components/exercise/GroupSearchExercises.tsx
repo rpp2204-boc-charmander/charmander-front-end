@@ -7,7 +7,7 @@ const GroupSearchExercises = ({
       {exercises.map((exercise: any) => {
         return (
           <button
-            className="txt:large m-1 rounded border border-gray-400 bg-white py-2 px-4 text-start font-semibold text-gray-800 shadow hover:bg-gray-100"
+            className="txt:large m-1 rounded border border-gray-400 bg-white py-2 px-4 text-start font-semibold text-gray-800 shadow hover:bg-blue-200"
             key={exercise.exercise_id}
             onClick={() => handleAddExerciseToWorkout(exercise.exercise_id)}
           >

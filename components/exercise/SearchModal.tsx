@@ -124,7 +124,11 @@ export default function SearchModal({
               </div>
               <div className="flex flex-row justify-center space-x-4 text-center">
                 <button
-                  className="rounded border border-gray-400  bg-white p-2  text-center  text-lg font-semibold text-gray-800 shadow hover:bg-gray-100"
+                  className={
+                    showDefault
+                      ? "w-[200px] rounded border  border-gray-400 bg-purple-200  p-2 text-center text-lg font-semibold text-gray-800 shadow"
+                      : "w-[200px] rounded border  border-gray-400 bg-white  p-2  text-center text-lg font-semibold text-gray-800 shadow hover:bg-blue-200"
+                  }
                   onClick={() => {
                     setShowDefault(true);
                     setShowCustom(false);
@@ -133,7 +137,11 @@ export default function SearchModal({
                   All Exercises
                 </button>
                 <button
-                  className="rounded border border-gray-400  bg-white p-2  text-center  text-lg font-semibold text-gray-800 shadow hover:bg-gray-100"
+                  className={
+                    showCustom
+                      ? "w-[200px] rounded border  border-gray-400 bg-purple-200  p-2 text-center text-lg font-semibold text-gray-800 shadow"
+                      : "w-[200px] rounded border  border-gray-400 bg-white  p-2  text-center text-lg font-semibold text-gray-800 shadow hover:bg-blue-200"
+                  }
                   onClick={() => {
                     setShowDefault(false);
                     setShowCustom(true);

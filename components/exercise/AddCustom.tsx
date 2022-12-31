@@ -51,7 +51,7 @@ const AddCustom = ({
         />
       </div>
       <input
-        className="focus:shadow-outline my-2 h-[4rem] rounded bg-white px-2 text-xl leading-tight shadow focus:outline-none"
+        className="focus:shadow-outline my-2 h-[4rem] rounded bg-white px-2 text-xl leading-tight shadow focus:outline-none sm:w-auto "
         id="search"
         type="text"
         placeholder="Enter custom exercise"
@@ -61,7 +61,7 @@ const AddCustom = ({
         }}
       ></input>
       <button
-        className="rounded border border-gray-400 bg-white  p-2 text-center text-lg font-semibold text-gray-800 shadow  hover:bg-gray-100 sm:w-auto sm:overflow-auto"
+        className="rounded border border-gray-400 bg-white  p-2 text-center text-lg font-semibold text-gray-800 shadow  hover:bg-blue-200 sm:w-auto sm:overflow-auto md:w-[300px]"
         onClick={() => hanleMakeNewCustomExercise()}
       >
         Add Custom Exercise
