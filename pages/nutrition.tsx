@@ -46,6 +46,7 @@ const Nutrition = ({
   const updateCalories = (foods : []) => {
     let calculatedCalories : number = 0;
     foods.map((food : FoodDataType) => {
+      calories =  food.CAL || food.EN
       calculatedCalories += Number(food.CAL);
     })
     return calculatedCalories;
