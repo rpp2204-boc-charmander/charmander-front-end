@@ -30,7 +30,7 @@ export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, se
           "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" :
           food.food_image} alt="" width={100} height={100} style={{height: "100px"}}></Image>
           </div>
-      <div style={{display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "space-between", paddingLeft: "30px"}}>
+      <div style={{display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "space-between", paddingLeft: "30px", width: "400px"}}>
           <h3 className="w-3/5 text-2xl font-bold">{food.food_name}</h3>
           <p className="italic">Estimated calories gained: {food.nutrients.CAL ? food.nutrients.CAL : food.nutrients.ENERC_KCAL}</p>
         </div>
