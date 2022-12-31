@@ -12,9 +12,7 @@ export interface HeaderProps {
   setToggleSidebar: Function;
   showReportButtons: boolean;
   timespan: String;
-  setTimespan: Function;
-  userId: String;
-  setUserId: Function;
+  setTimespan: Function
 }
 
 export default function Header({
@@ -27,8 +25,6 @@ export default function Header({
   showReportButtons,
   timespan,
   setTimespan,
-  userId,
-  setUserId
 }: HeaderProps) {
 
   const [formattedDate, setFormattedDate] = useState("");
