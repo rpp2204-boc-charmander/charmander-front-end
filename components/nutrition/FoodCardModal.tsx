@@ -8,10 +8,6 @@ interface FoodCardModalProps {
   info: Object
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 const FoodCardModal = ({ listId, info, removeSelection }) => {
 
   // info.unit = "Gram";
@@ -85,21 +81,13 @@ const FoodCardModal = ({ listId, info, removeSelection }) => {
       <div className="flex flex-col">
         <form>
           <label>Amount</label>
-<<<<<<< HEAD
-          <input placeholder="enter number in grams" className="shadow-lg w-6/10 h-6 rounded-lg mb-3 ml-3" onChange={(e) => {
-=======
           <input placeholder="enter number in grams" className="shadow-lg w-6/10 h-6 rounded-lg mb-3 ml-3 bg-white dark:bg-white" onChange={(e) => {
->>>>>>> main
-            handleAmountChange(e)
+            handleAmountChange(e);
           }}></input>
         </form>
         <form>
           <label>Unit</label>
-<<<<<<< HEAD
-          <select defaultValue="Gram, 1 grams" className="shadow-lg w-6/10 h-6 rounded-lg ml-10" onChange={(e) => {
-=======
           <select defaultValue="Gram, 1 grams" className="shadow-lg w-6/10 h-6 rounded-lg ml-10 bg-white dark:bg-white" onChange={(e) => {
->>>>>>> main
             handleUnitChange(e)
           }}>
             {

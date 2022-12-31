@@ -12,7 +12,6 @@ interface FoodListProps {
 }
 
 export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, setIsEditShowing } : FoodListProps) {
-  const [calories, setCalories] = useState(food.nutrients.CAL);
   const [consumed, setConsumed] = useState(food.consumed);
 
   return (
@@ -20,7 +19,7 @@ export default function FoodCard ({ food, setPendingItem, setIsRemoveShowing, se
       <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", height: "90px"}}>
       <div style={{display: "flex", flexDirection: "column", alignItems: "start", justifyContent: "space-between"}}>
           <h3 className="w-3/5 font-bold">{food.ITEM}</h3>
-          <p className="italic">Estimated calories gained: {calories}</p>
+          <p className="italic">Estimated calories gained: {food.CAL || food.ENERC_KCAL}</p>
         </div>
         <div style={{display: "flex", flexDirection: "column", alignItems: "end", justifyContent: "space-between"}}>
           <div className="flex flex-row">

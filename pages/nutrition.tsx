@@ -9,6 +9,7 @@ import foodData from "../mocks/foodData.json";
 import Modal from "../components/nutrition/Modal";
 import { ChildProps } from "../components/Layout";
 import { MdRestaurant } from "react-icons/md";
+import axios from "axios";
 
 
 interface FoodDataType {
@@ -47,8 +48,10 @@ const Nutrition = ({
   const updateCalories = (foods : []) => {
     let calculatedCalories : number = 0;
     foods.map((food : FoodDataType) => {
-      calories =  food.CAL || food.EN
-      calculatedCalories += Number(food.CAL);
+      let calories =  food.CAL || food.ENERC_KCAL;
+      if(food.CONSUMED){
+        calculatedCalories += Number(food.CAL);
+      }
     })
     return calculatedCalories;
   }
@@ -72,15 +75,15 @@ const Nutrition = ({
   };
 
   useEffect(() => {
+    const formattedDate = currentDate.toISOString().slice(0, 10);
     if(!loaded){
       axios.get('http://localhost:4000/nutrition/list/foodLog',{
         params: {
           user: 1,
-          date: currentDate
+          date: formattedDate
         }
       })
       .then((response) => {
-        console.log('all: ', response)
         setAllFoods(response.data);
         setLoaded(true);
       })
@@ -129,7 +132,7 @@ const Nutrition = ({
         : null}
         <FoodList foodData={allFoods} setPendingItem={setPendingItem} setIsRemoveShowing={setIsRemoveShowing} setIsEditShowing={setIsEditShowing}/>
         {
-        showModal ? ( <Modal showModal={handleShowModal} date={currentDate}/>) : ( null )
+        showModal ? ( <Modal showModal={handleShowModal} currentDate={currentDate}/>) : ( null )
       }
       </div>
     </>

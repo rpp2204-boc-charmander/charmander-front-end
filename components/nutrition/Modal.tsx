@@ -9,16 +9,12 @@ import { useState, useEffect } from "react";
 const appId = process.env.EDAMAM_APPLICATION_ID;
 const appKey = process.env.EDAMAM_APPLICATION_KEYS;
 
-const Modal = ({ showModal, date }) => {
+const Modal = ({ showModal, currentDate }) => {
 
   const [foodList, setFoodList] = useState([])
   const [search, setSearch] = useState('');
   const [preview, setPreview] = useState([]);
   const [parameters, setParameters] = useState([]);
-
-  const handleParameterChange = () => {
-
-  }
 
   const handleSearch = (e) => {
     // console.log(e.target.value)
@@ -26,53 +22,55 @@ const Modal = ({ showModal, date }) => {
   }
 
   const handleSelect = (food) => {
-    // axios.get('http://localhost:3000/nutrition/list/foods',{
-    //   params: food
-    //   })
-    //   .then((response) => {
-    //     console.log('response: ', response);
-    //   })
-
+    food.food.food_id = food.food.foodId;
+    axios.get('http://localhost:4000/nutrition/list/foods',{
+      params: food.food
+      })
+      .then((response) => {
+        food.food.foodId = response.data.id;
+        setFoodList(foodList.concat([food]));
+        setPreview([]);
+        document.getElementById('search-form').value = ""
+      })
   }
 
-  const handleAdd = () => {
+  const setSelectedUnits = (list) => {
+    for(let currFood in list.items){
+      if(list.items[currFood].unit){
+        list.items[currFood].food.unit = "Gram";
+        } else {
+          list.items[currFood].food.unit = list.items[currFood].unit;
+        }
+      }
+  }
+
+  const handleAdd = async () => {
+    const formattedDate = currentDate.toISOString().slice(0, 10);
     let foodLog: any = {};
-    foodLog.date = date;
+    foodLog.date = formattedDate;
     foodLog.consumed = false;
     foodLog.items = foodList;
     foodLog.user = 1;
+    setSelectedUnits(foodLog);
+    console.log('foodlog: ', foodLog)
     axios.post('http://localhost:4000/nutrition/create/logFoods',foodLog)
       .then((response) => {
         setLoaded(false);
       })
   }
 
-  const handleAddConsumed = () => {
+  const handleAddConsumed = async () => {
+    const formattedDate = currentDate.toISOString().slice(0, 10);
     let foodLog: any = {};
-    foodLog.date = date;
+    foodLog.date = formattedDate;
     foodLog.consumed = true;
     foodLog.items = foodList;
     foodLog.user = 1;
+    setSelectedUnits(foodLog);
     axios.post('http://localhost:4000/nutrition/create/logFoods',foodLog)
       .then((response) => {
         setLoaded(false);
       })
-  }
-
-  const handleAdd = () => {
-    let foodLog: any = {};
-    foodLog.date = date;
-    foodLog.consumed = false;
-    foodLog.items = foodList;
-    console.log(foodLog)
-  }
-
-  const handleAddConsumed = () => {
-    let foodLog: any = {};
-    foodLog.date = date;
-    foodLog.consumed = true;
-    foodLog.items = foodList;
-    console.log(foodLog)
   }
 
   const removeSelection = (key: any) => {
