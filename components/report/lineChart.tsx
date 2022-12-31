@@ -72,16 +72,8 @@ export default function LineChart(props: any) {
         options.scales.x.time.unit = "day";
       } else if (props.timespan === "month") {
         let date = new Date(props.time);
-        let firstDay = new Date(
-          date.getFullYear(),
-          date.getMonth(),
-          1
-        ).toString();
-        let lastDay = new Date(
-          date.getFullYear(),
-          date.getMonth() + 1,
-          0
-        ).toString();
+        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1).toString();
+        let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).toString();
         let [ufirst, ulast] = [Date.parse(firstDay), Date.parse(lastDay)];
         options.scales.x.min = ufirst;
         options.scales.x.max = ulast;
