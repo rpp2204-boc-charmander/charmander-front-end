@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Confetti from 'react-confetti'
+import useWindowSize from 'react-use/lib/useWindowSize';
 import axios from "axios";
 
 import ExerciseList from "../components/exercise/ExerciseList";
@@ -50,6 +51,7 @@ export default function Exercise({
 
   //Yey
   const [ confetti, setConfetti ] = useState(false);
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     setTitle("Exercise");
@@ -213,7 +215,7 @@ const completeExercise = async (workout_exercise_id: number) => {
 
   return (
     <div className="exerciseContainer w-full h-full">
-      { confetti && <Confetti />}
+      { confetti && <Confetti width={width} height={height} />}
       {addModalState && (
         <SearchModal
           query_date={query_date}
