@@ -14,7 +14,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
       <header className="flex w-full dark:bg-slate-500 bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
 
-        <div className="flex items-center py-3 justify-around w-[45%]">
+        <div className="flex items-center py-3 justify-around lg:w-[45%] sm:w-[80%]">
           <h1 className="text-2xl text-left pl-5 w-full">{exercise.exercise}
             <span className="text-lg border-l-2 ml-2 pl-2"> {exercise.muscle_group} </span>
           </h1>
@@ -26,16 +26,16 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
         </div>
       </header>
 
-      <section className="grid h-[250px] w-full grid-cols-[25%_40%_35%]">
+      <section className="grid h-[250px] w-full lg:grid-cols-[25%_40%_35%] sm:grid-cols-[65%_35%]">
         <img
-          className="aspect-square w-[225px] place-self-center rounded-lg bg-gray-300 shadow-md"
+          className="aspect-square w-[225px] place-self-center rounded-lg bg-gray-300 shadow-md sm:hidden lg:block"
           alt="exercise-image"
           src={exercise.photo_url}
         ></img>
 
-        <div className="pb-2 pt-3 h-[245px]">
+        <div className="pb-2 pt-3 lg:pl-0 sm:pl-2 lg:h-[245px] sm:h-[205px]">
 
-            <div className="bg-gray-500 dark:bg-gray-700 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar shadow-[inset_0_2px_8px_0_#404040]">
+            <div className="bg-gray-500 dark:bg-gray-700 flex flex-col items-center rounded-2xl h-full overflow-y-scroll no-scrollbar shadow-[inset_0_2px_8px_0_#404040]">
 
             {exercise.sets?.map( (exercise: any) => {
               return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 text-black font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-500 text-slate-50'}`}
@@ -49,9 +49,9 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
         </div>
 
-        <div className="flex flex-col items-center justify-around h-[250px] px-2 relative">
+        <div className="flex flex-col items-center justify-around lg:h-[250px] px-2 relative">
 
-          <p className="font-bold justify-self-center"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
+          <p className="font-bold justify-self-center sm:text-[0.85rem] lg:text-[1rem] text-center"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
 
           <div className="flex flex-col w-full h-[45%] justify-evenly">
 
@@ -60,9 +60,9 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
           }
 
           { exercise.is_complete ?
-            <p className='bg-green-500 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50 flex justify-center items-center cursor-default'> Exercise Completed </p> :
+            <p className='bg-green-500 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50 flex justify-center items-center cursor-default'> Completed </p> :
             <button className="bg-blue-500 hover:bg-blue-600 shadow-lg rounded-full w-full h-[40%] font-bold text-slate-50"
-                  onClick={ () => { completeExercise(exercise.id) }}> Complete Exercise
+                  onClick={ () => { completeExercise(exercise.id) }}> Complete
             </button>}
 
           </div>

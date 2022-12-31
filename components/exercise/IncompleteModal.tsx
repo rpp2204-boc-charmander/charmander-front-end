@@ -13,7 +13,7 @@ export default function IncompleteModal({ setWorkoutConfirm }: any) {
           <div className="title text-[2rem] font-bold"> Incomplete Sets! </div>
          </div>
 
-         <div className="bg-slate-50 dark:bg-slate-400 flex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-well">
+         <div className="bg-slate-50 dark:bg-slate-400 goflex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-well">
           <p className="text-xl"> Please finish sets before completing a workout. </p>
          </div>
 

@@ -247,7 +247,7 @@ const completeExercise = async (workout_exercise_id: number) => {
           setWorkoutConfirm={setWorkoutConfirm}/>
       )}
 
-      <div className="grid grid-cols-[25%_75%]">
+      <div className="lg:grid lg:grid-cols-[25%_75%] sm:flex sm:flex-col">
         <CalorieComponent
           caloriesBurned={caloriesBurned}
           toggleAddModal={toggleAddModal}
