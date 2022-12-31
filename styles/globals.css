@@ -45,12 +45,11 @@ a {
 }
 
 .haAclf {
-  background: slategray
+  @apply bg-[#D9D9D9] dark:bg-slate-700
 }
 
 .qJTHM {
-  background: slategray
-
+  @apply bg-[#D9D9D9] dark:bg-slate-700
 }
 
 
