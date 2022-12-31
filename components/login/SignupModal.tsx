@@ -4,8 +4,6 @@ import { EnumDeclaration, setConstantValue } from "typescript";
 import bcrypt from "bcryptjs";
 import axios from 'axios';
 import { useRouter } from "next/router";
-import { ChildProps } from "../Layout";
-import { useNavigate } from 'react-router-dom';
 
 export interface SignUpProps{
   setUserId: Function

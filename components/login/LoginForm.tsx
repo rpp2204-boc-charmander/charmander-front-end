@@ -6,7 +6,7 @@ import {
 } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import * as EmailValidator from "email-validator";
 import bcrypt from "bcryptjs";
 import axios from "axios";

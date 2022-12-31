@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import Image from 'next/image'
 import fitbit from '/public/fitbit/Fitbit_Logo_White_RGB.png'
-import { useFitbitContext } from  '../../context/FitbitProvider'
 import { useRouter } from 'next/router';
-import axios from 'axios';
 
 export interface FitbitProps {
   setUserId: Function

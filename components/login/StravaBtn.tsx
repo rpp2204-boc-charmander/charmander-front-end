@@ -2,7 +2,6 @@ import React from "react";
 import { useRouter } from "next/router";
 import strava from "/public/strava/strava_orange.svg";
 import Image from "next/image";
-import axios  from "axios";
 
 export interface StravaProps {
   setUserId: Function
