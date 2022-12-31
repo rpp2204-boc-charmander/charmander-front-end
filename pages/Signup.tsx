@@ -5,6 +5,7 @@ import Head from "next/head";
 import SignupModal from "../components/login/SignupModal";
 import { ChildProps } from "../components/Layout";
 import { useEffect } from "react";
+// import { useNavigate } from 'react-router-dom';
 
 const modalStyle = {
   display: "table",
@@ -14,7 +15,9 @@ const modalStyle = {
   transform: "translateY(50%)"
 };
 
-export default function Signup({ setTitle, setIcon, setShowCalendar, setShowReportButtons }: ChildProps) {
+export default function Signup({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userId }: ChildProps) {
+  // const navigate = useNavigate();
+
   useEffect(() => {
     setTitle("Welcome");
     setIcon("");
@@ -29,7 +32,7 @@ export default function Signup({ setTitle, setIcon, setShowCalendar, setShowRepo
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div style={modalStyle}>
-        <SignupModal />
+        <SignupModal userId={userId}/>
       </div>
     </div>
   );

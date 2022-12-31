@@ -4,8 +4,14 @@ import { EnumDeclaration, setConstantValue } from "typescript";
 import bcrypt from "bcryptjs";
 import axios from 'axios';
 import { useRouter } from "next/router";
+import { ChildProps } from "../Layout";
+import { useNavigate } from 'react-router-dom';
 
-export default function SignupModal() {
+export default function SignupModal({
+  userId,
+}: ChildProps) {
+  const router = useRouter();
+
   // STATE VALUES
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -108,17 +114,20 @@ export default function SignupModal() {
         sex: sex,
       };
 
-
       console.log('SALT: ', salt)
       console.log('HASH: ', hash);
 
       axios({
       method: 'post',
-      url: 'http://localhost:4000/user/create',
+      url: `${String(process.env.BACKEND_URL)}/user/create`,
       headers: {},
       data: sent
-      }).then((response) => {
+      }).then(async (response) => {
+
         console.log('RESPONSE: ', response.data[0].id);
+        userId = await response.data[0].id;
+        console.log('USER ID: ', userId);
+        router.push('/overview');
       });
   }
 
