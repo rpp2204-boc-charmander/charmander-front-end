@@ -92,7 +92,7 @@ export default function LineChart(props: any) {
   }, [props.chartData, props.timespan, props.time]);
 
   return (
-    <div className="chart-container">
+    <div className="chart-container w-full h-full flex justify-center lg:h-[20rem] max-h-[20rem]">
       <Line data={chartSetup} options={options} />
     </div>
   );
