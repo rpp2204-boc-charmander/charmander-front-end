@@ -9,6 +9,7 @@ import {
   MdLogout,
 } from "react-icons/md";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface SidebarProps {
   currentUser: any
@@ -19,9 +20,12 @@ export default function Sidebar({ currentUser }: SidebarProps) {
     <div className="flex grow bg-gray-500 dark:bg-slate-800 h-full">
       <div className="flex flex-col grow max-h-[100vh] w-48 top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
         <div className="flex flex-col items-center">
-          <div>
-            <MdAccountCircle className="h-32 w-32" />
-          </div>
+
+        {currentUser ? <Image src={currentUser.profile_pic} width={120} height={120} className='rounded-3xl'alt='User Photo'></Image> :
+            <div>
+              <MdAccountCircle className="h-32 w-32" />
+            </div>
+        }
 
           <div className="username pb-1 text-xl"> {currentUser ? `${currentUser.firstname} ${currentUser.lastname}` : ''} </div>
           {/* <div className="names text-sm italic">FirstName LastName </div> */}
