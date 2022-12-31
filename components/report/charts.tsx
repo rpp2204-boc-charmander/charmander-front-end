@@ -77,11 +77,23 @@ export default function Charts (props: any) {
     data: []
   });
 
+  const [id, setId]: any = useState({
+    userId: 1
+  });
+
+  useEffect(() => {
+    setId((prevState: any) => {
+      let id = {...prevState};
+      id.userId = props.userId;
+      return id;
+    });
+  });
+
   useEffect(() => {
     let unix: number = new Date(props.date).getTime();
     let year: number = new Date(props.date).getFullYear();
     if (reports.year !== year) {
-      axios.get(`http://localhost:8000/report/data/1/'${props.date}'`)
+      axios.get(`http://44.198.150.13:3000/report/data/${id.userId}/'${props.date}'`)
       .then((result) => {
         setReportData((prevState: any) => {
           let reports = {...prevState};
@@ -100,7 +112,7 @@ export default function Charts (props: any) {
         return reports;
       });
     }
-  }, props.date);
+  }, [props.date, props.userId]);
 
   let reportsData: report[] = reports.data;
 
@@ -109,7 +121,7 @@ export default function Charts (props: any) {
       <ul className='w-full h-full overflow-auto'>
         {reportsData.map((report, index) => {
           return (
-            <li key={index}>
+            <li key={index} className=''>
               <LineChart chartData={report} time={reports.unix} timespan={props.timespan}/>
             </li>)})}
       </ul>

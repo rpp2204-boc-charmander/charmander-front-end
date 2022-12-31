@@ -10,19 +10,21 @@ export default function Report({
   setShowCalendar,
   setShowReportButtons,
   timespan,
-  setTimespan
+  setTimespan,
+  userId
 }: ChildProps) {
 
   useEffect(() => {
     setTitle("Report");
     setIcon(() => MdOutlineAssignment);
-    setShowCalendar(false);
+    setShowCalendar(true);
     setShowReportButtons(true)
   }, [setTitle, setIcon, setShowCalendar, setShowReportButtons]);
 
   return (
     <div className="h-[100%] w-[100%] flex items-center justify-center">
-      <Charts timespan={timespan} date={currentDate.toISOString().split('T')[0]}/>
+      <Charts timespan={timespan} userId={userId}
+      date={currentDate.toISOString().split('T')[0]}/>
     </div>
   );
 }
