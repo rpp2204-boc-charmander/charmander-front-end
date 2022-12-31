@@ -15,7 +15,6 @@ export default function SignupModal({
   setUserId,
 }: SignUpProps) {
   const router = useRouter();
-  console.log('setUSERID: ', setUserId);
   // STATE VALUES
   const [open, setOpen] = useState(false);
   const [firstName, setFirstName] = useState("");

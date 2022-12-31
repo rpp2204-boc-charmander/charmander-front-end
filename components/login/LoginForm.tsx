@@ -161,7 +161,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
         </button>
         <button
           type="button"
-          className="grow text-right font-extralight underline hover:text-purple-700"
+          className="grow text-right font-extralight underline hover:text-LoginGray"
           onClick={() => authenticate()}
         >
           enter
