@@ -93,7 +93,6 @@ export default function Charts (props: any) {
     let unix: number = new Date(props.date).getTime();
     let year: number = new Date(props.date).getFullYear();
     if (reports.year !== year) {
-      console.log('request');
       axios.get(`http://44.198.150.13:3000/report/data/${id.userId}/'${props.date}'`)
       .then((result) => {
         setReportData((prevState: any) => {
