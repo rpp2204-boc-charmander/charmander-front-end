@@ -102,7 +102,7 @@ export default function LoginForm({ setUserId }: LoginFormProps) {
           {!emailErr ? (
             <div key="" className="h-6"></div>
           ) : (
-            <p className="h-6 text-xs text-red-600 dark:text-purple-700">
+            <p className="h-6 text-xs text-black dark:text-white">
               <span className="font-medium">Um...Hello?</span> That's not an
               email.
             </p>
