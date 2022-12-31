@@ -6,14 +6,14 @@ export default function IncompleteModal({ setWorkoutConfirm }: any) {
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => { setWorkoutConfirm( (prevState: any) => !prevState )}}></div>
 
-      <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-gray-300 z-50
+      <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-gray-300 dark:bg-gray-500 z-50
       flex flex-col items-center w-[30%] h-[30%] rounded-3xl pl-10 pr-10">
 
          <div className="w-[100%] header flex flex-row justify-between pt-4 pb-1 items-center">
           <div className="title text-[2rem] font-bold"> Incomplete Sets! </div>
          </div>
 
-         <div className="bg-slate-50 flex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-well">
+         <div className="bg-slate-50 dark:bg-slate-400 flex flex-col rounded-2xl h-[50%] w-full justify-around items-center overflow-y-scroll no-scrollbar shadow-well">
           <p className="text-xl"> Please finish sets before completing a workout. </p>
          </div>
 

@@ -10,9 +10,9 @@ import { GiMuscleUp } from "react-icons/gi";
 export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercise, toggleCompletedModal, toggleAddSetModal, completeExercise } : any) {
 
   return (
-    <div className="h-[35.3%] rounded-lg shadow-lg bg-gray-200 x-5 mt-8 flex flex-col">
+    <div className="h-[35.3%] rounded-lg shadow-xl bg-gray-200 dark:bg-slate-600 x-5 mt-8 flex flex-col">
 
-      <header className="flex w-full bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
+      <header className="flex w-full dark:bg-slate-500 bg-gray-400 text-white justify-between items-center font-bold rounded-t-lg">
 
         <div className="flex items-center py-3 justify-around w-[45%]">
           <h1 className="text-2xl text-left pl-5 w-full">{exercise.exercise}
@@ -35,7 +35,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
         <div className="pb-2 pt-3 h-[245px]">
 
-            <div className="bg-gray-500 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar border-2 shadow-[inset_0_2px_8px_0_#404040]">
+            <div className="bg-gray-500 dark:bg-gray-700 flex flex-col rounded-2xl h-full overflow-y-scroll no-scrollbar shadow-[inset_0_2px_8px_0_#404040]">
 
             {exercise.sets?.map( (exercise: any) => {
               return <button className={`bg-slate-50 hover:bg-slate-300 w-[95%] rounded-2xl py-3 text-center shadow-md mx-2 my-2 text-black font-bold ${exercise.reps_actual && 'bg-green-500 hover:bg-green-500 text-slate-50'}`}
@@ -51,7 +51,7 @@ export default function ExerciseItem ({ exercise, toggleEditModal, deleteExercis
 
         <div className="flex flex-col items-center justify-around h-[250px] px-2 relative">
 
-          <p className="font-bold justify-self-center text-black"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
+          <p className="font-bold justify-self-center"> Estimated Calories Burned: {exercise.est_cals_burned}</p>
 
           <div className="flex flex-col w-full h-[45%] justify-evenly">
 
