@@ -41,6 +41,7 @@ const Login = ({ setTitle, setIcon, setShowCalendar, setShowReportButtons, userI
           name="login"
           content="My Health Coach Login, Fitness, Nutrition, Exercise"
         />
+        <meta name="google-site-verification" content="d5H1-fc6By3nJIn1pM9axiSz4tO8Z1PORf4L7DSel8s" />
         <link rel="icon" href="/flavion.ico" />
       </Head>
       <main className="bg-LoginGreen flex w-[60rem] h-[30rem] justify-center items-center rounded-2xl shadow-xl">
