@@ -12,7 +12,7 @@ import Link from "next/link";
 
 export default function Sidebar() {
   return (
-    <div className="flex grow bg-gray-500 dark:bg-stone-900 h-full">
+    <div className="flex grow bg-gray-500 dark:bg-slate-800 h-full">
       <div className="flex flex-col grow max-h-[100vh] w-48 top-0 left-0 overflow-x-hidden items-center text-xl justify-between pt-2 text-white">
         <div className="flex flex-col items-center">
           <div>

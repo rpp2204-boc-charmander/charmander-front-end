@@ -1,31 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 
 interface GoogleProps {
-  init: boolean;
-  reset?: any;
+  google: boolean;
+  setUserId: Function
 }
 
-export default function GoogleBtn({ init, reset }: GoogleProps) {
+export default function GoogleBtn({ google, setUserId }: GoogleProps) {
   const router = useRouter();
 
   // handles responses from GI API login attempt
   async function handleResponse(response: any) {
     const token: any = await response.credential;
     const responsePayload: any = jwt_decode(token);
+
+    console.log(responsePayload)
     axios
-      .get(`${process.env.AUTH}?email=${responsePayload.email}`)
+      .get(`${process.env.BACKEND_URL}/user/${responsePayload.sub}`)
       .then((res) => {
         if (Object.keys(res.data).length === 0) {
-          console.log("No Account");
-          router.push("/Signup");
+          //store the first and last name in the database in the database
+          //get the id from the database
+            //store the first name, last name and id in the AuthContext user
+          router.push("/settings");
         } else {
+          //store the user db data in the AuthContext user
           router.push("/overview");
         }
       })
-      .catch((err) => router.push("/signup"));
+      .catch((err) => router.push("/Signup"));
   }
 
   // initializes connection to GI API and renders login button
@@ -43,15 +48,18 @@ export default function GoogleBtn({ init, reset }: GoogleProps) {
     });
 
     google.accounts.id.renderButton(document.getElementById("google_btn"), {
-      shape: "pill",
-      theme: "filled_black",
+      'shape': "pill",
+      theme: "filled_white",
       size: "large",
+      padding: 0
     });
   }
 
-  if (init) {
+  if (google) {
     initGoogle();
   }
 
-  return <div id="google_btn" />;
+  return (
+    <div className='p-0' id="google_btn"/>
+  )
 }

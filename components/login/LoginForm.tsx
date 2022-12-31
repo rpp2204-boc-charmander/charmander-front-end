@@ -11,12 +11,11 @@ import * as EmailValidator from "email-validator";
 import bcrypt from "bcryptjs";
 import axios from "axios";
 
-export interface LoginProps {
-  email: any;
-  password: string;
+export interface LoginFormProps {
+  setUserId: Function
 }
 
-export default function LoginForm() {
+export default function LoginForm({ setUserId }: LoginFormProps) {
   const router = useRouter();
 
   const [email, setEmail] = useState("email");
@@ -44,7 +43,7 @@ export default function LoginForm() {
     // }
 
     // var salt = bcrypt.genSaltSync(10);
-    // var hash = bcrypt.hashSync(pswd, salt);
+    // var hash = bcrypt.hashSync('test', salt);
     // console.log(hash)
 
     //Validate email
@@ -56,23 +55,30 @@ export default function LoginForm() {
 
     if (emailValid) {
       axios
-        .get(`${process.env.AUTH}?email=${email}`)
+        .get(`${process.env.BACKEND_URL}/user/email/${email}`)
+        // .get(`${process.env.DB_ENDPOINT}/email/${email}`)
 
         .then((res) => {
           if (Object.keys(res.data).length === 0) {
             router.push("/Signup");
           } else {
-            const hash = res.data;
 
-            if (bcrypt.compareSync(pswd, hash)) {
-              router.push("/overview");
-              setPswdErr(false);
-            } else {
-              setPswdErr(true);
+            const hash = res.data.user_password;
+            const userID =  res.data.id
+            console.log(userID, hash)
+
+            if (hash) {
+              if (bcrypt.compareSync(pswd, hash)) {
+                setUserId(userID)
+                router.push("/overview");
+                setPswdErr(false);
+              } else {
+                setPswdErr(true);
+              }
             }
           }
         })
-        .catch((err) => alert(err));
+        .catch((err) => console.log(err));
     }
   }
 
@@ -82,8 +88,8 @@ export default function LoginForm() {
     "bg-white shadow rounded-l w-[90%] h-[2rem] px-3 leading-tight focus:outline-none focus:shadow-outline text-med; text-black font-extralight";
 
   return (
-    <form className="w-full">
-      <h2 className="pt-6 text-xl">login</h2>
+    <form className="w-full flex flex-col items-center">
+      <h2 className="pt-6 text-3xl text-black dark:text-white font-bold">Login</h2>
       <br></br>
       <div className="search flex w-full flex-col">
         <input
@@ -151,14 +157,14 @@ export default function LoginForm() {
           className="items-start  font-extralight underline hover:text-purple-700"
           onClick={() => authenticate()}
         >
-          enter
+          {/* enter */}
         </button>
         <button
           type="button"
           className="grow text-right font-extralight underline hover:text-purple-700"
-          onClick={() => console.log("hi")}
+          onClick={() => authenticate()}
         >
-          forgot password?
+          enter
         </button>
       </div>
     </form>
