@@ -8,11 +8,11 @@ import { useRouter } from 'next/router';
 export interface LoginProps {
   setUserId: Function;
   setGoogle: Function;
-  google: boolean
+  google: boolean,
+  setCurrentUser: Function
 }
 
-export default function LoginCard({ setUserId, setGoogle, google }: LoginProps) {
-  const router = useRouter();
+export default function LoginCard({ setUserId, setGoogle, google, setCurrentUser }: LoginProps) {
 
   const loginCardLg =
     "text-black dark:text-white bg-LoginGray dark:bg-slate-600 flex flex-col items-center h-full p-2";
