@@ -35,8 +35,9 @@ export default function FitbitRoute (req: any, res: any) {
         axios
             .get(`${process.env.BACKEND_URL}/user/auth/${params.auth_id}`)
             .then(response => {
-                console.log('HIIIII', response.data)
-                return
+                if (response.data.id) {
+                    return
+                }
             })
 
     //     axios

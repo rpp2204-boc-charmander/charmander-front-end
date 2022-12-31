@@ -4,10 +4,11 @@ import fitbit from '/public/fitbit/Fitbit_Logo_White_RGB.png'
 import { useRouter } from 'next/router';
 
 export interface FitbitProps {
-  setUserId: Function
+  setUserId: Function,
+  setCurrentUser: Function,
 }
 
-export default function FitbitBtn({ setUserId }: FitbitProps) {
+export default function FitbitBtn({ setUserId, setCurrentUser }:  FitbitProps) {
   const router = useRouter()
 
   const handleLogin = () => {
