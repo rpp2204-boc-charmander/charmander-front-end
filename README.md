@@ -25,6 +25,7 @@ A health and fitness application made to easily track, plan and organize workout
 ### 2. Overview
   * Displays exercise and nutrition entries.
   * Displays net calories burned / gained.
+  * Can click an exercise or meal to mark as completed/consumed.
 
   <img width="1707" alt="Screenshot 2023-01-20 at 1 55 01 AM" src="https://user-images.githubusercontent.com/98191976/213670511-8d3e309b-5b59-40a8-a33b-5d9f693865cc.png">
 
