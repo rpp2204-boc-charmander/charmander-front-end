@@ -17,7 +17,7 @@ A health and fitness application made to easily track, plan and organize workout
 ## Features
 
 ### 1. Login / Signup
-  * Integrated to allow login/singup with FitBit, Strava, and Google.
+  * Integrated third-party APIs to allow login/sign-up with FitBit, Strava, and Google.
   
   <img width="1720" alt="Screenshot 2023-01-20 at 2 05 23 AM" src="https://user-images.githubusercontent.com/98191976/213670339-f421cddb-dbfd-45fd-b171-259d016028ee.png">
 <img width="1708" alt="Screenshot 2023-01-20 at 2 05 51 AM" src="https://user-images.githubusercontent.com/98191976/213670361-a91fdd09-ca55-40f1-9f27-cbf42ca71a05.png">
