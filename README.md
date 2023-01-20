@@ -35,8 +35,9 @@ A health and fitness application made to easily track, plan and organize workout
   * Edit, delete, or mark exercises as complete.
   * Calculates estimated calories burned when a set is completed.
   * Calculates estimated calories burned for the day when an exercise is completed.
-  
-  <img width="1725" alt="Screenshot 2023-01-20 at 1 51 18 AM" src="https://user-images.githubusercontent.com/98191976/213670883-3cb71a92-6d0f-4dc0-abed-7041768d5d71.png">
+
+<img width="1709" alt="Screenshot 2023-01-20 at 1 55 28 AM" src="https://user-images.githubusercontent.com/98191976/213671257-99114f54-790b-4381-b2d5-65b27aee2677.png">
+<img width="1725" alt="Screenshot 2023-01-20 at 1 51 18 AM" src="https://user-images.githubusercontent.com/98191976/213670883-3cb71a92-6d0f-4dc0-abed-7041768d5d71.png">
 <img width="1715" alt="Screenshot 2023-01-20 at 1 51 38 AM" src="https://user-images.githubusercontent.com/98191976/213670897-f68a66f8-118d-4716-82d4-9fdf42c50610.png">
 
   
