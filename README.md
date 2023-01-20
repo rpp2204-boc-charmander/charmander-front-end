@@ -16,19 +16,19 @@ A health and fitness application made to easily track, plan and organize workout
   
 ## Features
 
-1. Login / Signup
+### 1. Login / Signup
   * Integrated to allow login/singup with FitBit, Strava, and Google.
   
   <img width="1720" alt="Screenshot 2023-01-20 at 2 05 23 AM" src="https://user-images.githubusercontent.com/98191976/213670339-f421cddb-dbfd-45fd-b171-259d016028ee.png">
 <img width="1708" alt="Screenshot 2023-01-20 at 2 05 51 AM" src="https://user-images.githubusercontent.com/98191976/213670361-a91fdd09-ca55-40f1-9f27-cbf42ca71a05.png">
   
-2. Overview
+### 2. Overview
   * Displays exercise and nutrition entries.
   * Displays net calories burned / gained.
 
   <img width="1707" alt="Screenshot 2023-01-20 at 1 55 01 AM" src="https://user-images.githubusercontent.com/98191976/213670511-8d3e309b-5b59-40a8-a33b-5d9f693865cc.png">
 
-3. Exercise
+### 3. Exercise
   * Search and add exercises through our custom database of default exercises.
   * Create custom exercises.
   * Add sets and complete sets.
@@ -41,17 +41,17 @@ A health and fitness application made to easily track, plan and organize workout
 <img width="1715" alt="Screenshot 2023-01-20 at 1 51 38 AM" src="https://user-images.githubusercontent.com/98191976/213670897-f68a66f8-118d-4716-82d4-9fdf42c50610.png">
 
   
-4. Nutrition
+### 4. Nutrition
   * Search and add meals through a third-party API
   * Logs user meals for their respective days.
   * Edit, delete, or mark meals as consumed.
   * Calculate estimated calories gained when a meal is consumed.
   
-6. Report
+### 5. Report
   * Displays a user's exercise progression through graph charts. 
   * Able to toggle between day, week, or year view.
   
-5. Settings 
+### 6. Settings 
   * Edit user metrics
   * Toggle light/dark mode
   
