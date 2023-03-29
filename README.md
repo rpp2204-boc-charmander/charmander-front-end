@@ -60,8 +60,9 @@ A health and fitness application made to easily track, plan and organize workout
 <img width="1719" alt="Screenshot 2023-01-20 at 1 56 17 AM" src="https://user-images.githubusercontent.com/98191976/213671076-627745b1-4036-4382-bade-f37d775a0529.png">
 
 ## Team Members
-  * Login / Signup
+  * Authentication / Signup / Settings
     * [Anthony Merino](https://github.com/chiElephant)
+  * UI/UX
     * [Kris Opeda](https://github.com/kopeda)
   * Overview
     * [Hasan Uchchas](https://github.com/huchchas)
