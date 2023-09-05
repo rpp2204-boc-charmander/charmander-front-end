@@ -13,6 +13,11 @@ A health and fitness application made to easily track, plan and organize workout
   * Docker
   * CICD
   * PostgreSQL
+
+## Backend Repository
+The backend for this project is hosted in a separate repository. It is built using Express.js to construct the APIs and includes two Docker Compose files for seamless Continuous Integration and Deployment to an Amazon EC2 instance. 
+
+For source code and more details, click here: [charmander-backend](https://github.com/rpp2204-boc-charmander/charmander-backend)
   
 ## Features
 
