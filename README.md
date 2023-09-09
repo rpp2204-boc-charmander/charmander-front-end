@@ -64,7 +64,7 @@ For source code and more details, click here: [My Health Coach (Backend)](https:
   <img width="1720" alt="Screenshot 2023-01-20 at 1 56 06 AM" src="https://user-images.githubusercontent.com/98191976/213671071-0284b603-1167-4f79-a659-4bd1c7951bb9.png">
 <img width="1719" alt="Screenshot 2023-01-20 at 1 56 17 AM" src="https://user-images.githubusercontent.com/98191976/213671076-627745b1-4036-4382-bade-f37d775a0529.png">
 
-## Team Members
+### Team Members
   * Authentication / Signup / Settings
     * [Anthony Merino](https://github.com/chiElephant)
   * UI/UX
